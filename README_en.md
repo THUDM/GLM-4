@@ -4,7 +4,8 @@
 🤗 <a href="https://huggingface.co/collections/THUDM/glm-4-665fcf188c414b03c2f7e3b7" target="_blank">HF Repo</a> • 🤖 <a href="https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">ModelScope</a> • 🐦 <a href="https://twitter.com/thukeg" target="_blank">Twitter</a> • 👋 Join <a href="https://join.slack.com/t/chatglm/shared_invite/zt-25ti5uohv-A_hs~am_D3Q8XPZMpj7wwQ" target="_blank">Slack</a> and <a href="resources/WECHAT.md" target="_blank">WeChat</a>
 </p>
 <p align="center">
-📍Experience and use a larger-scale GLM business model on the <a href="https://open.bigmodel.cn">Zhipu AI Open Platform</a>
+📍Experience and use a larger-scale GLM business model on the <a href="https://open.bigmodel.cn/?utm_campaign=open&_channel_track_key=OWTVNma9">Zhipu AI Open Platform</a>
+
 </p>
 
 ## Model Introduction
@@ -15,19 +16,20 @@ and its human preference-aligned version **GLM-4-9B-Chat** have shown superior p
 multi-round conversations, GLM-4-9B-Chat
 also has advanced features such as web browsing, code execution, custom tool calls (Function Call), and long text
 reasoning (supporting up to 128K context). This generation of models has added multi-language support, supporting 26
-languages ​​including Japanese, Korean, and German. We have also launched the **GLM-4-9B-Chat-1M** model that supports 1M
+languages including Japanese, Korean, and German. We have also launched the **GLM-4-9B-Chat-1M** model that supports 1M
 context length (about 2 million Chinese characters) and the multimodal model GLM-4V-9B based on GLM-4-9B.
 **GLM-4V-9B** possesses dialogue capabilities in both Chinese and English at a high resolution of 1120*1120. 
 In various multimodal evaluations, including comprehensive abilities in Chinese and English, perception & reasoning, text recognition, and chart understanding, GLM-4V-9B demonstrates superior performance compared to GPT-4-turbo-2024-04-09, Gemini 1.0 Pro, Qwen-VL-Max, and Claude 3 Opus.
 
 ## Model List
 
-| Model            | Seq Length | Download                                                                                                                                |
-|------------------|------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| GLM-4-9B         | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)                 |
-| GLM-4-9B-Chat    | 128K       | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)       |
-| GLM-4-9B-Chat-1M | 1M         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m) |
-| GLM-4V-9B        | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)               |
+
+| Model            | Type | Seq Length | Download                                                                                                                                | Online Demo                                                                                 |
+|------------------|------|------------|-----------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| GLM-4-9B         | Base | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)                 | /                                                                                           |
+| GLM-4-9B-Chat    | Chat | 128K       | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)       | [🤖 ModelScope](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary) |
+| GLM-4-9B-Chat-1M | Chat | 1M         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m) | /                                                                                           |
+| GLM-4V-9B        | Chat | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)               | /                                                                                           |
 
 ## BenchMark
 

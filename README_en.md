@@ -66,7 +66,7 @@ The long text capability was further evaluated on LongBench-Chat, and the result
 <img src="resources/longbench.png" alt="Description text" style="display: block; margin: auto; width: 65%;">
 </p>
 
-### 多语言能力
+### Multi Language
 
 The tests for GLM-4-9B-Chat and Llama-3-8B-Instruct are conducted on six multilingual datasets. The test results and the corresponding languages selected for each dataset are shown in the table below:
 

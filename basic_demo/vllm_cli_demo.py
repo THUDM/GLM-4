@@ -30,6 +30,9 @@ def load_model_and_tokenizer(model_dir: str):
         worker_use_ray=True,
         engine_use_ray=False,
         disable_log_requests=True
+        # 如果遇见 OOM 现象，建议开启下述参数
+        # enable_chunked_prefill=True,
+        # max_num_batched_tokens=8192
     )
     tokenizer = AutoTokenizer.from_pretrained(
         model_dir,

@@ -11,8 +11,8 @@ Read this in [English](README_en.md)
 
 ## 模型介绍
 
-GLM-4-9B 是智谱 AI 推出的最新一代预训练模型 GLM-4 系列中的开源版本。 在语义、数学、推理、代码和知识等多方面的数据集测评中，**GLM-4-9B**
-及其人类偏好对齐的版本 **GLM-4-9B-Chat** 均表现出超越 Llama-3-8B 的卓越性能。除了能进行多轮对话，GLM-4-9B-Chat
+GLM-4-9B 是智谱 AI 推出的最新一代预训练模型 GLM-4 系列中的开源版本。 在语义、数学、推理、代码和知识等多方面的数据集测评中，
+**GLM-4-9B** 及其人类偏好对齐的版本 **GLM-4-9B-Chat** 均表现出超越 Llama-3-8B 的卓越性能。除了能进行多轮对话，GLM-4-9B-Chat
 还具备网页浏览、代码执行、自定义工具调用（Function Call）和长文本推理（支持最大 128K 上下文）等高级功能。本代模型增加了多语言支持，支持包括日语，韩语，德语在内的
 26 种语言。我们还推出了支持 1M 上下文长度（约 200 万中文字符）的 **GLM-4-9B-Chat-1M** 模型和基于 GLM-4-9B 的多模态模型
 GLM-4V-9B。**GLM-4V-9B** 具备 1120 * 1120 高分辨率下的中英双语多轮对话能力，在中英文综合能力、感知推理、文字识别、图表理解等多方面多模态评测中，GLM-4V-9B
@@ -152,9 +152,13 @@ from vllm import LLM, SamplingParams
 # max_model_len, tp_size = 1048576, 4
 
 # GLM-4-9B-Chat
+from transformers import AutoTokenizer
+from vllm import LLM, SamplingParams
+
+# 如果遇见 OOM 现象，建议减少max_model_len，或者增加tp_size
 max_model_len, tp_size = 131072, 1
 model_name = "THUDM/glm-4-9b-chat"
-prompt = '你好'
+prompt = [{"role": "user", "content": "你好"}]
 
 tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
 llm = LLM(
@@ -170,11 +174,10 @@ llm = LLM(
 stop_token_ids = [151329, 151336, 151338]
 sampling_params = SamplingParams(temperature=0.95, max_tokens=1024, stop_token_ids=stop_token_ids)
 
-inputs = tokenizer.build_chat_input(prompt, history=None, role='user')['input_ids'].tolist()
-outputs = llm.generate(prompt_token_ids=inputs, sampling_params=sampling_params)
+inputs = tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
+outputs = llm.generate(prompts=inputs, sampling_params=sampling_params)
 
-generated_text = [output.outputs[0].text for output in outputs]
-print(generated_text)
+print(outputs[0].outputs[0].text)
 ```
 
 ### 使用以下方法快速调用 GLM-4V-9B 多模态模型

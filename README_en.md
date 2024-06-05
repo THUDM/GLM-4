@@ -158,9 +158,13 @@ from vllm import LLM, SamplingParams
 # max_model_len, tp_size = 1048576, 4
 
 # GLM-4-9B-Chat
+from transformers import AutoTokenizer
+from vllm import LLM, SamplingParams
+
+# If you encounter OOM, you can try to reduce max_model_len or increase tp_size
 max_model_len, tp_size = 131072, 1
 model_name = "THUDM/glm-4-9b-chat"
-prompt = '你好'
+prompt = [{"role": "user", "content": "你好"}]
 
 tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
 llm = LLM(
@@ -169,18 +173,18 @@ llm = LLM(
     max_model_len=max_model_len,
     trust_remote_code=True,
     enforce_eager=True,
-    # GLM-4-9B-Chat-1M If you encounter OOM phenomenon, it is recommended to turn on the following parameters
+    # if you encounter OOM in GLM-4-9B-Chat-1M, you can try to enable the following parameters
     # enable_chunked_prefill=True,
     # max_num_batched_tokens=8192
 )
 stop_token_ids = [151329, 151336, 151338]
 sampling_params = SamplingParams(temperature=0.95, max_tokens=1024, stop_token_ids=stop_token_ids)
 
-inputs = tokenizer.build_chat_input(prompt, history=None, role='user')['input_ids'].tolist()
-outputs = llm.generate(prompt_token_ids=inputs, sampling_params=sampling_params)
+inputs = tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
+outputs = llm.generate(prompts=inputs, sampling_params=sampling_params)
 
-generated_text = [output.outputs[0].text for output in outputs]
-print(generated_text)
+print(outputs[0].outputs[0].text)
+
 ```
 
 ### Use the following method to quickly call the GLM-4V-9B multimodal model

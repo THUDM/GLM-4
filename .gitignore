@@ -1,6 +1,3 @@
 *venv
 *.DS_Store
-*base_model
-*multimodal
-chat_model
 *.idea/

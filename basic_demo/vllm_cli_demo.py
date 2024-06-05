@@ -25,7 +25,7 @@ def load_model_and_tokenizer(model_dir: str):
         tensor_parallel_size=1,
         dtype="bfloat16",
         trust_remote_code=True,
-        gpu_memory_utilization=0.3,
+        gpu_memory_utilization=0.9,
         enforce_eager=True,
         worker_use_ray=True,
         engine_use_ray=False,

@@ -44,12 +44,13 @@ pnpm install
 ```diff
 export default {
 
-BROWSER_TIMEOUT: 10000,
-BING_SEARCH_API_URL: 'https://api.bing.microsoft.com/v7.0',
-BING_SEARCH_API_KEY: '<PUT_YOUR_BING_SEARCH_KEY_HERE>',
-
-HOST: 'localhost',
-PORT: 3000,
+   BROWSER_TIMEOUT: 10000,
+   BING_SEARCH_API_URL: 'https://api.bing.microsoft.com/v7.0',
+   BING_SEARCH_API_KEY: '<PUT_YOUR_BING_SEARCH_KEY_HERE>',
+   
+   HOST: 'localhost',
+   PORT: 3000,
+};
 ```
 
 2. The Wenshengtu function needs to call the CogView API. Modify `src/tools/config.py`

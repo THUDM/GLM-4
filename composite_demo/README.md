@@ -46,6 +46,7 @@ pnpm install
 
         HOST: 'localhost',
         PORT: 3000,
+    };
     ```
 
 2. 文生图功能需要调用 CogView API。修改 `src/tools/config.py`

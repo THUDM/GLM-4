@@ -12,7 +12,6 @@ from threading import Thread
 
 from typing import Union
 from pathlib import Path
-from peft import AutoPeftModelForCausalLM, PeftModelForCausalLM
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
@@ -24,7 +23,7 @@ from transformers import (
     TextIteratorStreamer
 )
 
-ModelType = Union[PreTrainedModel, PeftModelForCausalLM]
+ModelType = Union[PreTrainedModel, AutoModelForCausalLM]
 TokenizerType = Union[PreTrainedTokenizer, PreTrainedTokenizerFast]
 
 MODEL_PATH = os.environ.get('MODEL_PATH', 'THUDM/glm-4-9b-chat')
@@ -40,7 +39,7 @@ def load_model_and_tokenizer(
 ) -> tuple[ModelType, TokenizerType]:
     model_dir = _resolve_path(model_dir)
     if (model_dir / 'adapter_config.json').exists():
-        model = AutoPeftModelForCausalLM.from_pretrained(
+        model = AutoModelForCausalLM.from_pretrained(
             model_dir, trust_remote_code=trust_remote_code, device_map='auto'
         )
         tokenizer_dir = model.peft_config['default'].base_model_name_or_path

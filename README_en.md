@@ -4,7 +4,7 @@
 🤗 <a href="https://huggingface.co/collections/THUDM/glm-4-665fcf188c414b03c2f7e3b7" target="_blank">HF Repo</a> • 🤖 <a href="https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">ModelScope</a> • 🐦 <a href="https://twitter.com/thukeg" target="_blank">Twitter</a> • 👋 Join <a href="https://join.slack.com/t/chatglm/shared_invite/zt-25ti5uohv-A_hs~am_D3Q8XPZMpj7wwQ" target="_blank">Slack</a> and <a href="resources/WECHAT.md" target="_blank">WeChat</a>
 </p>
 <p align="center">
-📍Experience and use a larger-scale GLM business model on the <a href="https://https://open.bigmodel.cn">Zhipu AI Open Platform</a>
+📍Experience and use a larger-scale GLM business model on the <a href="https://open.bigmodel.cn">Zhipu AI Open Platform</a>
 </p>
 
 ## Model Introduction

@@ -80,7 +80,7 @@ pnpm start
 4. Run the following commands to load the model locally and start the demo:
 
 ```bash
-streamlit run main.py
+streamlit run src/main.py
 ```
 
 Then you can see the demo address from the command line and click it to access it. The first access requires downloading

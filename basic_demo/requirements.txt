@@ -1,0 +1,23 @@
+torch>=2.3.0
+torchvision>=0.18.0
+transformers==4.40.0
+huggingface-hub>=0.23.1
+sentencepiece>=0.2.0
+pydantic>=2.7.1
+timm>=0.9.16
+tiktoken>=0.7.0
+accelerate>=0.30.1
+sentence_transformers>=2.7.0
+vllm>=0.4.3
+
+# web demo
+gradio>=4.31.5
+
+# openai demo
+openai>=1.30.3
+einops>=0.7.0
+sse-starlette>=2.1.0
+
+# Int4
+
+bitsandbytes>=0.43.1

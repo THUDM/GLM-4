@@ -1,0 +1,44 @@
+data_config:
+  train_file: train.jsonl
+  val_file: dev.jsonl
+  test_file: dev.jsonl
+  num_proc: 1
+max_input_length: 128
+max_output_length: 128
+training_args:
+  # see `transformers.Seq2SeqTrainingArguments`
+  output_dir: ./output
+  max_steps: 3000
+  # needed to be fit for the dataset
+  learning_rate: 5e-4
+  # settings for data loading
+  per_device_train_batch_size: 4
+  dataloader_num_workers: 16
+  remove_unused_columns: false
+  # settings for saving checkpoints
+  save_strategy: steps
+  save_steps: 500
+  # settings for logging
+  log_level: info
+  logging_strategy: steps
+  logging_steps: 500
+  # settings for evaluation
+  per_device_eval_batch_size: 16
+  evaluation_strategy: steps
+  eval_steps: 500
+  # settings for optimizer
+  # adam_epsilon: 1e-6
+  # uncomment the following line to detect nan or inf values
+  # debug: underflow_overflow
+  predict_with_generate: true
+  # see `transformers.GenerationConfig`
+  generation_config:
+    max_new_tokens: 512
+  # set your absolute deepspeed path here
+  #deepspeed: ds_zero_3.json
+peft_config:
+  peft_type: PREFIX_TUNING
+  task_type: CAUSAL_LM
+  num_virtual_tokens: 512
+  num_attention_heads: 2
+  token_dim: 256

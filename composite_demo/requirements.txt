@@ -1,0 +1,22 @@
+accelerate
+huggingface_hub>=0.19.4
+ipykernel>=6.26.0
+ipython>=8.18.1
+jupyter_client>=8.6.0
+langchain
+langchain-community
+matplotlib
+pillow>=10.1.0
+pymupdf
+python-docx
+python-pptx
+pyyaml>=6.0.1
+requests>=2.31.0
+sentencepiece
+streamlit>=1.35.0
+tiktoken
+transformers==4.40.0
+zhipuai>=2.1.0
+
+# Please install vllm if you'd like to use long context model.
+# vllm

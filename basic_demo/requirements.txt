@@ -9,6 +9,7 @@ tiktoken>=0.7.0
 accelerate>=0.30.1
 sentence_transformers>=2.7.0
 vllm>=0.4.3
+peft>=0.11.1
 
 # web demo
 gradio>=4.31.5

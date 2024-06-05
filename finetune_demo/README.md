@@ -36,7 +36,7 @@ pip install -r requirements.txt
 
 如果您仅希望微调模型的对话能力，而非工具能力，您应该按照以下格式整理数据。
 
-```
+```json
 [
   {
     "messages": [
@@ -49,45 +49,47 @@ pip install -r requirements.txt
             "args": {
               "<arg name>": "<arg value>"
             }
-          },
-          {
-            "role": "user",
-            "content": "<user prompt text>"
-          },
-          {
-            "role": "assistant",
-            "content": "<assistant response text>"
-          },
-          // If Tool Using:
-          {
-            "role": "user",
-            "content": "<user prompt text>"
-          },
-          {
-            "role": "assistant",
-            "content": "<assistant response text>"
-          },
-          {
-            "role": "observation",
-            "content": "<observation prompt text>"
-          },
-          {
-            "role": "assistant",
-            "content": "<assistant response observation>"
-          },
-          // Multi_turns:
-          {
-            "role": "user",
-            "content": "<user prompt text>"
-          },
-          {
-            "role": "assistant",
-            "content": "<assistant response text>"
           }
+           // Add more tools if needed
         ]
+      },
+      {
+        "role": "user",
+        "content": "<user prompt text>"
+      },
+      {
+        "role": "assistant",
+        "content": "<assistant response text>"
+      },
+      // If Tool Using
+      {
+        "role": "user",
+        "content": "<user prompt text>"
+      },
+      {
+        "role": "assistant",
+        "content": "<assistant response text>"
+      },
+      {
+        "role": "observation",
+        "content": "<observation prompt text>"
+      },
+      {
+        "role": "assistant",
+        "content": "<assistant response observation>"
+      },
+      // Multi_turns
+      {
+        "role": "user",
+        "content": "<user prompt text>"
+      },
+      {
+        "role": "assistant",
+        "content": "<assistant response text>"
       }
-      // ...
     ]
+  }
+]
 ```
 
 这里是一个不带有工具的例子:

@@ -32,7 +32,7 @@ The multi-round dialogue fine-tuning example uses the GLM-4 dialogue format conv
 
 For data files, the sample uses the following format:
 
-```
+```json
 [
   {
     "messages": [
@@ -45,45 +45,47 @@ For data files, the sample uses the following format:
             "args": {
               "<arg name>": "<arg value>"
             }
-          },
-          {
-            "role": "user",
-            "content": "<user prompt text>"
-          },
-          {
-            "role": "assistant",
-            "content": "<assistant response text>"
-          },
-          // If Tool Using:
-          {
-            "role": "user",
-            "content": "<user prompt text>"
-          },
-          {
-            "role": "assistant",
-            "content": "<assistant response text>"
-          },
-          {
-            "role": "observation",
-            "content": "<observation prompt text>"
-          },
-          {
-            "role": "assistant",
-            "content": "<assistant response observation>"
-          },
-          // Multi_turns:
-          {
-            "role": "user",
-            "content": "<user prompt text>"
-          },
-          {
-            "role": "assistant",
-            "content": "<assistant response text>"
           }
+          // Add more tools if needed
         ]
+      },
+      {
+        "role": "user",
+        "content": "<user prompt text>"
+      },
+      {
+        "role": "assistant",
+        "content": "<assistant response text>"
+      },
+      // If Tool Using
+      {
+        "role": "user",
+        "content": "<user prompt text>"
+      },
+      {
+        "role": "assistant",
+        "content": "<assistant response text>"
+      },
+      {
+        "role": "observation",
+        "content": "<observation prompt text>"
+      },
+      {
+        "role": "assistant",
+        "content": "<assistant response observation>"
+      },
+      // Multi_turns
+      {
+        "role": "user",
+        "content": "<user prompt text>"
+      },
+      {
+        "role": "assistant",
+        "content": "<assistant response text>"
       }
-      // ...
     ]
+  }
+]
 ```
 
 This is a sample without tools:

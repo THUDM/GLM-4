@@ -23,34 +23,43 @@ Test hardware information:
 The stress test data of relevant inference are as follows:
 
 **All tests are performed on a single GPU, and all video memory consumption is calculated based on the peak value**
+
 #
+
 ### GLM-4-9B-Chat
 
-| 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks      |
-|------|----------|-----------------|------------------|--------------|
-| BF16 | 19047MiB | 0.1554s         | 27.8193 tokens/s | Input length is 1000   |
-| BF16 | 20629MiB | 0.8199s         | 31.8613 tokens/s | Input length is 8000   |
-| BF16 | 27779MiB | 4.3554s         | 14.4108 tokens/s | Input length is 32000  |
-| BF16 | 57379MiB | 38.1467s        | 3.4205  tokens/s | Input length is 128000 |
-| BF16 | 74497MiB | 98.4930s        | 2.3653  tokens/s | Input length is 200000 |
+| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks                |
+|-------|------------|------------|------------------|------------------------|
+| BF16  | 19047MiB   | 0.1554s    | 27.8193 tokens/s | Input length is 1000   |
+| BF16  | 20629MiB   | 0.8199s    | 31.8613 tokens/s | Input length is 8000   |
+| BF16  | 27779MiB   | 4.3554s    | 14.4108 tokens/s | Input length is 32000  |
+| BF16  | 57379MiB   | 38.1467s   | 3.4205  tokens/s | Input length is 128000 |
 
-| 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks               |
-|------|----------|-----------------|------------------|-----------------------|
-| Int4 | 8251MiB  | 0.1667s         | 23.3903 tokens/s | Input length is 1000  |
-| Int4 | 9613MiB  | 0.8629s         | 23.4248 tokens/s | Input length is 8000  |
-| Int4 | 16065MiB | 4.3906s         | 14.6553 tokens/s | Input length is 32000 |
+| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks               |
+|-------|------------|------------|------------------|-----------------------|
+| Int4  | 8251MiB    | 0.1667s    | 23.3903 tokens/s | Input length is 1000  |
+| Int4  | 9613MiB    | 0.8629s    | 23.4248 tokens/s | Input length is 8000  |
+| Int4  | 16065MiB   | 4.3906s    | 14.6553 tokens/s | Input length is 32000 |
+
+### GLM-4-9B-Chat-1M
+
+| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks      |
+|-------|------------|------------|------------------|--------------|
+| BF16  | 74497MiB   | 98.4930s   | 2.3653  tokens/s | 输入长度为 200000 |
+
+If your input exceeds 200K, we recommend that you use the VLLM backend with multi gpus for inference to get better performance.
 
 #### GLM-4V-9B
 
-| Dtype   | GPU Memory | Prefilling | Decode Speed     | Remarks    |
-|------|------------|-----------------|------------------|------------|
-| BF16 | 28131MiB   | 0.1016s         | 33.4660 tokens/s | Input length is 1000 |
-| BF16 | 33043MiB   | 0.7935a         | 39.2444 tokens/s | Input length is 8000 |
+| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks              |
+|-------|------------|------------|------------------|----------------------|
+| BF16  | 28131MiB   | 0.1016s    | 33.4660 tokens/s | Input length is 1000 |
+| BF16  | 33043MiB   | 0.7935a    | 39.2444 tokens/s | Input length is 8000 |
 
-| Dtype |  GPU Memory     | Prefilling  | Decode Speed     | Remarks    |
-|-------|----------|-----------------|------------------|------------|
-| Int4  | 10267MiB | 0.1685a         | 28.7101 tokens/s | Input length is 1000 |
-| Int4  | 14105MiB | 0.8629s         | 24.2370 tokens/s | Input length is 8000 |
+| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks              |
+|-------|------------|------------|------------------|----------------------|
+| Int4  | 10267MiB   | 0.1685a    | 28.7101 tokens/s | Input length is 1000 |
+| Int4  | 14105MiB   | 0.8629s    | 24.2370 tokens/s | Input length is 8000 |
 
 ### Minimum hardware requirements
 

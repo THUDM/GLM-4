@@ -50,7 +50,7 @@ Read this in [English](README_en.md)
 | 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks    |
 |------|----------|-----------------|------------------|------------|
 | Int4 | 10267MiB | 0.1685a         | 28.7101 tokens/s | 输入长度为 1000 |
-| Int4 | 14105MiB | 0.8629s         | 40.7134 tokens/s | 输入长度为 8000 |
+| Int4 | 14105MiB | 0.8629s         | 24.2370 tokens/s | 输入长度为 8000 |
 
 ### 最低硬件要求
 

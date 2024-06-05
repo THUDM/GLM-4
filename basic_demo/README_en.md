@@ -42,15 +42,15 @@ The stress test data of relevant inference are as follows:
 
 #### GLM-4V-9B
 
-| 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks    |
-|------|----------|-----------------|------------------|------------|
-| BF16 | 28131MiB | 0.1016s         | 33.4660 tokens/s | Input length is 1000 |
-| BF16 | 33043MiB | 0.7935a         | 39.2444 tokens/s | Input length is 8000 |
+| Dtype   | GPU Memory | Prefilling | Decode Speed     | Remarks    |
+|------|------------|-----------------|------------------|------------|
+| BF16 | 28131MiB   | 0.1016s         | 33.4660 tokens/s | Input length is 1000 |
+| BF16 | 33043MiB   | 0.7935a         | 39.2444 tokens/s | Input length is 8000 |
 
-| 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks    |
-|------|----------|-----------------|------------------|------------|
-| Int4 | 10267MiB | 0.1685a         | 28.7101 tokens/s | Input length is 1000 |
-| Int4 | 14105MiB | 0.8629s         | 40.7134 tokens/s | Input length is 8000 |
+| Dtype |  GPU Memory     | Prefilling  | Decode Speed     | Remarks    |
+|-------|----------|-----------------|------------------|------------|
+| Int4  | 10267MiB | 0.1685a         | 28.7101 tokens/s | Input length is 1000 |
+| Int4  | 14105MiB | 0.8629s         | 24.2370 tokens/s | Input length is 8000 |
 
 ### Minimum hardware requirements
 

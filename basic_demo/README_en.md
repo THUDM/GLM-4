@@ -9,8 +9,9 @@ Please follow the steps in the document strictly to avoid unnecessary errors.
 ### Related inference test data
 
 **The data in this document are tested in the following hardware environment. The actual operating environment
-requirements and the video memory occupied by the operation are slightly different. Please refer to the actual operating
-environment. **
+requirements and the GPU memory occupied by the operation are slightly different. Please refer to the actual operating
+environment.**
+
 Test hardware information:
 
 + OS: Ubuntu 22.04
@@ -22,44 +23,45 @@ Test hardware information:
 
 The stress test data of relevant inference are as follows:
 
-**All tests are performed on a single GPU, and all video memory consumption is calculated based on the peak value**
+**All tests are performed on a single GPU, and all GPU memory consumption is calculated based on the peak value**
 
 #
 
 ### GLM-4-9B-Chat
 
-| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks                |
-|-------|------------|------------|------------------|------------------------|
-| BF16  | 19047MiB   | 0.1554s    | 27.8193 tokens/s | Input length is 1000   |
-| BF16  | 20629MiB   | 0.8199s    | 31.8613 tokens/s | Input length is 8000   |
-| BF16  | 27779MiB   | 4.3554s    | 14.4108 tokens/s | Input length is 32000  |
-| BF16  | 57379MiB   | 38.1467s   | 3.4205  tokens/s | Input length is 128000 |
+| Dtype | GPU Memory | Prefilling | Decode Speed  | Remarks                |
+|-------|------------|------------|---------------|------------------------|
+| BF16  | 19 GB      | 0.2s       | 27.8 tokens/s | Input length is 1000   |
+| BF16  | 21 GB      | 0.8s       | 31.8 tokens/s | Input length is 8000   |
+| BF16  | 28 GB      | 4.3s       | 14.4 tokens/s | Input length is 32000  |
+| BF16  | 58 GB      | 38.1s      | 3.4  tokens/s | Input length is 128000 |
 
-| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks               |
-|-------|------------|------------|------------------|-----------------------|
-| Int4  | 8251MiB    | 0.1667s    | 23.3903 tokens/s | Input length is 1000  |
-| Int4  | 9613MiB    | 0.8629s    | 23.4248 tokens/s | Input length is 8000  |
-| Int4  | 16065MiB   | 4.3906s    | 14.6553 tokens/s | Input length is 32000 |
+| Dtype | GPU Memory | Prefilling | Decode Speed  | Remarks               |
+|-------|------------|------------|---------------|-----------------------|
+| INT4  | 8 GB       | 0.2s       | 23.3 tokens/s | Input length is 1000  |
+| INT4  | 10 GB      | 0.8s       | 23.4 tokens/s | Input length is 8000  |
+| INT4  | 17 GB      | 4.3s       | 14.6 tokens/s | Input length is 32000 |
 
 ### GLM-4-9B-Chat-1M
 
-| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks      |
-|-------|------------|------------|------------------|--------------|
-| BF16  | 74497MiB   | 98.4930s   | 2.3653  tokens/s | 输入长度为 200000 |
+| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks                |
+|-------|------------|------------|------------------|------------------------|
+| BF16  | 74497MiB   | 98.4s      | 2.3653  tokens/s | Input length is 200000 |
 
-If your input exceeds 200K, we recommend that you use the vLLM backend with multi gpus for inference to get better performance.
+If your input exceeds 200K, we recommend that you use the vLLM backend with multi gpus for inference to get better
+performance.
 
 #### GLM-4V-9B
 
-| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks              |
-|-------|------------|------------|------------------|----------------------|
-| BF16  | 28131MiB   | 0.1016s    | 33.4660 tokens/s | Input length is 1000 |
-| BF16  | 33043MiB   | 0.7935a    | 39.2444 tokens/s | Input length is 8000 |
+| Dtype | GPU Memory | Prefilling | Decode Speed  | Remarks              |
+|-------|------------|------------|---------------|----------------------|
+| BF16  | 28 GB      | 0.1s       | 33.4 tokens/s | Input length is 1000 |
+| BF16  | 33 GB      | 0.7s       | 39.2 tokens/s | Input length is 8000 |
 
-| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks              |
-|-------|------------|------------|------------------|----------------------|
-| Int4  | 10267MiB   | 0.1685a    | 28.7101 tokens/s | Input length is 1000 |
-| Int4  | 14105MiB   | 0.8629s    | 24.2370 tokens/s | Input length is 8000 |
+| Dtype | GPU Memory | Prefilling | Decode Speed  | Remarks              |
+|-------|------------|------------|---------------|----------------------|
+| INT4  | 10 GB      | 0.1s       | 28.7 tokens/s | Input length is 1000 |
+| INT4  | 15 GB      | 0.8s       | 24.2 tokens/s | Input length is 8000 |
 
 ### Minimum hardware requirements
 
@@ -71,8 +73,8 @@ If you want to run the most basic code provided by the official (transformers ba
 If you want to run all the codes in this folder provided by the official, you also need:
 
 + Linux operating system (Debian series is best)
-+ GPU device with more than 8GB video memory, supporting CUDA or ROCM and supporting `BF16` reasoning (GPUs above A100,
-  V100, 20 and older GPU architectures are not supported)
++ GPU device with more than 8GB GPU memory, supporting CUDA or ROCM and supporting `BF16` reasoning (`FP16` precision
+  cannot be finetuned, and there is a small probability of problems in infering)
 
 Install dependencies
 

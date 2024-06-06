@@ -141,7 +141,7 @@ Users can upload documents and use the long text capability of GLM-4-9B to under
 pdf and other files.
 
 + Tool calls and system prompt words are not supported in this mode.
-+ If the text is very long, the model may require a high amount of video memory. Please confirm your hardware
++ If the text is very long, the model may require a high amount of GPU memory. Please confirm your hardware
   configuration.
 
 ## Image Understanding Mode

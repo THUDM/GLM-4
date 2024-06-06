@@ -6,8 +6,8 @@ not supported). Please strictly follow the steps in the document to avoid unnece
 ## Hardware check
 
 **The data in this document are tested in the following hardware environment. The actual operating environment
-requirements and the video memory occupied by the operation are slightly different. Please refer to the actual operating
-environment. **
+requirements and the GPU memory occupied by the operation are slightly different. Please refer to the actual operating
+environment.**
 Test hardware information:
 
 + OS: Ubuntu 22.04
@@ -17,7 +17,7 @@ Test hardware information:
 + GPU Driver: 535.104.05
 + GPU: NVIDIA A100-SXM4-80GB * 8
 
-| Fine-tuning solution | Video memory usage                           | Weight save point size |
+| Fine-tuning solution | GPU memory usage                             | Weight save point size |
 |----------------------|----------------------------------------------|------------------------|
 | lora (PEFT)          | 21531MiB                                     | 17M                    |
 | p-tuning v2 (PEFT)   | 21381MiB                                     | 121M                   |

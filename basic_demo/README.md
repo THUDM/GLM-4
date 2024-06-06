@@ -1,6 +1,6 @@
 # Basic Demo
 
-Read this in [English](README_en.md)
+Read this in [English](README_en.md).
 
 本 demo 中，你将体验到如何使用 GLM-4-9B 开源模型进行基本的任务。
 
@@ -11,6 +11,7 @@ Read this in [English](README_en.md)
 ### 相关推理测试数据
 
 **本文档的数据均在以下硬件环境测试,实际运行环境需求和运行占用的显存略有不同，请以实际运行环境为准。**
+
 测试硬件信息:
 
 + OS: Ubuntu 22.04
@@ -26,38 +27,38 @@ Read this in [English](README_en.md)
 
 #### GLM-4-9B-Chat
 
-| 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks      |
-|------|----------|-----------------|------------------|--------------|
-| BF16 | 19047MiB | 0.1554s         | 27.8193 tokens/s | 输入长度为 1000   |
-| BF16 | 20629MiB | 0.8199s         | 31.8613 tokens/s | 输入长度为 8000   |
-| BF16 | 27779MiB | 4.3554s         | 14.4108 tokens/s | 输入长度为 32000  |
-| BF16 | 57379MiB | 38.1467s        | 3.4205  tokens/s | 输入长度为 128000 |
+| 精度   | 显存占用  | Prefilling | Decode Speed  | Remarks      |
+|------|-------|------------|---------------|--------------|
+| BF16 | 19 GB | 0.2s       | 27.8 tokens/s | 输入长度为 1000   |
+| BF16 | 21 GB | 0.8s       | 31.8 tokens/s | 输入长度为 8000   |
+| BF16 | 28 GB | 4.3s       | 14.4 tokens/s | 输入长度为 32000  |
+| BF16 | 58 GB | 38.1s      | 3.4  tokens/s | 输入长度为 128000 |
 
-| 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks     |
-|------|----------|-----------------|------------------|-------------|
-| Int4 | 8251MiB  | 0.1667s         | 23.3903 tokens/s | 输入长度为 1000  |
-| Int4 | 9613MiB  | 0.8629s         | 23.4248 tokens/s | 输入长度为 8000  |
-| Int4 | 16065MiB | 4.3906s         | 14.6553 tokens/s | 输入长度为 32000 |
+| 精度   | 显存占用  | Prefilling | Decode Speed  | Remarks     |
+|------|-------|------------|---------------|-------------|
+| INT4 | 8 GB  | 0.2s       | 23.3 tokens/s | 输入长度为 1000  |
+| INT4 | 10 GB | 0.8s       | 23.4 tokens/s | 输入长度为 8000  |
+| INT4 | 17 GB | 4.3s       | 14.6 tokens/s | 输入长度为 32000 |
 
 ### GLM-4-9B-Chat-1M
 
-| 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks      |
-|------|----------|-----------------|------------------|--------------|
-| BF16 | 74497MiB | 98.4930s        | 2.3653  tokens/s | 输入长度为 200000 |
+| 精度   | 显存占用  | Prefilling | Decode Speed | Remarks      |
+|------|-------|------------|--------------|--------------|
+| BF16 | 75 GB | 98.4s      | 2.3 tokens/s | 输入长度为 200000 |
 
 如果您的输入超过200K，我们建议您使用vLLM后端进行多卡推理，以获得更好的性能。
 
 #### GLM-4V-9B
 
-| 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks    |
-|------|----------|-----------------|------------------|------------|
-| BF16 | 28131MiB | 0.1016s         | 33.4660 tokens/s | 输入长度为 1000 |
-| BF16 | 33043MiB | 0.7935a         | 39.2444 tokens/s | 输入长度为 8000 |
+| 精度   | 显存占用  | Prefilling | Decode Speed  | Remarks    |
+|------|-------|------------|---------------|------------|
+| BF16 | 28 GB | 0.1s       | 33.4 tokens/s | 输入长度为 1000 |
+| BF16 | 33 GB | 0.7s       | 39.2 tokens/s | 输入长度为 8000 |
 
-| 精度   | 显存占用     | Prefilling / 首响 | Decode Speed     | Remarks    |
-|------|----------|-----------------|------------------|------------|
-| Int4 | 10267MiB | 0.1685a         | 28.7101 tokens/s | 输入长度为 1000 |
-| Int4 | 14105MiB | 0.8629s         | 24.2370 tokens/s | 输入长度为 8000 |
+| 精度   | 显存占用  | Prefilling | Decode Speed  | Remarks    |
+|------|-------|------------|---------------|------------|
+| INT4 | 10 GB | 0.1s       | 28.7 tokens/s | 输入长度为 1000 |
+| INT4 | 15 GB | 0.8s       | 24.2 tokens/s | 输入长度为 8000 |
 
 ### 最低硬件要求
 
@@ -69,7 +70,7 @@ Read this in [English](README_en.md)
 如果您希望运行官方提供的本文件夹的所有代码，您还需要：
 
 + Linux 操作系统 (Debian 系列最佳)
-+ 大于 8GB 显存的，支持 CUDA 或者 ROCM 并且支持 `BF16` 推理的 GPU 设备 (A100以上GPU，V100，20以及更老的GPU架构不受支持)
++ 大于 8GB 显存的，支持 CUDA 或者 ROCM 并且支持 `BF16` 推理的 GPU 设备。(`FP16` 精度无法训练，推理有小概率出现问题)
 
 安装依赖
 
@@ -84,7 +85,6 @@ pip install -r requirements.txt
 ### 使用 transformers 后端代码
 
 + 使用命令行与 GLM-4-9B 模型进行对话。
-
 
 ```shell
 python trans_cli_demo.py # GLM-4-9B-Chat

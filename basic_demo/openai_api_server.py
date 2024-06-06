@@ -314,7 +314,7 @@ async def create_chat_completion(request: ChatCompletionRequest):
     if request.stream:
         predict_stream_generator = predict_stream(request.model, gen_params)
         output = await anext(predict_stream_generator)
-        if not output and 'get_' in output:
+        if output:
             return EventSourceResponse(predict_stream_generator, media_type="text/event-stream")
         logger.debug(f"First result output：\n{output}")
 
@@ -535,7 +535,6 @@ if __name__ == "__main__":
     engine_args = AsyncEngineArgs(
         model=MODEL_PATH,
         tokenizer=MODEL_PATH,
-        tokenizer_mode="slow",
         tensor_parallel_size=1,
         dtype="bfloat16",
         trust_remote_code=True,

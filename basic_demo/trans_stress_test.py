@@ -17,10 +17,17 @@ def stress_test(token_len, n, num_gpu):
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_PATH,
         trust_remote_code=True,
-        # quantization_config=BitsAndBytesConfig(load_in_4bit=True),
-        # low_cpu_mem_usage=True,
         torch_dtype=torch.bfloat16
     ).to(device).eval()
+    
+    # Use INT4 weight infer
+    # model = AutoModelForCausalLM.from_pretrained(
+    #     MODEL_PATH,
+    #     trust_remote_code=True,
+    #     quantization_config=BitsAndBytesConfig(load_in_4bit=True),
+    #     low_cpu_mem_usage=True,
+    # ).eval()
+
     times = []
     decode_times = []
 

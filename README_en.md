@@ -93,6 +93,7 @@ on [Berkeley Function Calling Leaderboard](https://github.com/ShishirPatil/goril
 | ChatGLM3-6B            |    57.88     |    62.18    |    69.78     |   5.42    |
 | GLM-4-9B-Chat          |    81.00     |    80.26    |    84.40     |   87.92   |
 
+
 ### Multi-Modal
 
 GLM-4V-9B is a multimodal language model with visual understanding capabilities. The evaluation results of its related
@@ -114,7 +115,7 @@ classic tasks are as follows:
 
 ## Quick call
 
-**硬件配置和系统要求，请查看[这里](basic_demo/README_en.md)。**
+**For hardware configuration and system requirements, please check [here](basic_demo/README_en.md). **
 
 ### Use the following method to quickly call the GLM-4-9B-Chat language model
 

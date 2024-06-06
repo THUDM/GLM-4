@@ -18,6 +18,7 @@ def extract_docx(path):
     for paragraph in doc.paragraphs:
         data.append(paragraph.text)
     content = '\n\n'.join(data)
+    return content
 
 def extract_pptx(path):
     prs = Presentation(path)

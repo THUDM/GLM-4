@@ -13,45 +13,38 @@ ensuring that the CLI interface displays formatted text correctly.
 import os
 import torch
 from threading import Thread
-from typing import Union
-from pathlib import Path
-from peft import AutoPeftModelForCausalLM, PeftModelForCausalLM
-from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    PreTrainedModel,
-    PreTrainedTokenizer,
-    PreTrainedTokenizerFast,
-    StoppingCriteria,
-    StoppingCriteriaList,
-    TextIteratorStreamer
-)
-
-ModelType = Union[PreTrainedModel, PeftModelForCausalLM]
-TokenizerType = Union[PreTrainedTokenizer, PreTrainedTokenizerFast]
+from transformers import AutoTokenizer, StoppingCriteria, StoppingCriteriaList, TextIteratorStreamer, AutoModel
 
 MODEL_PATH = os.environ.get('MODEL_PATH', 'THUDM/glm-4-9b-chat')
 
+## If use peft model.
+# def load_model_and_tokenizer(model_dir, trust_remote_code: bool = True):
+#     if (model_dir / 'adapter_config.json').exists():
+#         model = AutoModel.from_pretrained(
+#             model_dir, trust_remote_code=trust_remote_code, device_map='auto'
+#         )
+#         tokenizer_dir = model.peft_config['default'].base_model_name_or_path
+#     else:
+#         model = AutoModel.from_pretrained(
+#             model_dir, trust_remote_code=trust_remote_code, device_map='auto'
+#         )
+#         tokenizer_dir = model_dir
+#     tokenizer = AutoTokenizer.from_pretrained(
+#         tokenizer_dir, trust_remote_code=trust_remote_code, use_fast=False
+#     )
+#     return model, tokenizer
 
-def load_model_and_tokenizer(
-        model_dir: Union[str, Path], trust_remote_code: bool = True
-) -> tuple[ModelType, TokenizerType]:
-    model_dir = Path(model_dir).expanduser().resolve()
-    if (model_dir / 'adapter_config.json').exists():
-        model = AutoPeftModelForCausalLM.from_pretrained(
-            model_dir, trust_remote_code=trust_remote_code, device_map='auto')
-        tokenizer_dir = model.peft_config['default'].base_model_name_or_path
-    else:
-        model = AutoModelForCausalLM.from_pretrained(model_dir, trust_remote_code=trust_remote_code, device_map='auto')
-        tokenizer_dir = model_dir
 
-    tokenizer = AutoTokenizer.from_pretrained(
-        tokenizer_dir, trust_remote_code=trust_remote_code, encode_special_tokens=True, use_fast=False
-    )
-    return model, tokenizer
-
-
-model, tokenizer = load_model_and_tokenizer(MODEL_PATH, trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained(
+    MODEL_PATH,
+    trust_remote_code=True,
+    encode_special_tokens=True
+)
+model = AutoModel.from_pretrained(
+    MODEL_PATH,
+    trust_remote_code=True,
+    device_map="auto",
+    torch_dtype=torch.bfloat16).eval()
 
 
 class StopOnTokens(StoppingCriteria):

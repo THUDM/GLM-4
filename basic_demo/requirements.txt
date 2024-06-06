@@ -22,3 +22,6 @@ sse-starlette>=2.1.0
 
 # INT4
 bitsandbytes>=0.43.1
+
+# PEFT model, not need if you don't use PEFT finetune model.
+# peft>=0.11.0

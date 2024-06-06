@@ -1,10 +1,13 @@
 # GLM-4-9B Chat dialogue model fine-tuning
 
-In this demo, you will experience how to fine-tune the glm-4-9b dialogue open source model (visual understanding model is not supported). Please strictly follow the steps in the document to avoid unnecessary errors.
+In this demo, you will experience how to fine-tune the GLM-4-9B-Chat open source model (visual understanding model is
+not supported). Please strictly follow the steps in the document to avoid unnecessary errors.
 
 ## Hardware check
 
-**The data in this document are tested in the following hardware environment. The actual operating environment requirements and the video memory occupied by the operation are slightly different. Please refer to the actual operating environment. **
+**The data in this document are tested in the following hardware environment. The actual operating environment
+requirements and the video memory occupied by the operation are slightly different. Please refer to the actual operating
+environment. **
 Test hardware information:
 
 + OS: Ubuntu 22.04
@@ -14,13 +17,14 @@ Test hardware information:
 + GPU Driver: 535.104.05
 + GPU: NVIDIA A100-SXM4-80GB * 8
 
-| Fine-tuning solution | Video memory usage | Weight save point size |
-|--------------------|-----------------------------------|---------|
-| lora (PEFT) | 21531MiB | 17M |
-| p-tuning v2 (PEFT) | 21381MiB | 121M |
-| SFT (Zero3 method) | 80935MiB<br/>(Each GPU, 8 GPUs are required) | 20G |
+| Fine-tuning solution | Video memory usage                           | Weight save point size |
+|----------------------|----------------------------------------------|------------------------|
+| lora (PEFT)          | 21531MiB                                     | 17M                    |
+| p-tuning v2 (PEFT)   | 21381MiB                                     | 121M                   |
+| SFT (Zero3 method)   | 80935MiB<br/>(Each GPU, 8 GPUs are required) | 20G                    |
 
-Before starting fine-tuning, please install the dependencies in `basic_demo` first. You also need to install the dependencies in this directory:
+Before starting fine-tuning, please install the dependencies in `basic_demo` first. You also need to install the
+dependencies in this directory:
 
 ```bash
 pip install -r requirements.txt
@@ -28,7 +32,8 @@ pip install -r requirements.txt
 
 ## Multi-round dialogue format
 
-The multi-round dialogue fine-tuning example uses the GLM-4 dialogue format convention, adding different `loss_mask` to different roles to calculate `loss` for multiple rounds of replies in one calculation.
+The multi-round dialogue fine-tuning example uses the GLM-4 dialogue format convention, adding different `loss_mask` to
+different roles to calculate `loss` for multiple rounds of replies in one calculation.
 
 For data files, the sample uses the following format:
 
@@ -100,8 +105,11 @@ This is a sample with tools:
 {"messages": [{"role": "system", "content": "", "tools": [{"type": "function", "function": {"name": "get_recommended_books", "description": "Get recommended books based on user's interests", "parameters": {"type": "object", "properties": {"interests": {"type": "array", "items": {"type": "string"}, "description": "The interests to recommend books for"}}, "required": ["interests"]}}}]}, {"role": "user", "content": "Hi, I am looking for some book recommendations. I am interested in history and science fiction."}, {"role": "assistant", "content": "{\"name\": \"get_recommended_books\", \"arguments\": {\"interests\": [\"history\", \"science fiction\"]}}"}, {"role": "observation", "content": "{\"books\": [\"Sapiens: A Brief History of Humankind by Yuval Noah Harari\", \"A Brief History of Time by Stephen Hawking\", \"Dune by Frank Herbert\", \"The Martian by Andy Weir\"]}"}, {"role": "assistant", "content": "Based on your interests in history and science fiction, I would recommend the following books: \"Sapiens: A Brief History of Humankind\" by Yuval Noah Harari, \"A Brief History of Time\" by Stephen Hawking, \"Dune\" by Frank Herbert, and \"The Martian\" by Andy Weir."}]}
 ```
 
-- The `system` role is optional, but if it exists, it must appear before the `user` role, and a complete conversation data (whether single-round or multi-round conversation) can only have one `system` role.
-- The `tools` field is optional. If it exists, it must appear after the `system` role, and a complete conversation data (whether single-round or multi-round conversation) can only have one `tools` field. When the `tools` field exists, the `system` role must exist and the `content` field is empty.
+- The `system` role is optional, but if it exists, it must appear before the `user` role, and a complete conversation
+  data (whether single-round or multi-round conversation) can only have one `system` role.
+- The `tools` field is optional. If it exists, it must appear after the `system` role, and a complete conversation
+  data (whether single-round or multi-round conversation) can only have one `tools` field. When the `tools` field
+  exists, the `system` role must exist and the `content` field is empty.
 
 ## Configuration file
 
@@ -110,7 +118,9 @@ The fine-tuning configuration file is located in the `config` directory, includi
 1. `ds_zereo_2 / ds_zereo_3.json`: deepspeed configuration file.
 
 2. `lora.yaml / ptuning_v2
-3. .yaml / sft.yaml`: Configuration files for different modes of models, including model parameters, optimizer parameters, training parameters, etc. Some important parameters are explained as follows:
+3. .yaml / sft.yaml`: Configuration files for different modes of models, including model parameters, optimizer
+   parameters, training parameters, etc. Some important parameters are explained as follows:
+
 + data_config section
 + train_file: File path of training dataset.
 + val_file: File path of validation dataset.
@@ -149,7 +159,8 @@ The fine-tuning configuration file is located in the `config` directory, includi
 
 ## Start fine-tuning
 
-Execute **single machine multi-card/multi-machine multi-card** run through the following code, which uses `deepspeed` as the acceleration solution, and you need to install `deepspeed`.
+Execute **single machine multi-card/multi-machine multi-card** run through the following code, which uses `deepspeed` as
+the acceleration solution, and you need to install `deepspeed`.
 
 ```shell
 OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8 finetune_hf.py data/AdvertiseGen/ THUDM/glm-4-9b configs/lora.yaml
@@ -163,7 +174,8 @@ python finetune_hf.py data/AdvertiseGen/ THUDM/glm-4-9b-chat configs/lora.yaml
 
 ## Fine-tune from a saved point
 
-If you train as described above, each fine-tuning will start from the beginning. If you want to fine-tune from a half-trained model, you can add a fourth parameter, which can be passed in two ways:
+If you train as described above, each fine-tuning will start from the beginning. If you want to fine-tune from a
+half-trained model, you can add a fourth parameter, which can be passed in two ways:
 
 1. `yes`, automatically start training from the last saved Checkpoint
 
@@ -189,38 +201,45 @@ In this way, the answer you get is the fine-tuned answer.
 
 ### Use the fine-tuned model in other demos in this repository or external repositories
 
-You can use our `LORA` and fully fine-tuned models in any demo. This requires you to modify the code yourself according to the following tutorial.
+You can use our `LORA` and fully fine-tuned models in any demo. This requires you to modify the code yourself according
+to the following tutorial.
 
 1. Replace the way to read the model in the demo with the way to read the model in `finetune_demo/inference.py`.
 
-> Please note that for LORA and P-TuningV2, we did not merge the trained models, but recorded the fine-tuned path in `adapter_config.json`
-> If the location of your original model changes, you should modify the path of `base_model_name_or_path` in `adapter_config.json`.
+> Please note that for LORA and P-TuningV2, we did not merge the trained models, but recorded the fine-tuned path
+> in `adapter_config.json`
+> If the location of your original model changes, you should modify the path of `base_model_name_or_path`
+> in `adapter_config.json`.
 
 ```python
 def load_model_and_tokenizer(
-model_dir: Union[str, Path], trust_remote_code: bool = True
+        model_dir: Union[str, Path], trust_remote_code: bool = True
 ) -> tuple[ModelType, TokenizerType]:
-model_dir = _resolve_path(model_dir)
+
+
+    model_dir = _resolve_path(model_dir)
 if (model_dir / 'adapter_config.json').exists():
-model = AutoPeftModelForCausalLM.from_pretrained(
-model_dir, trust_remote_code=trust_remote_code, device_map='auto'
-)
+    model = AutoPeftModelForCausalLM.from_pretrained(
+        model_dir, trust_remote_code=trust_remote_code, device_map='auto'
+    )
 tokenizer_dir = model.peft_config['default'].base_model_name_or_path
 else:
 model = AutoModelForCausalLM.from_pretrained(
-model_dir, trust_remote_code=trust_remote_code, device_map='auto'
+    model_dir, trust_remote_code=trust_remote_code, device_map='auto'
 )
 tokenizer_dir = model_dir
 tokenizer = AutoTokenizer.from_pretrained(
-tokenizer_dir, trust_remote_code=trust_remote_code
+    tokenizer_dir, trust_remote_code=trust_remote_code
 )
 return model, tokenizer
 ```
 
-2. Read the fine-tuned model. Please note that you should use the location of the fine-tuned model. For example, if your model location is `/path/to/finetune_adapter_model`
-and the original model address is `path/to/base_model`, you should use `/path/to/finetune_adapter_model` as `model_dir`.
-3. After completing the above operations, you can use the fine-tuned model normally. Other calling methods remain unchanged.
-
+2. Read the fine-tuned model. Please note that you should use the location of the fine-tuned model. For example, if your
+   model location is `/path/to/finetune_adapter_model`
+   and the original model address is `path/to/base_model`, you should use `/path/to/finetune_adapter_model`
+   as `model_dir`.
+3. After completing the above operations, you can use the fine-tuned model normally. Other calling methods remain
+   unchanged.
 
 ## Reference
 

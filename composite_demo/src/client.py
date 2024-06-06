@@ -79,7 +79,7 @@ def process_response(output, history):
     return content, history
 
 
-# glm-4v-9b is not available in VLLM backend, use HFClient instead.
+# glm-4v-9b is not available in vLLM backend, use HFClient instead.
 @st.cache_resource(max_entries=1, show_spinner="Loading model...")
 def get_client(model_path, typ: ClientType) -> Client:
     match typ:

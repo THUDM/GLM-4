@@ -28,7 +28,7 @@ GPT-4-turbo-2024-04-09, Gemini 1.0 Pro, Qwen-VL-Max, and Claude 3 Opus.
 | Model            | Type | Seq Length | Download                                                                                                                                | Online Demo                                                                                                                                                                                |
 |------------------|------|------------|-----------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | GLM-4-9B         | Base | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)                 | /                                                                                                                                                                                          |
-| GLM-4-9B-Chat    | Chat | 128K       | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)       | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope VLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
+| GLM-4-9B-Chat    | Chat | 128K       | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)       | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
 | GLM-4-9B-Chat-1M | Chat | 1M         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m) | /                                                                                                                                                                                          |
 | GLM-4V-9B        | Chat | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)               | /                                                                                                                                                                                          |
 
@@ -158,13 +158,8 @@ Use the vLLM backend for inference:
 from transformers import AutoTokenizer
 from vllm import LLM, SamplingParams
 
-# GLM-4-9B-Chat-1M
-# max_model_len, tp_size = 1048576, 4
 
 # GLM-4-9B-Chat
-from transformers import AutoTokenizer
-from vllm import LLM, SamplingParams
-
 # If you encounter OOM, you can try to reduce max_model_len or increase tp_size
 max_model_len, tp_size = 131072, 1
 model_name = "THUDM/glm-4-9b-chat"
@@ -233,7 +228,7 @@ If you want to learn more about the GLM-4-9B series open source models, this ope
 with basic GLM-4-9B usage and development code through the following content
 
 + [base](basic_demo/README.md): Contains
-+ Interaction code using transformers and VLLM backend
++ Interaction code using transformers and vLLM backend
 + OpenAI API backend interaction code
 + Batch reasoning code
 

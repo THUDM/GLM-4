@@ -17,7 +17,7 @@ from transformers import AutoTokenizer, LogitsProcessor
 from sse_starlette.sse import EventSourceResponse
 
 EventSourceResponse.DEFAULT_PING_INTERVAL = 1000
-MODEL_PATH = 'THUDM/glm-4-9b'
+MODEL_PATH = 'THUDM/glm-4-9b-chat'
 MAX_MODEL_LENGTH = 8192
 
 

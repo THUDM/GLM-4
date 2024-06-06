@@ -2,7 +2,7 @@
 
 Read this in [English](README_en.md)
 
-本 demo 中，你将体验到如何使用 glm-4-9b 开源模型进行基本的任务。
+本 demo 中，你将体验到如何使用 GLM-4-9B 开源模型进行基本的任务。
 
 请严格按照文档的步骤进行操作，以避免不必要的错误。
 
@@ -45,7 +45,7 @@ Read this in [English](README_en.md)
 |------|----------|-----------------|------------------|--------------|
 | BF16 | 74497MiB | 98.4930s        | 2.3653  tokens/s | 输入长度为 200000 |
 
-如果您的输入超过200K，我们建议您使用VLLM后端进行多卡推理，以获得更好的性能。
+如果您的输入超过200K，我们建议您使用vLLM后端进行多卡推理，以获得更好的性能。
 
 #### GLM-4V-9B
 
@@ -83,13 +83,15 @@ pip install -r requirements.txt
 
 ### 使用 transformers 后端代码
 
-+ 使用 命令行 与 glm-4-9b 模型进行对话。
++ 使用命令行与 GLM-4-9B 模型进行对话。
+
 
 ```shell
-python trans_cli_demo.py
+python trans_cli_demo.py # GLM-4-9B-Chat
+python trans_cli_vision_demo.py # GLM-4V-9B
 ```
 
-+ 使用 Gradio 网页端与 glm-4-9b 模型进行对话。
++ 使用 Gradio 网页端与 GLM-4-9B-Chat 模型进行对话。
 
 ```shell
 python trans_web_demo.py
@@ -101,15 +103,15 @@ python trans_web_demo.py
 python cli_batch_request_demo.py
 ```
 
-### 使用 VLLM 后端代码
+### 使用 vLLM 后端代码
 
-+ 使用命令行与 glm-4-9b 模型进行对话。
++ 使用命令行与 GLM-4-9B-Chat 模型进行对话。
 
 ```shell
 python vllm_cli_demo.py
 ```
 
-+ 自行构建服务端，并使用 `OpenAI API` 的请求格式与 glm-4-9b 模型进行对话。本 demo 支持 Function Call 和 All Tools功能。
++ 自行构建服务端，并使用 `OpenAI API` 的请求格式与 GLM-4-9B-Chat 模型进行对话。本 demo 支持 Function Call 和 All Tools功能。
 
 启动服务端：
 

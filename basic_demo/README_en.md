@@ -1,6 +1,6 @@
 # Basic Demo
 
-In this demo, you will experience how to use the glm-4-9b open source model to perform basic tasks.
+In this demo, you will experience how to use the GLM-4-9B open source model to perform basic tasks.
 
 Please follow the steps in the document strictly to avoid unnecessary errors.
 
@@ -47,7 +47,7 @@ The stress test data of relevant inference are as follows:
 |-------|------------|------------|------------------|--------------|
 | BF16  | 74497MiB   | 98.4930s   | 2.3653  tokens/s | 输入长度为 200000 |
 
-If your input exceeds 200K, we recommend that you use the VLLM backend with multi gpus for inference to get better performance.
+If your input exceeds 200K, we recommend that you use the vLLM backend with multi gpus for inference to get better performance.
 
 #### GLM-4V-9B
 
@@ -87,13 +87,14 @@ pip install -r requirements.txt
 
 ### Use transformers backend code
 
-+ Use the command line to communicate with the glm-4-9b model.
++ Use the command line to communicate with the GLM-4-9B model.
 
 ```shell
-python trans_cli_demo.py
+python trans_cli_demo.py # GLM-4-9B-Chat
+python trans_cli_vision_demo.py # GLM-4V-9B
 ```
 
-+ Use the Gradio web client to communicate with the glm-4-9b model.
++ Use the Gradio web client to communicate with the GLM-4-9B-Chat model.
 
 ```shell
 python trans_web_demo.py
@@ -105,9 +106,9 @@ python trans_web_demo.py
 python cli_batch_request_demo.py
 ```
 
-### Use VLLM backend code
+### Use vLLM backend code
 
-+ Use the command line to communicate with the glm-4-9b model.
++ Use the command line to communicate with the GLM-4-9B-Chat model.
 
 ```shell
 python vllm_cli_demo.py

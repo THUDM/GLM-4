@@ -484,9 +484,7 @@ async def predict_stream(model_id, gen_params):
                     object="chat.completion.chunk"
                 )
                 yield "{}".format(chunk.model_dump_json(exclude_unset=True))
-            if not has_send_first_chunk and output.startswith("\n"):
-                output = output[1:]
-            send_msg = delta_text if has_send_first_chunk else output
+            send_msg = delta_text if has_send_first_chunk else output[1:] if output.startswith("\n") else output
             has_send_first_chunk = True
             message = DeltaMessage(
                 content=send_msg,

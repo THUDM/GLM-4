@@ -195,7 +195,7 @@ async def generate_stream_glm4(params):
         "skip_special_tokens": True,
     }
     sampling_params = SamplingParams(**params_dict)
-    async for output in engine.generate(inputs=inputs, sampling_params=sampling_params, request_id="glm-4-9b"):
+    async for output in engine.generate(inputs=inputs, sampling_params=sampling_params, request_id=f"{time.time()}"):
         output_len = len(output.outputs[0].token_ids)
         input_len = len(output.prompt_token_ids)
         ret = {

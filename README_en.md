@@ -1,7 +1,7 @@
 # GLM-4
 
 <p align="center">
-🤗 <a href="https://huggingface.co/collections/THUDM/glm-4-665fcf188c414b03c2f7e3b7" target="_blank">HF Repo</a> • 🤖 <a href="https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">ModelScope</a> • 🐦 <a href="https://twitter.com/thukeg" target="_blank">Twitter</a> • 👋 Join <a href="https://join.slack.com/t/chatglm/shared_invite/zt-25ti5uohv-A_hs~am_D3Q8XPZMpj7wwQ" target="_blank">Slack</a> and <a href="resources/WECHAT.md" target="_blank">WeChat</a>
+🤗 <a href="https://huggingface.co/collections/THUDM/glm-4-665fcf188c414b03c2f7e3b7" target="_blank">HF Repo</a> • 🤖 <a href="https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">ModelScope</a> • 🐦 <a href="https://twitter.com/thukeg" target="_blank">Twitter</a> • 👋 Join <a href="https://discord.gg/fK2dz4bg" target="_blank">Discord</a> and <a href="resources/WECHAT.md" target="_blank">WeChat</a>
 </p>
 <p align="center">
 📍Experience and use a larger-scale GLM business model on the <a href="https://open.bigmodel.cn/?utm_campaign=open&_channel_track_key=OWTVNma9">Zhipu AI Open Platform</a>
@@ -93,7 +93,6 @@ on [Berkeley Function Calling Leaderboard](https://github.com/ShishirPatil/goril
 | ChatGLM3-6B            |    57.88     |    62.18    |    69.78     |   5.42    |
 | GLM-4-9B-Chat          |    81.00     |    80.26    |    84.40     |   87.92   |
 
-
 ### Multi-Modal
 
 GLM-4V-9B is a multimodal language model with visual understanding capabilities. The evaluation results of its related
@@ -115,7 +114,7 @@ classic tasks are as follows:
 
 ## Quick call
 
-**For hardware configuration and system requirements, please check [here](basic_demo/README_en.md). **
+**For hardware configuration and system requirements, please check [here](basic_demo/README_en.md).**
 
 ### Use the following method to quickly call the GLM-4-9B-Chat language model
 
@@ -158,7 +157,6 @@ Use the vLLM backend for inference:
 ```python
 from transformers import AutoTokenizer
 from vllm import LLM, SamplingParams
-
 
 # GLM-4-9B-Chat
 # If you encounter OOM, you can try to reduce max_model_len or increase tp_size
@@ -245,7 +243,10 @@ with basic GLM-4-9B usage and development code through the following content
 
 + [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory): Efficient open-source fine-tuning framework,
   already supports GLM-4-9B-Chat language model fine-tuning.
-
++ [Xorbits Inference](https://github.com/xorbitsai/inference): Performance-enhanced and comprehensive global inference
+  framework, easily deploy your own models or import cutting-edge open source models with one click.
++ [self-llm](https://github.com/datawhalechina/self-llm/tree/master/GLM-4): Datawhale's self-llm project, which includes
+  the GLM-4-9B open source model cookbook.
 ## License
 
 + The use of GLM-4 model weights must follow

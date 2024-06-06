@@ -243,6 +243,7 @@ with basic GLM-4-9B usage and development code through the following content
 
 + [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory): Efficient open-source fine-tuning framework,
   already supports GLM-4-9B-Chat language model fine-tuning.
++ [SWIFT](https://github.com/modelscope/swift): LLM/VLM training framework from ModelScope, supports GLM4-9B-Chat/GLM4v-9b-chat fine-tuning.
 + [Xorbits Inference](https://github.com/xorbitsai/inference): Performance-enhanced and comprehensive global inference
   framework, easily deploy your own models or import cutting-edge open source models with one click.
 + [self-llm](https://github.com/datawhalechina/self-llm/tree/master/GLM-4): Datawhale's self-llm project, which includes

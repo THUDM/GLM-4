@@ -540,7 +540,7 @@ if __name__ == "__main__":
         trust_remote_code=True,
         gpu_memory_utilization=0.9,
         enforce_eager=True,
-        worker_use_ray=True,
+        worker_use_ray=True, # Set to False if you use wsl2 and encounter UnicodeDecodeError. Until https://github.com/ray-project/ray/issues/45492 is fixed.
         engine_use_ray=False,
         disable_log_requests=True,
         max_model_len=MAX_MODEL_LENGTH,

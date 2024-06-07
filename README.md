@@ -217,7 +217,7 @@ with torch.no_grad():
 
 如果你想更进一步了解 GLM-4-9B 系列开源模型，本开源仓库通过以下内容为开发者提供基础的 GLM-4-9B的使用和开发代码
 
-+ [base](basic_demo/README.md): 在这里包含了
++ [basic_demo](basic_demo/README.md): 在这里包含了
     + 使用 transformers 和 vLLM 后端的交互代码
     + OpenAI API 后端交互代码
     + Batch 推理代码

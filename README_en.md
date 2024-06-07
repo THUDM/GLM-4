@@ -226,7 +226,7 @@ Note: GLM-4V-9B does not support calling using vLLM method yet.
 If you want to learn more about the GLM-4-9B series open source models, this open source repository provides developers
 with basic GLM-4-9B usage and development code through the following content
 
-+ [base](basic_demo/README.md): Contains
++ [basic_demo](basic_demo/README.md): Contains
 + Interaction code using transformers and vLLM backend
 + OpenAI API backend interaction code
 + Batch reasoning code

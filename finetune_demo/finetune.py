@@ -239,7 +239,7 @@ def process_batch(
         loss_masks = [False, False]
         for message in conv:
             message = process_message(message)
-            loss_mask_val = False if message['role'] in ('system', 'user') else True
+            loss_mask_val = False if message['role'] in ('system', 'user', 'observation') else True
             new_input_ids = tokenizer.apply_chat_template([message], tokenize=True, return_dict=False)[0][2:]
             new_loss_masks = [loss_mask_val] * len(new_input_ids)
             input_ids += new_input_ids

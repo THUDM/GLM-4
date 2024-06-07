@@ -43,8 +43,7 @@ tokenizer = AutoTokenizer.from_pretrained(
 model = AutoModel.from_pretrained(
     MODEL_PATH,
     trust_remote_code=True,
-    device_map="auto",
-    torch_dtype=torch.bfloat16).eval()
+    device_map="auto").eval()
 
 
 class StopOnTokens(StoppingCriteria):

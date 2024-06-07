@@ -42,31 +42,26 @@ pnpm install
    needs to use:
 
 ```diff
---- a/browser/src/config.ts
-+++ b/browser/src/config.ts
-@@ -3,7 +3,7 @@ export default {
+export default {
 
-BROWSER_TIMEOUT: 10000,
-BING_SEARCH_API_URL: 'https://api.bing.microsoft.com/v7.0',
-- BING_SEARCH_API_KEY: '',
-+ BING_SEARCH_API_KEY: '<PUT_YOUR_BING_SEARCH_KEY_HERE>',
-
-HOST: 'localhost',
-PORT: 3000,
+   BROWSER_TIMEOUT: 10000,
+   BING_SEARCH_API_URL: 'https://api.bing.microsoft.com/v7.0',
+   BING_SEARCH_API_KEY: '<PUT_YOUR_BING_SEARCH_KEY_HERE>',
+   
+   HOST: 'localhost',
+   PORT: 3000,
+};
 ```
 
 2. The Wenshengtu function needs to call the CogView API. Modify `src/tools/config.py`
    , provide the [Zhipu AI Open Platform](https://open.bigmodel.cn) API Key required for the Wenshengtu function:
 
 ```diff
---- a/src/tools/config.py
-+++ b/src/tools/config.py
-@@ -2,5 +2,5 @@ BROWSER_SERVER_URL = 'http://localhost:3000'
+BROWSER_SERVER_URL = 'http://localhost:3000'
 
 IPYKERNEL = 'glm4-demo'
 
--ZHIPU_AI_KEY = ''
-+ZHIPU_AI_KEY = '<PUT_YOUR_ZHIPU_AI_KEY_HERE>'
+ZHIPU_AI_KEY = '<PUT_YOUR_ZHIPU_AI_KEY_HERE>'
 COGVIEW_MODEL = 'cogview-3'
 ```
 

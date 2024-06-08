@@ -24,6 +24,8 @@ Read this in [English](README_en.md)
 
 在开始微调之前，请你先安装`basic_demo`中的依赖，同时您需要安装本目录下的依赖项：
 
+> NOTE: NLTK 3.8.1 部分代码可能尚未对 python 3.12 进行适配，该情况下的适配方法可参考[issues #38](https://github.com/THUDM/GLM-4/issues/38)
+
 ```bash
 pip install -r requirements.txt
 ```

@@ -11,7 +11,7 @@ Read this in [English](README_en.md)
 
 + OS: Ubuntu 22.04
 + Memory: 512GB
-+ Python: 3.12.3
++ Python: 3.10.12 / 3.12.3 (如果您使用 Python 3.12.3  目前需要使用 git 源码安装 nltk)
 + CUDA Version:  12.3
 + GPU Driver: 535.104.05
 + GPU: NVIDIA A100-SXM4-80GB * 8

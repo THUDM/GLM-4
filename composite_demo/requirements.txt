@@ -1,3 +1,4 @@
+# Please install the requirments.txt in basic_demo first!
 # use vllm
 # vllm>=0.4.3
 

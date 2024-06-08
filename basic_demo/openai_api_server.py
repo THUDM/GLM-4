@@ -286,7 +286,6 @@ def process_messages(messages, tools=None, tool_choice="none"):
             if m.role == 'system':
                 messages.insert(0, {"role": m.role, "content": m.content})
                 break
-
     return messages
 
 
@@ -334,19 +333,12 @@ async def create_chat_completion(request: ChatCompletionRequest):
             except:
                 logger.warning("Failed to parse tool call")
 
-        # CallFunction
         if isinstance(function_call, dict):
             function_call = FunctionCallResponse(**function_call)
-            tool_response = ""
-            if not gen_params.get("messages"):
-                gen_params["messages"] = []
-            gen_params["messages"].append(ChatMessage(role="assistant", content=output))
-            gen_params["messages"].append(ChatMessage(role="tool", name=function_call.name, content=tool_response))
-            generate = predict(request.model, gen_params)
+            generate = parse_output_text(request.model, output, function_call=function_call)
             return EventSourceResponse(generate, media_type="text/event-stream")
         else:
-            generate = parse_output_text(request.model, output)
-            return EventSourceResponse(generate, media_type="text/event-stream")
+            return EventSourceResponse(predict_stream_generator, media_type="text/event-stream")
 
     response = ""
     async for response in generate_stream_glm4(gen_params):
@@ -404,77 +396,6 @@ async def create_chat_completion(request: ChatCompletionRequest):
         object="chat.completion",
         usage=usage
     )
-
-
-async def predict(model_id: str, params: dict):
-    choice_data = ChatCompletionResponseStreamChoice(
-        index=0,
-        delta=DeltaMessage(role="assistant"),
-        finish_reason=None
-    )
-    chunk = ChatCompletionResponse(model=model_id, id="", choices=[choice_data], object="chat.completion.chunk")
-    yield "{}".format(chunk.model_dump_json(exclude_unset=True))
-
-    previous_text = ""
-    async for new_response in generate_stream_glm4(params):
-        decoded_unicode = new_response["text"]
-        delta_text = decoded_unicode[len(previous_text):]
-        previous_text = decoded_unicode
-
-        finish_reason = new_response["finish_reason"]
-        if len(delta_text) == 0 and finish_reason != "tool_calls":
-            continue
-
-        function_call = None
-        if finish_reason == "tool_calls":
-            try:
-                function_call = process_response(decoded_unicode, use_tool=True)
-            except:
-                logger.warning(
-                    "Failed to parse tool call, maybe the response is not a tool call or have been answered.")
-
-        if isinstance(function_call, dict):
-            function_call = FunctionCallResponse(**function_call)
-
-        delta = DeltaMessage(
-            content=None,
-            role="assistant",
-            function_call=None,
-            tool_calls=[{
-                "id": f"call_{int(time.time() * 1000)}",
-                "index": 0,
-                "type": "function",
-                "function": function_call
-            }] if isinstance(function_call, FunctionCallResponse) else None,
-        )
-
-        choice_data = ChatCompletionResponseStreamChoice(
-            index=0,
-            delta=delta,
-            finish_reason=finish_reason
-        )
-        chunk = ChatCompletionResponse(
-            model=model_id,
-            id="",
-            choices=[choice_data],
-            object="chat.completion.chunk"
-        )
-        yield "{}".format(chunk.model_dump_json(exclude_unset=True))
-
-    choice_data = ChatCompletionResponseStreamChoice(
-        index=0,
-        delta=DeltaMessage(),
-        finish_reason="stop"
-    )
-    chunk = ChatCompletionResponse(
-        model=model_id,
-        id="",
-        choices=[choice_data],
-        object="chat.completion.chunk"
-    )
-    yield "{}".format(chunk.model_dump_json(exclude_unset=True))
-    yield '[DONE]'
-
 
 async def predict_stream(model_id, gen_params):
     output = ""
@@ -537,23 +458,19 @@ async def predict_stream(model_id, gen_params):
         yield '[DONE]'
 
 
-async def parse_output_text(model_id: str, value: str):
+async def parse_output_text(model_id: str, value: str, function_call: FunctionCallResponse = None):
+    delta = DeltaMessage(role="assistant", content=value)
+    if function_call is not None:
+        delta.function_call = function_call
+
     choice_data = ChatCompletionResponseStreamChoice(
         index=0,
-        delta=DeltaMessage(role="assistant", content=value),
+        delta=delta,
         finish_reason=None
     )
     chunk = ChatCompletionResponse(model=model_id, id="", choices=[choice_data], object="chat.completion.chunk")
     yield "{}".format(chunk.model_dump_json(exclude_unset=True))
-    choice_data = ChatCompletionResponseStreamChoice(
-        index=0,
-        delta=DeltaMessage(),
-        finish_reason="stop"
-    )
-    chunk = ChatCompletionResponse(model=model_id, id="", choices=[choice_data], object="chat.completion.chunk")
-    yield "{}".format(chunk.model_dump_json(exclude_unset=True))
     yield '[DONE]'
-
 
 if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
@@ -563,7 +480,8 @@ if __name__ == "__main__":
         tensor_parallel_size=1,
         dtype="bfloat16",
         trust_remote_code=True,
-        gpu_memory_utilization=0.3,
+        # 占用显存的比例，请根据你的显卡显存大小设置合适的值，例如，如果你的显卡有80G，您只想使用24G，请按照24/80=0.3设置
+        gpu_memory_utilization=0.9,
         enforce_eager=True,
         worker_use_ray=False,
         engine_use_ray=False,

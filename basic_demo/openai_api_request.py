@@ -8,8 +8,8 @@ base_url = "http://127.0.0.1:8000/v1/"
 client = OpenAI(api_key="EMPTY", base_url=base_url)
 
 
-def function_chat():
-    messages = [{"role": "user", "content": "What's the weather like in San Francisco, Tokyo, and Paris?"}]
+def function_chat(use_stream=False):
+    messages = [{"role": "user", "content": "What's the Celsius temperature in San Francisco?"}]
     tools = [
         {
             "type": "function",
@@ -47,15 +47,22 @@ def function_chat():
         model="glm-4",
         messages=messages,
         tools=tools,
-        stream=False, # must use False
+        stream=use_stream,
+        max_tokens=256,
+        temperature=0.9,
+        presence_penalty=1.2,
+        top_p=0.1,
         tool_choice="auto",  # use "auto" to let the model choose the tool automatically
         # tool_choice={"type": "function", "function": {"name": "my_function"}},
     )
     if response:
-        print(response.choices[0].message)
+        if use_stream:
+            for chunk in response:
+                print(chunk)
+        else:
+            print(response)
     else:
         print("Error:", response.status_code)
-
 
 
 def simple_chat(use_stream=False):
@@ -74,20 +81,20 @@ def simple_chat(use_stream=False):
         messages=messages,
         stream=use_stream,
         max_tokens=256,
-        temperature=0.1,
-        presence_penalty=1.1,
-        top_p=0.8)
+        temperature=0.4,
+        presence_penalty=1.2,
+        top_p=0.8,
+    )
     if response:
         if use_stream:
             for chunk in response:
-                print(chunk.choices[0].delta.content)
+                print(chunk)
         else:
-            content = response.choices[0].message.content
-            print(content)
+            print(response)
     else:
         print("Error:", response.status_code)
 
 
 if __name__ == "__main__":
-    # simple_chat(use_stream=False)
-    function_chat()
+    simple_chat(use_stream=True)
+    # function_chat(use_stream=False) # Only False is supported

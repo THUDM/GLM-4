@@ -12,7 +12,7 @@ Test hardware information:
 
 + OS: Ubuntu 22.04
 + Memory: 512GB
-+ Python: 3.12.3
++ Python:  Python: 3.10.12 / 3.12.3 (Currently, you need to install nltk from the git source code if you use Python 3.12.3)
 + CUDA Version: 12.3
 + GPU Driver: 535.104.05
 + GPU: NVIDIA A100-SXM4-80GB * 8

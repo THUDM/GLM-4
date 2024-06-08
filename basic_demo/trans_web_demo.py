@@ -105,6 +105,8 @@ def predict(history, prompt, max_length, top_p, temperature):
     if prompt:
         messages.append({"role": "system", "content": prompt})
     for idx, (user_msg, model_msg) in enumerate(history):
+        if prompt and idx == 0:
+            continue
         if idx == len(history) - 1 and not model_msg:
             messages.append({"role": "user", "content": user_msg})
             break

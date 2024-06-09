@@ -1,6 +1,6 @@
 import time
 from asyncio.log import logger
-
+import re
 import uvicorn
 import gc
 import json
@@ -135,13 +135,15 @@ class InvalidScoreLogitsProcessor(LogitsProcessor):
 
 def process_response(output: str, use_tool: bool = False) -> Union[str, dict]:
     lines = output.strip().split("\n")
+    arguments_json = None
+    special_tools = ["cogview", "simple_browser"]
 
-    if len(lines) == 2:
+    tool_call_pattern = re.compile(r'^[a-zA-Z_][a-zA-Z0-9_]*$')
+
+    if len(lines) >= 2 and tool_call_pattern.match(lines[0]):
         function_name = lines[0].strip()
-        arguments = lines[1].strip()
-        special_tools = ["cogview", "simple_browser"]
+        arguments = "\n".join(lines[1:]).strip()
 
-        arguments_json = None
         try:
             arguments_json = json.loads(arguments)
             is_tool_call = True
@@ -151,21 +153,26 @@ def process_response(output: str, use_tool: bool = False) -> Union[str, dict]:
         if is_tool_call and use_tool:
             content = {
                 "name": function_name,
-                "arguments": json.dumps(arguments_json if isinstance(arguments_json, dict) else arguments,
-                                        ensure_ascii=False)
+                "arguments": json.dumps(arguments_json if isinstance(arguments_json, dict) else arguments, ensure_ascii=False)
             }
-            if function_name in special_tools:
-                content["text"] = arguments
-            return content
-        elif is_tool_call:
-            content = {
-                "name": function_name,
-                "content": json.dumps(arguments_json if isinstance(arguments_json, dict) else arguments,
-                                      ensure_ascii=False)
-            }
-            return content
+            if function_name == "simple_browser":
+                search_pattern = re.compile(r'search\("(.+?)"\s*,\s*recency_days\s*=\s*(\d+)\)')
+                match = search_pattern.match(arguments)
+                if match:
+                    content["arguments"] = json.dumps({
+                        "query": match.group(1),
+                        "recency_days": int(match.group(2))
+                    }, ensure_ascii=False)
+            elif function_name == "cogview":
+                content["arguments"] = json.dumps({
+                    "prompt": arguments
+                }, ensure_ascii=False)
 
+            return content
     return output.strip()
+
+
+
 
 
 @torch.inference_mode()
@@ -177,6 +184,7 @@ async def generate_stream_glm4(params):
     repetition_penalty = float(params.get("repetition_penalty", 1.0))
     top_p = float(params.get("top_p", 1.0))
     max_new_tokens = int(params.get("max_tokens", 8192))
+
     messages = process_messages(messages, tools=tools, tool_choice=tool_choice)
     inputs = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
     params_dict = {
@@ -218,7 +226,7 @@ async def generate_stream_glm4(params):
 
 def process_messages(messages, tools=None, tool_choice="none"):
     _messages = messages
-    messages = []
+    processed_messages = []
     msg_has_sys = False
 
     def filter_tools(tool_choice, tools):
@@ -235,7 +243,7 @@ def process_messages(messages, tools=None, tool_choice="none"):
         if isinstance(tool_choice, dict):
             tools = filter_tools(tool_choice, tools)
         if tools:
-            messages.append(
+            processed_messages.append(
                 {
                     "role": "system",
                     "content": None,
@@ -245,7 +253,7 @@ def process_messages(messages, tools=None, tool_choice="none"):
             msg_has_sys = True
 
     if isinstance(tool_choice, dict) and tools:
-        messages.append(
+        processed_messages.append(
             {
                 "role": "assistant",
                 "metadata": tool_choice["function"]["name"],
@@ -255,38 +263,59 @@ def process_messages(messages, tools=None, tool_choice="none"):
 
     for m in _messages:
         role, content, func_call = m.role, m.content, m.function_call
+        tool_calls = getattr(m, 'tool_calls', None)
+
         if role == "function":
-            messages.append(
+            processed_messages.append(
                 {
                     "role": "observation",
                     "content": content
                 }
             )
-        elif role == "assistant" and func_call is not None:
-            for response in content.split("<|assistant|>"):
-                if "\n" in response:
-                    metadata, sub_content = response.split("\n", maxsplit=1)
-                else:
-                    metadata, sub_content = "", response
-                messages.append(
-                    {
-                        "role": role,
-                        "metadata": metadata,
-                        "content": sub_content.strip()
-                    }
-                )
+        elif role == "tool":
+            processed_messages.append(
+                {
+                    "role": "observation",
+                    "content": content,
+                    "function_call": True
+                }
+            )
+        elif role == "assistant":
+            if tool_calls:
+                for tool_call in tool_calls:
+                    processed_messages.append(
+                        {
+                            "role": "assistant",
+                            "metadata": tool_call.function.name,
+                            "content": tool_call.function.arguments
+                        }
+                    )
+            else:
+                for response in content.split("\n"):
+                    if "\n" in response:
+                        metadata, sub_content = response.split("\n", maxsplit=1)
+                    else:
+                        metadata, sub_content = "", response
+                    processed_messages.append(
+                        {
+                            "role": role,
+                            "metadata": metadata,
+                            "content": sub_content.strip()
+                        }
+                    )
         else:
             if role == "system" and msg_has_sys:
                 msg_has_sys = False
                 continue
-            messages.append({"role": role, "content": content})
+            processed_messages.append({"role": role, "content": content})
 
     if not tools or tool_choice == "none":
         for m in _messages:
             if m.role == 'system':
-                messages.insert(0, {"role": m.role, "content": m.content})
+                processed_messages.insert(0, {"role": m.role, "content": m.content})
                 break
-    return messages
+    return processed_messages
+
 
 
 @app.get("/health")
@@ -305,6 +334,7 @@ async def list_models():
 async def create_chat_completion(request: ChatCompletionRequest):
     if len(request.messages) < 1 or request.messages[-1].role == "assistant":
         raise HTTPException(status_code=400, detail="Invalid request")
+
 
     gen_params = dict(
         messages=request.messages,
@@ -391,29 +421,76 @@ async def create_chat_completion(request: ChatCompletionRequest):
 
     return ChatCompletionResponse(
         model=request.model,
-        id="",  # for open_source model, id is empty
+        id="",
         choices=[choice_data],
         object="chat.completion",
         usage=usage
     )
 
+
 async def predict_stream(model_id, gen_params):
     output = ""
     is_function_call = False
     has_send_first_chunk = False
+    function_name = None
     async for new_response in generate_stream_glm4(gen_params):
         decoded_unicode = new_response["text"]
         delta_text = decoded_unicode[len(output):]
         output = decoded_unicode
         lines = output.strip().split("\n")
-        if not is_function_call and len(lines) >= 2:
-            is_function_call = True
 
-        if not is_function_call and len(output) > 7:
-            finish_reason = new_response["finish_reason"]
-            if not has_send_first_chunk:
+        if not is_function_call and len(lines) >= 2 and re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', lines[0]):
+            is_function_call = True
+            function_name = lines[0].strip()
+
+        if is_function_call:
+            for char in delta_text:
+                function_call = {"name": function_name, "arguments": char}
                 message = DeltaMessage(
-                    content="",
+                    content=None,
+                    role="assistant",
+                    function_call=function_call
+                )
+                choice_data = ChatCompletionResponseStreamChoice(
+                    index=0,
+                    delta=message,
+                    finish_reason=None
+                )
+                chunk = ChatCompletionResponse(
+                    model=model_id,
+                    id="",
+                    choices=[choice_data],
+                    created=int(time.time()),
+                    object="chat.completion.chunk"
+                )
+                yield chunk.model_dump_json(exclude_unset=True)
+        else:
+            if len(output) > 7:
+                finish_reason = new_response.get("finish_reason", None)
+                if not has_send_first_chunk:
+                    message = DeltaMessage(
+                        content="",
+                        role="assistant",
+                        function_call=None,
+                    )
+                    choice_data = ChatCompletionResponseStreamChoice(
+                        index=0,
+                        delta=message,
+                        finish_reason=finish_reason
+                    )
+                    chunk = ChatCompletionResponse(
+                        model=model_id,
+                        id="",
+                        choices=[choice_data],
+                        created=int(time.time()),
+                        object="chat.completion.chunk"
+                    )
+                    yield chunk.model_dump_json(exclude_unset=True)
+
+                send_msg = delta_text if has_send_first_chunk else output
+                has_send_first_chunk = True
+                message = DeltaMessage(
+                    content=send_msg,
                     role="assistant",
                     function_call=None,
                 )
@@ -429,31 +506,10 @@ async def predict_stream(model_id, gen_params):
                     created=int(time.time()),
                     object="chat.completion.chunk"
                 )
-                yield "{}".format(chunk.model_dump_json(exclude_unset=True))
-
-            send_msg = delta_text if has_send_first_chunk else output
-            has_send_first_chunk = True
-            message = DeltaMessage(
-                content=send_msg,
-                role="assistant",
-                function_call=None,
-            )
-            choice_data = ChatCompletionResponseStreamChoice(
-                index=0,
-                delta=message,
-                finish_reason=finish_reason
-            )
-            chunk = ChatCompletionResponse(
-                model=model_id,
-                id="",
-                choices=[choice_data],
-                created=int(time.time()),
-                object="chat.completion.chunk"
-            )
-            yield "{}".format(chunk.model_dump_json(exclude_unset=True))
+                yield chunk.model_dump_json(exclude_unset=True)
 
     if is_function_call:
-        yield output
+        yield json.dumps({"text": output})
     else:
         yield '[DONE]'
 

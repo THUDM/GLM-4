@@ -9,7 +9,34 @@ client = OpenAI(api_key="EMPTY", base_url=base_url)
 
 
 def function_chat(use_stream=False):
-    messages = [{"role": "user", "content": "What's the Celsius temperature in San Francisco?"}]
+    messages = [
+        {
+            "role": "user", "content": "What's the Celsius temperature in San Francisco?"
+        },
+
+        # Give Observations
+        # {
+        #     "role": "assistant",
+        #         "content": None,
+        #         "function_call": None,
+        #         "tool_calls": [
+        #             {
+        #                 "id": "call_1717912616815",
+        #                 "function": {
+        #                     "name": "get_current_weather",
+        #                     "arguments": "{\"location\": \"San Francisco, CA\", \"format\": \"celsius\"}"
+        #                 },
+        #                 "type": "function"
+        #             }
+        #         ]
+        # },
+        # {
+        #     "tool_call_id": "call_1717912616815",
+        #     "role": "tool",
+        #     "name": "get_current_weather",
+        #     "content": "23°C",
+        # }
+    ]
     tools = [
         {
             "type": "function",
@@ -35,11 +62,11 @@ def function_chat(use_stream=False):
         },
     ]
 
-    # # All Tools 能力: 绘图
+    # All Tools: CogView
     # messages = [{"role": "user", "content": "帮我画一张天空的画画吧"}]
     # tools = [{"type": "cogview"}]
-    #
-    # All Tools 能力: 联网查询
+
+    # All Tools: Searching
     # messages = [{"role": "user", "content": "今天黄金的价格"}]
     # tools = [{"type": "simple_browser"}]
 
@@ -52,8 +79,7 @@ def function_chat(use_stream=False):
         temperature=0.9,
         presence_penalty=1.2,
         top_p=0.1,
-        tool_choice="auto",  # use "auto" to let the model choose the tool automatically
-        # tool_choice={"type": "function", "function": {"name": "my_function"}},
+        tool_choice="auto"
     )
     if response:
         if use_stream:
@@ -73,7 +99,7 @@ def simple_chat(use_stream=False):
         },
         {
             "role": "user",
-            "content": "你好，你是谁"
+            "content": "你是谁"
         }
     ]
     response = client.chat.completions.create(
@@ -96,5 +122,6 @@ def simple_chat(use_stream=False):
 
 
 if __name__ == "__main__":
-    simple_chat(use_stream=True)
-    # function_chat(use_stream=False) # Only False is supported
+    # simple_chat(use_stream=False)
+    function_chat(use_stream=False)
+

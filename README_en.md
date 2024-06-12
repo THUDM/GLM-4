@@ -14,9 +14,9 @@ GLM-4-9B is the open-source version of the latest generation of pre-trained mode
 AI. In the evaluation of data sets in semantics, mathematics, reasoning, code, and knowledge, **GLM-4-9B**
 and its human preference-aligned version **GLM-4-9B-Chat** have shown superior performance beyond Llama-3-8B. In
 addition to multi-round conversations, GLM-4-9B-Chat also has advanced features such as web browsing, code execution,
-custom tool calls (Function Call), and long text
-reasoning (supporting up to 128K context). This generation of models has added multi-language support, supporting 26
-languages including Japanese, Korean, and German. We have also launched the **GLM-4-9B-Chat-1M** model that supports 1M
+custom tool calls (Function Call), and long text reasoning (supporting up to 128K context).
+This generation of models has added multi-language support, supporting 26 languages including Japanese, Korean,
+and German. We have also launched the **GLM-4-9B-Chat-1M** model that supports 1M
 context length (about 2 million Chinese characters) and the multimodal model GLM-4V-9B based on GLM-4-9B.
 **GLM-4V-9B** possesses dialogue capabilities in both Chinese and English at a high resolution of 1120*1120.
 In various multimodal evaluations, including comprehensive abilities in Chinese and English, perception & reasoning,
@@ -30,7 +30,7 @@ GPT-4-turbo-2024-04-09, Gemini 1.0 Pro, Qwen-VL-Max, and Claude 3 Opus.
 | GLM-4-9B         | Base | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)                 | /                                                                                                                                                                                          |
 | GLM-4-9B-Chat    | Chat | 128K       | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)       | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
 | GLM-4-9B-Chat-1M | Chat | 1M         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m) | /                                                                                                                                                                                          |
-| GLM-4V-9B        | Chat | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)               | /                                                                                                                                                                                          |
+| GLM-4V-9B        | Chat | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)               | [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                                                                              |
 
 ## BenchMark
 
@@ -243,11 +243,13 @@ with basic GLM-4-9B usage and development code through the following content
 
 + [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory): Efficient open-source fine-tuning framework,
   already supports GLM-4-9B-Chat language model fine-tuning.
-+ [SWIFT](https://github.com/modelscope/swift): LLM/VLM training framework from ModelScope, supports GLM4-9B-Chat/GLM4v-9b-chat fine-tuning.
++ [SWIFT](https://github.com/modelscope/swift): LLM/VLM training framework from ModelScope, supports
+  GLM4-9B-Chat/GLM4v-9b-chat fine-tuning.
 + [Xorbits Inference](https://github.com/xorbitsai/inference): Performance-enhanced and comprehensive global inference
   framework, easily deploy your own models or import cutting-edge open source models with one click.
 + [self-llm](https://github.com/datawhalechina/self-llm/tree/master/GLM-4): Datawhale's self-llm project, which includes
   the GLM-4-9B open source model cookbook.
+
 ## License
 
 + The use of GLM-4 model weights must follow

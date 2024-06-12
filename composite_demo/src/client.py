@@ -21,6 +21,7 @@ from tools.tool_registry import ALL_TOOLS
 class ClientType(Enum):
     HF = auto()
     VLLM = auto()
+    API = auto()
 
 
 class Client(Protocol):
@@ -34,7 +35,7 @@ class Client(Protocol):
     ) -> Generator[tuple[str | dict, list[dict]]]: ...
 
 
-def process_input(history: list[dict], tools: list[dict]) -> list[dict]:
+def process_input(history: list[dict], tools: list[dict], role_name_replace:dict=None) -> list[dict]:
     chat_history = []
     if len(tools) > 0:
         chat_history.append(
@@ -43,6 +44,8 @@ def process_input(history: list[dict], tools: list[dict]) -> list[dict]:
 
     for conversation in history:
         role = str(conversation.role).removeprefix("<|").removesuffix("|>")
+        if role_name_replace:
+            role = role_name_replace.get(role, role)
         item = {
             "role": role,
             "content": conversation.content,
@@ -94,5 +97,8 @@ def get_client(model_path, typ: ClientType) -> Client:
                 e.msg += "; did you forget to install vLLM?"
                 raise
             return VLLMClient(model_path)
+        case ClientType.API:
+            from clients.openai import APIClient
+            return APIClient(model_path)
 
     raise NotImplementedError(f"Client type {typ} is not supported.")

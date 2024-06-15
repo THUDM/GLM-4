@@ -1,5 +1,5 @@
 # use vllm
-# vllm>=0.4.3
+# vllm>=0.5.0
 
 torch>=2.3.0
 torchvision>=0.18.0

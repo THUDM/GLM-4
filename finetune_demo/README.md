@@ -166,7 +166,7 @@ OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_
 通过以下代码执行 **单机单卡** 运行。
 
 ```shell
-python finetune_hf.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml
+python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml
 ```
 
 ## 从保存点进行微调
@@ -179,7 +179,7 @@ python finetune_hf.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yam
 例如，这就是一个从最后一个保存点继续微调的示例代码
 
 ```shell
-python finetune_hf.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml yes
+python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml yes
 ```
 
 ## 使用微调后的模型

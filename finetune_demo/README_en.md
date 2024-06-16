@@ -12,7 +12,8 @@ Test hardware information:
 
 + OS: Ubuntu 22.04
 + Memory: 512GB
-+ Python:  Python: 3.10.12 / 3.12.3 (Currently, you need to install nltk from the git source code if you use Python 3.12.3)
++ Python:  Python: 3.10.12 / 3.12.3 (Currently, you need to install nltk from the git source code if you use Python
+  3.12.3)
 + CUDA Version: 12.3
 + GPU Driver: 535.104.05
 + GPU: NVIDIA A100-SXM4-80GB * 8
@@ -26,7 +27,8 @@ Test hardware information:
 Before starting fine-tuning, please install the dependencies in `basic_demo` first. You also need to install the
 dependencies in this directory:
 
-> NOTE: Some codes in NLTK 3.8.1 might not yet be compatible with Python 3.12. For adaptation methods in such cases, please refer to [issues #38](https://github.com/THUDM/GLM-4/issues/38).
+> NOTE: Some codes in NLTK 3.8.1 might not yet be compatible with Python 3.12. For adaptation methods in such cases,
+> please refer to [issues #38](https://github.com/THUDM/GLM-4/issues/38).
 
 ```bash
 pip install -r requirements.txt
@@ -171,7 +173,7 @@ OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8 finetune_h
 Execute **single machine single card** run through the following code.
 
 ```shell
-python finetune_hf.py data/AdvertiseGen/ THUDM/glm-4-9b-chat configs/lora.yaml
+python finetune.py data/AdvertiseGen/ THUDM/glm-4-9b-chat configs/lora.yaml
 ```
 
 ## Fine-tune from a saved point
@@ -186,7 +188,7 @@ half-trained model, you can add a fourth parameter, which can be passed in two w
 For example, this is an example code to continue fine-tuning from the last saved point
 
 ```shell
-python finetune_hf.py data/AdvertiseGen/ THUDM/glm-4-9b-chat configs/lora.yaml yes
+python finetune.py data/AdvertiseGen/ THUDM/glm-4-9b-chat configs/lora.yaml yes
 ```
 
 ## Use the fine-tuned model
@@ -217,9 +219,9 @@ to the following tutorial.
 def load_model_and_tokenizer(
         model_dir: Union[str, Path], trust_remote_code: bool = True
 ) -> tuple[ModelType, TokenizerType]:
-
-
     model_dir = _resolve_path(model_dir)
+
+
 if (model_dir / 'adapter_config.json').exists():
     model = AutoPeftModelForCausalLM.from_pretrained(
         model_dir, trust_remote_code=trust_remote_code, device_map='auto'
@@ -242,6 +244,8 @@ return model, tokenizer
    as `model_dir`.
 3. After completing the above operations, you can use the fine-tuned model normally. Other calling methods remain
    unchanged.
+4. This fine-tuning script has not been tested on long texts of 128K or 1M tokens. Fine-tuning long texts requires GPU
+   devices with larger memory and more efficient fine-tuning solutions, which developers need to handle on their own.
 
 ## Reference
 

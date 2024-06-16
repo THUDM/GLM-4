@@ -1,0 +1,4 @@
+cmake>=3.29.5.1
+huggingface-hub>=0.23.4
+git+https://github.com/intel/neural-speed.git@main#egg=neural-speed
+intel-extension-for-transformers>=1.4.2

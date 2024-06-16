@@ -11,7 +11,7 @@ Read this in [English](README_en.md)
 
 + OS: Ubuntu 22.04
 + Memory: 512GB
-+ Python: 3.10.12 / 3.12.3 (如果您使用 Python 3.12.3  目前需要使用 git 源码安装 nltk)
++ Python: 3.10.12 / 3.12.3 (如果您使用 Python 3.12.3 目前需要使用 git 源码安装 nltk)
 + CUDA Version:  12.3
 + GPU Driver: 535.104.05
 + GPU: NVIDIA A100-SXM4-80GB * 8
@@ -24,7 +24,8 @@ Read this in [English](README_en.md)
 
 在开始微调之前，请你先安装`basic_demo`中的依赖，同时您需要安装本目录下的依赖项：
 
-> NOTE: NLTK 3.8.1 部分代码可能尚未对 python 3.12 进行适配，该情况下的适配方法可参考[issues #38](https://github.com/THUDM/GLM-4/issues/38)
+> NOTE: NLTK 3.8.1 部分代码可能尚未对 python 3.12
+> 进行适配，该情况下的适配方法可参考[issues #38](https://github.com/THUDM/GLM-4/issues/38)
 
 ```bash
 pip install -r requirements.txt
@@ -52,7 +53,7 @@ pip install -r requirements.txt
               "<arg name>": "<arg value>"
             }
           }
-           // Add more tools if needed
+          // Add more tools if needed
         ]
       },
       {
@@ -227,6 +228,7 @@ def load_model_and_tokenizer(
 2. 读取微调的模型，请注意，你应该使用微调模型的位置，例如，若你的模型位置为`/path/to/finetune_adapter_model`
    ，原始模型地址为`path/to/base_model`,则你应该使用`/path/to/finetune_adapter_model`作为`model_dir`。
 3. 完成上述操作后，就能正常使用微调的模型了，其他的调用方式没有变化。
+4. 本微调脚本没有测试过128K 1M等长文本的微调，长文本的微调需要更大显存的GPU设备，并且需要更高效的微调方案,需要开发者自行解决。
 
 ## 参考文献
 

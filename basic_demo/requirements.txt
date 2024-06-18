@@ -16,7 +16,7 @@ sentence_transformers>=2.7.0
 gradio>=4.33.0
 
 # openai demo
-openai>=1.31.1
+openai>=1.34.0
 einops>=0.7.0
 sse-starlette>=2.1.0
 

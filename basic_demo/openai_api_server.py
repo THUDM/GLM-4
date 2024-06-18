@@ -497,7 +497,7 @@ async def predict_stream(model_id, gen_params):
             function_call = {"name": None, "arguments": delta_text}
             tool_call = ChatCompletionMessageToolCall(
                 index=0,
-                id=generate_id('call_', 24),
+                id=None,
                 function=FunctionCall(**function_call),
                 type="function"
             )

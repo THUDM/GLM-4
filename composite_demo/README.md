@@ -82,6 +82,8 @@ pnpm install
 
 Chat 模型支持使用 [vLLM](https://github.com/vllm-project/vllm) 推理。若要使用，请安装 vLLM 并设置环境变量 `USE_VLLM=1`。
 
+Chat 模型支持使用 [OpenAI API](https://platform.openai.com/docs/api-reference/introduction) 推理。若要使用，请启动basic_demo目录下的openai_api_server并设置环境变量 `USE_API=1`。该功能可以解耦推理服务器和demo服务器。
+
 如果需要自定义 Jupyter 内核，可以通过 `export IPYKERNEL=<kernel_name>` 来指定。
 
 ## 使用

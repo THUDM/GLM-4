@@ -19,6 +19,7 @@ from sse_starlette.sse import EventSourceResponse
 
 EventSourceResponse.DEFAULT_PING_INTERVAL = 1000
 import os
+
 MODEL_PATH = os.environ.get('MODEL_PATH', 'THUDM/glm-4-9b-chat')
 MAX_MODEL_LENGTH = 8192
 
@@ -444,7 +445,7 @@ async def predict_stream(model_id, gen_params):
     function_name = None
     response_id = generate_id('chatcmpl-', 29)
     system_fingerprint = generate_id('fp_', 9)
-    tools = {tool['function']['name'] for tool in gen_params['tools']}
+    tools = {tool['function']['name'] for tool in gen_params['tools']} if gen_params['tools'] else None
     async for new_response in generate_stream_glm4(gen_params):
         decoded_unicode = new_response["text"]
         delta_text = decoded_unicode[len(output):]

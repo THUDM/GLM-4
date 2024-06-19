@@ -22,15 +22,15 @@ Read this in [English](README_en.md)
 | p-tuning v2 (PEFT) | 21381MiB                          | 121M    |
 | SFT (Zero3 method) | 80935MiB<br/>(Each GPU，需要使用8张GPU) | 20G     |
 
-在开始微调之前，请你先安装`basic_demo`中的依赖，同时您需要安装本目录下的依赖项：
-
-> NOTE: NLTK 3.8.1 部分代码可能尚未对 python 3.12
-> 进行适配，该情况下的适配方法可参考[issues #38](https://github.com/THUDM/GLM-4/issues/38)
+在开始微调之前，请你先安装 `basic_demo` 中的依赖，并保证克隆了最新版本的模型仓库，同时您需要安装本目录下的依赖项：
 
 ```bash
 pip install -r requirements.txt
 ```
 
+> NOTE: NLTK 3.8.1 部分代码可能尚未对 python 3.12
+> 进行适配，该情况下的适配方法可参考[issues #38](https://github.com/THUDM/GLM-4/issues/38)
+> 
 ## 多轮对话格式
 
 多轮对话微调示例采用 GLM-4 对话格式约定，对不同角色添加不同 `loss_mask` 从而在一遍计算中为多轮回复计算 `loss`。

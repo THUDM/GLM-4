@@ -56,16 +56,22 @@ class DataCollatorForSeq2Seq(_DataCollatorForSeq2Seq):
 
 
 class Seq2SeqTrainer(_Seq2SeqTrainer):
+    # Not Support for apex
     def training_step(self, model: nn.Module, inputs: dict[str, Any]) -> torch.Tensor:
+
         model.train()
         inputs = self._prepare_inputs(inputs)
-        loss = self.compute_loss(model, inputs)
-        if self.args.gradient_accumulation_steps > 1:
-            loss = loss / self.args.gradient_accumulation_steps
-        loss.backward()
+
+        with self.compute_loss_context_manager():
+            loss = self.compute_loss(model, inputs)
+
+        if self.args.n_gpu > 1:
+            loss = loss.mean()
+        self.accelerator.backward(loss)
+        detached_loss = loss.detach() / self.args.gradient_accumulation_steps
         del inputs
         torch.cuda.empty_cache()
-        return loss.detach()
+        return detached_loss
 
     def prediction_step(
             self,
@@ -75,6 +81,7 @@ class Seq2SeqTrainer(_Seq2SeqTrainer):
             ignore_keys=None,
             **gen_kwargs,
     ) -> tuple[Optional[float], Optional[torch.Tensor], Optional[torch.Tensor]]:
+
         with torch.no_grad():  # Ensure no gradient computation
             if self.args.predict_with_generate:
                 output_ids = inputs.pop('output_ids')
@@ -255,12 +262,7 @@ def process_batch(
             message = process_message(message)
 
             loss_mask_val = False if message['role'] in ('system', 'user', 'observation') else True
-
-            # New Code With Using apply_chat_template in jinjia template in tokenizer_config.json
-            # new_input_ids = tokenizer.apply_chat_template([message], tokenize=True, return_dict=False)
-
-            # Old Code With Using apply_chat_template in tokenization_chatglm.py
-            new_input_ids = tokenizer.apply_chat_template([message], tokenize=True, return_dict=False)[0][2:]
+            new_input_ids = tokenizer.apply_chat_template([message], tokenize=True, return_dict=False)[2:]
             new_loss_masks = [loss_mask_val] * len(new_input_ids)
             input_ids += new_input_ids
             loss_masks += new_loss_masks
@@ -299,12 +301,7 @@ def process_batch_eval(
                 break
             else:
                 message = process_message(message)
-
-                # New Code With Using apply_chat_template in jinjia template in tokenizer_config.json
-                # new_input_ids = tokenizer.apply_chat_template([message], tokenize=True, return_dict=False)
-
-                # Old Code With Using apply_chat_template in tokenization_chatglm.py
-                new_input_ids = tokenizer.apply_chat_template([message], tokenize=True, return_dict=False)[0][2:]
+                new_input_ids = tokenizer.apply_chat_template([message], tokenize=True, return_dict=False)[2:]
                 if message['role'] == 'assistant':
                     output_prompt, output_ids = (
                         new_input_ids[:1],

@@ -24,15 +24,15 @@ Test hardware information:
 | p-tuning v2 (PEFT)   | 21381MiB                                     | 121M                   |
 | SFT (Zero3 method)   | 80935MiB<br/>(Each GPU, 8 GPUs are required) | 20G                    |
 
-Before starting fine-tuning, please install the dependencies in `basic_demo` first. You also need to install the
+Before starting fine-tuning, please install the dependencies in `basic_demo` and clone the latest model repos (Hugging Face) first. You also need to install the
 dependencies in this directory:
-
-> NOTE: Some codes in NLTK 3.8.1 might not yet be compatible with Python 3.12. For adaptation methods in such cases,
-> please refer to [issues #38](https://github.com/THUDM/GLM-4/issues/38).
 
 ```bash
 pip install -r requirements.txt
 ```
+
+> NOTE: Some codes in NLTK 3.8.1 might not yet be compatible with Python 3.12. For adaptation methods in such cases,
+> please refer to [issues #38](https://github.com/THUDM/GLM-4/issues/38).
 
 ## Multi-round dialogue format
 

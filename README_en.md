@@ -301,3 +301,15 @@ If you find our work helpful, please consider citing the following paper.
       primaryClass={cs.CV}
 }
 ```
+
+
+```
+@misc{wang2023cogvlm,
+      title={CogVLM: Visual Expert for Pretrained Language Models}, 
+      author={Weihan Wang and Qingsong Lv and Wenmeng Yu and Wenyi Hong and Ji Qi and Yan Wang and Junhui Ji and Zhuoyi Yang and Lei Zhao and Xixuan Song and Jiazheng Xu and Bin Xu and Juanzi Li and Yuxiao Dong and Ming Ding and Jie Tang},
+      year={2023},
+      eprint={2311.03079},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```

@@ -105,7 +105,7 @@ python trans_web_demo.py
 + Use Batch inference.
 
 ```shell
-python cli_batch_request_demo.py
+python trans_batch_demo.py
 ```
 
 ### Use vLLM backend code

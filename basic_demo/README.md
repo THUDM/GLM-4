@@ -100,7 +100,7 @@ python trans_web_demo.py
 + 使用 Batch 推理。
 
 ```shell
-python cli_batch_request_demo.py
+python trans_batch_demo.py
 ```
 
 ### 使用 vLLM 后端代码

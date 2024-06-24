@@ -96,10 +96,11 @@ python trans_cli_demo.py # GLM-4-9B-Chat
 python trans_cli_vision_demo.py # GLM-4V-9B
 ```
 
-+ Use the Gradio web client to communicate with the GLM-4-9B-Chat model.
++ Use the Gradio web client to communicate with the  GLM-4-9B model.
 
 ```shell
-python trans_web_demo.py
+python trans_web_demo.py  # GLM-4-9B-Chat
+python trans_web_vision_demo.py # GLM-4V-9B
 ```
 
 + Use Batch inference.

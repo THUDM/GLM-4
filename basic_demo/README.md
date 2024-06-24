@@ -91,10 +91,11 @@ python trans_cli_demo.py # GLM-4-9B-Chat
 python trans_cli_vision_demo.py # GLM-4V-9B
 ```
 
-+ 使用 Gradio 网页端与 GLM-4-9B-Chat 模型进行对话。
++ 使用 Gradio 网页端与 GLM-4-9B 模型进行对话。
 
 ```shell
-python trans_web_demo.py
+python trans_web_demo.py  # GLM-4-9B-Chat
+python trans_web_vision_demo.py # GLM-4V-9B
 ```
 
 + 使用 Batch 推理。

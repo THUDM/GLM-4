@@ -39,14 +39,6 @@ GPT-4-turbo-2024-04-09, Gemini 1.0 Pro, Qwen-VL-Max, and Claude 3 Opus.
 | GLM-4-9B-Chat-1M | Chat | 1M         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m) [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M)   | /                                                                                                                                                                                          |
 | GLM-4V-9B        | Chat | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b) [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)        | [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                                                                              |
 
-## Projects
-
-The following excellent open source repositories have in-depth support for the GLM-4-9B model, and everyone is welcome to expand their learning.
-
-Inference acceleration:
-
-* [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): Real-time inference on your laptop accelerated by quantization, similar to llama.cpp.
-
 ## BenchMark
 
 ### Typical Tasks
@@ -259,11 +251,13 @@ with basic GLM-4-9B usage and development code through the following content
 + [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory): Efficient open-source fine-tuning framework,
   already supports GLM-4-9B-Chat language model fine-tuning.
 + [SWIFT](https://github.com/modelscope/swift): LLM/VLM training framework from ModelScope, supports
-  GLM4-9B-Chat/GLM4v-9b-chat fine-tuning.
+  GLM-4-9B-Chat / GLM-4V-9b fine-tuning.
 + [Xorbits Inference](https://github.com/xorbitsai/inference): Performance-enhanced and comprehensive global inference
   framework, easily deploy your own models or import cutting-edge open source models with one click.
++ [LangChain-ChatChat](https://github.com/chatchat-space/Langchain-Chatchat): RAG and Agent applications based on language models such as Langchain and ChatGLM
 + [self-llm](https://github.com/datawhalechina/self-llm/tree/master/GLM-4): Datawhale's self-llm project, which includes
   the GLM-4-9B open source model cookbook.
++ [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): Real-time inference on your laptop accelerated by quantization, similar to llama.cpp.
 
 ## License
 

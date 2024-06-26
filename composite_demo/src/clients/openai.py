@@ -43,12 +43,12 @@ class APIClient(Client):
         history: list[Conversation],
         **parameters,
     ) -> Generator[tuple[str | dict, list[dict]]]:
-        chat_history = process_input(history, tools)
-        messages = process_input(history, '', role_name_replace=self.role_name_replace)
+        chat_history = process_input(history, '', role_name_replace=self.role_name_replace)
+        #messages = process_input(history, '', role_name_replace=self.role_name_replace)
         openai_tools = format_openai_tool(tools)
         response = self.client.chat.completions.create(
             model="glm-4",
-            messages=messages,
+            messages=chat_history,
             tools=openai_tools,
             stream=self.use_stream,
             max_tokens=parameters["max_new_tokens"],

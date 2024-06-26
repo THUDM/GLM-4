@@ -37,10 +37,10 @@ class Client(Protocol):
 
 def process_input(history: list[dict], tools: list[dict], role_name_replace:dict=None) -> list[dict]:
     chat_history = []
-    if len(tools) > 0:
-        chat_history.append(
-            {"role": "system", "content": build_system_prompt(list(ALL_TOOLS), tools)}
-        )
+    #if len(tools) > 0:
+    chat_history.append(
+        {"role": "system", "content": build_system_prompt(list(ALL_TOOLS), tools)}
+    )
 
     for conversation in history:
         role = str(conversation.role).removeprefix("<|").removesuffix("|>")

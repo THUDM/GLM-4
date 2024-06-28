@@ -5,11 +5,11 @@
 </p>
 <p align="center">
 📍Experience and use a larger-scale GLM business model on the <a href="https://open.bigmodel.cn/?utm_campaign=open&_channel_track_key=OWTVNma9">Zhipu AI Open Platform</a>
-
 </p>
 
 ## Update
-- 🔥🔥 **News**: ``2024/6/24``: We have updated the running files and configuration files of the model repository to support Flash Attention 2,
+- 🔥 **News**: ``2024/6/28``: We have updated the running files and configuration files of the model repository to support Flash Attention 2,
+- 🔥 **News**: ``2024/6/24``: We have updated the running files and configuration files of the model repository to support Flash Attention 2,
 Please update the model configuration file and refer to the sample code in `basic_demo/trans_cli_demo.py`.
 - 🔥🔥 **News**: ``2024/6/19``: We updated the running files and configuration files of the model repository and fixed some model inference issues. Welcome to clone the latest model repository.
 - 🔥 **News**: ``2024/6/18``: We released a [technical report](https://arxiv.org/pdf/2406.12793), welcome to check it out.

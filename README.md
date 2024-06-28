@@ -11,7 +11,10 @@ Read this in [English](README_en.md)
 
 ## 项目更新
 
-- 🔥🔥 **News**: ``2024/6/24``: 我们更新了模型仓库的运行文件和配置文件，支持 Flash Attention 2, 
+- 🔥 **News**: ``2024/6/28``: We have worked with the Intel technical team to improve the ITREX and OpenVINO deployment 
+tutorials for GLM-4-9B-Chat. You can use Intel CPU/GPU devices to efficiently deploy the GLM-4-9B open source model. 
+Welcome to [view](intel_device_demo).
+- 🔥 **News**: ``2024/6/24``: 我们更新了模型仓库的运行文件和配置文件，支持 Flash Attention 2, 
 请更新模型配置文件并参考 `basic_demo/trans_cli_demo.py` 中的示例代码。
 - 🔥 **News**: ``2024/6/19``: 我们更新了模型仓库的运行文件和配置文件，修复了部分已知的模型推理的问题，欢迎大家克隆最新的模型仓库。
 - 🔥 **News**: ``2024/6/18``: 我们发布 [技术报告](https://arxiv.org/pdf/2406.12793), 欢迎查看。

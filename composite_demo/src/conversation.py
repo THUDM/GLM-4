@@ -30,7 +30,8 @@ def build_system_prompt(
 ):
     value = SELFCOG_PROMPT
     value += "\n\n" + datetime.now().strftime(DATE_PROMPT)
-    value += "\n\n# 可用工具"
+    if enabled_tools or functions:
+        value += "\n\n# 可用工具"
     contents = []
     for tool in enabled_tools:
         contents.append(f"\n\n## {tool}\n\n{TOOL_SYSTEM_PROMPTS[tool]}")

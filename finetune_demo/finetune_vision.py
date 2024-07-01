@@ -271,7 +271,7 @@ def process_batch(
                 [message],
                 tokenize=True,
                 return_dict=True,
-                padding=True,
+                padding=True
             )
             new_input_ids = new_input_ids_all['input_ids'][0][2:]
             new_attention_mask = new_input_ids_all['attention_mask'][0][2:]
@@ -453,6 +453,7 @@ def main(
         batched=True,
     )
     print('train_dataset:', train_dataset)
+
     val_dataset = data_manager.get_dataset(
         Split.VALIDATION,
         functools.partial(
@@ -463,6 +464,7 @@ def main(
         ),
         batched=True,
     )
+
     if val_dataset is not None:
         print('val_dataset:', val_dataset)
     test_dataset = data_manager.get_dataset(

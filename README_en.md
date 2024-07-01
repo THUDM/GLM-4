@@ -8,10 +8,11 @@
 </p>
 
 ## Update
-- 🔥 **News**: ``2024/6/28``: We have updated the running files and configuration files of the model repository to support Flash Attention 2,
-- 🔥 **News**: ``2024/6/24``: We have updated the running files and configuration files of the model repository to support Flash Attention 2,
-Please update the model configuration file and refer to the sample code in `basic_demo/trans_cli_demo.py`.
-- 🔥🔥 **News**: ``2024/6/19``: We updated the running files and configuration files of the model repository and fixed some model inference issues. Welcome to clone the latest model repository.
+
+- 🔥 **News**: ``2024/7/1``: We have updated the multimodal fine-tuning of GLM-4V-9B. You need to update the run file and configuration file of our model repository to support this feature. For more fine-tuning details (such as dataset format, video memory requirements), please go to [view](finetune_demo).
+- 🔥 **News**: ``2024/6/28``: We have worked with the Intel technical team to improve the ITREX and OpenVINO deployment tutorials for GLM-4-9B-Chat. You can use Intel CPU/GPU devices to efficiently deploy the GLM-4-9B open source model. Welcome to [view](intel_device_demo).
+- 🔥 **News**: ``2024/6/24``: We have updated the running files and configuration files of the model repository to support Flash Attention 2, Please update the model configuration file and refer to the sample code in `basic_demo/trans_cli_demo.py`.
+- 🔥 **News**: ``2024/6/19``: We updated the running files and configuration files of the model repository and fixed some model inference issues. Welcome to clone the latest model repository.
 - 🔥 **News**: ``2024/6/18``: We released a [technical report](https://arxiv.org/pdf/2406.12793), welcome to check it out.
 - 🔥 **News**: ``2024/6/05``: We released the GLM-4-9B series of open source models
 

@@ -35,10 +35,11 @@ training_args:
   generation_config:
     max_new_tokens: 512
   # set your absolute deepspeed path here
-  #deepspeed: ds_zero_2.json
+  # deepspeed: configs/ds_zero_3.json
 peft_config:
   peft_type: LORA
   task_type: CAUSAL_LM
   r: 8
   lora_alpha: 32
   lora_dropout: 0.1
+  target_modules: ["query_key_value"]

@@ -6,8 +6,10 @@ not supported). Please strictly follow the steps in the document to avoid unnece
 ## Hardware check
 
 **The data in this document are tested in the following hardware environment. The actual operating environment
-requirements and the GPU memory occupied by the operation are slightly different. Please refer to the actual operating
-environment.**
+requirements and the video memory occupied by the operation are slightly different. Please refer to the actual operating
+environment. The fine-tuned resource usage is set according to the configuration file in the
+configs folder**
+
 Test hardware information:
 
 + OS: Ubuntu 22.04
@@ -18,14 +20,19 @@ Test hardware information:
 + GPU Driver: 535.104.05
 + GPU: NVIDIA A100-SXM4-80GB * 8
 
-| Fine-tuning solution | GPU memory usage                             | Weight save point size |
-|----------------------|----------------------------------------------|------------------------|
-| lora (PEFT)          | 21531MiB                                     | 17M                    |
-| p-tuning v2 (PEFT)   | 21381MiB                                     | 121M                   |
-| SFT (Zero3 method)   | 80935MiB<br/>(Each GPU, 8 GPUs are required) | 20G                    |
+| Fine-tuning Model | Fine-tuning solution               | GPU memory usage            | Weight save point size |
+|-------------------|------------------------------------|-----------------------------|------------------------|
+| GLM-4-9B-Chat     | lora (PEFT)                        | 22G                         | 17M                    |
+| GLM-4-9B-Chat     | p-tuning v2 (PEFT)                 | 21G                         | 121M                   |
+| GLM-4-9B-Chat     | SFT (Zero3 method)                 | 80G (Each GPU, Need 8 GPUs) | 20G                    |
+| GLM-4V-9B         | lora (PEFT), Include EVA2CLIPModel | 75G                         | 37M                    |
+| GLM-4V-9B         | SFT                                | Not Support in this Code    | 28G                    |
 
-Before starting fine-tuning, please install the dependencies in `basic_demo` and clone the latest model repos (Hugging Face) first. You also need to install the
-dependencies in this directory:
+**GLM-4V-9B fine-tuning cannot work properly with deepspeed, the official fine-tuning script only does the most basic
+fine-tuning solution, more optimizations require developers to explore on their own**
+
+Before starting fine-tuning, please install the dependencies in `basic_demo` and clone the latest model repos (Hugging
+Face) first. You also need to install the dependencies in this directory:
 
 ```bash
 pip install -r requirements.txt
@@ -99,21 +106,107 @@ For data files, the sample uses the following format:
 
 This is a sample without tools:
 
-```
-{"messages": [{"role": "user", "content": "类型#裤*材质#牛仔布*风格#性感"}, {"role": "assistant", "content": "3x1的这款牛仔裤采用浅白的牛仔面料为裤身材质，其柔然的手感和细腻的质地，在穿着舒适的同时，透露着清纯甜美的个性气质。除此之外，流畅的裤身剪裁将性感的腿部曲线彰显的淋漓尽致，不失为一款随性出街的必备单品。"}]}
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "类型#裤*材质#牛仔布*风格#性感"
+    },
+    {
+      "role": "assistant",
+      "content": "3x1的这款牛仔裤采用浅白的牛仔面料为裤身材质，其柔然的手感和细腻的质地，在穿着舒适的同时，透露着清纯甜美的个性气质。除此之外，流畅的裤身剪裁将性感的腿部曲线彰显的淋漓尽致，不失为一款随性出街的必备单品。"
+    }
+  ]
+}
 ```
 
 This is a sample with tools:
 
-```
-{"messages": [{"role": "system", "content": "", "tools": [{"type": "function", "function": {"name": "get_recommended_books", "description": "Get recommended books based on user's interests", "parameters": {"type": "object", "properties": {"interests": {"type": "array", "items": {"type": "string"}, "description": "The interests to recommend books for"}}, "required": ["interests"]}}}]}, {"role": "user", "content": "Hi, I am looking for some book recommendations. I am interested in history and science fiction."}, {"role": "assistant", "content": "{\"name\": \"get_recommended_books\", \"arguments\": {\"interests\": [\"history\", \"science fiction\"]}}"}, {"role": "observation", "content": "{\"books\": [\"Sapiens: A Brief History of Humankind by Yuval Noah Harari\", \"A Brief History of Time by Stephen Hawking\", \"Dune by Frank Herbert\", \"The Martian by Andy Weir\"]}"}, {"role": "assistant", "content": "Based on your interests in history and science fiction, I would recommend the following books: \"Sapiens: A Brief History of Humankind\" by Yuval Noah Harari, \"A Brief History of Time\" by Stephen Hawking, \"Dune\" by Frank Herbert, and \"The Martian\" by Andy Weir."}]}
+```json
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "",
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "get_recommended_books",
+            "description": "Get recommended books based on user's interests",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "interests": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The interests to recommend books for"
+                }
+              },
+              "required": [
+                "interests"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Hi, I am looking for some book recommendations. I am interested in history and science fiction."
+    },
+    {
+      "role": "assistant",
+      "content": "{\"name\": \"get_recommended_books\", \"arguments\": {\"interests\": [\"history\", \"science fiction\"]}}"
+    },
+    {
+      "role": "observation",
+      "content": "{\"books\": [\"Sapiens: A Brief History of Humankind by Yuval Noah Harari\", \"A Brief History of Time by Stephen Hawking\", \"Dune by Frank Herbert\", \"The Martian by Andy Weir\"]}"
+    },
+    {
+      "role": "assistant",
+      "content": "Based on your interests in history and science fiction, I would recommend the following books: \"Sapiens: A Brief History of Humankind\" by Yuval Noah Harari, \"A Brief History of Time\" by Stephen Hawking, \"Dune\" by Frank Herbert, and \"The Martian\" by Andy Weir."
+    }
+  ]
+}
 ```
 
-- The `system` role is optional, but if it exists, it must appear before the `user` role, and a complete conversation
-  data (whether single-round or multi-round conversation) can only have one `system` role.
-- The `tools` field is optional. If it exists, it must appear after the `system` role, and a complete conversation
-  data (whether single-round or multi-round conversation) can only have one `tools` field. When the `tools` field
-  exists, the `system` role must exist and the `content` field is empty.
+This is a sample with VQA Task:
+
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "图片中的动物是什么？",
+      "image": "/root/images/0001.jpg"
+    },
+    {
+      "role": "assistant",
+      "content": "图片中有一只猫。"
+    },
+    {
+      "role": "user",
+      "content": "图片中的猫在做什么？"
+    },
+    {
+      "role": "assistant",
+      "content": "这只猫坐在或站在桌子上，桌上有很多食物。"
+    }
+  ]
+}
+```
+
+- The `system` role is optional, but if it exists, it must appear before the `user` role, and the `system` role can only
+  appear once in a complete conversation (whether it is a single round or a multi-round conversation).
+- The `tools` field is optional, but if it exists, it must appear after the `system` role, and the `tools` field can
+  only appear once in a complete conversation (whether it is a single round or a multi-round conversation). When
+  the `tools` field exists, the `system` role must exist and the `content` field is empty.
+- `GLM-4V-9B` does not support the `tools` field and the `system` field. And `image` must be placed in the first
+  message. The `image` field needs to contain the `absolute path` of the image.
 
 ## Configuration file
 
@@ -123,9 +216,8 @@ The fine-tuning configuration file is located in the `config` directory, includi
 
 2. `lora.yaml / ptuning_v2
 3. .yaml / sft.yaml`: Configuration files for different modes of models, including model parameters, optimizer
-   parameters, training parameters, etc. Some important parameters are explained as follows:
+   parameters, training parameters, etc. Some important parameters are explained as follows: + data_config section
 
-+ data_config section
 + train_file: File path of training dataset.
 + val_file: File path of validation dataset.
 + test_file: File path of test dataset.
@@ -156,8 +248,7 @@ The fine-tuning configuration file is located in the `config` directory, includi
 + r: rank of LoRA.
 + lora_alpha: scaling factor of LoRA.
 + lora_dropout: dropout probability to use in LoRA layer.
-+ P-TuningV2 parameters:
-+ num_virtual_tokens: the number of virtual tokens.
++ P-TuningV2 parameters: + num_virtual_tokens: the number of virtual tokens.
 + num_attention_heads: 2: the number of attention heads of P-TuningV2 (do not change).
 + token_dim: 256: the token dimension of P-TuningV2 (do not change).
 
@@ -167,13 +258,15 @@ Execute **single machine multi-card/multi-machine multi-card** run through the f
 the acceleration solution, and you need to install `deepspeed`.
 
 ```shell
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8 finetune_hf.py data/AdvertiseGen/ THUDM/glm-4-9b configs/lora.yaml
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_hf.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b  configs/lora.yaml  # For VQA Fine-tune
 ```
 
 Execute **single machine single card** run through the following code.
 
 ```shell
-python finetune.py data/AdvertiseGen/ THUDM/glm-4-9b-chat configs/lora.yaml
+python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
+python finetune.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
 ## Fine-tune from a saved point

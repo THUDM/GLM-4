@@ -6,7 +6,8 @@ Read this in [English](README_en.md)
 
 ## 硬件检查
 
-**本文档的数据均在以下硬件环境测试,实际运行环境需求和运行占用的显存略有不同，请以实际运行环境为准。**
+**本文档的数据均在以下硬件环境测试,实际运行环境需求和运行占用的显存略有不同，请以实际运行环境为准。微调的资源占用均按照
+configs 文件夹中的配置文件设置**
 测试硬件信息:
 
 + OS: Ubuntu 22.04
@@ -16,11 +17,15 @@ Read this in [English](README_en.md)
 + GPU Driver: 535.104.05
 + GPU: NVIDIA A100-SXM4-80GB * 8
 
-| 微调方案               | 显存占用                              | 权重保存点大小 |
-|--------------------|-----------------------------------|---------|
-| lora (PEFT)        | 21531MiB                          | 17M     |
-| p-tuning v2 (PEFT) | 21381MiB                          | 121M    |
-| SFT (Zero3 method) | 80935MiB<br/>(Each GPU，需要使用8张GPU) | 20G     |
+| 微调模型            | 微调方案                  | 显存占用                       | 权重保存点大小   | 
+|-----------------|-----------------------|----------------------------|-----------|
+| GLM-4-9B-Chat   | lora (PEFT)           | 22G                        | 17M       |
+| GLM-4-9B-Chat   | p-tuning v2 (PEFT)    | 21G                        | 121M      |
+| GLM-4-9B-Chat   | SFT (Zero3 method)    | 80G (Each GPU，需要使用8张GPU)   | 20G       |
+| GLM-4V-9B       | lora (PEFT), 包含视觉模块   | 75G                        | 37M       |
+| GLM-4V-9B       | SFT                   | 本代码不支持                     | 28G       |
+
+**GLM-4V-9B 微调无法可能正常使用 deepspeed,官方微调脚本仅做最基础的微调方案，更多优化需要开发者自行探索**
 
 在开始微调之前，请你先安装 `basic_demo` 中的依赖，并保证克隆了最新版本的模型仓库，同时您需要安装本目录下的依赖项：
 
@@ -30,7 +35,8 @@ pip install -r requirements.txt
 
 > NOTE: NLTK 3.8.1 部分代码可能尚未对 python 3.12
 > 进行适配，该情况下的适配方法可参考[issues #38](https://github.com/THUDM/GLM-4/issues/38)
-> 
+>
+
 ## 多轮对话格式
 
 多轮对话微调示例采用 GLM-4 对话格式约定，对不同角色添加不同 `loss_mask` 从而在一遍计算中为多轮回复计算 `loss`。
@@ -97,14 +103,98 @@ pip install -r requirements.txt
 
 这里是一个不带有工具的例子:
 
-```
-{"messages": [{"role": "user", "content": "类型#裤*材质#牛仔布*风格#性感"}, {"role": "assistant", "content": "3x1的这款牛仔裤采用浅白的牛仔面料为裤身材质，其柔然的手感和细腻的质地，在穿着舒适的同时，透露着清纯甜美的个性气质。除此之外，流畅的裤身剪裁将性感的腿部曲线彰显的淋漓尽致，不失为一款随性出街的必备单品。"}]}
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "类型#裤*材质#牛仔布*风格#性感"
+    },
+    {
+      "role": "assistant",
+      "content": "3x1的这款牛仔裤采用浅白的牛仔面料为裤身材质，其柔然的手感和细腻的质地，在穿着舒适的同时，透露着清纯甜美的个性气质。除此之外，流畅的裤身剪裁将性感的腿部曲线彰显的淋漓尽致，不失为一款随性出街的必备单品。"
+    }
+  ]
+}
 ```
 
 这是一个带有工具调用的例子:
 
+```json
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "",
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "get_recommended_books",
+            "description": "Get recommended books based on user's interests",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "interests": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The interests to recommend books for"
+                }
+              },
+              "required": [
+                "interests"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "Hi, I am looking for some book recommendations. I am interested in history and science fiction."
+    },
+    {
+      "role": "assistant",
+      "content": "{\"name\": \"get_recommended_books\", \"arguments\": {\"interests\": [\"history\", \"science fiction\"]}}"
+    },
+    {
+      "role": "observation",
+      "content": "{\"books\": [\"Sapiens: A Brief History of Humankind by Yuval Noah Harari\", \"A Brief History of Time by Stephen Hawking\", \"Dune by Frank Herbert\", \"The Martian by Andy Weir\"]}"
+    },
+    {
+      "role": "assistant",
+      "content": "Based on your interests in history and science fiction, I would recommend the following books: \"Sapiens: A Brief History of Humankind\" by Yuval Noah Harari, \"A Brief History of Time\" by Stephen Hawking, \"Dune\" by Frank Herbert, and \"The Martian\" by Andy Weir."
+    }
+  ]
+}
 ```
-{"messages": [{"role": "system", "content": "", "tools": [{"type": "function", "function": {"name": "get_recommended_books", "description": "Get recommended books based on user's interests", "parameters": {"type": "object", "properties": {"interests": {"type": "array", "items": {"type": "string"}, "description": "The interests to recommend books for"}}, "required": ["interests"]}}}]}, {"role": "user", "content": "Hi, I am looking for some book recommendations. I am interested in history and science fiction."}, {"role": "assistant", "content": "{\"name\": \"get_recommended_books\", \"arguments\": {\"interests\": [\"history\", \"science fiction\"]}}"}, {"role": "observation", "content": "{\"books\": [\"Sapiens: A Brief History of Humankind by Yuval Noah Harari\", \"A Brief History of Time by Stephen Hawking\", \"Dune by Frank Herbert\", \"The Martian by Andy Weir\"]}"}, {"role": "assistant", "content": "Based on your interests in history and science fiction, I would recommend the following books: \"Sapiens: A Brief History of Humankind\" by Yuval Noah Harari, \"A Brief History of Time\" by Stephen Hawking, \"Dune\" by Frank Herbert, and \"The Martian\" by Andy Weir."}]}
+
+这是一个视觉VQA微调的例子：
+
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "图片中的动物是什么？",
+      "image": "/root/images/0001.jpg"
+    },
+    {
+      "role": "assistant",
+      "content": "图片中有一只猫。"
+    },
+    {
+      "role": "user",
+      "content": "图片中的猫在做什么？"
+    },
+    {
+      "role": "assistant",
+      "content": "这只猫坐在或站在桌子上，桌上有很多食物。"
+    }
+  ]
+}
 ```
 
 - `system` 角色为可选角色，但若存在 `system` 角色，其必须出现在 `user`
@@ -112,6 +202,8 @@ pip install -r requirements.txt
 - `tools` 字段为可选字段，若存在 `tools` 字段，其必须出现在 `system`
   角色之后，且一个完整的对话数据（无论单轮或者多轮对话）只能出现一次 `tools` 字段。当 `tools` 字段存在时，`system`
   角色必须存在并且 `content` 字段为空。
+- `GLM-4V-9B` 不支持 `tools` 字段和 `system` 字段。并且 `image` 必须放在第一条消息中。 `image`
+  字段需要放置置图片的 `绝对路径`。
 
 ## 配置文件
 
@@ -158,16 +250,18 @@ pip install -r requirements.txt
 
 ## 开始微调
 
-通过以下代码执行 **单机多卡/多机多卡** 运行，这是使用 `deepspeed` 作为加速方案的，您需要安装 `deepspeed`。
+通过以下代码执行 **单机多卡/多机多卡** 运行，这是使用 `deepspeed` 作为加速方案的，您需要安装 `deepspeed`。接着，按照此命令运行：
 
 ```shell
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_hf.py  data/AdvertiseGen/  THUDM/glm-4-9b  configs/lora.yaml
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_hf.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b  configs/lora.yaml  # For VQA Fine-tune
 ```
 
 通过以下代码执行 **单机单卡** 运行。
 
 ```shell
-python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml
+python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
+python finetune.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
 ## 从保存点进行微调

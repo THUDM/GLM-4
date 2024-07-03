@@ -172,7 +172,9 @@ abstract class BaseBrowser {
       logger.debug(`Searching for: ${query}`);
       const search = new URLSearchParams({ q: query });
       recency_days > 0 && search.append('recency_days', recency_days.toString());
-      search.append('customconfig', config.CUSTOM_CONFIG_ID);
+       if (config.CUSTOM_CONFIG_ID !== undefined) {
+        search.append('customconfig', config.CUSTOM_CONFIG_ID);
+    }
       const url = `${config.BING_SEARCH_API_URL}/search?${search.toString()}`;
       console.log('Full URL:', url); // 输出完整的 URL查看是否正确
 

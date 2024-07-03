@@ -236,6 +236,8 @@ class DataManager(object):
             batched=batched,
             remove_columns=remove_columns,
             num_proc=self._num_proc,
+            batch_size=500,    # Dynamically adjust according to mem size
+            writer_batch_size=500
         )
 
 

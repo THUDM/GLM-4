@@ -172,13 +172,20 @@ abstract class BaseBrowser {
       logger.debug(`Searching for: ${query}`);
       const search = new URLSearchParams({ q: query });
       recency_days > 0 && search.append('recency_days', recency_days.toString());
+      if (config.CUSTOM_CONFIG_ID) {
+    search.append('customconfig', config.CUSTOM_CONFIG_ID.toString());
+}
+      const url = `${config.BING_SEARCH_API_URL}/search?${search.toString()}`;
+      console.log('Full URL:', url); // 输出完整的 URL查看是否正确
+
       return withTimeout(
         config.BROWSER_TIMEOUT,
-        fetch(`${config.BING_SEARCH_API_URL}/search?${search.toString()}`, {
+        fetch(url, {
           headers: {
             'Ocp-Apim-Subscription-Key': config.BING_SEARCH_API_KEY,
           }
-        }).then(
+        })
+            .then(
           res =>
             res.json() as Promise<{
               queryContext: {
@@ -255,11 +262,11 @@ abstract class BaseBrowser {
           }
         })
         .catch(err => {
-          logger.error(err.message);
+          logger.error(`搜索请求失败：${query}，错误信息：${err.message}`);
           if (err.code === 'ECONNABORTED') {
             throw new Error(`Timeout while executing search for: ${query}`);
           }
-          throw new Error(`Network or server error occurred`);
+          throw new Error(`网络或服务器发生错误，请检查URL: ${url}`);
         });
     },
     open_url: (url: string) => {

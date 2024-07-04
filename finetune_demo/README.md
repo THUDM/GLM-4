@@ -253,7 +253,7 @@ pip install -r requirements.txt
 通过以下代码执行 **单机多卡/多机多卡** 运行，这是使用 `deepspeed` 作为加速方案的，您需要安装 `deepspeed`。接着，按照此命令运行：
 
 ```shell
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_hf.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
 OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b  configs/lora.yaml  # For VQA Fine-tune
 ```
 
@@ -261,7 +261,7 @@ OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_
 
 ```shell
 python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
-python finetune.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
+python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
 ## 从保存点进行微调

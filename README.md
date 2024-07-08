@@ -11,6 +11,7 @@ Read this in [English](README_en.md)
 
 ## 项目更新
 
+- 🔥🔥 **News**: ``2024/7/8``: GLM-4-9B-Chat 模型已适配 [Llama.cpp](https://github.com/ggerganov/llama.cpp),您可以在[PR](https://github.com/ggerganov/llama.cpp/pull/8031) 查看具体的细节。
 - 🔥 **News**: ``2024/7/1``: 我们更新了 GLM-4V-9B 的微调，您需要更新我们的模型仓库的运行文件和配置文件， 以支持这个功能，更多微调细节 (例如数据集格式，显存要求)，请前往 [查看](finetune_demo)。
 - 🔥 **News**: ``2024/6/28``: 我们与英特尔技术团队合作，改进了 GLM-4-9B-Chat 的 ITREX 和 OpenVINO 部署教程。您可以使用英特尔 CPU/GPU 设备高效部署 GLM-4-9B 开源模型。欢迎访问 [查看](intel_device_demo)。
 - 🔥 **News**: ``2024/6/24``: 我们更新了模型仓库的运行文件和配置文件，支持 Flash Attention 2, 

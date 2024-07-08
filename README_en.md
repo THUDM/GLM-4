@@ -8,7 +8,7 @@
 </p>
 
 ## Update
-
+- 🔥🔥 **News**: ``2024/7/8``: The GLM-4-9B-Chat model has been adapted to [Llama.cpp](https://github.com/ggerganov/llama.cpp), you can check the specific details in [PR](https://github.com/ggerganov/llama.cpp/pull/8031).
 - 🔥 **News**: ``2024/7/1``: We have updated the multimodal fine-tuning of GLM-4V-9B. You need to update the run file and configuration file of our model repository to support this feature. For more fine-tuning details (such as dataset format, video memory requirements), please go to [view](finetune_demo).
 - 🔥 **News**: ``2024/6/28``: We have worked with the Intel technical team to improve the ITREX and OpenVINO deployment tutorials for GLM-4-9B-Chat. You can use Intel CPU/GPU devices to efficiently deploy the GLM-4-9B open source model. Welcome to [view](intel_device_demo).
 - 🔥 **News**: ``2024/6/24``: We have updated the running files and configuration files of the model repository to support Flash Attention 2, Please update the model configuration file and refer to the sample code in `basic_demo/trans_cli_demo.py`.

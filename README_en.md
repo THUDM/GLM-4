@@ -8,12 +8,23 @@
 </p>
 
 ## Update
-- 🔥🔥 **News**: ``2024/7/8``: The GLM-4-9B-Chat model has been adapted to [Llama.cpp](https://github.com/ggerganov/llama.cpp), you can check the specific details in [PR](https://github.com/ggerganov/llama.cpp/pull/8031).
-- 🔥 **News**: ``2024/7/1``: We have updated the multimodal fine-tuning of GLM-4V-9B. You need to update the run file and configuration file of our model repository to support this feature. For more fine-tuning details (such as dataset format, video memory requirements), please go to [view](finetune_demo).
-- 🔥 **News**: ``2024/6/28``: We have worked with the Intel technical team to improve the ITREX and OpenVINO deployment tutorials for GLM-4-9B-Chat. You can use Intel CPU/GPU devices to efficiently deploy the GLM-4-9B open source model. Welcome to [view](intel_device_demo).
-- 🔥 **News**: ``2024/6/24``: We have updated the running files and configuration files of the model repository to support Flash Attention 2, Please update the model configuration file and refer to the sample code in `basic_demo/trans_cli_demo.py`.
-- 🔥 **News**: ``2024/6/19``: We updated the running files and configuration files of the model repository and fixed some model inference issues. Welcome to clone the latest model repository.
-- 🔥 **News**: ``2024/6/18``: We released a [technical report](https://arxiv.org/pdf/2406.12793), welcome to check it out.
+
+- 🔥🔥 **News**: ``2024/7/9``: The GLM-4-9B-Chat model has been adapted to [Ollama](https://github.com/ollama/ollama)
+  and  [Llama.cpp](https://github.com/ggerganov/llama.cpp), you can check the specific details
+  in [PR](https://github.com/ggerganov/llama.cpp/pull/8031).
+- 🔥 **News**: ``2024/7/1``: We have updated the multimodal fine-tuning of GLM-4V-9B. You need to update the run file and
+  configuration file of our model repository to support this feature. For more fine-tuning details (such as dataset
+  format, video memory requirements), please go to [view](finetune_demo).
+- 🔥 **News**: ``2024/6/28``: We have worked with the Intel technical team to improve the ITREX and OpenVINO deployment
+  tutorials for GLM-4-9B-Chat. You can use Intel CPU/GPU devices to efficiently deploy the GLM-4-9B open source model.
+  Welcome to [view](intel_device_demo).
+- 🔥 **News**: ``2024/6/24``: We have updated the running files and configuration files of the model repository to
+  support Flash Attention 2, Please update the model configuration file and refer to the sample code
+  in `basic_demo/trans_cli_demo.py`.
+- 🔥 **News**: ``2024/6/19``: We updated the running files and configuration files of the model repository and fixed some
+  model inference issues. Welcome to clone the latest model repository.
+- 🔥 **News**: ``2024/6/18``: We released a [technical report](https://arxiv.org/pdf/2406.12793), welcome to check it
+  out.
 - 🔥 **News**: ``2024/6/05``: We released the GLM-4-9B series of open source models
 
 ## Model Introduction
@@ -33,12 +44,12 @@ GPT-4-turbo-2024-04-09, Gemini 1.0 Pro, Qwen-VL-Max, and Claude 3 Opus.
 
 ## Model List
 
-| Model            | Type | Seq Length | Download                                                                                                                                | Online Demo                                                                                                                                                                                |
-|------------------|------|------------|-----------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| GLM-4-9B         | Base | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)  [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B)      | /                                                                                                                                                                                          |
-| GLM-4-9B-Chat    | Chat | 128K       | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat) [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)      | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
-| GLM-4-9B-Chat-1M | Chat | 1M         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m) [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M)   | /                                                                                                                                                                                          |
-| GLM-4V-9B        | Chat | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b) [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)        | [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                                                                              |
+| Model            | Type | Seq Length | Download                                                                                                                                                                                                     | Online Demo                                                                                                                                                                                |
+|------------------|------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GLM-4-9B         | Base | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)  [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B)                        | /                                                                                                                                                                                          |
+| GLM-4-9B-Chat    | Chat | 128K       | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat) [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)          | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
+| GLM-4-9B-Chat-1M | Chat | 1M         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m) [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) | /                                                                                                                                                                                          |
+| GLM-4V-9B        | Chat | 8K         | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)  [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b) [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)                      | [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                                                                              |
 
 ## BenchMark
 
@@ -255,10 +266,12 @@ with basic GLM-4-9B usage and development code through the following content
   GLM-4-9B-Chat / GLM-4V-9b fine-tuning.
 + [Xorbits Inference](https://github.com/xorbitsai/inference): Performance-enhanced and comprehensive global inference
   framework, easily deploy your own models or import cutting-edge open source models with one click.
-+ [LangChain-ChatChat](https://github.com/chatchat-space/Langchain-Chatchat): RAG and Agent applications based on language models such as Langchain and ChatGLM
++ [LangChain-ChatChat](https://github.com/chatchat-space/Langchain-Chatchat): RAG and Agent applications based on
+  language models such as Langchain and ChatGLM
 + [self-llm](https://github.com/datawhalechina/self-llm/tree/master/GLM-4): Datawhale's self-llm project, which includes
   the GLM-4-9B open source model cookbook.
-+ [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): Real-time inference on your laptop accelerated by quantization, similar to llama.cpp.
++ [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): Real-time inference on your laptop accelerated by quantization,
+  similar to llama.cpp.
 
 ## License
 

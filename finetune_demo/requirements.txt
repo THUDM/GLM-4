@@ -1,7 +1,7 @@
 jieba>=0.42.1
-datasets>2.20.0
+datasets>=2.20.0
 peft>=0.11.1
-deepspeed>=0.14.3
+deepspeed>=0.14.4
 nltk==3.8.1
 rouge_chinese>=1.0.3
 ruamel.yaml>=0.18.6

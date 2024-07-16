@@ -15,7 +15,7 @@ from transformers import AutoTokenizer
 from vllm import SamplingParams, AsyncEngineArgs, AsyncLLMEngine
 from typing import List, Dict
 
-MODEL_PATH = 'THUDM/glm-4-9b'
+MODEL_PATH = 'THUDM/glm-4-9b-chat'
 
 
 def load_model_and_tokenizer(model_dir: str):
@@ -25,7 +25,7 @@ def load_model_and_tokenizer(model_dir: str):
         tensor_parallel_size=1,
         dtype="bfloat16",
         trust_remote_code=True,
-        gpu_memory_utilization=0.3,
+        gpu_memory_utilization=0.9,
         enforce_eager=True,
         worker_use_ray=True,
         engine_use_ray=False,
@@ -63,7 +63,6 @@ async def vllm_gen(messages: List[Dict[str, str]], top_p: float, temperature: fl
         "use_beam_search": False,
         "length_penalty": 1,
         "early_stopping": False,
-        "stop_token_ids": [151329, 151336, 151338],
         "ignore_eos": False,
         "max_tokens": max_dec_len,
         "logprobs": None,

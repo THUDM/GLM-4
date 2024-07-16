@@ -8,9 +8,10 @@
 </p>
 
 ## Update
-
-- 🔥🔥 **News**: ``2024/7/9``: The GLM-4-9B-Chat model has been adapted to [Ollama](https://github.com/ollama/ollama)
-  and  [Llama.cpp](https://github.com/ggerganov/llama.cpp), you can check the specific details
+- 🔥🔥 **News**: ``2024/7/16``: The ` transformers` version that the GLM-4-9B-Chat model depends on has been upgraded 
+to `4.42.4`. Please update the model configuration file and refer to `basic_demo/requirements.txt` to update the dependencies.
+- 🔥 **News**: ``2024/7/9``: The GLM-4-9B-Chat model has been adapted to [Ollama](https://github.com/ollama/ollama)
+  and [Llama.cpp](https://github.com/ggerganov/llama.cpp), you can check the specific details
   in [PR](https://github.com/ggerganov/llama.cpp/pull/8031).
 - 🔥 **News**: ``2024/7/1``: We have updated the multimodal fine-tuning of GLM-4V-9B. You need to update the run file and
   configuration file of our model repository to support this feature. For more fine-tuning details (such as dataset

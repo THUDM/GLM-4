@@ -24,7 +24,7 @@ training_args:
   logging_steps: 10
   # settings for evaluation
   per_device_eval_batch_size: 16
-  evaluation_strategy: steps
+  eval_strategy: steps
   eval_steps: 500
   # settings for optimizer
   # adam_epsilon: 1e-6

@@ -3,8 +3,11 @@ data_config:
   val_file: dev.jsonl
   test_file: dev.jsonl
   num_proc: 1
-max_input_length: 128
-max_output_length: 128
+
+combine: True
+max_input_length: 512
+max_output_length: 512
+
 training_args:
   # see `transformers.Seq2SeqTrainingArguments`
   output_dir: ./output

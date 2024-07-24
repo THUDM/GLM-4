@@ -1,26 +1,15 @@
 # Please install the requirments.txt in basic_demo first!
-# use vllm
-# vllm>=0.4.3
 
-accelerate>=0.30.1
-huggingface_hub>=0.19.4
 ipykernel>=6.26.0
 ipython>=8.18.1
 jupyter_client>=8.6.0
-
-langchain>=0.2.1
-langchain-community>=0.2.1
-
+langchain>=0.2.10
+langchain-community>=0.2.9
 matplotlib>=3.9.0
-pillow>=10.1.0
 pymupdf>=1.24.5
 python-docx>=1.1.2
 python-pptx>=0.6.23
 pyyaml>=6.0.1
 requests>=2.31.0
-sentencepiece
-streamlit>=1.35.0
-tiktoken>=0.7.0
-transformers==4.40.0
-zhipuai>=2.1.0
-
+streamlit>=1.36.0
+zhipuai>=2.1.3

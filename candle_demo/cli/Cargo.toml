@@ -1,0 +1,33 @@
+[package]
+name= "glm4-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+hf-hub = {workspace = true}
+clap = { workspace = true}
+tokenizers = {workspace = true}
+serde_json = {workspace = true}
+candle-core = {workspace = true}
+candle-transformers = {workspace = true}
+candle-examples = {workspace = true}
+candle-nn = {workspace = true}
+safetensors = {workspace = true}
+accelerate-src = { workspace = true, optional = true}
+intel-mkl-src = { workspace = true ,optional = true}
+rand = { workspace = true}
+owo-colors = {workspace = true}
+glm4 = {workspace = true}
+
+[build-dependencies]
+bindgen_cuda = { version = "0.1.1", optional = true }
+[features]
+default = []
+cuda = ["candle-core/cuda", "candle-nn/cuda", "candle-transformers/cuda", "dep:bindgen_cuda"]
+accelerate = ["dep:accelerate-src", "candle-core/accelerate", "candle-nn/accelerate", "candle-transformers/accelerate"]
+mkl = ["dep:intel-mkl-src", "candle-core/mkl", "candle-nn/mkl", "candle-transformers/mkl"]

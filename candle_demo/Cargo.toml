@@ -1,0 +1,30 @@
+[workspace]
+members = ["cli", "glm4"]
+resolver = "2"
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Donjuan Platinum <donjuan@lecturify.net>"]
+license = "GPL-2.0-only"
+description = "ChatGlm"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace.dependencies]
+hf-hub = "0.3.2"
+clap = { version = "4.5.6", features = ["derive"] }
+tokenizers = "0.19.1"
+serde_json = "1.0.120"
+candle-core = "0.6.0"
+# candle-transformers = "0.6.0"
+candle-transformers = "0.6.0"	
+candle-examples = "0.6.0"
+candle-nn = "0.6.0"
+safetensors = "0.4.3"
+accelerate-src = { version = "0.3.2"}
+intel-mkl-src = { version = "0.8.1", features = ["mkl-static-lp64-iomp"] }
+rand = "0.8.5"
+owo-colors = "4.0.0"
+glm4 = {path = "./glm4"}
+
+
+

@@ -411,6 +411,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1462739cb27611015575c0c11df5df7601141071f07518d56fcc1be504cbec97"
 
 [[package]]
+name = "cli"
+version = "0.1.0"
+dependencies = [
+ "accelerate-src",
+ "bindgen_cuda",
+ "candle-core",
+ "candle-examples",
+ "candle-nn",
+ "candle-transformers",
+ "clap",
+ "glm4",
+ "hf-hub",
+ "intel-mkl-src",
+ "owo-colors",
+ "rand",
+ "safetensors",
+ "serde_json",
+ "tokenizers",
+]
+
+[[package]]
 name = "colorchoice"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1066,27 +1087,6 @@ dependencies = [
  "candle-nn",
  "candle-transformers",
  "clap",
- "hf-hub",
- "intel-mkl-src",
- "owo-colors",
- "rand",
- "safetensors",
- "serde_json",
- "tokenizers",
-]
-
-[[package]]
-name = "glm4-cli"
-version = "0.1.0"
-dependencies = [
- "accelerate-src",
- "bindgen_cuda",
- "candle-core",
- "candle-examples",
- "candle-nn",
- "candle-transformers",
- "clap",
- "glm4",
  "hf-hub",
  "intel-mkl-src",
  "owo-colors",

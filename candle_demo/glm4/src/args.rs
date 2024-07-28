@@ -18,15 +18,15 @@ pub struct Args {
     pub temperature: Option<f64>,
 
     /// Nucleus sampling probability cutoff.
-    #[arg(long)]
-    pub top_p: Option<f64>,
+    #[arg(long,default_value_t = 0.6)]
+    pub top_p: f64,
 
     /// The seed to use when generating random samples.
     #[arg(long)]
     pub seed: Option<u64>,
 
     /// The length of the sample to generate (in tokens).
-    #[arg(long, short = 'n', default_value_t = 5000)]
+    #[arg(long, short = 'n', default_value_t = 500)]
     pub sample_len: usize,
 
     #[arg(long)]

@@ -28,14 +28,14 @@ impl TextGeneration {
         tokenizer: Tokenizer,
         seed: u64,
         temp: Option<f64>,
-        top_p: Option<f64>,
+        top_p: f64,
         repeat_penalty: f32,
         repeat_last_n: usize,
         verbose_prompt: bool,
         device: &Device,
         dtype: DType,
     ) -> Self {
-        let logits_processor = LogitsProcessor::new(seed, temp, top_p);
+        let logits_processor = LogitsProcessor::new(seed, temp, Some(top_p));
         Self {
             model,
             tokenizer,

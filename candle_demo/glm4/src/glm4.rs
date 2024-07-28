@@ -35,7 +35,7 @@ impl Config {
             ffn_hidden_size: 13696,
             kv_channels: 128,
             num_attention_heads: 32,
-            seq_length: 131072,
+            seq_length: 8192,
             layernorm_epsilon: 1e-5,
             rmsnorm: true,
             apply_residual_connection_post_layernorm: false,

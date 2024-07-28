@@ -27,7 +27,7 @@ fn main() -> Result<(), ()> {
     );
     println!(
         "temp: {:.2} repeat-penalty: {:.2} repeat-last-n: {}",
-        args.temperature.unwrap_or(0.95).red(),
+        args.temperature.unwrap_or(0.6).red(),
         args.repeat_penalty.red(),
         args.repeat_last_n.red(),
     );
@@ -48,7 +48,7 @@ fn main() -> Result<(), ()> {
 
     let model_id = match args.model_id {
         Some(model_id) => model_id.to_string(),
-        None => "THUDM/glm4-9b".to_string(),
+        None => "THUDM/glm-4-9b".to_string(),
     };
     let revision = match args.revision {
         Some(rev) => rev.to_string(),
@@ -58,7 +58,7 @@ fn main() -> Result<(), ()> {
     let tokenizer_filename = match args.tokenizer {
         Some(file) => std::path::PathBuf::from(file),
         None => api
-            .model("THUDM/glm4-9b".to_string())
+            .model("THUDM/codegeex4-all-9b".to_string())
             .get("tokenizer.json")
             .unwrap(),
     };

@@ -8,7 +8,7 @@ GLM-4-9B 是智谱 AI 推出的最新一代预训练模型 GLM-4 系列中的开
 #+begin_src shell
   cargo build --release -p cli # Cpu
   cargo build --release -p cli --features cuda # if cuda is avalibe
-  ./target/release/codegeex4-cli --sample-len 500
+  ./target/release/cli --sample-len 500
 #+end_src
 ** Output_Example
 [[../resources/candle_example.png][file:../resources/candle_example.png]]

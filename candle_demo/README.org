@@ -3,7 +3,8 @@ GLM-4-9B 是智谱 AI 推出的最新一代预训练模型 GLM-4 系列中的开
 
 
 - [[https://github.com/THUDM/GLM-4][Github]]
-- [[https://huggingface.co/THUDM/glm-4-9b][huggingface]]  
+- [[https://huggingface.co/THUDM/glm-4-9b][huggingface]]
+- [[https://github.com/huggingface/candle/tree/main/candle-examples/examples/glm4][Candle_Offical]]  
 ** Cli
 #+begin_src shell
   cargo build --release -p cli # Cpu

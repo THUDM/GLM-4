@@ -272,7 +272,7 @@ with basic GLM-4-9B usage and development code through the following content
   framework, easily deploy your own models or import cutting-edge open source models with one click.
 + [LangChain-ChatChat](https://github.com/chatchat-space/Langchain-Chatchat): RAG and Agent applications based on
   language models such as Langchain and ChatGLM
-+ [self-llm](https://github.com/datawhalechina/self-llm/tree/master/GLM-4): Datawhale's self-llm project, which includes
++ [self-llm](https://github.com/datawhalechina/self-llm/tree/master/models/GLM-4): Datawhale's self-llm project, which includes
   the GLM-4-9B open source model cookbook.
 + [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): Real-time inference on your laptop accelerated by quantization,
   similar to llama.cpp.

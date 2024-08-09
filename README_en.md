@@ -11,7 +11,7 @@
 - 🔥🔥 **News**: ```2024/07/24```:  we released the latest technical interpretation related to long texts. Check
 out [here](https://medium.com/@ChatGLM/glm-long-scaling-pre-trained-model-contexts-to-millions-caa3c48dea85) to view our
 technical report on long context technology in the training of the open-source GLM-4-9B model.
-- 🔥 **News**: ``2024/7/16``: The ` transformers` version that the GLM-4-9B-Chat model depends on has been upgraded 
+- 🔥 **News**: ``2024/7/16``: The `transformers` version that the GLM-4-9B-Chat model depends on has been upgraded 
 to `4.42.4`. Please update the model configuration file and refer to `basic_demo/requirements.txt` to update the dependencies.
 - 🔥 **News**: ``2024/7/9``: The GLM-4-9B-Chat model has been adapted to [Ollama](https://github.com/ollama/ollama)
   and [Llama.cpp](https://github.com/ggerganov/llama.cpp), you can check the specific details

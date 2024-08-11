@@ -10,10 +10,15 @@
 Read this in [English](README_en.md)
 
 ## 项目更新
-- 🔥🔥 **News**: ```2024/07/24```: 我们发布了与长文本相关的最新技术解读，关注 [这里](https://medium.com/@ChatGLM/glm-long-scaling-pre-trained-model-contexts-to-millions-caa3c48dea85) 查看我们在训练 GLM-4-9B 开源模型中关于长文本技术的技术报告。
-- 🔥 **News**: ``2024/7/16``: GLM-4-9B-Chat 模型依赖的` transformers`版本升级到 `4.42.4`, 请更新模型配置文件并参考 `basic_demo/requirements.txt` 更新依赖。
+
+- 🔥🔥 **News**: ```2024/08/12```: GLM-4-9B-Chat 模型依赖的`transformers`版本升级到 `4.44.0`，请重新拉取除模型权重(
+  `*.safetensor` 文件 和 `tokenizer.model`)外的文件并参考 `basic_demo/requirements.txt` 严格更新依赖。
+- 🔥 **News**: ```2024/07/24```:
+  我们发布了与长文本相关的最新技术解读，关注 [这里](https://medium.com/@ChatGLM/glm-long-scaling-pre-trained-model-contexts-to-millions-caa3c48dea85)
+  查看我们在训练 GLM-4-9B 开源模型中关于长文本技术的技术报告。
 - 🔥 **News**: ``2024/7/9``: GLM-4-9B-Chat
-  模型已适配 [Ollama](https://github.com/ollama/ollama),[Llama.cpp](https://github.com/ggerganov/llama.cpp)，您可以在[PR](https://github.com/ggerganov/llama.cpp/pull/8031) 查看具体的细节。
+  模型已适配 [Ollama](https://github.com/ollama/ollama),[Llama.cpp](https://github.com/ggerganov/llama.cpp)
+  ，您可以在[PR](https://github.com/ggerganov/llama.cpp/pull/8031) 查看具体的细节。
 - 🔥 **News**: ``2024/7/1``: 我们更新了 GLM-4V-9B 的微调，您需要更新我们的模型仓库的运行文件和配置文件，
   以支持这个功能，更多微调细节 (例如数据集格式，显存要求)，请前往 [查看](finetune_demo)。
 - 🔥 **News**: ``2024/6/28``: 我们与英特尔技术团队合作，改进了 GLM-4-9B-Chat 的 ITREX 和 OpenVINO 部署教程。您可以使用英特尔

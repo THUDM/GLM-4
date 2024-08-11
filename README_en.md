@@ -10,12 +10,20 @@
 ## Update
 
 - 🔥🔥 **News**: ```2024/08/12```: The `transformers` version required for the GLM-4-9B-Chat model has been upgraded
-  to `4.44.0`. Please re-download all files except for the model weights (`*.safetensor` files and `tokenizer.model`),
+  to `4.44.0`. Please pull all files again except for the model weights (`*.safetensor` files and `tokenizer.model`),
   and strictly update the dependencies as per `basic_demo/requirements.txt`.
 - 🔥 **News**: ```2024/07/24```:  we released the latest technical interpretation related to long texts. Check
   out [here](https://medium.com/@ChatGLM/glm-long-scaling-pre-trained-model-contexts-to-millions-caa3c48dea85) to view
   our
   technical report on long context technology in the training of the open-source GLM-4-9B model.
+- 🔥🔥 **News**: ```2024/07/24```:  we released the latest technical interpretation related to long texts. Check
+  out [here](https://medium.com/@ChatGLM/glm-long-scaling-pre-trained-model-contexts-to-millions-caa3c48dea85) to view
+  our
+  technical report on long context technology in the training of the open-source GLM-4-9B model.
+- 🔥 **News**: ``2024/7/16``: The `transformers` version that the GLM-4-9B-Chat model depends on has been upgraded
+  to `4.42.4`. Please update the model configuration file and refer to `basic_demo/requirements.txt` to update the
+  dependencies.
+
 - 🔥 **News**: ``2024/7/9``: The GLM-4-9B-Chat model has been adapted to [Ollama](https://github.com/ollama/ollama)
   and [Llama.cpp](https://github.com/ggerganov/llama.cpp), you can check the specific details
   in [PR](https://github.com/ggerganov/llama.cpp/pull/8031).
@@ -275,7 +283,8 @@ with basic GLM-4-9B usage and development code through the following content
   framework, easily deploy your own models or import cutting-edge open source models with one click.
 + [LangChain-ChatChat](https://github.com/chatchat-space/Langchain-Chatchat): RAG and Agent applications based on
   language models such as Langchain and ChatGLM
-+ [self-llm](https://github.com/datawhalechina/self-llm/tree/master/GLM-4): Datawhale's self-llm project, which includes
++ [self-llm](https://github.com/datawhalechina/self-llm/tree/master/models/GLM-4): Datawhale's self-llm project, which
+  includes
   the GLM-4-9B open source model cookbook.
 + [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): Real-time inference on your laptop accelerated by quantization,
   similar to llama.cpp.

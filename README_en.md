@@ -9,7 +9,11 @@
 
 ## Update
 
-- 🔥🔥 **News**: ```2024/08/12```: The `transformers` version required for the GLM-4-9B-Chat model has been upgraded
+- 🔥🔥 **News**: ```2024/08/15```: We have open-sourced a model with long-text output capability (single turn LLM output can exceed
+  10K tokens) [longwriter-glm4-9b](https://huggingface.co/THUDM/LongWriter-glm4-9b) and the
+  dataset [LongWriter-6k](https://huggingface.co/datasets/THUDM/LongWriter-6k). You're welcome
+  to [try it online](https://huggingface.co/spaces/THUDM/LongWriter).
+- 🔥 **News**: ```2024/08/12```: The `transformers` version required for the GLM-4-9B-Chat model has been upgraded
   to `4.44.0`. Please pull all files again except for the model weights (`*.safetensor` files and `tokenizer.model`),
   and strictly update the dependencies as per `basic_demo/requirements.txt`.
 - 🔥 **News**: ```2024/07/24```:  we released the latest technical interpretation related to long texts. Check

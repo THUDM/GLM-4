@@ -14,7 +14,8 @@ Read this in [English](README_en.md)
 - 🔥🔥 **News**: ```2024/08/15```: 我们开源具备长文本输出能力(单轮对话大模型输出可超过1万token)
   的模型 [longwriter-glm4-9b](https://huggingface.co/THUDM/LongWriter-glm4-9b)
   以及数据集 [LongWriter-6k](https://huggingface.co/datasets/THUDM/LongWriter-6k),
-  欢迎 [在线体验](https://huggingface.co/spaces/THUDM/LongWriter)
+  欢迎在 [Huggingface Space](https://huggingface.co/spaces/THUDM/LongWriter)
+  或 [魔搭社区空间](https://modelscope.cn/studios/ZhipuAI/LongWriter-glm4-9b-demo) 在线体验。
 - 🔥 **News**: ```2024/08/12```: GLM-4-9B-Chat 模型依赖的`transformers`版本升级到 `4.44.0`，请重新拉取除模型权重(
   `*.safetensor` 文件 和 `tokenizer.model`)外的文件并参考 `basic_demo/requirements.txt` 严格更新依赖。
 - 🔥 **News**: ```2024/07/24```:

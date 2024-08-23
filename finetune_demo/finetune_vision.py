@@ -270,6 +270,8 @@ def process_batch(
             if message.get('image'):
                 image = Image.open(message['image']).convert('RGB')
                 message['image'] = image
+            else:
+                images = None
 
             loss_mask_val = False if message['role'] in ('system', 'user', 'observation') else True
             new_input_ids_all = tokenizer.apply_chat_template(
@@ -312,14 +314,15 @@ def process_batch(
     del batched_conv, conv, input_ids, attention_mask, position_ids, loss_masks, message, new_input_ids, new_loss_masks, labels, input_id, mask
     torch.cuda.empty_cache()
 
-    return {
+    return_dict = {
         'input_ids': batched_input_ids,
         'attention_mask': batched_attention_mask,
         'position_ids': batched_position_ids,
         'labels': batched_labels,
-        'images': batched_images
     }
-
+    if len(batched_images) > 0:
+        return_dict['images'] = batched_images
+    return return_dict
 
 def process_batch_eval(
         batch: Mapping[str, Sequence],
@@ -372,19 +375,22 @@ def process_batch_eval(
             batched_attention_mask.append(attention_segment[:max_input_length])
             batched_position_ids.append(position_segment[:max_input_length])
             batched_output_ids.append(output_segment[:max_output_length])
-            batched_images.append(new_input_ids_all['images'][0])
+            if 'images' in new_input_ids_all:
+                batched_images.append(new_input_ids_all['images'][0])
 
     del batched_conv, input_ids, attention_mask, position_ids, new_input_ids_all, output_segment
     torch.cuda.empty_cache()
 
-    return {
+    return_dict = {
         'input_ids': batched_input_ids,
         'attention_mask': batched_attention_mask,
         'position_ids': batched_position_ids,
         'output_ids': batched_output_ids,
-        'images': batched_images
     }
 
+    if len(batched_images) > 0:
+        return_dict['images'] = batched_images
+    return return_dict
 
 def load_tokenizer_and_model(
         model_dir: str,
@@ -489,6 +495,13 @@ def main(
     )
     if test_dataset is not None:
         print('test_dataset:', test_dataset)
+
+    ft_config.training_args.generation_config.pad_token_id = (
+        151329
+    )
+    ft_config.training_args.generation_config.eos_token_id = [
+        151329, 151336, 151338
+    ]
 
     model.gradient_checkpointing_enable()
     model.enable_input_require_grads()

@@ -444,6 +444,13 @@ def main(
     if test_dataset is not None:
         print('test_dataset:', test_dataset)
 
+    ft_config.training_args.generation_config.pad_token_id = (
+        151329
+    )
+    ft_config.training_args.generation_config.eos_token_id = [
+        151329, 151336, 151338
+    ]
+
     model.gradient_checkpointing_enable()
     model.enable_input_require_grads()
 

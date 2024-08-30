@@ -1,3 +1,5 @@
+tiktoken>=0.7.0
+typer>=0.12.3
 jieba>=0.42.1
 datasets>=2.20.0
 peft>=0.11.1

@@ -132,6 +132,13 @@ Client request:
 python openai_api_request.py
 ```
 
+### LoRA adapters with vLLM
++ use LoRA adapters with vLLM on GLM-4-9B-Chat model.
+
+```shell
+python vllm_cli_lora_demo.py
+```
+
 ## Stress test
 
 Users can use this code to test the generation speed of the model on the transformers backend on their own devices:

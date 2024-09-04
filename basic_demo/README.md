@@ -126,6 +126,12 @@ python openai_api_server.py
 python openai_api_request.py
 ```
 
+### 在 GLM-4-9B-Chat 模型上使用带有 Lora adapter 的 vLLM
+
+```shell
+python vllm_cli_lora_demo.py
+```
+
 ## 压力测试
 
 用户可以在自己的设备上使用本代码测试模型在 transformers后端的生成速度:

@@ -112,6 +112,13 @@ python trans_batch_demo.py
 python vllm_cli_demo.py
 ```
 
++ 在 GLM-4-9B-Chat 模型上使用带有 Lora adapter 的 vLLM
+```python
+# vllm_cli_demo.py
+# 添加 LORA_PATH = ''
+```
+
+  
 + 自行构建服务端，并使用 `OpenAI API` 的请求格式与 GLM-4-9B-Chat 模型进行对话。本 demo 支持 Function Call 和 All Tools功能。
 
 启动服务端：
@@ -124,12 +131,6 @@ python openai_api_server.py
 
 ```shell
 python openai_api_request.py
-```
-
-### 在 GLM-4-9B-Chat 模型上使用带有 Lora adapter 的 vLLM
-
-```shell
-python vllm_cli_lora_demo.py
 ```
 
 ## 压力测试

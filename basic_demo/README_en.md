@@ -117,6 +117,13 @@ python trans_batch_demo.py
 python vllm_cli_demo.py
 ```
 
++ use LoRA adapters with vLLM on GLM-4-9B-Chat model.
+
+```python
+# vllm_cli_demo.py
+# add LORA_PATH = ''
+```
+
 + Build the server by yourself and use the request format of `OpenAI API` to communicate with the glm-4-9b model. This
   demo supports Function Call and All Tools functions.
 

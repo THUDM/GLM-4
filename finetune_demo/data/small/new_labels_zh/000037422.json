@@ -1,0 +1,45 @@
+{
+    "messages": [
+        {
+            "role": "user",
+            "content": "照片中有多少人体模型？",
+            "image": "/share/img_datasets/CogVLM-SFT-311K/small/images/000037422.jpg"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!图片中有三个人体模型。"
+        },
+        {
+            "role": "user",
+            "content": "人体模型穿的是什么？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!人体模型穿着衬衫，打着领带。"
+        },
+        {
+            "role": "user",
+            "content": "放置人体模型的桌子是什么材料的？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!人体模型被放在一张木桌上。"
+        },
+        {
+            "role": "user",
+            "content": "这些人体模型有头还是腿？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!不，这些人体模型是无头无腿的，它们是专门用来展示衬衫和领带的。"
+        },
+        {
+            "role": "user",
+            "content": "人体模型展示的目的可能是什么？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!人体模型展示的目的是展示衬衫和领带，通常是在零售环境中。通过在人体模型上展示服装，顾客可以很容易地想象衬衫和领带在穿着时的样子。它还允许零售商展示潜在的组合和造型选项，这可以帮助客户决定购买什么。这种展示的总体目标是促进销售，增强消费者的购物体验。"
+        }
+    ]
+}

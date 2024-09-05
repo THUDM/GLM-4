@@ -1,0 +1,37 @@
+{
+    "messages": [
+        {
+            "role": "user",
+            "content": "正在显示什么类型的飞机？",
+            "image": "/share/img_datasets/CogVLM-SFT-311K/small/images/000035864.jpg"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!一架老式单引擎飞机正在展出。它是红白相间的，有一个螺旋桨，上面有一张脸和名字。"
+        },
+        {
+            "role": "user",
+            "content": "与图片中的飞机相关的人在哪里？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!人们站在跑道上，四处走动，看着停机坪上展示的各种飞机。"
+        },
+        {
+            "role": "user",
+            "content": "活动是在室内举行还是在室外举行？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!这场活动是在户外举行的，停机坪上展示的飞机和跑道上走来走去的人都证明了这一点。"
+        },
+        {
+            "role": "user",
+            "content": "展示飞机的活动的目的是什么？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!该活动的目的是举办一场航空展，通常以各种飞机和航空相关展览为特色，通常包括老式和现代飞机。与会者可以四处走动，欣赏不同的飞机，同时了解它们背后的历史和技术。空中表演通常包括飞行演示、特技表演和其他空中活动，展示飞行员的技能和专业知识以及各种机型的能力。此次活动采用老式单引擎飞机，让爱好者和公众能够欣赏多年来航空业的发展和进步。"
+        }
+    ]
+}

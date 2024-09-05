@@ -1,0 +1,45 @@
+{
+    "messages": [
+        {
+            "role": "user",
+            "content": "图片中有多少只熊？",
+            "image": "/share/img_datasets/CogVLM-SFT-311K/small/images/000036338.jpg"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!图片中有两只熊，特别是小熊。"
+        },
+        {
+            "role": "user",
+            "content": "小熊的颜色是什么？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!小熊是棕色的。"
+        },
+        {
+            "role": "user",
+            "content": "图像的设置是什么？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!这张照片拍摄在灌木丛旁边的草地上，灌木丛低矮，看起来像木头，这表明熊是一个自然栖息地。"
+        },
+        {
+            "role": "user",
+            "content": "图片中的小熊在做什么？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!幼熊正在探索低矮的灌木丛，似乎在调查地面上的什么东西，可能是在寻找食物或玩他们觉得有趣的东西。"
+        },
+        {
+            "role": "user",
+            "content": "幼熊经常探索和调查周围环境吗？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!是的，幼熊和其他动物一样，探索和调查周围环境是它们自然行为发展的一部分，这是很常见的。幼熊天生好奇，随着它们的成长，它们学会了在环境中导航，发现如何寻找食物，与其他熊互动，避免潜在的威胁。在这个探索阶段，幼熊可能会相互玩耍或与遇到的物体玩耍，这有助于提高它们的身体技能、协调能力和社交能力。对周围环境的探索和调查也有助于培养他们的认知能力，因为他们会发现事物是如何工作的，或者如何在环境中操纵物体。这种学习过程是它们发展的重要组成部分，确保它们获得必要的技能，成年后在野外生存和茁壮成长。"
+        }
+    ]
+}

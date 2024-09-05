@@ -1,0 +1,45 @@
+{
+    "messages": [
+        {
+            "role": "user",
+            "content": "滑雪者附近的国旗是什么颜色的？",
+            "image": "/share/img_datasets/CogVLM-SFT-311K/small/images/000035853.jpg"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!滑雪者附近的旗帜是蓝色的。"
+        },
+        {
+            "role": "user",
+            "content": "有没有一群人在观看图片中的滑雪者？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!是的，有一群人看着滑雪者在雪地上滑雪。"
+        },
+        {
+            "role": "user",
+            "content": "图片中显示的是什么类型的地方？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!图片显示了一个滑雪场，一群不同的人在享受滑雪，看着其他人滑雪。"
+        },
+        {
+            "role": "user",
+            "content": "这一幕似乎发生在一天中的什么时候？"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!该场景似乎发生在中午，能见度明亮清晰。"
+        },
+        {
+            "role": "user",
+            "content": "描述滑雪者在斜坡上的动作。"
+        },
+        {
+            "role": "assistant",
+            "content": "zRzRzRzRzRzRzR!滑雪者正从斜坡上下来，很可能正在享受滑雪的刺激，并在白雪覆盖的山上航行。"
+        }
+    ]
+}

@@ -9,7 +9,7 @@
 
 ## Update
 
-- 🔥 **News**: On **2024/09/05**, we open-sourced a model enabling LLMs to generate fine-grained citations in
+- 🔥 **News**: ```2024/09/05```: We open-sourced a model enabling LLMs to generate fine-grained citations in
   long-context Q&A: [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b), along with the
   dataset [LongCite-14k](https://huggingface.co/datasets/THUDM/LongCite-45k). You are welcome to experience it online
   at [Huggingface Space](https://huggingface.co/spaces/THUDM/LongCite).

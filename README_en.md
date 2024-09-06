@@ -9,9 +9,14 @@
 
 ## Update
 
-- 🔥🔥 **News**: ```2024/09/06```: Add support for OpenAI API server on the GLM-4v-9B model.
-- 🔥🔥 **News**: ```2024/09/04```: Add demo code for using vLLM with LoRA adapter on the GLM-4-9B-Chat model.
-- 🔥🔥 **News**: ```2024/08/15```: We have open-sourced a model with long-text output capability (single turn LLM output can exceed
+- 🔥 **News**: ```2024/09/06```: Add support for OpenAI API server on the GLM-4v-9B model.
+- 🔥 **News**: ```2024/09/05```: We open-sourced a model enabling LLMs to generate fine-grained citations in
+  long-context Q&A: [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b), along with the
+  dataset [LongCite-14k](https://huggingface.co/datasets/THUDM/LongCite-45k). You are welcome to experience it online
+  at [Huggingface Space](https://huggingface.co/spaces/THUDM/LongCite).
+- 🔥 **News**: ```2024/09/04```: Add demo code for using vLLM with LoRA adapter on the GLM-4-9B-Chat model.
+- 🔥 **News**: ```2024/08/15```: We have open-sourced a model with long-text output capability (single turn LLM output
+  can exceed
   10K tokens) [longwriter-glm4-9b](https://huggingface.co/THUDM/LongWriter-glm4-9b) and the
   dataset [LongWriter-6k](https://huggingface.co/datasets/THUDM/LongWriter-6k). You're welcome
   to [try it online](https://huggingface.co/spaces/THUDM/LongWriter).

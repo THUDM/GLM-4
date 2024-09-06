@@ -5,6 +5,7 @@ data_config:
   num_proc: 1
 
 combine: True
+freezeV: True
 max_input_length: 512
 max_output_length: 512
 

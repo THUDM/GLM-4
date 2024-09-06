@@ -10,8 +10,8 @@ tiktoken>=0.7.0
 numpy==1.26.4 # Need less than 2.0.0
 accelerate>=0.33.0
 sentence_transformers>=3.0.1
-gradio>=4.41.0 # web demo
-openai>=1.40.3 # openai demo
+gradio>=4.42.0 # web demo
+openai>=1.43.0 # openai demo
 einops>=0.8.0
 pillow>=10.4.0
 sse-starlette>=2.1.3

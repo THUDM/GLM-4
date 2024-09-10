@@ -163,10 +163,14 @@ Use the transformers backend for inference:
 ```python
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import os
 
-device = "cuda"
+os.environ['CUDA_VISIBLE_DEVICES'] = '0' # Set the GPU number. If inference with multiple GPUs, set multiple GPU numbers
+MODEL_PATH = "THUDM/glm-4-9b-chat"
 
-tokenizer = AutoTokenizer.from_pretrained("THUDM/glm-4-9b-chat", trust_remote_code=True)
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
 
 query = "你好"
 
@@ -179,11 +183,12 @@ inputs = tokenizer.apply_chat_template([{"role": "user", "content": query}],
 
 inputs = inputs.to(device)
 model = AutoModelForCausalLM.from_pretrained(
-    "THUDM/glm-4-9b-chat",
+    MODEL_PATH,
     torch_dtype=torch.bfloat16,
     low_cpu_mem_usage=True,
-    trust_remote_code=True
-).to(device).eval()
+    trust_remote_code=True,
+    device_map="auto"
+).eval()
 
 gen_kwargs = {"max_length": 2500, "do_sample": True, "top_k": 1}
 with torch.no_grad():
@@ -233,12 +238,16 @@ Use the transformers backend for inference:
 import torch
 from PIL import Image
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import os
 
-device = "cuda"
+os.environ['CUDA_VISIBLE_DEVICES'] = '0' # Set the GPU number. If inference with multiple GPUs, set multiple GPU numbers
+MODEL_PATH = "THUDM/glm-4v-9b"
 
-tokenizer = AutoTokenizer.from_pretrained("THUDM/glm-4v-9b", trust_remote_code=True)
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
-query = 'display this image'
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
+
+query = '描述这张图片'
 image = Image.open("your image").convert('RGB')
 inputs = tokenizer.apply_chat_template([{"role": "user", "image": image, "content": query}],
                                        add_generation_prompt=True, tokenize=True, return_tensors="pt",
@@ -246,11 +255,12 @@ inputs = tokenizer.apply_chat_template([{"role": "user", "image": image, "conten
 
 inputs = inputs.to(device)
 model = AutoModelForCausalLM.from_pretrained(
-    "THUDM/glm-4v-9b",
+    MODEL_PATH,
     torch_dtype=torch.bfloat16,
     low_cpu_mem_usage=True,
-    trust_remote_code=True
-).to(device).eval()
+    trust_remote_code=True,
+    device_map="auto"
+).eval()
 
 gen_kwargs = {"max_length": 2500, "do_sample": True, "top_k": 1}
 with torch.no_grad():

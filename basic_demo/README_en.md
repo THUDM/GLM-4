@@ -126,6 +126,7 @@ python vllm_cli_demo.py
 
 + Build the server by yourself and use the request format of `OpenAI API` to communicate with the glm-4-9b model. This
   demo supports Function Call and All Tools functions.
++ Modify the `MODEL_PATH` in `open_api_server.py`, and you can choose to build the GLM-4-9B-Chat or GLM-4v-9B server side.
 
 Start the server:
 

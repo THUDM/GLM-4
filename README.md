@@ -10,6 +10,8 @@
 Read this in [English](README_en.md)
 
 ## 项目更新
+
+- 🔥 **News**: ```2024/09/06```: 增加了在 GLM-4v-9B 模型上构建OpenAI API兼容的服务端
 - 🔥 **News**: ```2024/09/05``` 我们开源了使LLMs能够在长上下文问答中生成细粒度引用的模型 [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b)
   以及数据集 [LongCite-14k](https://huggingface.co/datasets/THUDM/LongCite-45k),
   欢迎在 [Huggingface Space](https://huggingface.co/spaces/THUDM/LongCite) 在线体验。

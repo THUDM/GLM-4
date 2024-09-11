@@ -17,8 +17,10 @@ from transformers import (
     AutoModel,
     TextIteratorStreamer
 )
+from peft import PeftModelForCausalLM
 from PIL import Image
 from io import BytesIO
+from pathlib import Path
 
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 TORCH_TYPE = torch.bfloat16 if torch.cuda.is_available() and torch.cuda.get_device_capability()[0] >= 8 else torch.float16
@@ -365,16 +367,39 @@ torch.cuda.empty_cache()
 
 if __name__ == "__main__":
     MODEL_PATH = sys.argv[1]
-    tokenizer = AutoTokenizer.from_pretrained(
+    model_dir = Path(MODEL_PATH).expanduser().resolve()
+    if (model_dir / 'adapter_config.json').exists():
+        import json
+        with open(model_dir / 'adapter_config.json', 'r', encoding='utf-8') as file:
+            config = json.load(file)
+        model = AutoModel.from_pretrained(
+            config.get('base_model_name_or_path'),
+            trust_remote_code=True,
+            device_map='auto',
+            torch_dtype=TORCH_TYPE
+        )
+        model = PeftModelForCausalLM.from_pretrained(
+            model=model,
+            model_id=model_dir,
+            trust_remote_code=True,
+        )
+        tokenizer = AutoTokenizer.from_pretrained(
+            config.get('base_model_name_or_path'),
+            trust_remote_code=True,
+            encode_special_tokens=True
+        )
+        model.eval().to(DEVICE)
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(
         MODEL_PATH,
         trust_remote_code=True,
         encode_special_tokens=True
-    )
-    model = AutoModel.from_pretrained(
-        MODEL_PATH,
-        torch_dtype=TORCH_TYPE,
-        trust_remote_code=True,
-        device_map="auto",
-    ).eval().to(DEVICE)
+        )
+        model = AutoModel.from_pretrained(
+            MODEL_PATH,
+            torch_dtype=TORCH_TYPE,
+            trust_remote_code=True,
+            device_map="auto",
+        ).eval().to(DEVICE)
 
     uvicorn.run(app, host='0.0.0.0', port=8000, workers=1)

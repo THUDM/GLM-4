@@ -142,7 +142,7 @@ python openai_api_request.py
 python trans_stress_test.py
 ```
 
-##使用昇腾卡运行代码
+## 使用昇腾卡运行代码
 
 用户可以在昇腾硬件环境下运行以上代码，只需将transformers修改为openmind，将device中的cuda设备修改为npu：
 

@@ -147,3 +147,15 @@ Users can use this code to test the generation speed of the model on the transfo
 ```shell
 python trans_stress_test.py
 ```
+
+## Use Ascend card to run code
+
+Users can run the above code in the Ascend hardware environment. They only need to change the transformers to openmind and the cuda device in device to npu.
+
+```shell
+#from transformers import AutoModelForCausalLM, AutoTokenizer
+from openmind import AutoModelForCausalLM, AutoTokenizer
+
+#device = 'cuda'
+device = 'npu'
+```

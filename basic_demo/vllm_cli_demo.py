@@ -30,7 +30,6 @@ def load_model_and_tokenizer(model_dir: str, enable_lora: bool):
         gpu_memory_utilization=0.9,
         enforce_eager=True,
         worker_use_ray=True,
-        engine_use_ray=False,
         disable_log_requests=True
         # 如果遇见 OOM 现象，建议开启下述参数
         # enable_chunked_prefill=True,

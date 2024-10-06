@@ -37,11 +37,7 @@ MODEL_PATH = os.environ.get('MODEL_PATH', 'THUDM/glm-4-9b-chat')
 #     return model, tokenizer
 
 
-tokenizer = AutoTokenizer.from_pretrained(
-    MODEL_PATH,
-    trust_remote_code=True,
-    encode_special_tokens=True
-)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH,trust_remote_code=True)
 
 model = AutoModel.from_pretrained(
     MODEL_PATH,

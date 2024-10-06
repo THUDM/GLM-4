@@ -673,7 +673,6 @@ if __name__ == "__main__":
         gpu_memory_utilization=0.9,
         enforce_eager=True,
         worker_use_ray=False,
-        engine_use_ray=False,
         disable_log_requests=True,
         max_model_len=MAX_MODEL_LENGTH,
     )

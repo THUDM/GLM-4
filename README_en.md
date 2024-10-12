@@ -9,7 +9,7 @@
 
 ## Update
 
-- 🔥 **News**: ```2024/09/12```: Add GLM-4v-9B model support for vllm framework.
+- 🔥 **News**: ```2024/10/12```: Add GLM-4v-9B model support for vllm framework.
 - 🔥 **News**: ```2024/09/06```: Add support for OpenAI API server on the GLM-4v-9B model.
 - 🔥 **News**: ```2024/09/05```: We open-sourced a model enabling LLMs to generate fine-grained citations in
   long-context Q&A: [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b), along with the

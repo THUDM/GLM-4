@@ -9,6 +9,7 @@
 
 ## Update
 
+- 🔥 **News**: ```2024/10/12```: Add GLM-4v-9B model support for vllm framework.
 - 🔥 **News**: ```2024/09/06```: Add support for OpenAI API server on the GLM-4v-9B model.
 - 🔥 **News**: ```2024/09/05```: We open-sourced a model enabling LLMs to generate fine-grained citations in
   long-context Q&A: [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b), along with the
@@ -269,7 +270,39 @@ with torch.no_grad():
     print(tokenizer.decode(outputs[0]))
 ```
 
-Note: GLM-4V-9B does not support calling using vLLM method yet.
+Use the vLLM backend for inference:
+
+```python
+from PIL import Image
+from vllm import LLM, SamplingParams
+
+model_name = "THUDM/glm-4v-9b"
+
+llm = LLM(model=model_name,
+          tensor_parallel_size=1,
+          max_model_len=8192,
+          trust_remote_code=True,
+          enforce_eager=True)
+stop_token_ids = [151329, 151336, 151338]
+sampling_params = SamplingParams(temperature=0.2,
+                                 max_tokens=1024,
+                                 stop_token_ids=stop_token_ids)
+
+prompt = "What's the content of the image?"
+image = Image.open("your image").convert('RGB')
+inputs = {
+    "prompt": prompt,
+    "multi_modal_data": {
+        "image": image
+        },
+        }
+outputs = llm.generate(inputs, sampling_params=sampling_params)
+
+for o in outputs:
+    generated_text = o.outputs[0].text
+    print(generated_text)
+
+```
 
 ## Complete project list
 

@@ -11,6 +11,7 @@ Read this in [English](README_en.md)
 
 ## 项目更新
 
+- 🔥 **News**: ```2024/10/12```: 增加了 GLM-4v-9B 模型对vllm框架的支持
 - 🔥 **News**: ```2024/09/06```: 增加了在 GLM-4v-9B 模型上构建OpenAI API兼容的服务端
 - 🔥 **News**: ```2024/09/05``` 我们开源了使LLMs能够在长上下文问答中生成细粒度引用的模型 [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b)
   以及数据集 [LongCite-45k](https://huggingface.co/datasets/THUDM/LongCite-45k),
@@ -252,7 +253,39 @@ with torch.no_grad():
     print(tokenizer.decode(outputs[0]))
 ```
 
-注意: GLM-4V-9B 暂不支持使用 vLLM 方式调用。
+使用 vLLM 后端进行推理:
+
+```python
+from PIL import Image
+from vllm import LLM, SamplingParams
+
+model_name = "THUDM/glm-4v-9b"
+
+llm = LLM(model=model_name,
+          tensor_parallel_size=1,
+          max_model_len=8192,
+          trust_remote_code=True,
+          enforce_eager=True)
+stop_token_ids = [151329, 151336, 151338]
+sampling_params = SamplingParams(temperature=0.2,
+                                 max_tokens=1024,
+                                 stop_token_ids=stop_token_ids)
+
+prompt = "What's the content of the image?"
+image = Image.open("your image").convert('RGB')
+inputs = {
+    "prompt": prompt,
+    "multi_modal_data": {
+        "image": image
+        },
+        }
+outputs = llm.generate(inputs, sampling_params=sampling_params)
+
+for o in outputs:
+    generated_text = o.outputs[0].text
+    print(generated_text)
+
+```
 
 ## 完整项目列表
 

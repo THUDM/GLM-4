@@ -130,6 +130,7 @@ class FinetuningConfig(object):
     max_input_length: int
     max_output_length: int
     combine: bool
+    freezeV: bool
 
     training_args: Seq2SeqTrainingArguments = dc.field(
         default_factory=lambda: Seq2SeqTrainingArguments(output_dir='./output')

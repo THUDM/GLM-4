@@ -1,5 +1,5 @@
 """
-This script creates a CLI demo with transformers backend for the glm-4-9b model,
+This script creates a CLI demo with transformers backend for the glm-4-9b-chat model,
 allowing users to interact with the model through a command-line interface.
 
 Usage:
@@ -19,7 +19,7 @@ import torch
 from threading import Thread
 from transformers import AutoTokenizer, AutoModelForCausalLM, StoppingCriteria, StoppingCriteriaList, TextIteratorStreamer
 
-MODEL_PATH = "/share/home/zyx/Models/glm-4-9b-chat-hf"
+MODEL_PATH = "THUDM/glm-4-9b-chat-hf"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 

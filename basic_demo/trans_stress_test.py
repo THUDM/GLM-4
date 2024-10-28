@@ -1,3 +1,7 @@
+"""
+Note:
+    Using with glm-4-9b-chat-hf will require `transformers>=4.46.0".
+"""
 import argparse
 import time
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer, BitsAndBytesConfig

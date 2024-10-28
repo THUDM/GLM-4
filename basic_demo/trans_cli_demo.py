@@ -10,26 +10,21 @@ Note: The script includes a modification to handle markdown to plain text conver
 ensuring that the CLI interface displays formatted text correctly.
 
 If you use flash attention, you should install the flash-attn and  add attn_implementation="flash_attention_2" in model loading.
+
+Note:
+    Using with glm-4-9b-chat-hf will require `transformers>=4.46.0".
 """
 
-import os
 import torch
 from threading import Thread
-from transformers import (
-    AutoTokenizer,
-    StoppingCriteria,
-    StoppingCriteriaList,
-    TextIteratorStreamer,
-    GlmForCausalLM
-)
+from transformers import AutoTokenizer, AutoModelForCausalLM, StoppingCriteria, StoppingCriteriaList, TextIteratorStreamer
 
-MODEL_PATH = os.environ.get('MODEL_PATH', 'THUDM/glm-4-9b-chat')
+MODEL_PATH = "/share/home/zyx/Models/glm-4-9b-chat-hf"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 
-model = GlmForCausalLM.from_pretrained(
-    MODEL_PATH,
-    # attn_implementation="flash_attention_2", # Use Flash Attention
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_PATH, # attn_implementation="flash_attention_2", # Use Flash Attention
     torch_dtype=torch.bfloat16,  # using flash-attn must use bfloat16 or float16
     device_map="auto").eval()
 

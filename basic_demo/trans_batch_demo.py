@@ -4,19 +4,18 @@ Here is an example of using batch request glm-4-9b,
 here you need to build the conversation format yourself and then call the batch function to make batch requests.
 Please note that in this demo, the memory consumption is significantly higher.
 
+Note:
+    Using with glm-4-9b-chat-hf will require `transformers>=4.46.0".
+
 """
 
-from typing import Optional, Union
-from transformers import AutoModel, AutoTokenizer, LogitsProcessorList
+from typing import Union
+from transformers import AutoTokenizer, LogitsProcessorList, AutoModelForCausalLM
 
-MODEL_PATH = 'THUDM/glm-4-9b-chat'
+MODEL_PATH = 'THUDM/glm-4-9b-chat-hf'
 
-tokenizer = AutoTokenizer.from_pretrained(
-    MODEL_PATH,
-    trust_remote_code=True,
-    encode_special_tokens=True)
-model = AutoModel.from_pretrained(MODEL_PATH, trust_remote_code=True, device_map="auto").eval()
-
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, device_map="auto").eval()
 
 def process_model_outputs(inputs, outputs, tokenizer):
     responses = []
@@ -36,11 +35,17 @@ def batch(
         do_sample: bool = True,
         top_p: float = 0.8,
         temperature: float = 0.8,
-        logits_processor: Optional[LogitsProcessorList] = LogitsProcessorList(),
+        logits_processor=None,
 ):
+    if logits_processor is None:
+        logits_processor = LogitsProcessorList()
     messages = [messages] if isinstance(messages, str) else messages
-    batched_inputs = tokenizer(messages, return_tensors="pt", padding="max_length", truncation=True,
-                               max_length=max_input_tokens).to(model.device)
+    batched_inputs = tokenizer(
+        messages,
+        return_tensors="pt",
+        padding="max_length",
+        truncation=True,
+        max_length=max_input_tokens).to(model.device)
 
     gen_kwargs = {
         "max_new_tokens": max_new_tokens,

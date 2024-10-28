@@ -9,6 +9,7 @@
 
 ## Update
 
+- 🔥🔥 **News**: ```2024/10/25```: We have open-sourced the end-to-end Chinese-English voice dialogue model [GLM-4-Voice](https://github.com/THUDM/GLM-4-Voice).
 - 🔥 **News**: ```2024/10/12```: Add GLM-4v-9B model support for vllm framework.
 - 🔥 **News**: ```2024/09/06```: Add support for OpenAI API server on the GLM-4v-9B model.
 - 🔥 **News**: ```2024/09/05```: We open-sourced a model enabling LLMs to generate fine-grained citations in

@@ -11,7 +11,7 @@ ensuring that the CLI interface displays formatted text correctly.
 """
 import time
 import asyncio
-from transformers import AutoTokenizer
+from transformers import PreTrainedTokenizer
 from vllm import SamplingParams, AsyncEngineArgs, AsyncLLMEngine
 from typing import List, Dict
 from vllm.lora.request import LoRARequest
@@ -20,13 +20,14 @@ MODEL_PATH = 'THUDM/glm-4-9b-chat'
 LORA_PATH = ''
 
 def load_model_and_tokenizer(model_dir: str, enable_lora: bool):
+    tokenizer = PreTrainedTokenizer.from_pretrained(model_dir),
+
     engine_args = AsyncEngineArgs(
         model=model_dir,
         tokenizer=model_dir,
         enable_lora=enable_lora,
         tensor_parallel_size=1,
         dtype="bfloat16",
-        trust_remote_code=True,
         gpu_memory_utilization=0.9,
         enforce_eager=True,
         worker_use_ray=True,
@@ -35,11 +36,7 @@ def load_model_and_tokenizer(model_dir: str, enable_lora: bool):
         # enable_chunked_prefill=True,
         # max_num_batched_tokens=8192
     )
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_dir,
-        trust_remote_code=True,
-        encode_special_tokens=True
-    )
+
     engine = AsyncLLMEngine.from_engine_args(engine_args)
     return engine, tokenizer
 

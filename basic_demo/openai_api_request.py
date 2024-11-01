@@ -95,12 +95,12 @@ def function_chat(use_stream=False):
 def simple_chat(use_stream=False):
     messages = [
         {
-            "role": "system",
+            "role": "user",
             "content": "请在你输出的时候都带上“喵喵喵”三个字，放在开头。",
         },
         {
             "role": "user",
-            "content": "你是谁"
+            "content": "你是猫吗"
         }
     ]
     response = client.chat.completions.create(
@@ -201,7 +201,12 @@ def glm4v_simple_image_chat(use_stream=False, img_path=None):
     
 
 if __name__ == "__main__":
-    simple_chat(use_stream=False)
-    # function_chat(use_stream=False)
-    # glm4v_simple_image_chat(use_stream=False, img_path="demo.jpg")
+    # Testing the text model
+    simple_chat(use_stream=False) 
+
+    # Testing the text model with tools
+    # function_chat(use_stream=False) 
+    
+    # Testing images of multimodal models
+    # glm4v_simple_image_chat(use_stream=False, img_path="demo.jpg") 
 

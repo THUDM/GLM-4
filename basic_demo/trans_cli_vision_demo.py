@@ -17,7 +17,7 @@ from transformers import (
     AutoTokenizer,
     StoppingCriteria,
     StoppingCriteriaList,
-    TextIteratorStreamer, AutoModel, BitsAndBytesConfig
+    TextIteratorStreamer, AutoModel
 )
 
 from PIL import Image

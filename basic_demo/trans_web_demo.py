@@ -3,6 +3,9 @@ This script creates an interactive web demo for the GLM-4-9B model using Gradio,
 a Python library for building quick and easy UI components for machine learning models.
 It's designed to showcase the capabilities of the GLM-4-9B model in a user-friendly interface,
 allowing users to interact with the model through a chat-like interface.
+
+Note:
+    Using with glm-4-9b-chat-hf will require `transformers>=4.46.0".
 """
 
 import os
@@ -27,7 +30,7 @@ from transformers import (
 ModelType = Union[PreTrainedModel, PeftModelForCausalLM]
 TokenizerType = Union[PreTrainedTokenizer, PreTrainedTokenizerFast]
 
-MODEL_PATH = os.environ.get('MODEL_PATH', 'THUDM/glm-4-9b-chat')
+MODEL_PATH = os.environ.get('MODEL_PATH', 'THUDM/glm-4-9b-chat-hf')
 TOKENIZER_PATH = os.environ.get("TOKENIZER_PATH", MODEL_PATH)
 
 

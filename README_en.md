@@ -56,14 +56,14 @@ GPT-4-turbo-2024-04-09, Gemini 1.0 Pro, Qwen-VL-Max, and Claude 3 Opus.
 
 ## Model List
 
-|        Model        | Type | Seq Length | Transformers  |                                                                                                      Download                                                                                                       |                                                                                        Online Demo                                                                                         |
-|:-------------------:|:----:|:----------:|:-------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|      GLM-4-9B       | Base |     8K     | `4.44 - 4.45` |             [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)             |                                                                                             /                                                                                              |
-|    GLM-4-9B-Chat    | Chat |    128K    | `4.44 - 4.45` |     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)      | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
-|  GLM-4-9B-Chat-HF   | Chat |    128K    |  `>= 4.46.0`  |                                     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                      | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
-|  GLM-4-9B-Chat-1M   | Chat |     1M     | `4.44 - 4.45` | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) |                                                                                             /                                                                                              |
-| GLM-4-9B-Chat-1M-HF | Chat |     1M     |  `>= 4.46.0`  |                                  [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                   |                                                                                             /                                                                                              |
-|      GLM-4V-9B      | Chat |     8K     |  `>= 4.46.0`  |           [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)            |                                                       [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                        |
+|        Model        | Type | Seq Length | Transformers Version |                                                                                                      Download                                                                                                       |                                                                                        Online Demo                                                                                         |
+|:-------------------:|:----:|:----------:|:--------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|      GLM-4-9B       | Base |     8K     |  `4.44.0 - 4.45.0`   |             [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)             |                                                                                             /                                                                                              |
+|    GLM-4-9B-Chat    | Chat |    128K    |     `>= 4.44.0`      |     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)      | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
+|  GLM-4-9B-Chat-HF   | Chat |    128K    |     `>= 4.46.0`      |                                     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                      | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
+|  GLM-4-9B-Chat-1M   | Chat |     1M     |     `>= 4.44.0`      | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) |                                                                                             /                                                                                              |
+| GLM-4-9B-Chat-1M-HF | Chat |     1M     |     `>= 4.46.0`      |                                  [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                   |                                                                                             /                                                                                              |
+|      GLM-4V-9B      | Chat |     8K     |     `>= 4.46.0`      |           [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)            |                                                       [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                        |
 
 ## BenchMarkß
 
@@ -158,7 +158,8 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import os
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0' # Set the GPU number. If inference with multiple GPUs, set multiple GPU numbers
+os.environ[
+    'CUDA_VISIBLE_DEVICES'] = '0'  # Set the GPU number. If inference with multiple GPUs, set multiple GPU numbers
 MODEL_PATH = "THUDM/glm-4-9b-chat-hf"
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -233,7 +234,8 @@ from PIL import Image
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import os
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0' # Set the GPU number. If inference with multiple GPUs, set multiple GPU numbers
+os.environ[
+    'CUDA_VISIBLE_DEVICES'] = '0'  # Set the GPU number. If inference with multiple GPUs, set multiple GPU numbers
 MODEL_PATH = "THUDM/glm-4v-9b"
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -286,8 +288,8 @@ inputs = {
     "prompt": prompt,
     "multi_modal_data": {
         "image": image
-        },
-        }
+    },
+}
 outputs = llm.generate(inputs, sampling_params=sampling_params)
 
 for o in outputs:

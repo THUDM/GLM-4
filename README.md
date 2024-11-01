@@ -11,38 +11,16 @@ Read this in [English](README_en.md)
 
 ## 项目更新
 
-- 🔥🔥 **News**: ```2024/11/01```: 支持了 GLM-4-9B-Chat-hf 和 GLM-4v-9B 模型在 vLLM 0.6.3 以上版本和 transformers 4.46.0 以上版本运行
-- 🔥🔥 **News**: ```2024/10/25```: 我们开源了端到端中英语音对话模型 [GLM-4-Voice](https://github.com/THUDM/GLM-4-Voice)
-- 🔥 **News**: ```2024/10/12```: 增加了 GLM-4v-9B 模型对vllm框架的支持
-- 🔥 **News**: ```2024/09/06```: 增加了在 GLM-4v-9B 模型上构建OpenAI API兼容的服务端
-- 🔥 **News**: ```2024/09/05``` 我们开源了使LLMs能够在长上下文问答中生成细粒度引用的模型 [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b)
-  以及数据集 [LongCite-45k](https://huggingface.co/datasets/THUDM/LongCite-45k),
-  欢迎在 [Huggingface Space](https://huggingface.co/spaces/THUDM/LongCite) 在线体验。
-- 🔥**News**: ```2024/09/04```: 增加了在 GLM-4-9B-Chat 模型上使用带有 Lora adapter 的 vLLM 演示代码
-- 🔥**News**: ```2024/08/15```: 我们开源具备长文本输出能力(单轮对话大模型输出可超过1万token)
-  的模型 [longwriter-glm4-9b](https://huggingface.co/THUDM/LongWriter-glm4-9b)
-  以及数据集 [LongWriter-6k](https://huggingface.co/datasets/THUDM/LongWriter-6k),
-  欢迎在 [Huggingface Space](https://huggingface.co/spaces/THUDM/LongWriter)
-  或 [魔搭社区空间](https://modelscope.cn/studios/ZhipuAI/LongWriter-glm4-9b-demo) 在线体验。
-- 🔥 **News**: ```2024/08/12```: GLM-4-9B-Chat 模型依赖的`transformers`版本升级到 `4.44.0`，请重新拉取除模型权重(
-  `*.safetensor` 文件 和 `tokenizer.model`)外的文件并参考 `basic_demo/requirements.txt` 严格更新依赖。
-- 🔥 **News**: ```2024/07/24```:
-  我们发布了与长文本相关的最新技术解读，关注 [这里](https://medium.com/@ChatGLM/glm-long-scaling-pre-trained-model-contexts-to-millions-caa3c48dea85)
-  查看我们在训练 GLM-4-9B 开源模型中关于长文本技术的技术报告。
-- 🔥 **News**: ``2024/7/16``: GLM-4-9B-Chat 模型依赖的`transformers`版本升级到 `4.42.4`,
-  请更新模型配置文件并参考 `basic_demo/requirements.txt` 更新依赖。
-- 🔥 **News**: ``2024/7/9``: GLM-4-9B-Chat
-  模型已适配 [Ollama](https://github.com/ollama/ollama),[Llama.cpp](https://github.com/ggerganov/llama.cpp)
-  ，您可以在[PR](https://github.com/ggerganov/llama.cpp/pull/8031) 查看具体的细节。
-- 🔥 **News**: ``2024/7/1``: 我们更新了 GLM-4V-9B 的微调，您需要更新我们的模型仓库的运行文件和配置文件，
-  以支持这个功能，更多微调细节 (例如数据集格式，显存要求)，请前往 [查看](finetune_demo)。
-- 🔥 **News**: ``2024/6/28``: 我们与英特尔技术团队合作，改进了 GLM-4-9B-Chat 的 ITREX 和 OpenVINO 部署教程。您可以使用英特尔
-  CPU/GPU 设备高效部署 GLM-4-9B 开源模型。欢迎访问 [查看](intel_device_demo)。
-- 🔥 **News**: ``2024/6/24``: 我们更新了模型仓库的运行文件和配置文件，支持 Flash Attention 2,
-  请更新模型配置文件并参考 `basic_demo/trans_cli_demo.py` 中的示例代码。
-- 🔥 **News**: ``2024/6/19``: 我们更新了模型仓库的运行文件和配置文件，修复了部分已知的模型推理的问题，欢迎大家克隆最新的模型仓库。
-- 🔥 **News**: ``2024/6/18``: 我们发布 [技术报告](https://arxiv.org/pdf/2406.12793), 欢迎查看。
-- 🔥 **News**: ``2024/6/05``: 我们发布 GLM-4-9B 系列开源模型
+- 🔥🔥 **News**: ```2024/11/01```: 本仓库依赖进行升级，请更新`requirements.txt`中的依赖以保证正常运行模型。[glm-4-9b-chat-hf](https://huggingface.co/THUDM/glm-4-9b-chat-hf) 是适配 `transformers>=4.46` 的模型权重，使用 transforemrs 库中的 `GlmModel` 类实现。
+同时，[glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat), [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b) 中的 `tokenzier_chatglm.py` 已经更新以适配最新版本的 `transforemrs`库。请前往 HuggingFace 更新文件。
+- 🔥 **News**: ```2024/10/27```: 我们开源了 [LongReward](https://github.com/THUDM/LongReward)，这是一个使用 AI 反馈改进长上下文大型语言模型。
+- 🔥 **News**: ```2024/10/25```: 我们开源了端到端中英语音对话模型 [GLM-4-Voice](https://github.com/THUDM/GLM-4-Voice)。
+- 🔥 **News**: ```2024/09/05``` 我们开源了使LLMs能够在长上下文问答中生成细粒度引用的模型 [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b) 以及数据集 [LongCite-45k](https://huggingface.co/datasets/THUDM/LongCite-45k), 欢迎在 [Huggingface Space](https://huggingface.co/spaces/THUDM/LongCite) 在线体验。
+- 🔥**News**: ```2024/08/15```: 我们开源具备长文本输出能力(单轮对话大模型输出可超过1万token) 的模型 [longwriter-glm4-9b](https://huggingface.co/THUDM/LongWriter-glm4-9b) 以及数据集 [LongWriter-6k](https://huggingface.co/datasets/THUDM/LongWriter-6k),  欢迎在 [Huggingface Space](https://huggingface.co/spaces/THUDM/LongWriter) 或 [魔搭社区空间](https://modelscope.cn/studios/ZhipuAI/LongWriter-glm4-9b-demo) 在线体验。
+- 🔥 **News**: ```2024/07/24```: 我们发布了与长文本相关的最新技术解读，关注 [这里](https://medium.com/@ChatGLM/glm-long-scaling-pre-trained-model-contexts-to-millions-caa3c48dea85) 查看我们在训练 GLM-4-9B 开源模型中关于长文本技术的技术报告。
+- 🔥 **News**: ``2024/07/09``: GLM-4-9B-Chat 模型已适配 [Ollama](https://github.com/ollama/ollama), [Llama.cpp](https://github.com/ggerganov/llama.cpp)，您可以在 [PR](https://github.com/ggerganov/llama.cpp/pull/8031) 查看具体的细节。
+- 🔥 **News**: ``2024/06/18``: 我们发布 [技术报告](https://arxiv.org/pdf/2406.12793), 欢迎查看。
+- 🔥 **News**: ``2024/06/05``: 我们发布 GLM-4-9B 系列开源模型。
 
 ## 模型介绍
 

@@ -10,19 +10,20 @@ Note: The script includes a modification to handle markdown to plain text conver
 ensuring that the CLI interface displays formatted text correctly.
 """
 
-import os
 import torch
 from threading import Thread
 from transformers import (
     AutoTokenizer,
     StoppingCriteria,
     StoppingCriteriaList,
-    TextIteratorStreamer, AutoModel, BitsAndBytesConfig
+    TextIteratorStreamer,
+    AutoModel,
+    BitsAndBytesConfig
 )
 
 from PIL import Image
 
-MODEL_PATH = os.environ.get('MODEL_PATH', 'THUDM/glm-4v-9b')
+MODEL_PATH = "THUDM/glm-4v-9b"
 
 tokenizer = AutoTokenizer.from_pretrained(
     MODEL_PATH,

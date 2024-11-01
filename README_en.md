@@ -8,47 +8,36 @@
 </p>
 
 ## Update
-- 🔥🔥 **News**: ```2024/11/01```: Support for GLM-4-9B-Chat-hf and GLM-4v-9B models on vLLM >= 0.6.3 and transformers >= 4.46.0
-- 🔥🔥 **News**: ```2024/10/25```: We have open-sourced the end-to-end Chinese-English voice dialogue model [GLM-4-Voice](https://github.com/THUDM/GLM-4-Voice).
-- 🔥 **News**: ```2024/10/12```: Add GLM-4v-9B model support for vllm framework.
-- 🔥 **News**: ```2024/09/06```: Add support for OpenAI API server on the GLM-4v-9B model.
-- 🔥 **News**: ```2024/09/05```: We open-sourced a model enabling LLMs to generate fine-grained citations in
-  long-context Q&A: [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b), along with the
-  dataset [LongCite-14k](https://huggingface.co/datasets/THUDM/LongCite-45k). You are welcome to experience it online
+
+- 🔥🔥 **News**: ```2024/11/01```: Dependencies have been updated in this repository. Please update the dependencies in
+  `requirements.txt` to ensure the model runs correctly. The model weights
+  for [glm-4-9b-chat-hf](https://huggingface.co/THUDM/glm-4-9b-chat-hf) are compatible with `transformers>=4.46` and can
+  be implemented using the `GlmModel` class in the transformers library. Additionally, `tokenizer_chatglm.py`
+  in [glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat) and [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b)
+  has been updated for the latest version of `transformers`. Please update the files on HuggingFace.
+- 🔥 **News**: ```2024/10/27```: We have open-sourced [LongReward](https://github.com/THUDM/LongReward), a model that
+  uses AI feedback to enhance long-context large language models.
+- 🔥 **News**: ```2024/10/25```: We have open-sourced the end-to-end Mandarin-English voice dialogue
+  model [GLM-4-Voice](https://github.com/THUDM/GLM-4-Voice).
+- 🔥 **News**: ```2024/09/05```: We have open-sourced [longcite-glm4-9b](https://huggingface.co/THUDM/LongCite-glm4-9b),
+  a model enabling LLMs to produce fine-grained citations in long-context Q&A, along with the
+  dataset [LongCite-45k](https://huggingface.co/datasets/THUDM/LongCite-45k). Try it out online
   at [Huggingface Space](https://huggingface.co/spaces/THUDM/LongCite).
-- 🔥 **News**: ```2024/09/04```: Add demo code for using vLLM with LoRA adapter on the GLM-4-9B-Chat model.
-- 🔥 **News**: ```2024/08/15```: We have open-sourced a model with long-text output capability (single turn LLM output
-  can exceed
-  10K tokens) [longwriter-glm4-9b](https://huggingface.co/THUDM/LongWriter-glm4-9b) and the
-  dataset [LongWriter-6k](https://huggingface.co/datasets/THUDM/LongWriter-6k). You're welcome
-  to [try it online](https://huggingface.co/spaces/THUDM/LongWriter).
-- 🔥 **News**: ```2024/08/12```: The `transformers` version required for the GLM-4-9B-Chat model has been upgraded
-  to `4.44.0`. Please pull all files again except for the model weights (`*.safetensor` files and `tokenizer.model`),
-  and strictly update the dependencies as per `basic_demo/requirements.txt`.
-- 🔥 **News**: ```2024/07/24```:  we released the latest technical interpretation related to long texts. Check
-  out [here](https://medium.com/@ChatGLM/glm-long-scaling-pre-trained-model-contexts-to-millions-caa3c48dea85) to view
-  our
-  technical report on long context technology in the training of the open-source GLM-4-9B model.
-- 🔥 **News**: ``2024/7/16``: The `transformers` version that the GLM-4-9B-Chat model depends on has been upgraded
-  to `4.42.4`. Please update the model configuration file and refer to `basic_demo/requirements.txt` to update the
-  dependencies.
-- 🔥 **News**: ``2024/7/9``: The GLM-4-9B-Chat model has been adapted to [Ollama](https://github.com/ollama/ollama)
-  and [Llama.cpp](https://github.com/ggerganov/llama.cpp), you can check the specific details
-  in [PR](https://github.com/ggerganov/llama.cpp/pull/8031).
-- 🔥 **News**: ``2024/7/1``: We have updated the multimodal fine-tuning of GLM-4V-9B. You need to update the run file and
-  configuration file of our model repository to support this feature. For more fine-tuning details (such as dataset
-  format, video memory requirements), please go to [view](finetune_demo).
-- 🔥 **News**: ``2024/6/28``: We have worked with the Intel technical team to improve the ITREX and OpenVINO deployment
-  tutorials for GLM-4-9B-Chat. You can use Intel CPU/GPU devices to efficiently deploy the GLM-4-9B open source model.
-  Welcome to [view](intel_device_demo).
-- 🔥 **News**: ``2024/6/24``: We have updated the running files and configuration files of the model repository to
-  support Flash Attention 2, Please update the model configuration file and refer to the sample code
-  in `basic_demo/trans_cli_demo.py`.
-- 🔥 **News**: ``2024/6/19``: We updated the running files and configuration files of the model repository and fixed some
-  model inference issues. Welcome to clone the latest model repository.
-- 🔥 **News**: ``2024/6/18``: We released a [technical report](https://arxiv.org/pdf/2406.12793), welcome to check it
-  out.
-- 🔥 **News**: ``2024/6/05``: We released the GLM-4-9B series of open source models
+- 🔥 **News**: ```2024/08/15```: We have
+  open-sourced [longwriter-glm4-9b](https://huggingface.co/THUDM/LongWriter-glm4-9b), a model capable of generating over
+  10,000 tokens in single-turn dialogue, along with the
+  dataset [LongWriter-6k](https://huggingface.co/datasets/THUDM/LongWriter-6k). Experience it online
+  at [Huggingface Space](https://huggingface.co/spaces/THUDM/LongWriter) or
+  the [ModelScope Community Space](https://modelscope.cn/studios/ZhipuAI/LongWriter-glm4-9b-demo).
+- 🔥 **News**: ```2024/07/24```: We published the latest technical insights on long-text processing. Check out our
+  technical report on training the open-source GLM-4-9B model for long
+  texts [here](https://medium.com/@ChatGLM/glm-long-scaling-pre-trained-model-contexts-to-millions-caa3c48dea85).
+- 🔥 **News**: ```2024/07/09```: The GLM-4-9B-Chat model is now compatible
+  with [Ollama](https://github.com/ollama/ollama) and [Llama.cpp](https://github.com/ggerganov/llama.cpp). See detailed
+  information in this [PR](https://github.com/ggerganov/llama.cpp/pull/8031).
+- 🔥 **News**: ```2024/06/18```: We have released a [technical report](https://arxiv.org/pdf/2406.12793), available for
+  viewing.
+- 🔥 **News**: ```2024/06/05```: We released the GLM-4-9B series of open-source models.
 
 ## Model Introduction
 
@@ -67,15 +56,14 @@ GPT-4-turbo-2024-04-09, Gemini 1.0 Pro, Qwen-VL-Max, and Claude 3 Opus.
 
 ## Model List
 
-| Model               | Type | Seq Length | Transformers |   vLLM   | Download                                                                                                                                                                                                                | Online Demo                                                                                                                                                                                |
-|:-------------------:|:----:|:----------:|:------------:|:--------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| GLM-4-9B            | Base | 8K         |   <= 4.45    | <= 0.6.2 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)                             | /                                                                                                                                                                                          |
-| GLM-4-9B-Chat       | Chat | 128K       |   <= 4.45    | <= 0.6.2 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)              | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
-| GLM-4-9B-Chat-HF    | Chat | 128K       |   >= 4.46    | <= 0.6.2 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                                                              | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
-| GLM-4-9B-Chat-1M    | Chat | 1M         |   <= 4.45    | <= 0.6.2 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M)     | /                                                                                                                                                                                          |
-| GLM-4-9B-Chat-1M-HF | Chat | 1M         |   >= 4.46    | <= 0.6.2 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                                                        | /                                                                                                                                                                                          |
-| GLM-4V-9B           | Chat | 8K         |   >= 4.46    | >= 0.6.3 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)                          | [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                                                                              |
-
+|        Model        | Type | Seq Length | Transformers  |                                                                                                      Download                                                                                                       |                                                                                        Online Demo                                                                                         |
+|:-------------------:|:----:|:----------:|:-------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|      GLM-4-9B       | Base |     8K     | `4.44 - 4.45` |             [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)             |                                                                                             /                                                                                              |
+|    GLM-4-9B-Chat    | Chat |    128K    | `4.44 - 4.45` |     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)      | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
+|  GLM-4-9B-Chat-HF   | Chat |    128K    |  `>= 4.46.0`  |                                     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                      | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
+|  GLM-4-9B-Chat-1M   | Chat |     1M     | `4.44 - 4.45` | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) |                                                                                             /                                                                                              |
+| GLM-4-9B-Chat-1M-HF | Chat |     1M     |  `>= 4.46.0`  |                                  [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                   |                                                                                             /                                                                                              |
+|      GLM-4V-9B      | Chat |     8K     |  `>= 4.46.0`  |           [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)            |                                                       [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                        |
 
 ## BenchMarkß
 

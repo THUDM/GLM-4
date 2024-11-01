@@ -11,21 +11,24 @@ ensuring that the CLI interface displays formatted text correctly.
 
 If you use flash attention, you should install the flash-attn and  add attn_implementation="flash_attention_2" in model loading.
 
-Note:
-    Using with glm-4-9b-chat-hf will require `transformers>=4.46.0".
 """
 
 import torch
 from threading import Thread
 from transformers import AutoTokenizer, AutoModelForCausalLM, StoppingCriteria, StoppingCriteriaList, TextIteratorStreamer
 
-MODEL_PATH = "THUDM/glm-4-9b-chat-hf"
+MODEL_PATH = "THUDM/glm-4-9b-chat"
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+# trust_remote_code=True is needed if you using with `glm-4-9b-chat`
+# Not use if you using with `glm-4-9b-chat-hf`
+# both tokenizer and model should consider with this issue.
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
 
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_PATH, # attn_implementation="flash_attention_2", # Use Flash Attention
     torch_dtype=torch.bfloat16,  # using flash-attn must use bfloat16 or float16
+    trust_remote_code=True,
     device_map="auto").eval()
 
 

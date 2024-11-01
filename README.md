@@ -55,7 +55,6 @@ GLM-4V-9B。**GLM-4V-9B** 具备 1120 * 1120 高分辨率下的中英双语多�
 
 ## Model List
 
-<div style="overflow-x:auto;">
 | Model               | Type | Seq Length | Transformers |   vLLM   | Download                                                                                                                                                                                                            | Online Demo                                                                                                                                                                                |
 |:-------------------:|:----:|:----------:|:------------:|:--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | GLM-4-9B            | Base | 8K         |   <= 4.45    | <= 0.6.2 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)                         | /                                                                                                                                                                                          |
@@ -64,7 +63,6 @@ GLM-4V-9B。**GLM-4V-9B** 具备 1120 * 1120 高分辨率下的中英双语多�
 | GLM-4-9B-Chat-1M    | Chat | 1M         |   <= 4.45    | <= 0.6.2 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) | /                                                                                                                                                                                          |
 | GLM-4-9B-Chat-1M-HF | Chat | 1M         |   >= 4.46    | <= 0.6.2 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                                                    | /                                                                                                                                                                                          |
 | GLM-4V-9B           | Chat | 8K         |   >= 4.46    | >= 0.6.3 | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)                      | [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                                                                              |
-</div>
 
 ## 评测结果
 

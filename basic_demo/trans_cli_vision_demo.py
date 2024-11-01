@@ -29,6 +29,8 @@ tokenizer = AutoTokenizer.from_pretrained(
     trust_remote_code=True,
     encode_special_tokens=True
 )
+
+## For BF16 inference
 model = AutoModel.from_pretrained(
     MODEL_PATH,
     trust_remote_code=True,
@@ -36,7 +38,6 @@ model = AutoModel.from_pretrained(
     torch_dtype=torch.bfloat16,
     device_map="auto",
 ).eval()
-
 
 ## For INT4 inference
 # model = AutoModel.from_pretrained(

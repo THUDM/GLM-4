@@ -302,7 +302,10 @@ def generate_stream_glm4v(model: AutoModel, tokenizer: AutoTokenizer, params: di
             inputs.append({"role": "user", "content": user_msg})
         if model_msg:
             inputs.append({"role": "assistant", "content": model_msg})
-    inputs.append({"role": "user", "content": query, "image": image_list[0]})
+    if len(image_list) >= 1:
+        inputs.append({"role": "user", "content": query, "image": image_list[0]})
+    else:
+        inputs.append({"role": "user", "content": query})
 
     model_inputs = tokenizer.apply_chat_template(
         inputs,

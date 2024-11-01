@@ -7,7 +7,7 @@ Usage:
 
 Requirements:
 - Gradio package
-  - Type `pip install gradio` to install Gradio.
+  - Type `pip install gradio==4.44.1` to install Gradio.
 """
 
 import os
@@ -18,7 +18,7 @@ from transformers import (
     AutoTokenizer,
     StoppingCriteria,
     StoppingCriteriaList,
-    TextIteratorStreamer, AutoModel, BitsAndBytesConfig
+    TextIteratorStreamer, AutoModel
 )
 from PIL import Image
 import requests

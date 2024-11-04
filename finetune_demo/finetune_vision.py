@@ -399,7 +399,7 @@ def load_tokenizer_and_model(
         model = AutoModelForCausalLM.from_pretrained(
             model_dir,
             trust_remote_code=True,
-            empty_init=False,
+            empty_init=False,   #if transformers>=4.46 and load glm-4-9b-chat-hf, delete this
             use_cache=False,
             torch_dtype=torch.bfloat16  # Must use BFloat 16
         )
@@ -409,7 +409,7 @@ def load_tokenizer_and_model(
         model = AutoModelForCausalLM.from_pretrained(
             model_dir,
             trust_remote_code=True,
-            empty_init=False,
+            empty_init=False,   #if transformers>=4.46 and load glm-4-9b-chat-hf, delete this
             use_cache=False,
             torch_dtype=torch.bfloat16
         )

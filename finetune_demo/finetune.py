@@ -56,14 +56,14 @@ class DataCollatorForSeq2Seq(_DataCollatorForSeq2Seq):
 
 
 class Seq2SeqTrainer(_Seq2SeqTrainer):
-    # Not Support for apex
-    def training_step(self, model: nn.Module, inputs: dict[str, Any]) -> torch.Tensor:
+    # Not Support for apex. transformers>=4.46 require additional args: num_items_in_batch
+    def training_step(self, model: nn.Module, inputs: dict[str, Any], num_items_in_batch=None) -> torch.Tensor:
 
         model.train()
         inputs = self._prepare_inputs(inputs)
 
         with self.compute_loss_context_manager():
-            loss = self.compute_loss(model, inputs)
+            loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
 
         if self.args.n_gpu > 1:
             loss = loss.mean()
@@ -353,7 +353,6 @@ def load_tokenizer_and_model(
         model = AutoModelForCausalLM.from_pretrained(
             model_dir,
             trust_remote_code=True,
-            empty_init=False,
             use_cache=False,
             torch_dtype=torch.bfloat16  # Must use BFloat 16
         )
@@ -363,7 +362,6 @@ def load_tokenizer_and_model(
         model = AutoModelForCausalLM.from_pretrained(
             model_dir,
             trust_remote_code=True,
-            empty_init=False,
             use_cache=False,
             torch_dtype=torch.bfloat16
         )

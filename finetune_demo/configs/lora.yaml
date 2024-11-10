@@ -47,3 +47,4 @@ peft_config:
   lora_alpha: 32
   lora_dropout: 0.1
   target_modules: ["query_key_value"]
+  #target_modules: ["q_proj", "k_proj", "v_proj"] if model is glm-4-9b-chat-hf

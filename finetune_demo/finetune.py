@@ -348,7 +348,7 @@ def load_tokenizer_and_model(
         model_dir: str,
         peft_config: Optional[PeftConfig] = None,
 ):
-    tokenizer = AutoTokenizer.from_pretrained(model_dir, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(model_dir, padding_side='left', trust_remote_code=True)
     if peft_config is not None:
         model = AutoModelForCausalLM.from_pretrained(
             model_dir,
@@ -370,6 +370,8 @@ def load_tokenizer_and_model(
 
 def compute_metrics(eval_preds: EvalPrediction, tokenizer):
     batched_pred_ids, batched_label_ids = eval_preds
+    batched_pred_ids[batched_pred_ids==-100] = tokenizer.pad_token_id
+    batched_label_ids[batched_label_ids==-100] = tokenizer.pad_token_id
     metrics_dct = {'rouge-1': [], 'rouge-2': [], 'rouge-l': [], 'bleu-4': []}
     for pred_ids, label_ids in zip(batched_pred_ids, batched_label_ids):
         pred_txt = tokenizer.decode(pred_ids).strip()

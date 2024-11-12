@@ -46,9 +46,6 @@ async def vllm_gen(messages: List[Dict[str, str]], top_p: float, temperature: fl
         "temperature": temperature,
         "top_p": top_p,
         "top_k": -1,
-        "use_beam_search": False,
-        "length_penalty": 1,
-        "early_stopping": False,
         "ignore_eos": False,
         "max_tokens": max_dec_len,
         "logprobs": None,
@@ -58,7 +55,7 @@ async def vllm_gen(messages: List[Dict[str, str]], top_p: float, temperature: fl
     }
     sampling_params = SamplingParams(**params_dict)
 
-    async for output in engine.generate(inputs=inputs, sampling_params=sampling_params, request_id=f"{time.time()}"):
+    async for output in engine.generate(prompt=inputs, sampling_params=sampling_params, request_id=f"{time.time()}"):
         yield output.outputs[0].text
 
 

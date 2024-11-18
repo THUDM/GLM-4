@@ -11,8 +11,8 @@
 
 - 🔥🔥 **News**: ```2024/11/01```: Dependencies have been updated in this repository. Please update the dependencies in
   `requirements.txt` to ensure the model runs correctly. The model weights
-  for [glm-4-9b-chat-hf](https://huggingface.co/THUDM/glm-4-9b-chat-hf) are compatible with `transformers>=4.46` and can
-  be implemented using the `GlmModel` class in the transformers library. Additionally, `tokenizer_chatglm.py`
+  for [glm-4-9b-chat-hf](https://huggingface.co/THUDM/glm-4-9b-chat-hf) are compatible with `transformers>=4.46.2` and can
+  be implemented using the `GlmModel` class in the `transformers` library. Additionally, `tokenizer_chatglm.py`
   in [glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat) and [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b)
   has been updated for the latest version of `transformers`. Please update the files on HuggingFace.
 - 🔥 **News**: ```2024/10/27```: We have open-sourced [LongReward](https://github.com/THUDM/LongReward), a model that

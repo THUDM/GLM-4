@@ -22,7 +22,6 @@ from PIL import Image
 from io import BytesIO
 from pathlib import Path
 
-DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 TORCH_TYPE = torch.bfloat16 if torch.cuda.is_available() and torch.cuda.get_device_capability()[0] >= 8 else torch.float16
 
 @asynccontextmanager
@@ -167,7 +166,7 @@ async def create_chat_completion(request: ChatCompletionRequest):
         generate = predict(request.model, gen_params)
         return EventSourceResponse(generate, media_type="text/event-stream")
     response = generate_glm4v(model, tokenizer, gen_params)
-
+    
     usage = UsageInfo()
 
     message = ChatMessageResponse(
@@ -283,6 +282,7 @@ def process_history_and_images(messages: List[ChatMessageInput]) -> Tuple[
 
 @torch.inference_mode()
 def generate_stream_glm4v(model: AutoModel, tokenizer: AutoTokenizer, params: dict):
+    uploaded = False
     messages = params["messages"]
     temperature = float(params.get("temperature", 1.0))
     repetition_penalty = float(params.get("repetition_penalty", 1.0))
@@ -314,6 +314,7 @@ def generate_stream_glm4v(model: AutoModel, tokenizer: AutoTokenizer, params: di
         return_tensors="pt",
         return_dict=True
     ).to(next(model.parameters()).device)
+
     input_echo_len = len(model_inputs["input_ids"][0])
     streamer = TextIteratorStreamer(
         tokenizer=tokenizer,
@@ -328,6 +329,7 @@ def generate_stream_glm4v(model: AutoModel, tokenizer: AutoTokenizer, params: di
         "top_p": top_p if temperature > 1e-5 else 0,
         "top_k": 1,
         'streamer': streamer,
+        "eos_token_id": [151329, 151336, 151338],
     }
     if temperature > 1e-5:
         gen_kwargs["temperature"] = temperature
@@ -354,7 +356,7 @@ def generate_stream_glm4v(model: AutoModel, tokenizer: AutoTokenizer, params: di
             },
         }
     generation_thread.join()
-
+    print('\033[91m--generated_text\033[0m', generated_text)
     yield {
         "text": generated_text,
         "usage": {
@@ -391,18 +393,19 @@ if __name__ == "__main__":
             trust_remote_code=True,
             encode_special_tokens=True
         )
-        model.eval().to(DEVICE)
+        model.eval()
     else:
         tokenizer = AutoTokenizer.from_pretrained(
-        MODEL_PATH,
-        trust_remote_code=True,
-        encode_special_tokens=True
+            MODEL_PATH,
+            trust_remote_code=True,
+            encode_special_tokens=True
         )
         model = AutoModel.from_pretrained(
             MODEL_PATH,
             torch_dtype=TORCH_TYPE,
             trust_remote_code=True,
             device_map="auto",
-        ).eval().to(DEVICE)
+        ).eval()
+        
 
     uvicorn.run(app, host='0.0.0.0', port=8000, workers=1)

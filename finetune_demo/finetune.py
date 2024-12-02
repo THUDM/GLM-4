@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import json
 import jieba
 import dataclasses as dc
 import functools
@@ -244,6 +245,18 @@ def process_message(message):
                  v is not None}
     elif 'tools' in message:
         del message['tools']
+
+    # convert tarin data of agent chat.
+    if message['role'] == 'assistant':
+        content = message['content']
+        if isinstance(content, str) and content.startswith("{") and content.endswith("}"):
+            try:
+                content_ = eval(content)
+                if isinstance(content_, dict) and "name" in content_ and "arguments" in content_:
+                    message['content'] = json.dumps(content_["arguments"], ensure_ascii=False)
+                    message['metadata'] = content_["name"]
+            except:
+                pass
     return message
 
 

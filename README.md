@@ -284,6 +284,9 @@ for o in outputs:
 + [fintune_demo](finetune_demo/README.md): 在这里包含了
     + PEFT (LORA, P-Tuning) 微调代码
     + SFT 微调代码
++ [candle_demo](candle_demo/README.org): 在这里包含了
+    + Rust Candle框架支持
+    
 
 ## 友情链接
 
@@ -296,7 +299,7 @@ for o in outputs:
 + [self-llm](https://github.com/datawhalechina/self-llm/tree/master/models/GLM-4): Datawhale 团队的提供的 GLM-4-9B
   系列模型使用教程。
 + [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): 类似 llama.cpp 的量化加速推理方案，实现笔记本上实时对话
-
++ [candle](https://github.com/huggingface/candle/tree/main/candle-examples/examples/glm4): Rust实现的ML框架 目前支持Codegeex4
 ## 协议
 
 + GLM-4 模型的权重的使用则需要遵循 [模型协议](https://huggingface.co/THUDM/glm-4-9b/blob/main/LICENSE)。

@@ -11,7 +11,8 @@ Read this in [English](README_en.md)
 
 ## 项目更新
 
-- 🔥🔥 **News**: ```2024/11/01```: 本仓库依赖进行升级，请更新`requirements.txt`中的依赖以保证正常运行模型。[glm-4-9b-chat-hf](https://huggingface.co/THUDM/glm-4-9b-chat-hf) 是适配 `transformers>=4.46.2` 的模型权重，使用 `transformers` 库中的 `GlmModel` 类实现。
+- 🔥🔥 **News**: ```2024/12/10```: 本仓库微调代码支持使用`Ascend NPU`进行微调。请更新微调代码并查看代码内注释。
+- 🔥 **News**: ```2024/11/01```: 本仓库依赖进行升级，请更新`requirements.txt`中的依赖以保证正常运行模型。[glm-4-9b-chat-hf](https://huggingface.co/THUDM/glm-4-9b-chat-hf) 是适配 `transformers>=4.46.2` 的模型权重，使用 `transformers` 库中的 `GlmModel` 类实现。
 同时，[glm-4-9b-chat](https://huggingface.co/THUDM/glm-4-9b-chat), [glm-4v-9b](https://huggingface.co/THUDM/glm-4v-9b) 中的 `tokenzier_chatglm.py` 已经更新以适配最新版本的 `transformers`库。请前往 HuggingFace 更新文件。
 - 🔥 **News**: ```2024/10/27```: 我们开源了 [LongReward](https://github.com/THUDM/LongReward)，这是一个使用 AI 反馈改进长上下文大型语言模型。
 - 🔥 **News**: ```2024/10/25```: 我们开源了端到端中英语音对话模型 [GLM-4-Voice](https://github.com/THUDM/GLM-4-Voice)。

@@ -6,57 +6,58 @@ from transformers import (
     AutoModel,
     AutoTokenizer,
 )
-from PIL import Image
 import torch
 
 app = typer.Typer(pretty_exceptions_show_locals=False)
 
 
 def load_model_and_tokenizer(
-        model_dir: Union[str, Path], trust_remote_code: bool = True
+    model_dir: Union[str, Path], trust_remote_code: bool = True
 ):
     model_dir = Path(model_dir).expanduser().resolve()
-    if (model_dir / 'adapter_config.json').exists():
+    if (model_dir / "adapter_config.json").exists():
         import json
-        with open(model_dir / 'adapter_config.json', 'r', encoding='utf-8') as file:
+
+        with open(model_dir / "adapter_config.json", "r", encoding="utf-8") as file:
             config = json.load(file)
         model = AutoModel.from_pretrained(
-            config.get('base_model_name_or_path'),
+            config.get("base_model_name_or_path"),
             trust_remote_code=trust_remote_code,
-            device_map='auto',
-            torch_dtype=torch.bfloat16
+            device_map="auto",
+            torch_dtype=torch.bfloat16,
         )
         model = PeftModelForCausalLM.from_pretrained(
             model=model,
             model_id=model_dir,
             trust_remote_code=trust_remote_code,
         )
-        tokenizer_dir = model.peft_config['default'].base_model_name_or_path
+        tokenizer_dir = model.peft_config["default"].base_model_name_or_path
     else:
         model = AutoModel.from_pretrained(
             model_dir,
             trust_remote_code=trust_remote_code,
-            device_map='auto',
-            torch_dtype=torch.bfloat16
+            device_map="auto",
+            torch_dtype=torch.bfloat16,
         )
         tokenizer_dir = model_dir
     tokenizer = AutoTokenizer.from_pretrained(
         tokenizer_dir,
         trust_remote_code=trust_remote_code,
         encode_special_tokens=True,
-        use_fast=False
+        use_fast=False,
     )
     return model, tokenizer
 
 
 @app.command()
 def main(
-        model_dir: Annotated[str, typer.Argument(help='')],
+    model_dir: Annotated[str, typer.Argument(help="")],
 ):
     # For GLM-4 Finetune Without Tools
     messages = [
         {
-            "role": "user", "content": "#裙子#夏天",
+            "role": "user",
+            "content": "#裙子#夏天",
         }
     ]
 
@@ -119,7 +120,7 @@ def main(
         add_generation_prompt=True,
         tokenize=True,
         return_tensors="pt",
-        return_dict=True
+        return_dict=True,
     ).to(model.device)
     generate_kwargs = {
         "max_new_tokens": 1024,
@@ -130,10 +131,12 @@ def main(
         "eos_token_id": model.config.eos_token_id,
     }
     outputs = model.generate(**inputs, **generate_kwargs)
-    response = tokenizer.decode(outputs[0][len(inputs['input_ids'][0]):], skip_special_tokens=True).strip()
+    response = tokenizer.decode(
+        outputs[0][len(inputs["input_ids"][0]) :], skip_special_tokens=True
+    ).strip()
     print("=========")
     print(response)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app()

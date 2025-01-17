@@ -304,17 +304,21 @@ If you want to learn more about the GLM-4-9B series open source models, this ope
 with basic GLM-4-9B usage and development code through the following content
 
 + [basic_demo](basic_demo/README.md): Contains
-+ Interaction code using transformers and vLLM backend
-+ OpenAI API backend interaction code
-+ Batch reasoning code
+  + Interaction code using transformers and vLLM backend
+  + OpenAI API backend interaction code
+  + Batch reasoning code
 
 + [composite_demo](composite_demo/README.md): Contains
-+ Fully functional demonstration code for GLM-4-9B and GLM-4V-9B open source models, including All Tools capabilities,
-  long document interpretation, and multimodal capabilities.
+  + Fully functional demonstration code for GLM-4-9B and GLM-4V-9B open source models, including All Tools capabilities,
+    long document interpretation, and multimodal capabilities.
 
 + [fintune_demo](finetune_demo/README.md): Contains
-+ PEFT (LORA, P-Tuning) fine-tuning code
-+ SFT fine-tuning code
+  + PEFT (LORA, P-Tuning) fine-tuning code
+  + SFT fine-tuning code
+
++ [intel_device_demo](intel_device_demo/): Contains
+  + OpenVINO deployment code
+  + Intel® Extension for Transformers deployment code
 
 ## Friendly Links
 
@@ -331,6 +335,9 @@ with basic GLM-4-9B usage and development code through the following content
   the GLM-4-9B open source model cookbook.
 + [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): Real-time inference on your laptop accelerated by quantization,
   similar to llama.cpp.
++ [OpenVINO](https://github.com/openvinotoolkit): glm-4-9b-chat already supports the use of OpenVINO. The toolkit accelerates inference and has a greater inference speed improvement on Intel's GPU, GPU and NPU devices. For
+specific usage, please refer to  [OpenVINO notebooks](https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot-generate-api.ipynb) 
+
 
 ## License
 

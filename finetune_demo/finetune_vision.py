@@ -364,7 +364,7 @@ def process_batch_eval(
                 user_idx.append(idx)
 
         if user_idx[-1] != len(input_ids):
-            user_ids.append(len(input_ids))
+            user_idx.append(len(input_ids))
 
         # Split the conversation into multiple dialogue segments
         for end_idx in range(1, len(dialogue_parts)):

@@ -285,6 +285,10 @@ for o in outputs:
 + [fintune_demo](finetune_demo/README.md): 在这里包含了
     + PEFT (LORA, P-Tuning) 微调代码
     + SFT 微调代码
+ 
+ + [intel_device_demo](intel_device_demo/): 在这里包含了
+   + 使用 OpenVINO 部署模型代码
+   + 使用 Intel® Extension for Transformers 部署模型代码
 
 ## 友情链接
 
@@ -297,6 +301,8 @@ for o in outputs:
 + [self-llm](https://github.com/datawhalechina/self-llm/tree/master/models/GLM-4): Datawhale 团队的提供的 GLM-4-9B
   系列模型使用教程。
 + [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): 类似 llama.cpp 的量化加速推理方案，实现笔记本上实时对话
++ [OpenVINO](https://github.com/openvinotoolkit): 
+Intel 开发的高性能 CPU,GPU及NPU 加速推理方案，可以参考此 [步骤](https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot-generate-api.ipynb) 部署 glm-4-9b-chat 模型。
 
 ## 协议
 

@@ -356,12 +356,15 @@ def process_batch_eval(
         position_ids = list(range(len(input_ids)))
 
         dialogue_parts = [0]
+        user_idx = []
         for idx, token_id in enumerate(input_ids):
             if token_id == 151337:
                 dialogue_parts.append(idx + 1)
+            elif token_id == 151336:
+                user_idx.append(idx)
 
-        if not dialogue_parts or dialogue_parts[-1] != len(input_ids):
-            dialogue_parts.append(len(input_ids))
+        if user_idx[-1] != len(input_ids):
+            user_idx.append(len(input_ids))
 
         # Split the conversation into multiple dialogue segments
         for end_idx in range(1, len(dialogue_parts)):
@@ -369,7 +372,7 @@ def process_batch_eval(
             attention_segment = attention_mask[: dialogue_parts[end_idx]]
             position_segment = position_ids[: dialogue_parts[end_idx]]
             output_segment = input_ids[
-                dialogue_parts[end_idx - 1] : dialogue_parts[end_idx]
+                dialogue_parts[end_idx] : user_idx[end_idx]
             ]
             output_segment.append(151336)  # Add EOS token
 

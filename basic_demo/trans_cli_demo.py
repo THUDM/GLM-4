@@ -28,7 +28,6 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_PATH, # attn_implementation="flash_attention_2", # Use Flash Attention
     torch_dtype=torch.bfloat16,  # using flash-attn must use bfloat16 or float16
-    trust_remote_code=True,
     device_map="auto").eval()
 
 

@@ -352,7 +352,6 @@ def load_tokenizer_and_model(
     if peft_config is not None:
         model = AutoModelForCausalLM.from_pretrained(
             model_dir,
-            trust_remote_code=True,
             use_cache=False,
             torch_dtype=torch.bfloat16,  # Must use BFloat 16
         )
@@ -361,7 +360,6 @@ def load_tokenizer_and_model(
     else:
         model = AutoModelForCausalLM.from_pretrained(
             model_dir,
-            trust_remote_code=True,
             use_cache=False,
             torch_dtype=torch.bfloat16,
         )

@@ -379,31 +379,26 @@ if __name__ == "__main__":
             config = json.load(file)
         model = AutoModel.from_pretrained(
             config.get('base_model_name_or_path'),
-            trust_remote_code=True,
             device_map='auto',
             torch_dtype=TORCH_TYPE
         )
         model = PeftModelForCausalLM.from_pretrained(
             model=model,
             model_id=model_dir,
-            trust_remote_code=True,
         )
         tokenizer = AutoTokenizer.from_pretrained(
             config.get('base_model_name_or_path'),
-            trust_remote_code=True,
             encode_special_tokens=True
         )
         model.eval()
     else:
         tokenizer = AutoTokenizer.from_pretrained(
             MODEL_PATH,
-            trust_remote_code=True,
             encode_special_tokens=True
         )
         model = AutoModel.from_pretrained(
             MODEL_PATH,
             torch_dtype=TORCH_TYPE,
-            trust_remote_code=True,
             device_map="auto",
         ).eval()
 

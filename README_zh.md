@@ -1,7 +1,7 @@
 # GLM-4
 
 <p align="center">
- 📄<a href="https://arxiv.org/pdf/2406.12793" target="_blank"> Report </a> • 🤗 <a href="https://huggingface.co/collections/THUDM/glm-4-665fcf188c414b03c2f7e3b7" target="_blank">HF Repo</a> • 🤖 <a href="https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">ModelScope</a> • 🟣 <a href="https://wisemodel.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">WiseModel</a> • 🐦 <a href="https://twitter.com/thukeg" target="_blank">Twitter</a> • 👋 加入我们的 <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a> 和 <a href="resources/WECHAT.md" target="_blank">微信</a> 
+👋 加入我们的 <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a> 和 <a href="resources/WECHAT.md" target="_blank"> 微信 </a>
 </p>
 <p align="center">
 📍在 <a href="https://open.bigmodel.cn/?utm_campaign=open&_channel_track_key=OWTVNma9">智谱AI开放平台</a> 体验和使用更大规模的 GLM 商业模型。
@@ -11,7 +11,7 @@ Read this in [English](README)
 
 ## 项目更新
 
-- 🔥🔥 **News**: ```2025/04/14```: 我们发布 `GLM-4-0414` 系列模型，包含 9B 和 32B 模型尺寸的模型。
+- 🔥🔥 **News**: ```2025/04/14```: 我们发布 `GLM-4-0414` 系列模型，包含 9B 和 32B 两种模型尺寸，欢迎尝试。
 - 🔥 **News**: ``2024/06/18``: 我们发布 [技术报告](https://arxiv.org/pdf/2406.12793), 欢迎查看。
 - 🔥 **News**: ``2024/06/05``: 我们发布 `GLM-4-9B` 系列开源模型。
 
@@ -19,39 +19,27 @@ Read this in [English](README)
 
 ### GLM-4-0414 系列模型
 
-|        Model        |       Type        | Seq Length  |                                                                                                      Download                                                                                                       |
-|:-------------------:|:-----------------:|:-----------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| GLM-4-9B-Chat-0414  |       Chat        |    128K     |             [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)          |
-|  GLM-4-Z1-9B-0414   |     Reasoning     |    128K     |       |
-|   GLM-4-32B-0414    |       Base        |    128K     |         |
-| GLM-4-32B-Chat-0414 |       Chat        |    128K     |                                                                      |
-|  GLM-4-Z1-32B-0414  |     Reasoning     |    128K     |  |
-|    GLM-4-DR-0414    |     Reasoning     |    128K     |                                              |
-
+|        Model        |   Type    | Seq Length |                                                                    Download                                                                    |
+|:-------------------:|:---------:|:----------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|
+| GLM-4-9B-Chat-0414  |   Chat    |    128K    | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414) |
+|  GLM-4-Z1-9B-0414   | Reasoning |    128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)   |
+|   GLM-4-32B-0414    |   Base    |    128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)   |
+| GLM-4-32B-Chat-0414 |   Chat    |    128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)   |
+|  GLM-4-Z1-32B-0414  | Reasoning |    128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)  |
+|    GLM-4-DR-0414    | Reasoning |    128K    |      [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-DR-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-DR-0414)      |
 
 ### GLM-4-9B 系列模型
 
-|        Model        | Type | Seq Length |                                                                                                      Download                                                                                                       |                                                                                        Online Demo                                                                                         |
-|:-------------------:|:----:|:----------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|      GLM-4-9B       | Base |     8K     |             [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)             |                                                                                             /                                                                                              |
-|    GLM-4-9B-Chat    | Chat |    128K    |     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)      | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
-|  GLM-4-9B-Chat-HF   | Chat |    128K    |                                     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                      | [🤖 ModelScope CPU](https://modelscope.cn/studios/dash-infer/GLM-4-Chat-DashInfer-Demo/summary)<br> [🤖 ModelScope vLLM](https://modelscope.cn/studios/ZhipuAI/glm-4-9b-chat-vllm/summary) |
-|  GLM-4-9B-Chat-1M   | Chat |     1M     | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) |                                                                                             /                                                                                              |
-| GLM-4-9B-Chat-1M-HF | Chat |     1M     |                                  [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                   |                                                                                             /                                                                                              |
-|      GLM-4V-9B      | Chat |     8K     |           [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)            |                                                       [🤖 ModelScope](https://modelscope.cn/studios/ZhipuAI/glm-4v-9b-Demo/summary)                                                        |
-
-
-### 之前的工作
-
-GLM-4-9B 是智谱 AI GLM-4 系列中的开源版本。 在语义、数学、推理、代码和知识等多方面的数据集测评中，
-**GLM-4-9B** 及其人类偏好对齐的版本 **GLM-4-9B-Chat** 均表现出超越 Llama-3-8B 的卓越性能。除了能进行多轮对话，GLM-4-9B-Chat
-还具备网页浏览、代码执行、自定义工具调用（Function Call）和长文本推理（支持最大 128K 上下文）等高级功能。本代模型增加了多语言支持，支持包括日语，韩语，德语在内的
-26 种语言。我们还推出了支持 1M 上下文长度（约 200 万中文字符）的 **GLM-4-9B-Chat-1M** 模型和基于 GLM-4-9B 的多模态模型
-GLM-4V-9B。**GLM-4V-9B** 具备 1120 * 1120 高分辨率下的中英双语多轮对话能力，在中英文综合能力、感知推理、文字识别、图表理解等多方面多模态评测中，GLM-4V-9B
-表现出超越 GPT-4-turbo-2024-04-09、Gemini 1.0 Pro、Qwen-VL-Max 和 Claude 3 Opus 的卓越性能。
+|        Model        | Type | Seq Length |                                                                                                      Download                                                                                                      |
+|:-------------------:|:----:|:----------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|      GLM-4-9B       | Base |     8K     |            [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)             |
+|    GLM-4-9B-Chat    | Chat |    128K    |     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)     |
+|  GLM-4-9B-Chat-HF   | Chat |    128K    |                                     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                     |
+|  GLM-4-9B-Chat-1M   | Chat |     1M     |[🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) |
+| GLM-4-9B-Chat-1M-HF | Chat |     1M     |                                  [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                  |
+|      GLM-4V-9B      | Chat |     8K     |           [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)           |
 
 ## 评测结果
-
 
 ### GLM-4-9B 系列
 
@@ -140,14 +128,12 @@ GLM-4V-9B 是一个多模态语言模型，具备视觉理解能力，其相关�
 ```python
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-import os
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 MODEL_PATH = "THUDM/glm-4-9b-chat-hf"
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 
 query = "你好"
 
@@ -163,7 +149,6 @@ model = AutoModelForCausalLM.from_pretrained(
     MODEL_PATH,
     torch_dtype=torch.bfloat16,
     low_cpu_mem_usage=True,
-    trust_remote_code=True,
     device_map="auto"
 ).eval()
 
@@ -187,12 +172,11 @@ max_model_len, tp_size = 131072, 1
 model_name = "THUDM/glm-4-9b-chat-hf"
 prompt = [{"role": "user", "content": "你好"}]
 
-tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
 llm = LLM(
     model=model_name,
     tensor_parallel_size=tp_size,
     max_model_len=max_model_len,
-    trust_remote_code=True,
     enforce_eager=True,
     # GLM-4-9B-Chat-1M 如果遇见 OOM 现象，建议开启下述参数
     # enable_chunked_prefill=True,
@@ -215,14 +199,12 @@ print(outputs[0].outputs[0].text)
 import torch
 from PIL import Image
 from transformers import AutoModelForCausalLM, AutoTokenizer
-import os
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0' # 设置 GPU 编号，如果单机单卡指定一个，单机多卡指定多个 GPU 编号
 MODEL_PATH = "THUDM/glm-4v-9b"
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 
 query = '描述这张图片'
 image = Image.open("your image").convert('RGB')
@@ -235,7 +217,6 @@ model = AutoModelForCausalLM.from_pretrained(
     MODEL_PATH,
     torch_dtype=torch.bfloat16,
     low_cpu_mem_usage=True,
-    trust_remote_code=True,
     device_map="auto"
 ).eval()
 
@@ -257,7 +238,6 @@ model_name = "THUDM/glm-4v-9b"
 llm = LLM(model=model_name,
           tensor_parallel_size=1,
           max_model_len=8192,
-          trust_remote_code=True,
           enforce_eager=True)
 stop_token_ids = [151329, 151336, 151338]
 sampling_params = SamplingParams(temperature=0.2,
@@ -270,8 +250,8 @@ inputs = {
     "prompt": prompt,
     "multi_modal_data": {
         "image": image
-        },
-        }
+    },
+}
 outputs = llm.generate(inputs, sampling_params=sampling_params)
 
 for o in outputs:
@@ -295,10 +275,10 @@ for o in outputs:
 + [fintune_demo](finetune_demo/README.md): 在这里包含了
     + PEFT (LORA, P-Tuning) 微调代码
     + SFT 微调代码
- 
- + [intel_device_demo](intel_device_demo/): 在这里包含了
-   + 使用 OpenVINO 部署模型代码
-   + 使用 Intel® Extension for Transformers 部署模型代码
+
++ [intel_device_demo](intel_device_demo/): 在这里包含了
+    + 使用 OpenVINO 部署模型代码
+    + 使用 Intel® Extension for Transformers 部署模型代码
 
 ## 友情链接
 
@@ -311,8 +291,10 @@ for o in outputs:
 + [self-llm](https://github.com/datawhalechina/self-llm/tree/master/models/GLM-4): Datawhale 团队的提供的 GLM-4-9B
   系列模型使用教程。
 + [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): 类似 llama.cpp 的量化加速推理方案，实现笔记本上实时对话
-+ [OpenVINO](https://github.com/openvinotoolkit): 
-Intel 开发的高性能 CPU,GPU及NPU 加速推理方案，可以参考此 [步骤](https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot-generate-api.ipynb) 部署 glm-4-9b-chat 模型。
++ [OpenVINO](https://github.com/openvinotoolkit):
+  Intel 开发的高性能 CPU,GPU及NPU
+  加速推理方案，可以参考此 [步骤](https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot-generate-api.ipynb)
+  部署 glm-4-9b-chat 模型。
 
 ## 协议
 

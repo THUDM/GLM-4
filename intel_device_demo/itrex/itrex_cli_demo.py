@@ -21,7 +21,7 @@ class StopOnTokens(StoppingCriteria):
 
 
 def initialize_model_and_tokenizer():
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_PATH,
         device_map="cpu", # Use Intel CPU for inference

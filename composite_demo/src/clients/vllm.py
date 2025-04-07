@@ -24,7 +24,6 @@ class VLLMClient(Client):
             model=model_path,
             tensor_parallel_size=1,
             dtype="bfloat16",  # torch.bfloat16 is needed.
-            trust_remote_code=True,
             gpu_memory_utilization=0.6,
             enforce_eager=True,
             worker_use_ray=False,
@@ -44,13 +43,8 @@ class VLLMClient(Client):
             "best_of": 1,
             "top_p": 1,
             "top_k": -1,
-            "use_beam_search": False,
             "length_penalty": 1,
-            "early_stopping": False,
             "stop_token_ids": [151329, 151336, 151338],
-            "ignore_eos": False,
-            "logprobs": None,
-            "prompt_logprobs": None,
         }
         params_dict.update(parameters)
         sampling_params = SamplingParams(**params_dict)

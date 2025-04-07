@@ -657,7 +657,7 @@ async def parse_output_text(model_id: str, value: str, function_call: ChoiceDelt
 
 if __name__ == "__main__":
     MODEL_PATH = sys.argv[1]
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
     engine_args = AsyncEngineArgs(
         model=MODEL_PATH,
         tokenizer=MODEL_PATH,
@@ -665,7 +665,6 @@ if __name__ == "__main__":
         tensor_parallel_size=1,
         # dtype="bfloat16",
         dtype="half",
-        trust_remote_code=True,
         # 占用显存的比例，请根据你的显卡显存大小设置合适的值，例如，如果你的显卡有80G，您只想使用24G，请按照24/80=0.3设置
         gpu_memory_utilization=0.9,
         enforce_eager=True,

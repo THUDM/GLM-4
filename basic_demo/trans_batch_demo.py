@@ -46,7 +46,7 @@ def batch(
         padding="max_length",
         truncation=True,
         max_length=max_input_tokens).to(model.device)
-    
+
     gen_kwargs = {
         "max_new_tokens": max_new_tokens,
         "num_beams": num_beams,

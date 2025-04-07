@@ -19,7 +19,7 @@ from sse_starlette.sse import EventSourceResponse
 
 EventSourceResponse.DEFAULT_PING_INTERVAL = 1000
 
-MAX_MODEL_LENGTH = 8192 
+MAX_MODEL_LENGTH = 8192
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -610,7 +610,7 @@ async def predict_stream(model_id, gen_params):
             object="chat.completion.chunk"
         )
         yield chunk.model_dump_json(exclude_unset=True)
-    
+
         finish_reason = 'stop'
         message = DeltaMessage(
             content=delta_text,

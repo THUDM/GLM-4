@@ -11,16 +11,16 @@ ensuring that the CLI interface displays formatted text correctly.
 """
 import time
 import asyncio
-from transformers import PreTrainedTokenizer
+from transformers import AutoTokenizer
 from vllm import SamplingParams, AsyncEngineArgs, AsyncLLMEngine
 from typing import List, Dict
 from vllm.lora.request import LoRARequest
 
-MODEL_PATH = 'THUDM/glm-4-9b-chat'
+MODEL_PATH = 'THUDM/glm-4-9b-chat-hf'
 LORA_PATH = ''
 
 def load_model_and_tokenizer(model_dir: str, enable_lora: bool):
-    tokenizer = PreTrainedTokenizer.from_pretrained(model_dir),
+    tokenizer = AutoTokenizer.from_pretrained(model_dir)
 
     engine_args = AsyncEngineArgs(
         model=model_dir,
@@ -30,11 +30,7 @@ def load_model_and_tokenizer(model_dir: str, enable_lora: bool):
         dtype="bfloat16",
         gpu_memory_utilization=0.9,
         enforce_eager=True,
-        worker_use_ray=True,
         disable_log_requests=True
-        # 如果遇见 OOM 现象，建议开启下述参数
-        # enable_chunked_prefill=True,
-        # max_num_batched_tokens=8192
     )
 
     engine = AsyncLLMEngine.from_engine_args(engine_args)
@@ -60,22 +56,15 @@ async def vllm_gen(lora_path: str, enable_lora: bool, messages: List[Dict[str, s
         "frequency_penalty": 0.0,
         "temperature": temperature,
         "top_p": top_p,
-        "top_k": -1,
-        "use_beam_search": False,
-        "length_penalty": 1,
-        "early_stopping": False,
-        "ignore_eos": False,
         "max_tokens": max_dec_len,
-        "logprobs": None,
-        "prompt_logprobs": None,
         "skip_special_tokens": True,
     }
     sampling_params = SamplingParams(**params_dict)
     if enable_lora:
-        async for output in engine.generate(inputs=inputs, sampling_params=sampling_params, request_id=f"{time.time()}", lora_request=LoRARequest("glm-4-lora", 1, lora_path=lora_path)):
+        async for output in engine.generate(prompt=inputs, sampling_params=sampling_params, request_id=f"{time.time()}", lora_request=LoRARequest("glm-4-lora", 1, lora_path=lora_path)):
             yield output.outputs[0].text
     else:
-        async for output in engine.generate(inputs=inputs, sampling_params=sampling_params, request_id=f"{time.time()}"):
+        async for output in engine.generate(prompt=inputs, sampling_params=sampling_params, request_id=f"{time.time()}"):
             yield output.outputs[0].text
 
 

@@ -11,8 +11,8 @@
 测试硬件信息:
 
 + OS: Ubuntu 22.04 (本教程一定需要在Linux环境下执行)
-+ Memory: 512GB 
-+ Python: 3.10.12 
++ Memory: 512GB
++ Python: 3.10.12
 + CPU: Intel(R) Xeon(R) Platinum 8358 CPU / 12th Gen Intel i5-12400
 
 ## 安装依赖
@@ -42,36 +42,36 @@ AVX:1 AVX2:1 AVX512F:1 AVX512BW:1 AVX_VNNI:0 AVX512_VNNI:1 AMX_INT8:0 AMX_BF16:0
 beam_size: 1, do_sample: 1, top_k: 40, top_p: 0.900, continuous_batching: 0, max_request_num: 1, early_stopping: 0, scratch_size_ratio: 1.000
 model_file_loader: loading model from runtime_outs/ne_chatglm2_q_nf4_bestla_cfp32_sym_sfp32_g32.bin
 Loading the bin file with NE format...
-load_ne_hparams  0.hparams.n_vocab = 151552                        
-load_ne_hparams  1.hparams.n_embd = 4096                          
-load_ne_hparams  2.hparams.n_mult = 0                             
-load_ne_hparams  3.hparams.n_head = 32                            
-load_ne_hparams  4.hparams.n_head_kv = 0                             
-load_ne_hparams  5.hparams.n_layer = 40                            
-load_ne_hparams  6.hparams.n_rot = 0                             
-load_ne_hparams  7.hparams.ftype = 0                             
-load_ne_hparams  8.hparams.max_seq_len = 131072                        
-load_ne_hparams  9.hparams.alibi_bias_max = 0.000                         
-load_ne_hparams  10.hparams.clip_qkv = 0.000                         
-load_ne_hparams  11.hparams.par_res = 0                             
-load_ne_hparams  12.hparams.word_embed_proj_dim = 0                             
-load_ne_hparams  13.hparams.do_layer_norm_before = 0                             
-load_ne_hparams  14.hparams.multi_query_group_num = 2                             
-load_ne_hparams  15.hparams.ffn_hidden_size = 13696                         
-load_ne_hparams  16.hparams.inner_hidden_size = 0                             
-load_ne_hparams  17.hparams.n_experts = 0                             
-load_ne_hparams  18.hparams.n_experts_used = 0                             
-load_ne_hparams  19.hparams.n_embd_head_k = 0                             
-load_ne_hparams  20.hparams.norm_eps = 0.000000                      
-load_ne_hparams  21.hparams.freq_base = 5000000.000                   
-load_ne_hparams  22.hparams.freq_scale = 1.000                         
-load_ne_hparams  23.hparams.rope_scaling_factor = 0.000                         
-load_ne_hparams  24.hparams.original_max_position_embeddings = 0                             
-load_ne_hparams  25.hparams.use_yarn = 0                             
-load_ne_vocab    26.vocab.bos_token_id = 1                             
-load_ne_vocab    27.vocab.eos_token_id = 151329                        
-load_ne_vocab    28.vocab.pad_token_id = 151329                        
-load_ne_vocab    29.vocab.sep_token_id = -1                            
+load_ne_hparams  0.hparams.n_vocab = 151552
+load_ne_hparams  1.hparams.n_embd = 4096
+load_ne_hparams  2.hparams.n_mult = 0
+load_ne_hparams  3.hparams.n_head = 32
+load_ne_hparams  4.hparams.n_head_kv = 0
+load_ne_hparams  5.hparams.n_layer = 40
+load_ne_hparams  6.hparams.n_rot = 0
+load_ne_hparams  7.hparams.ftype = 0
+load_ne_hparams  8.hparams.max_seq_len = 131072
+load_ne_hparams  9.hparams.alibi_bias_max = 0.000
+load_ne_hparams  10.hparams.clip_qkv = 0.000
+load_ne_hparams  11.hparams.par_res = 0
+load_ne_hparams  12.hparams.word_embed_proj_dim = 0
+load_ne_hparams  13.hparams.do_layer_norm_before = 0
+load_ne_hparams  14.hparams.multi_query_group_num = 2
+load_ne_hparams  15.hparams.ffn_hidden_size = 13696
+load_ne_hparams  16.hparams.inner_hidden_size = 0
+load_ne_hparams  17.hparams.n_experts = 0
+load_ne_hparams  18.hparams.n_experts_used = 0
+load_ne_hparams  19.hparams.n_embd_head_k = 0
+load_ne_hparams  20.hparams.norm_eps = 0.000000
+load_ne_hparams  21.hparams.freq_base = 5000000.000
+load_ne_hparams  22.hparams.freq_scale = 1.000
+load_ne_hparams  23.hparams.rope_scaling_factor = 0.000
+load_ne_hparams  24.hparams.original_max_position_embeddings = 0
+load_ne_hparams  25.hparams.use_yarn = 0
+load_ne_vocab    26.vocab.bos_token_id = 1
+load_ne_vocab    27.vocab.eos_token_id = 151329
+load_ne_vocab    28.vocab.pad_token_id = 151329
+load_ne_vocab    29.vocab.sep_token_id = -1
 init: hparams.n_vocab         = 151552
 init: hparams.n_embd          = 4096
 init: hparams.n_mult          = 0

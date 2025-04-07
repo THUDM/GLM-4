@@ -118,7 +118,7 @@ python vllm_cli_demo.py
 # 添加 LORA_PATH = ''
 ```
 
-  
+
 + 自行构建服务端，并使用 `OpenAI API` 的请求格式与 GLM-4-9B-Chat GLM-4v-9B 或者模型进行对话。本 demo 支持 Function Call 和 All Tools功能。
 + 修改 `open_api_server.py` 中模型路径 `MODEL_PATH`，可选择构建 GLM-4-9B-Chat 或者 GLM-4v-9B 服务端
 
@@ -153,4 +153,3 @@ from openmind import AutoModelForCausalLM, AutoTokenizer
 #device = 'cuda'
 device = 'npu'
 ```
-

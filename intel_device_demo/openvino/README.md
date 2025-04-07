@@ -2,7 +2,7 @@
 
 Read this in [English](README_en.md).
 
-[OpenVINO](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html) 
+[OpenVINO](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html)
 是 Intel 为深度学习推理而设计的开源工具包。它可以帮助开发者优化模型，提高推理性能，减少模型的内存占用。
 本示例将展示如何使用 OpenVINO 部署 GLM-4-9B-Chat 模型。
 

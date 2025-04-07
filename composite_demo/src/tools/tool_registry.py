@@ -73,7 +73,7 @@ def dispatch_tool(tool_name: str, code: str, session_id: str) -> list[ToolObserv
     # Dispatch predefined tools
     if tool_name in ALL_TOOLS:
         return ALL_TOOLS[tool_name](code, session_id)
-    
+
     code = code.strip().rstrip('<|observation|>').strip()
 
     # Dispatch custom tools

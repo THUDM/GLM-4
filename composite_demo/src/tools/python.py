@@ -197,4 +197,3 @@ def tool_call(code: str, session_id: str) -> list[ToolObservation]:
     image = f'data:image/png;base64,{res}' if res_type == 'image' else None
 
     return [ToolObservation(res_type, text, image)]
-

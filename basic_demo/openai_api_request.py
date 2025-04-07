@@ -194,19 +194,18 @@ def glm4v_simple_image_chat(use_stream=False, img_path=None):
             "role": "user",
             "content": "Do you think this is a spring or winter photo?"
         },
-      
+
 
     ]
     create_chat_completion(messages=messages, use_stream=use_stream)
-    
+
 
 if __name__ == "__main__":
     # Testing the text model
-    simple_chat(use_stream=False) 
+    simple_chat(use_stream=False)
 
     # Testing the text model with tools
-    # function_chat(use_stream=False) 
-    
-    # Testing images of multimodal models
-    # glm4v_simple_image_chat(use_stream=False, img_path="demo.jpg") 
+    # function_chat(use_stream=False)
 
+    # Testing images of multimodal models
+    # glm4v_simple_image_chat(use_stream=False, img_path="demo.jpg")

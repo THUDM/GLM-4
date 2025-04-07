@@ -35,7 +35,7 @@ def map_response(response: dict) -> ToolObservation:
     pprint(response)
     role_metadata = response.get("roleMetadata")
     metadata = response.get("metadata")
-    
+
     if role_metadata.split()[0] == 'quote_result' and metadata:
         quote_id = QUOTE_REGEX.search(role_metadata.split()[1]).group(1)
         quote: dict[str, str] = metadata['metadata_list'][0]

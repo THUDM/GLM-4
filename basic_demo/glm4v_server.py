@@ -166,7 +166,7 @@ async def create_chat_completion(request: ChatCompletionRequest):
         generate = predict(request.model, gen_params)
         return EventSourceResponse(generate, media_type="text/event-stream")
     response = generate_glm4v(model, tokenizer, gen_params)
-    
+
     usage = UsageInfo()
 
     message = ChatMessageResponse(
@@ -406,6 +406,6 @@ if __name__ == "__main__":
             trust_remote_code=True,
             device_map="auto",
         ).eval()
-        
+
 
     uvicorn.run(app, host='0.0.0.0', port=8000, workers=1)

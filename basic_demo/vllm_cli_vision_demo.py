@@ -45,13 +45,8 @@ async def vllm_gen(messages: List[Dict[str, str]], top_p: float, temperature: fl
         "frequency_penalty": 0.0,
         "temperature": temperature,
         "top_p": top_p,
-        "top_k": -1,
-        "ignore_eos": False,
         "max_tokens": max_dec_len,
-        "logprobs": None,
-        "prompt_logprobs": None,
         "skip_special_tokens": True,
-        "stop_token_ids" :[151329, 151336, 151338]
     }
     sampling_params = SamplingParams(**params_dict)
 

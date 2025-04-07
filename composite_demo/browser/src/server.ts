@@ -20,7 +20,7 @@ app.post('/', async (req: Request, res: Response) => {
   } = req.body;
   logger.info(`session_id: ${session_id}`);
   logger.info(`action: ${action}`);
-  
+
   if (!session_history[session_id]) {
     session_history[session_id] = new SimpleBrowser();
   }

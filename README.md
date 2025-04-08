@@ -125,12 +125,12 @@ classic tasks are as follows:
 
 This repository provides developers with the basic usage and development code for the GLM-4 open-source models through the following components:
 
-+ [inference](inference/README_zh.md)
++ [inference](inference/README.md)
     + Interactive code using transformers and vLLM backends
     + OpenAI API backend interaction code
     + Batch inference code
 
-+ [finetune](finetune/README_zh)
++ [finetune](finetune/README.md)
     + PEFT (LoRA, P-Tuning) fine-tuning code (for 9B models)
     + SFT fine-tuning code (for 9B models)
 

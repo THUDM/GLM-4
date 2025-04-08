@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+
 MODEL_PATH = os.environ.get("MODEL_PATH", "THUDM/GLM-4-9B-Chat-0414")
 
 # vision-model THUDM/glm-4v-9b

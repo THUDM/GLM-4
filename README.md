@@ -121,170 +121,22 @@ classic tasks are as follows:
 | **Claude 3 Opus**          | 63.3                | 59.2                | 64                | 45.7       | 54.9     | 1586.8  | 37.8               | 70.6     | 694          |
 | **GLM-4V-9B**              | 81.1                | 79.4                | 76.8              | 58.7       | 47.2     | 2163.8  | 46.6               | 81.1     | 786          |
 
-## Quick call
+## project list
 
-**For hardware configuration and system requirements, please check [here](basic_demo/README_en.md).**
+This repository provides developers with the basic usage and development code for the GLM-4 open-source models through the following components:
 
-### Use the following method to quickly call the GLM-4-9B-Chat language model
++ [inference](inference/README_zh.md)
+    + Interactive code using transformers and vLLM backends
+    + OpenAI API backend interaction code
+    + Batch inference code
 
-Use the transformers backend for inference:
++ [finetune](finetune/README_zh)
+    + PEFT (LoRA, P-Tuning) fine-tuning code (for 9B models)
+    + SFT fine-tuning code (for 9B models)
 
-```python
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-MODEL_PATH = "THUDM/glm-4-9b-chat-hf"
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-
-query = "你好"
-
-inputs = tokenizer.apply_chat_template([{"role": "user", "content": query}],
-                                       add_generation_prompt=True,
-                                       tokenize=True,
-                                       return_tensors="pt",
-                                       return_dict=True
-                                       )
-
-inputs = inputs.to(device)
-model = AutoModelForCausalLM.from_pretrained(
-    MODEL_PATH,
-    torch_dtype=torch.bfloat16,
-    low_cpu_mem_usage=True,
-    device_map="auto"
-).eval()
-
-gen_kwargs = {"max_length": 2500, "do_sample": True, "top_k": 1}
-with torch.no_grad():
-    outputs = model.generate(**inputs, **gen_kwargs)
-    outputs = outputs[:, inputs['input_ids'].shape[1]:]
-    print(tokenizer.decode(outputs[0], skip_special_tokens=True))
-```
-
-Use the vLLM backend for inference:
-
-```python
-from transformers import AutoTokenizer
-from vllm import LLM, SamplingParams
-
-# GLM-4-9B-Chat
-# If you encounter OOM, you can try to reduce max_model_len or increase tp_size
-max_model_len, tp_size = 131072, 1
-model_name = "THUDM/glm-4-9b-chat-hf"
-prompt = [{"role": "user", "content": "你好"}]
-
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-llm = LLM(
-    model=model_name,
-    tensor_parallel_size=tp_size,
-    max_model_len=max_model_len,
-    enforce_eager=True,
-    # if you encounter OOM in GLM-4-9B-Chat-1M, you can try to enable the following parameters
-    # enable_chunked_prefill=True,
-    # max_num_batched_tokens=8192
-)
-stop_token_ids = [151329, 151336, 151338]
-sampling_params = SamplingParams(temperature=0.95, max_tokens=1024, stop_token_ids=stop_token_ids)
-
-inputs = tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
-outputs = llm.generate(prompts=inputs, sampling_params=sampling_params)
-
-print(outputs[0].outputs[0].text)
-
-```
-
-### Use the following method to quickly call the GLM-4V-9B multimodal model
-
-Use the transformers backend for inference:
-
-```python
-import torch
-from PIL import Image
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-MODEL_PATH = "THUDM/glm-4v-9b"
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-
-query = '描述这张图片'
-image = Image.open("your image").convert('RGB')
-inputs = tokenizer.apply_chat_template([{"role": "user", "image": image, "content": query}],
-                                       add_generation_prompt=True, tokenize=True, return_tensors="pt",
-                                       return_dict=True)  # chat mode
-
-inputs = inputs.to(device)
-model = AutoModelForCausalLM.from_pretrained(
-    MODEL_PATH,
-    torch_dtype=torch.bfloat16,
-    low_cpu_mem_usage=True,
-    device_map="auto"
-).eval()
-
-gen_kwargs = {"max_length": 2500, "do_sample": True, "top_k": 1}
-with torch.no_grad():
-    outputs = model.generate(**inputs, **gen_kwargs)
-    outputs = outputs[:, inputs['input_ids'].shape[1]:]
-    print(tokenizer.decode(outputs[0]))
-```
-
-Use the vLLM backend for inference:
-
-```python
-from PIL import Image
-from vllm import LLM, SamplingParams
-
-model_name = "THUDM/glm-4v-9b"
-
-llm = LLM(model=model_name,
-          tensor_parallel_size=1,
-          max_model_len=8192,
-          enforce_eager=True)
-stop_token_ids = [151329, 151336, 151338]
-sampling_params = SamplingParams(temperature=0.2,
-                                 max_tokens=1024,
-                                 stop_token_ids=stop_token_ids)
-
-prompt = "What's the content of the image?"
-image = Image.open("your image").convert('RGB')
-inputs = {
-    "prompt": prompt,
-    "multi_modal_data": {
-        "image": image
-    },
-}
-outputs = llm.generate(inputs, sampling_params=sampling_params)
-
-for o in outputs:
-    generated_text = o.outputs[0].text
-    print(generated_text)
-
-```
-
-## Complete project list
-
-If you want to learn more about the GLM-4-9B series open source models, this open source repository provides developers
-with basic GLM-4-9B usage and development code through the following content
-
-+ [basic_demo](basic_demo/README.md): Contains
-  + Interaction code using transformers and vLLM backend
-  + OpenAI API backend interaction code
-  + Batch reasoning code
-
-+ [composite_demo](composite_demo/README.md): Contains
-  + Fully functional demonstration code for GLM-4-9B and GLM-4V-9B open source models, including All Tools capabilities,
-    long document interpretation, and multimodal capabilities.
-
-+ [fintune_demo](finetune_demo/README.md): Contains
-  + PEFT (LORA, P-Tuning) fine-tuning code
-  + SFT fine-tuning code
-
-+ [intel_device_demo](intel_device_demo/): Contains
-  + OpenVINO deployment code
-  + Intel® Extension for Transformers deployment code
++ [demo](demo)
+    + [intel_device_demo](demo/intel_device_demo) Deployment code using OpenVINO / Intel® Extension for Transformers
+    + [composite_demo](demo/composite_demo/README.md) Full-feature demo code for GLM-4-9B-Chat and GLM-4V-9B open-source models, including All Tools capability, long-document understanding, and multimodal features.
 
 ## Friendly Links
 
@@ -303,6 +155,7 @@ with basic GLM-4-9B usage and development code through the following content
   similar to llama.cpp.
 + [OpenVINO](https://github.com/openvinotoolkit): glm-4-9b-chat already supports the use of OpenVINO. The toolkit accelerates inference and has a greater inference speed improvement on Intel's GPU, GPU and NPU devices. For
 specific usage, please refer to  [OpenVINO notebooks](https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot-generate-api.ipynb)
+
 
 
 ## License

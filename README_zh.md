@@ -55,7 +55,7 @@ Read this in [English](README)
 
 | Model               | MMLU | C-Eval | GPQA | GSM8K | MATH | HumanEval |
 |:--------------------|:----:|:------:|:----:|:-----:|:----:|:---------:|
-| Llama-3-8B          | 66.6 |  51.2  |  -   | 45.8  |  -   |   33.5    | 
+| Llama-3-8B          | 66.6 |  51.2  |  -   | 45.8  |  -   |   33.5    |
 | Llama-3-8B-Instruct | 68.4 |  51.3  | 34.2 | 79.6  | 30.0 |   62.2    |
 | ChatGLM3-6B-Base    | 61.4 |  69.0  | 26.8 | 72.3  | 25.7 |   58.5    |
 | GLM-4-9B            | 74.7 |  77.1  | 34.3 | 84.0  | 30.4 |   70.1    |
@@ -116,193 +116,34 @@ GLM-4V-9B 是一个多模态语言模型，具备视觉理解能力，其相关�
 | **Gemini 1.0 Pro**         | 73.6                | 74.3                | 70.7              | 38.6       | 49.0     | 2148.9  | 45.7               | 72.9     | 680          |
 | **Claude 3 Opus**          | 63.3                | 59.2                | 64.0              | 45.7       | 54.9     | 1586.8  | 37.8               | 70.6     | 694          |
 | **GLM-4V-9B**              | 81.1                | 79.4                | 76.8              | 58.7       | 47.2     | 2163.8  | 46.6               | 81.1     | 786          |
-
-## 快速调用
-
-**硬件配置和系统要求，请查看[这里](basic_demo/README.md)。**
-
-### 使用以下方法快速调用 GLM-4-9B-Chat 语言模型
-
-使用 transformers 后端进行推理:
-
-```python
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-MODEL_PATH = "THUDM/glm-4-9b-chat-hf"
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-
-query = "你好"
-
-inputs = tokenizer.apply_chat_template([{"role": "user", "content": query}],
-                                       add_generation_prompt=True,
-                                       tokenize=True,
-                                       return_tensors="pt",
-                                       return_dict=True
-                                       )
-
-inputs = inputs.to(device)
-model = AutoModelForCausalLM.from_pretrained(
-    MODEL_PATH,
-    torch_dtype=torch.bfloat16,
-    low_cpu_mem_usage=True,
-    device_map="auto"
-).eval()
-
-gen_kwargs = {"max_length": 2500, "do_sample": True, "top_k": 1}
-with torch.no_grad():
-    outputs = model.generate(**inputs, **gen_kwargs)
-    outputs = outputs[:, inputs['input_ids'].shape[1]:]
-    print(tokenizer.decode(outputs[0], skip_special_tokens=True))
-```
-
-使用 vLLM 后端进行推理:
-
-```python
-from transformers import AutoTokenizer
-from vllm import LLM, SamplingParams
-
-# GLM-4-9B-Chat-1M
-# max_model_len, tp_size = 1048576, 4
-# 如果遇见 OOM 现象，建议减少max_model_len，或者增加tp_size
-max_model_len, tp_size = 131072, 1
-model_name = "THUDM/glm-4-9b-chat-hf"
-prompt = [{"role": "user", "content": "你好"}]
-
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-llm = LLM(
-    model=model_name,
-    tensor_parallel_size=tp_size,
-    max_model_len=max_model_len,
-    enforce_eager=True,
-    # GLM-4-9B-Chat-1M 如果遇见 OOM 现象，建议开启下述参数
-    # enable_chunked_prefill=True,
-    # max_num_batched_tokens=8192
-)
-stop_token_ids = [151329, 151336, 151338]
-sampling_params = SamplingParams(temperature=0.95, max_tokens=1024, stop_token_ids=stop_token_ids)
-
-inputs = tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
-outputs = llm.generate(prompts=inputs, sampling_params=sampling_params)
-
-print(outputs[0].outputs[0].text)
-```
-
-### 使用以下方法快速调用 GLM-4V-9B 多模态模型
-
-使用 transformers 后端进行推理:
-
-```python
-import torch
-from PIL import Image
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-MODEL_PATH = "THUDM/glm-4v-9b"
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-
-query = '描述这张图片'
-image = Image.open("your image").convert('RGB')
-inputs = tokenizer.apply_chat_template([{"role": "user", "image": image, "content": query}],
-                                       add_generation_prompt=True, tokenize=True, return_tensors="pt",
-                                       return_dict=True)  # chat mode
-
-inputs = inputs.to(device)
-model = AutoModelForCausalLM.from_pretrained(
-    MODEL_PATH,
-    torch_dtype=torch.bfloat16,
-    low_cpu_mem_usage=True,
-    device_map="auto"
-).eval()
-
-gen_kwargs = {"max_length": 2500, "do_sample": True, "top_k": 1}
-with torch.no_grad():
-    outputs = model.generate(**inputs, **gen_kwargs)
-    outputs = outputs[:, inputs['input_ids'].shape[1]:]
-    print(tokenizer.decode(outputs[0]))
-```
-
-使用 vLLM 后端进行推理:
-
-```python
-from PIL import Image
-from vllm import LLM, SamplingParams
-
-model_name = "THUDM/glm-4v-9b"
-
-llm = LLM(model=model_name,
-          tensor_parallel_size=1,
-          max_model_len=8192,
-          enforce_eager=True)
-stop_token_ids = [151329, 151336, 151338]
-sampling_params = SamplingParams(temperature=0.2,
-                                 max_tokens=1024,
-                                 stop_token_ids=stop_token_ids)
-
-prompt = "What's the content of the image?"
-image = Image.open("your image").convert('RGB')
-inputs = {
-    "prompt": prompt,
-    "multi_modal_data": {
-        "image": image
-    },
-}
-outputs = llm.generate(inputs, sampling_params=sampling_params)
-
-for o in outputs:
-    generated_text = o.outputs[0].text
-    print(generated_text)
-
-```
-
 ## 完整项目列表
 
-如果你想更进一步了解 GLM-4-9B 系列开源模型，本开源仓库通过以下内容为开发者提供基础的 GLM-4-9B 的使用和开发代码
+本开源仓库通过以下内容为开发者提供基础的 GLM-4 开源模型使用和开发代码
 
-+ [basic_demo](basic_demo/README.md): 在这里包含了
++ [inference](inference/README_zh.md)
     + 使用 transformers 和 vLLM 后端的交互代码
     + OpenAI API 后端交互代码
     + Batch 推理代码
 
-+ [composite_demo](composite_demo/README.md): 在这里包含了
-    + GLM-4-9B-Chat 以及 GLM-4V-9B 开源模型的完整功能演示代码，包含了 All Tools 能力、长文档解读和多模态能力的展示。
++ [finetune](finetune/README_zh)
+    + PEFT (LORA, P-Tuning) 微调代码 (适用于 9B模型)
+    + SFT 微调代码 (适用于 9B模型)
 
-+ [fintune_demo](finetune_demo/README.md): 在这里包含了
-    + PEFT (LORA, P-Tuning) 微调代码
-    + SFT 微调代码
++ [demo](demo)
+    + [intel_device_demo](demo/intel_device_demo) 使用 OpenVINO / 使用 Intel® Extension for Transformers 部署模型代码
+    + [composite_demo](demo/composite_demo/README.md) GLM-4-9B-Chat 以及 GLM-4V-9B 开源模型的完整功能演示代码，包含了 All Tools 能力、长文档解读和多模态能力的展示。
 
-+ [intel_device_demo](intel_device_demo/): 在这里包含了
-    + 使用 OpenVINO 部署模型代码
-    + 使用 Intel® Extension for Transformers 部署模型代码
 
 ## 友情链接
 
 + [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory): 高效开源微调框架，已支持 GLM-4-9B-Chat 语言模型微调。
-+ [SWIFT](https://github.com/modelscope/swift): 魔搭社区的大模型/多模态大模型训练框架，已支持 GLM-4-9B-Chat / GLM-4V-9B
-  模型微调。
++ [SWIFT](https://github.com/modelscope/swift): 魔搭社区的大模型/多模态大模型训练框架，已支持 GLM-4-9B-Chat / GLM-4V-9B 模型微调。
 + [Xorbits Inference](https://github.com/xorbitsai/inference): 性能强大且功能全面的分布式推理框架，轻松一键部署你自己的模型或内置的前沿开源模型。
-+ [LangChain-ChatChat](https://github.com/chatchat-space/Langchain-Chatchat): 基于 Langchain 与 ChatGLM 等语言模型的 RAG
-  与 Agent 应用
-+ [self-llm](https://github.com/datawhalechina/self-llm/tree/master/models/GLM-4): Datawhale 团队的提供的 GLM-4-9B
-  系列模型使用教程。
++ [LangChain-ChatChat](https://github.com/chatchat-space/Langchain-Chatchat): 基于 Langchain 与 ChatGLM 等语言模型的 RAG 与 Agent 应用
++ [self-llm](https://github.com/datawhalechina/self-llm/tree/master/models/GLM-4): Datawhale 团队的提供的 GLM-4-9B 系列模型使用教程。
 + [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): 类似 llama.cpp 的量化加速推理方案，实现笔记本上实时对话
-+ [OpenVINO](https://github.com/openvinotoolkit):
-  Intel 开发的高性能 CPU,GPU及NPU
-  加速推理方案，可以参考此 [步骤](https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot-generate-api.ipynb)
-  部署 glm-4-9b-chat 模型。
++ [OpenVINO](https://github.com/openvinotoolkit): Intel 开发的高性能 CPU,GPU及NPU 加速推理方案，可以参考此 [步骤](https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot-generate-api.ipynb) 部署 glm-4-9b-chat 模型。
 
-## 协议
-
-+ GLM-4 模型的权重的使用则需要遵循 [模型协议](https://huggingface.co/THUDM/glm-4-9b/blob/main/LICENSE)。
-
-+ 本开源仓库的代码则遵循 [Apache 2.0](LICENSE) 协议。
-
-请您严格遵循开源协议。
 
 ## 引用
 
@@ -310,7 +151,7 @@ for o in outputs:
 
 ```
 @misc{glm2024chatglm,
-      title={ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools}, 
+      title={ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools},
       author={Team GLM and Aohan Zeng and Bin Xu and Bowen Wang and Chenhui Zhang and Da Yin and Diego Rojas and Guanyu Feng and Hanlin Zhao and Hanyu Lai and Hao Yu and Hongning Wang and Jiadai Sun and Jiajie Zhang and Jiale Cheng and Jiayi Gui and Jie Tang and Jing Zhang and Juanzi Li and Lei Zhao and Lindong Wu and Lucen Zhong and Mingdao Liu and Minlie Huang and Peng Zhang and Qinkai Zheng and Rui Lu and Shuaiqi Duan and Shudan Zhang and Shulin Cao and Shuxun Yang and Weng Lam Tam and Wenyi Zhao and Xiao Liu and Xiao Xia and Xiaohan Zhang and Xiaotao Gu and Xin Lv and Xinghan Liu and Xinyi Liu and Xinyue Yang and Xixuan Song and Xunkai Zhang and Yifan An and Yifan Xu and Yilin Niu and Yuantao Yang and Yueyan Li and Yushi Bai and Yuxiao Dong and Zehan Qi and Zhaoyu Wang and Zhen Yang and Zhengxiao Du and Zhenyu Hou and Zihan Wang},
       year={2024},
       eprint={2406.12793},
@@ -321,7 +162,7 @@ for o in outputs:
 
 ```
 @misc{wang2023cogvlm,
-      title={CogVLM: Visual Expert for Pretrained Language Models}, 
+      title={CogVLM: Visual Expert for Pretrained Language Models},
       author={Weihan Wang and Qingsong Lv and Wenmeng Yu and Wenyi Hong and Ji Qi and Yan Wang and Junhui Ji and Zhuoyi Yang and Lei Zhao and Xixuan Song and Jiazheng Xu and Bin Xu and Juanzi Li and Yuxiao Dong and Ming Ding and Jie Tang},
       year={2023},
       eprint={2311.03079},

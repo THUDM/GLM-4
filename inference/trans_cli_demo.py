@@ -25,17 +25,13 @@ from transformers import (
 )
 
 
-MODEL_PATH = "THUDM/glm-4-9b-chat"
-
-# trust_remote_code=True is needed if you using with `glm-4-9b-chat`
-# Not use if you using with `glm-4-9b-chat-hf`
-# both tokenizer and model should consider with this issue.
+MODEL_PATH = "THUDM/GLM-4-9B-Chat-0414"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
 
 model = AutoModelForCausalLM.from_pretrained(
-    MODEL_PATH,  # attn_implementation="flash_attention_2", # Use Flash Attention
-    torch_dtype=torch.bfloat16,  # using flash-attn must use bfloat16 or float16
+    MODEL_PATH,
+    torch_dtype=torch.bfloat16,
     device_map="auto",
 ).eval()
 

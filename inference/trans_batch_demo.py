@@ -4,9 +4,6 @@ Here is an example of using batch request glm-4-9b,
 here you need to build the conversation format yourself and then call the batch function to make batch requests.
 Please note that in this demo, the memory consumption is significantly higher.
 
-Note:
-    Using with glm-4-9b-chat-hf will require `transformers>=4.46.0".
-
 """
 
 from typing import Union
@@ -14,7 +11,7 @@ from typing import Union
 from transformers import AutoModelForCausalLM, AutoTokenizer, LogitsProcessorList
 
 
-MODEL_PATH = "THUDM/glm-4-9b-chat-hf"
+MODEL_PATH = "THUDM/GLM-4-9B-Chat-0414"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, device_map="auto").eval()

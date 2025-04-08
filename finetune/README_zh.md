@@ -2,7 +2,7 @@
 
 Read this in [English](README)
 
-本 demo 中，你将体验到如何微调 GLM-4-9B-Chat 对话开源模型(不支持视觉理解模型)。 请严格按照文档的步骤进行操作，以避免不必要的错误。
+本 demo 中，你将体验到如何微调 GLM-4-9B-Chat 对话开源模型(不支持32B系列模型，会导致OOM)。
 
 ## 硬件检查
 
@@ -10,20 +10,21 @@ Read this in [English](README)
 configs 文件夹中的配置文件设置**
 测试硬件信息:
 
+
 + OS: Ubuntu 22.04
 + Memory: 512GB
-+ Python: 3.10.12 / 3.12.3 (如果您使用 Python 3.12.3 目前需要使用 git 源码安装 nltk)
-+ CUDA Version:  12.3
++ Python: 3.12.3
++ CUDA Version:  12.4
 + GPU Driver: 535.104.05
-+ GPU: NVIDIA A100-SXM4-80GB * 8
++ GPU: NVIDIA H100 80GB HBM3 * 8
 
-| 微调模型            | 微调方案                  | 显存占用                       | 权重保存点大小   |
-|-----------------|-----------------------|----------------------------|-----------|
-| GLM-4-9B-Chat   | lora (PEFT)           | 22G                        | 17M       |
-| GLM-4-9B-Chat   | p-tuning v2 (PEFT)    | 21G                        | 121M      |
-| GLM-4-9B-Chat   | SFT (Zero3 method)    | 80G (Each GPU，需要使用8张GPU)   | 20G       |
-| GLM-4V-9B       | lora (PEFT), 包含视觉模块   | 75G                        | 37M       |
-| GLM-4V-9B       | SFT                   | 本代码不支持                     | 28G       |
+| 微调模型            | 微调方案                | 显存占用                       | 权重保存点大小   |
+|-----------------|---------------------|----------------------------|-----------|
+| GLM-4-9B-Chat   | lora (PEFT)         | 22G                        | 17M       |
+| GLM-4-9B-Chat   | p-tuning v2 (PEFT)  | 21G                        | 121M      |
+| GLM-4-9B-Chat   | SFT (Zero3 method)  | 80G (Each GPU，需要使用8张GPU)   | 20G       |
+| GLM-4V-9B       | lora (PEFT), 包含视觉模块 | 75G                        | 37M       |
+| GLM-4V-9B       | SFT                 | 本代码不支持                     | 28G       |
 
 **GLM-4V-9B 微调无法可能正常使用 deepspeed,官方微调脚本仅做最基础的微调方案，更多优化需要开发者自行探索**
 
@@ -253,14 +254,14 @@ pip install -r requirements.txt
 通过以下代码执行 **单机多卡/多机多卡** 运行，这是使用 `deepspeed` 作为加速方案的，您需要安装 `deepspeed`。接着，按照此命令运行：
 
 ```shell
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-Chat-0414  configs/lora.yaml # For Chat Fine-tune
 OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b  configs/lora.yaml  # For VQA Fine-tune
 ```
 
 通过以下代码执行 **单机单卡** 运行。
 
 ```shell
-python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
+python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-Chat-0414  configs/lora.yaml # For Chat Fine-tune
 python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
@@ -274,7 +275,7 @@ python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml 
 例如，这就是一个从最后一个保存点继续微调的示例代码
 
 ```shell
-python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml yes
+python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-Chat-0414  configs/lora.yaml yes
 ```
 
 ## 使用微调后的模型
@@ -287,23 +288,15 @@ python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml y
 > 中记录了微调型的路径，如果你的原始模型位置发生更改，则你应该修改`adapter_config.json`中`base_model_name_or_path`的路径。
 
 ```python
-def load_model_and_tokenizer(
-        model_dir: Union[str, Path], trust_remote_code: bool = True
-) -> tuple[ModelType, TokenizerType]:
+def load_model_and_tokenizer(model_dir: Union[str, Path]) -> tuple[ModelType, TokenizerType]:
     model_dir = _resolve_path(model_dir)
-    if (model_dir / 'adapter_config.json').exists():
-        model = AutoPeftModelForCausalLM.from_pretrained(
-            model_dir, trust_remote_code=trust_remote_code, device_map='auto'
-        )
-        tokenizer_dir = model.peft_config['default'].base_model_name_or_path
+    if (model_dir / "adapter_config.json").exists():
+        model = AutoPeftModelForCausalLM.from_pretrained(model_dir, device_map="auto")
+        tokenizer_dir = model.peft_config["default"].base_model_name_or_path
     else:
-        model = AutoModelForCausalLM.from_pretrained(
-            model_dir, trust_remote_code=trust_remote_code, device_map='auto'
-        )
+        model = AutoModelForCausalLM.from_pretrained(model_dir, device_map="auto")
         tokenizer_dir = model_dir
-    tokenizer = AutoTokenizer.from_pretrained(
-        tokenizer_dir, trust_remote_code=trust_remote_code
-    )
+    tokenizer = AutoTokenizer.from_pretrained(tokenizer_dir)
     return model, tokenizer
 ```
 
@@ -315,7 +308,6 @@ def load_model_and_tokenizer(
 ## 参考文献
 
 ```
-
 @inproceedings{liu2022p,
 title={P-tuning: Prompt tuning can be comparable to fine-tuning across scales and tasks},
 author={Liu, Xiao and Ji, Kaixuan and Fu, Yicheng and Tam, Weng and Du, Zhengxiao and Yang, Zhilin and Tang, Jie},
@@ -333,5 +325,4 @@ eprint={2306.05301},
 archivePrefix={arXiv},
 primaryClass={cs.CL}
 }
-
 ```

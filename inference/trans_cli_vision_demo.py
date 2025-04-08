@@ -31,7 +31,6 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True, en
 model = AutoModel.from_pretrained(
     MODEL_PATH,
     trust_remote_code=True,
-    # attn_implementation="flash_attention_2",  # Use Flash Attention
     torch_dtype=torch.bfloat16,
     device_map="auto",
 ).eval()

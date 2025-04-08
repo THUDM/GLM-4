@@ -90,7 +90,7 @@ pnpm install
 之后即可从命令行中看到 demo 的地址，点击即可访问。初次访问需要下载并加载模型，可能需要花费一定时间。
 
 如果已经在本地下载了模型，可以通过 `export *_MODEL_PATH=/path/to/model` 来指定从本地加载模型。可以指定的模型包括：
-- `CHAT_MODEL_PATH`: 用于 All Tools 模式与文档解读模式，默认为 `THUDM/glm-4-9b-chat`。
+- `CHAT_MODEL_PATH`: 用于 All Tools 模式与文档解读模式，默认为 `THUDM/glm-4-9b-chatglm-4-9b-chat`。
 - `VLM_MODEL_PATH`: 用于 VLM 模式，默认为 `THUDM/glm-4v-9b`。
 
 Chat 模型支持使用 [vLLM](https://github.com/vllm-project/vllm) 推理。若要使用，请安装 vLLM 并设置环境变量 `USE_VLLM=1`。

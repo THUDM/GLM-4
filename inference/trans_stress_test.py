@@ -1,8 +1,3 @@
-"""
-Note:
-    Using with glm-4-9b-chat-hf will require `transformers>=4.46.0".
-"""
-
 import argparse
 import time
 from threading import Thread
@@ -11,7 +6,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 
 
-MODEL_PATH = "/data/yuxuan/GLM-4-0414/glm-4-32b-0414-hf"
+MODEL_PATH = "THUDM/GLM-4-9B-Chat-0414"
 
 
 def stress_test(input_token_len, n, output_token_len):

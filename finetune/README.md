@@ -1,8 +1,6 @@
 # GLM-4-9B Chat dialogue model fine-tuning
 
-In this demo, you will experience how to fine-tune the GLM-4-9B-Chat open source model (visual understanding model is
-not supported). Please strictly follow the steps in the document to avoid unnecessary errors.
-
+In this demo, you will experience how to fine-tune the GLM-4-9B-Chat open source model (32B Model is Not support otherwise cause OOM).
 ## Hardware check
 
 **The data in this document are tested in the following hardware environment. The actual operating environment
@@ -14,11 +12,10 @@ Test hardware information:
 
 + OS: Ubuntu 22.04
 + Memory: 512GB
-+ Python:  Python: 3.10.12 / 3.12.3 (Currently, you need to install nltk from the git source code if you use Python
-  3.12.3)
-+ CUDA Version: 12.3
++ Python: 3.12.3
++ CUDA Version: 12.4
 + GPU Driver: 535.104.05
-+ GPU: NVIDIA A100-SXM4-80GB * 8
++ GPU: NVIDIA H100 80GB HBM3 * 8
 
 | Fine-tuning Model | Fine-tuning solution               | GPU memory usage            | Weight save point size |
 |-------------------|------------------------------------|-----------------------------|------------------------|
@@ -265,7 +262,7 @@ OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_
 Execute **single machine single card** run through the following code.
 
 ```shell
-python finetune.py  data/AdvertiseGen/  THUDM/glm-4-9b-chat  configs/lora.yaml # For Chat Fine-tune
+python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-Chat-0414  configs/lora.yaml # For Chat Fine-tune
 python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
@@ -281,7 +278,7 @@ half-trained model, you can add a fourth parameter, which can be passed in two w
 For example, this is an example code to continue fine-tuning from the last saved point
 
 ```shell
-python finetune.py data/AdvertiseGen/ THUDM/glm-4-9b-chat configs/lora.yaml yes
+python finetune.py data/AdvertiseGen/ THUDM/GLM-4-9B-Chat-0414 configs/lora.yaml yes
 ```
 
 ## Use the fine-tuned model
@@ -299,26 +296,16 @@ to the following tutorial.
 > in `adapter_config.json`.
 
 ```python
-def load_model_and_tokenizer(
-        model_dir: Union[str, Path], trust_remote_code: bool = True
-) -> tuple[ModelType, TokenizerType]:
+def load_model_and_tokenizer(model_dir: Union[str, Path]) -> tuple[ModelType, TokenizerType]:
     model_dir = _resolve_path(model_dir)
-
-
-if (model_dir / 'adapter_config.json').exists():
-    model = AutoPeftModelForCausalLM.from_pretrained(
-        model_dir, trust_remote_code=trust_remote_code, device_map='auto'
-    )
-tokenizer_dir = model.peft_config['default'].base_model_name_or_path
-else:
-model = AutoModelForCausalLM.from_pretrained(
-    model_dir, trust_remote_code=trust_remote_code, device_map='auto'
-)
-tokenizer_dir = model_dir
-tokenizer = AutoTokenizer.from_pretrained(
-    tokenizer_dir, trust_remote_code=trust_remote_code
-)
-return model, tokenizer
+    if (model_dir / "adapter_config.json").exists():
+        model = AutoPeftModelForCausalLM.from_pretrained(model_dir, device_map="auto")
+        tokenizer_dir = model.peft_config["default"].base_model_name_or_path
+    else:
+        model = AutoModelForCausalLM.from_pretrained(model_dir, device_map="auto")
+        tokenizer_dir = model_dir
+    tokenizer = AutoTokenizer.from_pretrained(tokenizer_dir)
+    return model, tokenizer
 ```
 
 2. Read the fine-tuned model. Please note that you should use the location of the fine-tuned model. For example, if your
@@ -333,7 +320,6 @@ return model, tokenizer
 ## Reference
 
 ```
-
 @inproceedings{liu2022p,
 title={P-tuning: Prompt tuning can be comparable to fine-tuning across scales and tasks},
 author={Liu, Xiao and Ji, Kaixuan and Fu, Yicheng and Tam, Weng and Du, Zhengxiao and Yang, Zhilin and Tang, Jie},
@@ -351,5 +337,4 @@ eprint={2306.05301},
 archivePrefix={arXiv},
 primaryClass={cs.CL}
 }
-
 ```

@@ -11,7 +11,7 @@ Read this in [English](README)
 
 ## 项目更新
 
-- 🔥🔥 **News**: ```2025/04/14```: 我们发布 `GLM-4-0414` 系列模型，包含 9B 和 32B 两种模型尺寸，欢迎尝试。
+- 🔥🔥 **News**: ```2025/04/14```: 我们发布 `GLM-4-0414` 系列模型，包含 9B 和 32B 两种模型尺寸。
 - 🔥 **News**: ``2024/06/18``: 我们发布 [技术报告](https://arxiv.org/pdf/2406.12793), 欢迎查看。
 - 🔥 **News**: ``2024/06/05``: 我们发布 `GLM-4-9B` 系列开源模型。
 
@@ -89,8 +89,7 @@ Read this in [English](README)
 
 ### 工具调用能力
 
-我们在 [Berkeley Function Calling Leaderboard](https://github.com/ShishirPatil/gorilla/tree/main/berkeley-function-call-leaderboard)
-上进行了测试并得到了以下结果：
+我们在 [Berkeley Function Calling Leaderboard](https://github.com/ShishirPatil/gorilla/tree/main/berkeley-function-call-leaderboard) 上进行了测试并得到了以下结果：
 
 | Model                  | Overall Acc. | AST Summary | Exec Summary | Relevance |
 |:-----------------------|:------------:|:-----------:|:------------:|:---------:|

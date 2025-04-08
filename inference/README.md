@@ -6,86 +6,64 @@ Please follow the steps in the document strictly to avoid unnecessary errors.
 
 ## Device and dependency check
 
-### Related inference test data
-
-**The data in this document are tested in the following hardware environment. The actual operating environment
-requirements and the GPU memory occupied by the operation are slightly different. Please refer to the actual operating
-environment.**
-
-Test hardware information:
-
-+ OS: Ubuntu 22.04
-+ Memory: 512GB
-+ Python: 3.10.12 (recommend) / 3.12.3 have been tested
-+ CUDA Version: 12.3
-+ GPU Driver: 535.104.05
-+ GPU: NVIDIA A100-SXM4-80GB * 8
-
-The stress test data of relevant inference are as follows:
-
-**All tests are performed on a single GPU, and all GPU memory consumption is calculated based on the peak value**
-
-#
-
-### GLM-4-9B-Chat
-
-| Dtype | GPU Memory | Prefilling | Decode Speed  | Remarks                |
-|-------|------------|------------|---------------|------------------------|
-| BF16  | 19 GB      | 0.2s       | 27.8 tokens/s | Input length is 1000   |
-| BF16  | 21 GB      | 0.8s       | 31.8 tokens/s | Input length is 8000   |
-| BF16  | 28 GB      | 4.3s       | 14.4 tokens/s | Input length is 32000  |
-| BF16  | 58 GB      | 38.1s      | 3.4  tokens/s | Input length is 128000 |
-
-| Dtype | GPU Memory | Prefilling | Decode Speed  | Remarks               |
-|-------|------------|------------|---------------|-----------------------|
-| INT4  | 8 GB       | 0.2s       | 23.3 tokens/s | Input length is 1000  |
-| INT4  | 10 GB      | 0.8s       | 23.4 tokens/s | Input length is 8000  |
-| INT4  | 17 GB      | 4.3s       | 14.6 tokens/s | Input length is 32000 |
-
-### GLM-4-9B-Chat-1M
-
-| Dtype | GPU Memory | Prefilling | Decode Speed     | Remarks                |
-|-------|------------|------------|------------------|------------------------|
-| BF16  | 74497MiB   | 98.4s      | 2.3653  tokens/s | Input length is 200000 |
-
-If your input exceeds 200K, we recommend that you use the vLLM backend with multi gpus for inference to get better
-performance.
-
-#### GLM-4V-9B
-
-| Dtype | GPU Memory | Prefilling | Decode Speed  | Remarks              |
-|-------|------------|------------|---------------|----------------------|
-| BF16  | 28 GB      | 0.1s       | 33.4 tokens/s | Input length is 1000 |
-| BF16  | 33 GB      | 0.7s       | 39.2 tokens/s | Input length is 8000 |
-
-| Dtype | GPU Memory | Prefilling | Decode Speed  | Remarks              |
-|-------|------------|------------|---------------|----------------------|
-| INT4  | 10 GB      | 0.1s       | 28.7 tokens/s | Input length is 1000 |
-| INT4  | 15 GB      | 0.8s       | 24.2 tokens/s | Input length is 8000 |
-
-### Minimum hardware requirements
-
-If you want to run the most basic code provided by the official (transformers backend) you need:
-
-+ Python >= 3.10
-+ Memory of at least 32 GB
-
-If you want to run all the codes in this folder provided by the official, you also need:
-
-+ Linux operating system (Debian series is best)
-+ GPU device with more than 8GB GPU memory, supporting CUDA or ROCM and supporting `BF16` reasoning (`FP16` precision
-  cannot be finetuned, and there is a small probability of problems in infering)
-
-Install dependencies
+### Install dependencies
 
 ```shell
 pip install -r requirements.txt
 ```
 
-## Basic function calls
+### Related Inference Benchmark Data
 
-**Unless otherwise specified, all demos in this folder do not support advanced usage such as Function Call and All Tools
-**
+**All benchmark data in this document was collected under the hardware environment listed below. Actual memory usage and runtime may vary depending on your deployment setup. Please refer to your actual environment.**
+
+Test Hardware:
+
++ OS: Ubuntu 22.04
++ Memory: 512GB
++ Python: 3.12.3
++ CUDA Version: 12.4
++ GPU Driver: 535.104.05
++ GPU: NVIDIA H100 80GB HBM3 * 8
+
+The following stress test results show memory usage and latency during inference. If multiple GPUs are used, "Memory Usage" refers to the maximum usage on a single GPU.
+
+#### GLM-4-32B-Chat-0414
+
+| Precision   | #GPUs | Memory Usage  | First Token Latency | Token Output Speed | Input Tokens |
+|-------------|-------|---------------|---------------------|-------------------|--------------|
+| BF16        | 1     | 68 GB         | 0.16s               | 24.4 tokens/s     | 1000         |
+| BF16        | 1     | 72 GB         | 1.37s               | 16.9 tokens/s     | 8000         |
+| BF16        | 2     | 50 GB         | 6.75s               | 8.1 tokens/s      | 32000        |
+| BF16        | 4     | 55 GB         | 37.83s              | 3.0 tokens/s      | 100000       |
+
+#### GLM-4-9B-Chat-0414
+
+| Precision | #GPUs | Memory Usage | First Token Latency | Token Output Speed | Input Tokens |
+|-----------|-------|---------------|----------------------|---------------------|---------------|
+| BF16      | 1     | 19 GB         | 0.05s                | 44.4 tokens/s       | 1000          |
+| BF16      | 1     | 25 GB         | 0.39s                | 39.0 tokens/s       | 8000          |
+| BF16      | 1     | 31 GB         | 2.29s                | 18.7 tokens/s       | 32000         |
+| BF16      | 1     | 55 GB         | 6.80s                | 14.1 tokens/s       | 100000        |
+
+#### GLM-4-9B-Chat-1M
+
+| Precision | #GPUs | Memory Usage | First Token Latency | Token Output Speed | Input Tokens |
+|-----------|-------|---------------|----------------------|---------------------|---------------|
+| BF16      | 1     | 75 GB         | 98.4s                | 2.3 tokens/s        | 200000        |
+
+#### GLM-4V-9B
+
+| Precision | #GPUs | Memory Usage | First Token Latency | Token Output Speed | Input Tokens |
+|-----------|-------|---------------|----------------------|---------------------|---------------|
+| BF16      | 1     | 28 GB         | 0.1s                 | 33.4 tokens/s       | 1000          |
+| BF16      | 1     | 33 GB         | 0.7s                 | 39.2 tokens/s       | 8000          |
+
+| Precision | #GPUs | Memory Usage | First Token Latency | Token Output Speed | Input Tokens |
+|-----------|-------|---------------|----------------------|---------------------|---------------|
+| INT4      | 1     | 10 GB         | 0.1s                 | 28.7 tokens/s       | 1000          |
+| INT4      | 1     | 15 GB         | 0.8s                 | 24.2 tokens/s       | 8000          |
+
+## Basic function calls
 
 ### Use transformers backend code
 

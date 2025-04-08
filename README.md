@@ -11,7 +11,7 @@
 
 ## Project Updates
 
-- 🔥🔥 **News**: `2025/04/14`: We released the `GLM-4-0414` series models, available in 9B and 32B sizes. Feel free to try them out.
+- 🔥🔥 **News**: `2025/04/14`: We released the `GLM-4-0414` series models, available in 9B and 32B sizes.
 - 🔥 **News**: `2024/06/18`: We released our [technical report](https://arxiv.org/pdf/2406.12793), check it out!
 - 🔥 **News**: `2024/06/05`: We open-sourced the `GLM-4-9B` series models.
 
@@ -78,8 +78,7 @@ The long text capability was further evaluated on LongBench-Chat, and the result
 
 ### Multi Language
 
-The tests for GLM-4-9B-Chat and Llama-3-8B-Instruct are conducted on six multilingual datasets. The test results and the
-corresponding languages selected for each dataset are shown in the table below:
+The tests for GLM-4-9B-Chat and Llama-3-8B-Instruct are conducted on six multilingual datasets. The test results and the corresponding languages selected for each dataset are shown in the table below:
 
 | Dataset     | Llama-3-8B-Instruct | GLM-4-9B-Chat |                                           Languages                                            |
 |:------------|:-------------------:|:-------------:|:----------------------------------------------------------------------------------------------:|
@@ -92,8 +91,7 @@ corresponding languages selected for each dataset are shown in the table below:
 
 ### Function Call
 
-Tested
-on [Berkeley Function Calling Leaderboard](https://github.com/ShishirPatil/gorilla/tree/main/berkeley-function-call-leaderboard).
+Tested on [Berkeley Function Calling Leaderboard](https://github.com/ShishirPatil/gorilla/tree/main/berkeley-function-call-leaderboard).
 
 | Model                  | Overall Acc. | AST Summary | Exec Summary | Relevance |
 |:-----------------------|:------------:|:-----------:|:------------:|:---------:|
@@ -104,8 +102,7 @@ on [Berkeley Function Calling Leaderboard](https://github.com/ShishirPatil/goril
 
 ### Multi-Modal
 
-GLM-4V-9B is a multimodal language model with visual understanding capabilities. The evaluation results of its related
-classic tasks are as follows:
+GLM-4V-9B is a multimodal language model with visual understanding capabilities. The evaluation results of its related classic tasks are as follows:
 
 |                            | **MMBench-EN-Test** | **MMBench-CN-Test** | **SEEDBench_IMG** | **MMStar** | **MMMU** | **MME** | **HallusionBench** | **AI2D** | **OCRBench** |
 |----------------------------|---------------------|---------------------|-------------------|------------|----------|---------|--------------------|----------|--------------|
@@ -121,7 +118,7 @@ classic tasks are as follows:
 | **Claude 3 Opus**          | 63.3                | 59.2                | 64                | 45.7       | 54.9     | 1586.8  | 37.8               | 70.6     | 694          |
 | **GLM-4V-9B**              | 81.1                | 79.4                | 76.8              | 58.7       | 47.2     | 2163.8  | 46.6               | 81.1     | 786          |
 
-## project list
+## Project list
 
 This repository provides developers with the basic usage and development code for the GLM-4 open-source models through the following components:
 
@@ -155,17 +152,6 @@ This repository provides developers with the basic usage and development code fo
   similar to llama.cpp.
 + [OpenVINO](https://github.com/openvinotoolkit): glm-4-9b-chat already supports the use of OpenVINO. The toolkit accelerates inference and has a greater inference speed improvement on Intel's GPU, GPU and NPU devices. For
 specific usage, please refer to  [OpenVINO notebooks](https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot-generate-api.ipynb)
-
-
-
-## License
-
-+ The use of GLM-4 model weights must follow
-  the [Model License](https://huggingface.co/THUDM/glm-4-9b/blob/main/LICENSE).
-
-+ The code in this open source repository follows the [Apache 2.0](LICENSE) license.
-
-Please strictly follow the open source license.
 
 ## Reference
 

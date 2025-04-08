@@ -286,16 +286,6 @@ python finetune.py data/AdvertiseGen/ THUDM/glm-4-9b-chat configs/lora.yaml yes
 
 ## Use the fine-tuned model
 
-### Verify the fine-tuned model in inference.py
-
-You can Use our fine-tuned model in `finetune_demo/inference.py`, and you can easily test it with just one line of code.
-
-```shell
-python inference.py your_finetune_path
-```
-
-In this way, the answer you get is the fine-tuned answer.
-
 ### Use the fine-tuned model in other demos in this repository or external repositories
 
 You can use our `LORA` and fully fine-tuned models in any demo. This requires you to modify the code yourself according

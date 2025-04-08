@@ -11,13 +11,13 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 
 
-MODEL_PATH = "THUDM/glm-4-9b-chat-hf"
+MODEL_PATH = "/data/yuxuan/GLM-4-0414/glm-4-32b-0414-hf"
 
 
-def stress_test(token_len, n, num_gpu):
-    device = torch.device(f"cuda:{num_gpu - 1}" if torch.cuda.is_available() and num_gpu > 0 else "cpu")
+def stress_test(input_token_len, n, output_token_len):
     tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, paddsing_side="left")
-    model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, torch_dtype=torch.bfloat16).to(device).eval()
+    model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, torch_dtype=torch.bfloat16, device_map="auto").eval()
+    device = model.device
 
     # Use INT4 weight infer
     # model = AutoModelForCausalLM.from_pretrained(
@@ -46,15 +46,15 @@ def stress_test(token_len, n, num_gpu):
         _ = model.generate(
             input_ids=warmup_inputs["input_ids"],
             attention_mask=warmup_inputs["attention_mask"],
-            max_new_tokens=2048,
+            max_new_tokens=512,
             do_sample=False,
-            repetition_penalty=1.0,
+            repetition_penalty=0.1,
             eos_token_id=[151329, 151336, 151338],
         )
     print("Warming up complete. Starting stress test...")
 
     for i in range(n):
-        random_token_ids = torch.randint(3, vocab_size - 200, (token_len - 5,), dtype=torch.long)
+        random_token_ids = torch.randint(3, vocab_size - 200, (input_token_len - 5,), dtype=torch.long)
         input_ids = (
             torch.tensor(start_tokens + random_token_ids.tolist() + end_tokens, dtype=torch.long)
             .unsqueeze(0)
@@ -69,9 +69,9 @@ def stress_test(token_len, n, num_gpu):
         generate_kwargs = {
             "input_ids": test_inputs["input_ids"],
             "attention_mask": test_inputs["attention_mask"],
-            "max_new_tokens": 512,
+            "max_new_tokens": output_token_len,
             "do_sample": False,
-            "repetition_penalty": 1.0,
+            "repetition_penalty": 0.1,  # For generate more tokens for test.
             "eos_token_id": [151329, 151336, 151338],
             "streamer": streamer,
         }
@@ -108,19 +108,10 @@ def stress_test(token_len, n, num_gpu):
     return times, avg_first_token_time, decode_times, avg_decode_time
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Stress test for model inference")
-    parser.add_argument("--token_len", type=int, default=1000, help="Number of tokens for each test")
-    parser.add_argument("--n", type=int, default=3, help="Number of iterations for the stress test")
-    parser.add_argument("--num_gpu", type=int, default=1, help="Number of GPUs to use for inference")
-    args = parser.parse_args()
-
-    token_len = args.token_len
-    n = args.n
-    num_gpu = args.num_gpu
-
-    stress_test(token_len, n, num_gpu)
-
-
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Stress test for model inference")
+    parser.add_argument("--input_token_len", type=int, default=100000, help="Number of tokens for each test")
+    parser.add_argument("--output_token_len", type=int, default=128, help="Number of output tokens for each test")
+    parser.add_argument("--n", type=int, default=3, help="Number of iterations for the stress test")
+    args = parser.parse_args()
+    stress_test(args.input_token_len, args.n, args.output_token_len)

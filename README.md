@@ -135,6 +135,14 @@ This repository provides developers with the basic usage and development code fo
     + [intel_device_demo](demo/intel_device_demo) Deployment code using OpenVINO / Intel® Extension for Transformers
     + [composite_demo](demo/composite_demo/README.md) Full-feature demo code for GLM-4-9B-Chat and GLM-4V-9B open-source models, including All Tools capability, long-document understanding, and multimodal features.
 
+## Model Implementation Code
+
+If you're interested in our model implementation, feel free to check out the related Pull Requests in the respective repositories — they have already been merged.
+
++ [vLLM Model Implementation](https://github.com/vllm-project/vllm/pull/16338)  
++ [transformers Model Implementation](https://github.com/huggingface/transformers/pull/37388)  
++ [llama.cpp Model Implementation]()
+
 ## Friendly Links
 
 + [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory): Efficient open-source fine-tuning framework,

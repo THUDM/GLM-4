@@ -115,6 +115,7 @@ GLM-4V-9B 是一个多模态语言模型，具备视觉理解能力，其相关�
 | **Gemini 1.0 Pro**         | 73.6                | 74.3                | 70.7              | 38.6       | 49.0     | 2148.9  | 45.7               | 72.9     | 680          |
 | **Claude 3 Opus**          | 63.3                | 59.2                | 64.0              | 45.7       | 54.9     | 1586.8  | 37.8               | 70.6     | 694          |
 | **GLM-4V-9B**              | 81.1                | 79.4                | 76.8              | 58.7       | 47.2     | 2163.8  | 46.6               | 81.1     | 786          |
+
 ## 完整项目列表
 
 本开源仓库通过以下内容为开发者提供基础的 GLM-4 开源模型使用和开发代码
@@ -132,6 +133,14 @@ GLM-4V-9B 是一个多模态语言模型，具备视觉理解能力，其相关�
     + [intel_device_demo](demo/intel_device_demo) 使用 OpenVINO / 使用 Intel® Extension for Transformers 部署模型代码
     + [composite_demo](demo/composite_demo/README.md) GLM-4-9B-Chat 以及 GLM-4V-9B 开源模型的完整功能演示代码，包含了 All Tools 能力、长文档解读和多模态能力的展示。
 
+
+## 模型实现代码
+
+如果你想查看我们的模型实现，欢迎查看在相关仓库的模型实现Pull Request，他们已经被合并。
+
++ [vLLM 模型实现](https://github.com/vllm-project/vllm/pull/16338)
++ [transformers 模型实现](ttps://github.com/huggingface/transformers/pull/37388)
++ [llama.cpp 模型实现]()
 
 ## 友情链接
 

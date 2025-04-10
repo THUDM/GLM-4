@@ -141,7 +141,7 @@ If you're interested in our model implementation, feel free to check out the rel
 
 + [vLLM Model Implementation](https://github.com/vllm-project/vllm/pull/16338)  
 + [transformers Model Implementation](https://github.com/huggingface/transformers/pull/37388)  
-+ [llama.cpp Model Implementation]()
++ [llama.cpp Model Implementation](https://github.com/ggml-org/llama.cpp/pull/12867)
 
 ## Friendly Links
 

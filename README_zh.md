@@ -140,7 +140,7 @@ GLM-4V-9B 是一个多模态语言模型，具备视觉理解能力，其相关�
 
 + [vLLM 模型实现](https://github.com/vllm-project/vllm/pull/16338)
 + [transformers 模型实现](ttps://github.com/huggingface/transformers/pull/37388)
-+ [llama.cpp 模型实现]()
++ [llama.cpp 模型实现](https://github.com/ggml-org/llama.cpp/pull/12867)
 
 ## 友情链接
 

@@ -16,24 +16,30 @@ Read this in [English](README)
 - 🔥 **News**: ``2024/06/05``: 我们发布 `GLM-4-9B` 系列开源模型。
 
 ## 效果展示
+
+### 动画绘制
+
+以下两个动画均由 `GLM-4-Z1-32B-0414` 绘制而成
+
 <table>
   <tr>
     <td style="vertical-align: top; padding: 10px;">
       <video src="https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32" 
-             width="100%" autoplay loop muted playsinline></video>
-      <div style="margin-top: 10px; font-size: 14px; color: #333;">
+             style="width: 400px; height: 300px;" autoplay loop muted playsinline></video>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
         write a Python program that shows a ball bouncing inside a spinning hexagon. The ball should be affected by gravity and friction, and it must bounce off the rotating walls realistically
       </div>
     </td>
     <td style="vertical-align: top; padding: 10px;">
-      <video src="https://github.com/user-attachments/assets/d78e552a-4b3f-4b81-ac3f-3898079554f6" 
-             width="100%" autoplay loop muted playsinline></video>
-      <div style="margin-top: 10px; font-size: 14px; color: #333;">
-        Test
+      <video src="https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32" 
+             style="width: 400px; height: 300px;" autoplay loop muted playsinline></video>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+         write a Python program that shows a ball bouncing inside a spinning hexagon. The ball should be affected by gravity and friction, and it must bounce off the rotating walls realistically
       </div>
     </td>
   </tr>
 </table>
+
 ## 模型列表
 
 ### GLM-4-0414 系列模型

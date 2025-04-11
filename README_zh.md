@@ -15,6 +15,25 @@ Read this in [English](README)
 - 🔥 **News**: ``2024/06/18``: 我们发布 [技术报告](https://arxiv.org/pdf/2406.12793), 欢迎查看。
 - 🔥 **News**: ``2024/06/05``: 我们发布 `GLM-4-9B` 系列开源模型。
 
+## 效果展示
+<table>
+  <tr>
+    <td style="vertical-align: top; padding: 10px;">
+      <video src="https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32" 
+             width="100%" autoplay loop muted playsinline></video>
+      <div style="margin-top: 10px; font-size: 14px; color: #333;">
+        write a Python program that shows a ball bouncing inside a spinning hexagon. The ball should be affected by gravity and friction, and it must bounce off the rotating walls realistically
+      </div>
+    </td>
+    <td style="vertical-align: top; padding: 10px;">
+      <video src="https://github.com/user-attachments/assets/d78e552a-4b3f-4b81-ac3f-3898079554f6" 
+             width="100%" autoplay loop muted playsinline></video>
+      <div style="margin-top: 10px; font-size: 14px; color: #333;">
+        Test
+      </div>
+    </td>
+  </tr>
+</table>
 ## 模型列表
 
 ### GLM-4-0414 系列模型
@@ -139,7 +158,7 @@ GLM-4V-9B 是一个多模态语言模型，具备视觉理解能力，其相关�
 如果你想查看我们的模型实现，欢迎查看在相关仓库的模型实现Pull Request，他们已经被合并。
 
 + [vLLM 模型实现](https://github.com/vllm-project/vllm/pull/16338)
-+ [transformers 模型实现](ttps://github.com/huggingface/transformers/pull/37388)
++ [transformers 模型实现](https://github.com/huggingface/transformers/pull/37388)
 + [llama.cpp 模型实现](https://github.com/ggml-org/llama.cpp/pull/12867)
 
 ## 友情链接

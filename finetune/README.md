@@ -35,9 +35,6 @@ Face) first. You also need to install the dependencies in this directory:
 pip install -r requirements.txt
 ```
 
-> NOTE: Some codes in NLTK 3.8.1 might not yet be compatible with Python 3.12. For adaptation methods in such cases,
-> please refer to [issues #38](https://github.com/THUDM/GLM-4/issues/38).
-
 ## Multi-round dialogue format
 
 The multi-round dialogue fine-tuning example uses the GLM-4 dialogue format convention, adding different `loss_mask` to

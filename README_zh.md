@@ -79,16 +79,17 @@ Read this in [English](README)
 
 ### GLM-4-0414 系列模型
 
-|        Model        |   Type    | Seq Length* |                                                                    Download                                                                    |
-|:-------------------:|:---------:|:----------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|
-| GLM-4-9B-Chat-0414  |   Chat    |    32K -> 128K    | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414) |
-|  GLM-Z1-9B-0414   | Reasoning |    32K -> 128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)   |
-|   GLM-4-32B-0414    |   Base    |    32K -> 128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)   |
-| GLM-4-32B-Chat-0414 |   Chat    |    32K -> 128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)   |
-|  GLM-Z1-32B-0414  | Reasoning |    32K -> 128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)  |
-|  GLM-Rumination-32B-0414 | Reasoning |    32K -> 128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-DR-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-DR-32B-0414)  |
+|             Model             |   Type    | Seq Length* |                                                                                                                         Download                                                                                                                         |
+|:-----------------------------:|:---------:|:----------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|      GLM-4-9B-Chat-0414       |   Chat    |    32K -> 128K    |              [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)    <br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)               |
+|        GLM-Z1-9B-0414         | Reasoning |    32K -> 128K    |                 [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)     <br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)                 |
+|        GLM-4-32B-0414         |   Base    |    32K -> 128K    |                [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)     <br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)                |
+|      GLM-4-32B-Chat-0414      |   Chat    |    32K -> 128K    |               [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)     <br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-32B-0414)                    |
+|        GLM-Z1-32B-0414        | Reasoning |    32K -> 128K    |               [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)     <br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)                |
+| GLM-4-Z1-Rumination-32B-0414  | Reasoning |    32K -> 128K    | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-Rumination-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-Rumination-32B-0414) <br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-Z1-Rumination-32B-0414) |
 
 \* 模型原生采用 32k 上下文进行训练，对于输入 + 输出长度可能超过 32k 的请求，我们建议激活 Yarn 来获得较好的外推性能，可以使用如下配置进行 Yarn 外推设置：
+
 ```json
 "rope_scaling": {
     "factor": 4.0,

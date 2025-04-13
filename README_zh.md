@@ -19,9 +19,16 @@ Read this in [English](README)
 
 ### 动画绘制
 
-以下两个动画均由 `GLM-4-Z1-32B-0414` 绘制而成
 
 <table>
+  <tr>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-Z1-32B-0414
+    </td>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-32B-Chat-0414
+    </td>
+  </tr>
   <tr>
     <td style="vertical-align: top; padding: 10px;">
       <video src="https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32" 
@@ -31,27 +38,64 @@ Read this in [English](README)
       </div>
     </td>
     <td style="vertical-align: top; padding: 10px;">
-      <video src="https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32" 
+      <video src="https://github.com/user-attachments/assets/ff87767e-66ac-4fcb-935a-eda783d12210" 
              style="width: 400px; height: 300px;" autoplay loop muted playsinline></video>
       <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
-         write a Python program that shows a ball bouncing inside a spinning hexagon. The ball should be affected by gravity and friction, and it must bounce off the rotating walls realistically
+         Create a first person filght simulaor with threejs in HTML
       </div>
     </td>
   </tr>
 </table>
 
+### UI设计
+
+<table>
+  <tr>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-32B-Chat-0414
+    </td>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-32B-Chat-0414
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/986a5d56-23d3-4724-bc70-230088e0d327" style="width: 400px; height: 300px;" />
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+        给我设计一个移动端机器学习平台的 UI，其中要包括训练任务，存储管理，和个人统计信息界面。个人信息统计界面要用图表展示用户过去一段时间的各类资源使用情况。使用 Tailwind CSS 来美化页面，把这 3 个手机界面平铺展示到一个 HTML 页面中
+      </div>
+    </td>
+    <td style="vertical-align: top; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/f466ab72-0670-4bde-b007-9ee3f1042480" style="width: 400px; height: 300px;" />
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+         Create an svg to illustrate the training pipeline of an LLM
+      </div>
+    </td>
+  </tr>
+</table>
+
+
 ## 模型列表
 
 ### GLM-4-0414 系列模型
 
-|        Model        |   Type    | Seq Length |                                                                    Download                                                                    |
+|        Model        |   Type    | Seq Length* |                                                                    Download                                                                    |
 |:-------------------:|:---------:|:----------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|
-| GLM-4-9B-Chat-0414  |   Chat    |    128K    | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414) |
-|  GLM-4-Z1-9B-0414   | Reasoning |    128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)   |
-|   GLM-4-32B-0414    |   Base    |    128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)   |
-| GLM-4-32B-Chat-0414 |   Chat    |    128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)   |
-|  GLM-4-Z1-32B-0414  | Reasoning |    128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)  |
-|  GLM-4-DR-32B-0414   | Reasoning |    128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-DR-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-DR-32B-0414)  |
+| GLM-4-9B-Chat-0414  |   Chat    |    32K -> 128K    | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414) |
+|  GLM-Z1-9B-0414   | Reasoning |    32K -> 128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)   |
+|   GLM-4-32B-0414    |   Base    |    32K -> 128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)   |
+| GLM-4-32B-Chat-0414 |   Chat    |    32K -> 128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)   |
+|  GLM-Z1-32B-0414  | Reasoning |    32K -> 128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)  |
+|  GLM-Rumination-32B-0414 | Reasoning |    32K -> 128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-DR-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-DR-32B-0414)  |
+
+\* 模型原生采用 32k 上下文进行训练，对于输入 + 输出长度可能超过 32k 的请求，我们建议激活 Yarn 来获得较好的外推性能，可以使用如下配置进行 Yarn 外推设置：
+```json
+"rope_scaling": {
+    "factor": 4.0,
+    "original_max_position_embeddings": 32768,
+    "type": "yarn"
+}
+```
 
 ### GLM-4-9B 系列模型
 
@@ -159,7 +203,9 @@ GLM-4V-9B 是一个多模态语言模型，具备视觉理解能力，其相关�
     + [composite_demo](demo/composite_demo/README.md) GLM-4-9B-Chat 以及 GLM-4V-9B 开源模型的完整功能演示代码，包含了 All Tools 能力、长文档解读和多模态能力的展示。
 
 
-## 模型实现代码
+## 模型和提示词实现
+
+### 模型实现
 
 如果你想查看我们的模型实现，欢迎查看在相关仓库的模型实现Pull Request，他们已经被合并。
 
@@ -167,9 +213,46 @@ GLM-4V-9B 是一个多模态语言模型，具备视觉理解能力，其相关�
 + [transformers 模型实现](https://github.com/huggingface/transformers/pull/37388)
 + [llama.cpp 模型实现](https://github.com/ggml-org/llama.cpp/pull/12867)
 
+### 提示词实现
+
+如果你使用`transformers`库提供的`apply_chat_template`方法构建提示词。以下是对不同 GLM-4-0414 模型中 `系统提示词`的限制。
+
++ `GLM-4-32B-0414`: 基座模型，无对话模板。
++ `GLM-4-*-Chat-0414` / `GLM-4-Z1-*-0414`: 如果传入`tools`，则由 `apply_chat_template` 填充工具到`chat_template`中的固定模板，单独作为一条带有`tools`绑定的 `system`字段信息并拼接于`messages[0]`。原本传入的所有`messages` 自动往后移动一个位置。
++ `GLM-4-DR-32B-0414`: 
+    + 不支持自定义系统提示词，不支持自定义工具，你的所有 `tools` 和 `system` 字段会被 `apply_chat_template` 忽略。
+    + 一共支持四个工具，分别是
+        ```
+        1. search
+           描述: 执行搜索查询并返回搜索结果。当您需要查找有关特定主题的信息时使用此功能。
+           参数: query (字符串) - 搜索查询字符串，除非是中文专有名词，否则使用英文单词
+
+        2. click
+           描述: 点击搜索结果中的链接并导航到相应页面。当您需要查看特定搜索结果的详细内容时使用此功能。
+           参数: link_id (整数) - 要点击的链接ID（来自搜索结果中的序号）
+
+        3. open
+           描述: 打开特定网站。通过URL获取任何网站的内容。
+           参数: url (字符串) - 目标网站URL或域名
+
+        4. finish
+           描述: 完成任务。当您已找到所需信息时使用此功能。
+           参数: 无
+        ```
+    
+    + `chat_template`中的固定模板使用英语提示词，默认只支持英语，想更换其他语言，需要修改以下部分
+        ```
+        <重要配置>
+        - 采用语言
+            * 搜索关键词：英语 -> 在这里换成中文或者其他语言
+            * 思考：英语 -> 在这里换成中文或者其他语言
+        ```
+
+GLM-4-0414 系列模型的提示词构造可以前往对应的模型仓库中的 `chat_template.jinja` 查看具体的模型对话模板。
+
 ## 友情链接
 
-+ [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory): 高效开源微调框架，已支持 GLM-4-9B-Chat 语言模型微调。
++ [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory): 高效开源微调框架，支持`GLM-4-0414`, `GLM-4` 系列模型的微调。
 + [SWIFT](https://github.com/modelscope/swift): 魔搭社区的大模型/多模态大模型训练框架，已支持 GLM-4-9B-Chat / GLM-4V-9B 模型微调。
 + [Xorbits Inference](https://github.com/xorbitsai/inference): 性能强大且功能全面的分布式推理框架，轻松一键部署你自己的模型或内置的前沿开源模型。
 + [LangChain-ChatChat](https://github.com/chatchat-space/Langchain-Chatchat): 基于 Langchain 与 ChatGLM 等语言模型的 RAG 与 Agent 应用

@@ -1,50 +1,42 @@
-# GLM-4 开眼模型微调
+# GLM-4-9B Chat 对话模型微调
 
 Read this in [English](README)
 
+本 demo 中，你将体验到如何微调 GLM-4-9B-Chat 对话开源模型(不支持32B系列模型，会导致OOM)。
+
 ## 硬件检查
 
-所有微调测试均在以下环境和硬件下测试:
-
-> OS: Ubuntu 22.04
-> 
-> Memory: 512GB
-> 
-> Python: 3.12.3
-> 
-> CUDA Version: 12.4
-> 
-> GPU Driver: 535.104.05
-> 
-> GPU: NVIDIA H100 80GB HBM3 (以下简称 GPU)
+**本文档的数据均在以下硬件环境测试,实际运行环境需求和运行占用的显存略有不同，请以实际运行环境为准。微调的资源占用均按照
+configs 文件夹中的配置文件设置**
+测试硬件信息:
 
 
-+ 基于 Llama-Factory 进行微调
++ OS: Ubuntu 22.04
++ Memory: 512GB
++ Python: 3.12.3
++ CUDA Version:  12.4
++ GPU Driver: 535.104.05
++ GPU: NVIDIA H100 80GB HBM3 * 8
 
-| Fine-tuning Model         | Fine-tuning solution | GPU memory usage             |
-|---------------------------|----------------------|------------------------------|
-| GLM-4-9B-Chat-0414        | lora                 | 22G (Each GPU, Need 1 GPU)   |
-| GLM-4-9B-Chat-0414        | SFT (Zero3 method)   | 55G (Each GPU, Need 4 GPUs)  |
-| GLM-4-9B-Chat-0414        | lora                 | 80G (Each GPU, Need 8 GPUs)  |
-| GLM-4-32B-Chat-0414       | SFT (Zero3 method)   | 80G (Each GPU, Need 16 GPUs) |
+| 微调模型            | 微调方案                | 显存占用                       | 权重保存点大小   |
+|-----------------|---------------------|----------------------------|-----------|
+| GLM-4-9B-Chat   | lora (PEFT)         | 22G                        | 17M       |
+| GLM-4-9B-Chat   | p-tuning v2 (PEFT)  | 21G                        | 121M      |
+| GLM-4-9B-Chat   | SFT (Zero3 method)  | 80G (Each GPU，需要使用8张GPU)   | 20G       |
+| GLM-4V-9B       | lora (PEFT), 包含视觉模块 | 75G                        | 37M       |
+| GLM-4V-9B       | SFT                 | 本代码不支持                     | 28G       |
 
-+ 基于本仓库代码微调
-
-| Fine-tuning Model        | Fine-tuning solution               | GPU memory usage              |
-|--------------------------|------------------------------------|-------------------------------|
-| GLM-4V-9B                | lora (PEFT), Include EVA2CLIPModel | 75G (Each GPU, Need 1 GPU)    |
-| GLM-4-9B-Chat            | lora (PEFT)                        | 22G (Each GPU, Need 1 GPU)    |
-| GLM-4-9B-Chat            | SFT (Zero3 method)                 | 80G (Each GPU, Need 8 GPUs)   | 
-
-## 准备工作
-
-> GLM-4 系列模型支持使用`Llama-Factory`框架进行微调，本仓库的微调框架不在维护, 仍然支持 GLM-4-9B-Chat-0414 和 GLM-4V-9B 的微调。
+**GLM-4V-9B 微调无法可能正常使用 deepspeed,官方微调脚本仅做最基础的微调方案，更多优化需要开发者自行探索**
 
 在开始微调之前，请你先安装 `basic_demo` 中的依赖，并保证克隆了最新版本的模型仓库，同时您需要安装本目录下的依赖项：
 
 ```bash
 pip install -r requirements.txt
 ```
+
+> NOTE: NLTK 3.8.1 部分代码可能尚未对 python 3.12
+> 进行适配，该情况下的适配方法可参考[issues #38](https://github.com/THUDM/GLM-4/issues/38)
+>
 
 ## 多轮对话格式
 

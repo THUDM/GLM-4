@@ -166,8 +166,11 @@ GLM 家族迎来新一代开源模型 **GLM-4-32B-0414** 系列，320 亿参数�
 | GLM-4-32B-0414  | Agentless<sup>[2]</sup>  | 30.7 | 34.0                                                                                |
 | GLM-4-32B-0414  | OpenHands<sup>[3]</sup>  | 27.2  | 28.0                                                                                |
 
+
 [1] [Moatless v0.0.3](https://github.com/aorwall/moatless-tools) 使用如下参数 `response_format="react", thoughts_in_action=False, max_interations=30`，未对失败轨迹进行重试，其余为默认配置
+
 [2] [Agentless v1.5.0](https://github.com/OpenAutoCoder/Agentless) 其中的 Embedding 模型使用了 [BGE](https://github.com/FlagOpen/FlagEmbedding/blob/master/README_zh.md)，基于[FAISS](https://github.com/facebookresearch/faiss)进行相似性检索，为加快patch验证的速度同时尽可能保证效果，将运行单个实例的超时时间从默认的300s修改为180s
+
 [3] [OpenHands v0.29.1](https://github.com/All-Hands-AI/OpenHands/tree/main) 未采用 YaRN 上下文扩展，而是限制了最大 60 个 iterations，并对 history 进行 summarization 以防止超出 32K 上下文限制，summarization 配置为 `llm_config="condenser", keep_first=1, max_size=32`，同样未对失败轨迹进行重试
 
 

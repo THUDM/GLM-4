@@ -106,12 +106,12 @@ Finally, **GLM-Z1-9B-0414** is a surprise. We employed the aforementioned series
   </tr>
 </table>
 
-### Analysis and Research Report Writing (TODO: dr demo)
+### Analysis and Research Report Writing
 
 <td style="vertical-align: top; padding: 10px; width: 420px;">
   <video src="https://github.com/user-attachments/assets/7939c8c5-0fcf-4bc4-be45-3964aad0e61c" style="width: 400px; height: 300px; object-fit: contain;" autoplay loop muted playsinline></video>
   <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
-    中国城市 AI 发展分析：北京与杭州的对比研究。同时调研国外城市用 AI 进行城市治理的案例。
+    Analysis of AI Development in Chinese Cities: A Comparative Study of Beijing and Hangzhou, Alongside an Investigation of International Cases of AI in Urban Governance. (Prompt translated from Chinese)
   </div>
 </td>
 

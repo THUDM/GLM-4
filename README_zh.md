@@ -17,28 +17,84 @@ Read this in [English](README)
 
 ## 效果展示
 
-# 性能展示
+### 动画绘制
 
-## 动画渲染
+<table>
+  <tr>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px; width: 420px;">
+      GLM-4-Z1-32B-0414
+    </td>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px; width: 420px;">
+      GLM-4-32B-Chat-0414
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; padding: 10px; width: 420px;">
+      <video src="https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32" 
+             style="width: 400px; height: 300px; object-fit: contain;" autoplay loop muted playsinline></video>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+        write a Python program that shows a ball bouncing inside a spinning hexagon. The ball should be affected by gravity and friction, and it must bounce off the rotating walls realistically
+      </div>
+    </td>
+    <td style="vertical-align: top; padding: 10px; width: 420px;">
+      <video src="https://github.com/user-attachments/assets/ff87767e-66ac-4fcb-935a-eda783d12210" 
+             style="width: 400px; height: 300px; object-fit: contain;" autoplay loop muted playsinline></video>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+         Create a first person flight simulator with threejs in HTML
+      </div>
+    </td>
+  </tr>
+</table>
 
-|                                     GLM-4-Z1-32B-0414                                     |                                   GLM-4-32B-Chat-0414                                     |
-|:-----------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------:|
-| ![视频缩略图](https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32) | ![视频缩略图](https://github.com/user-attachments/assets/ff87767e-66ac-4fcb-935a-eda783d12210) |
-|                 编写一个 Python 程序，展示一个球在旋转六边形内弹跳。球应受重力和摩擦力影响，并且必须真实地从旋转的墙壁反弹                 |                              使用 HTML 和 three.js 创建第一人称飞行模拟器                               |
+### 网页设计
 
-## 网页设计
+<table>
+  <tr>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px; width: 420px;">
+      GLM-4-32B-Chat-0414
+    </td>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px; width: 420px;">
+      GLM-4-32B-Chat-0414
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; padding: 10px; width: 420px;">
+      <img src="https://github.com/user-attachments/assets/bd9c1fc1-c784-4e8f-9c76-5f7389a715f1"/>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+          设计一个支持自定义函数绘制的绘图板，可以添加和删除自定义函数，并为函数指定颜色
+      </div>
+    </td>
+    <td style="vertical-align: top; padding: 10px; width: 420px;">
+      <img src="https://github.com/user-attachments/assets/7ad12d52-9229-4278-8d1b-ffbf43e99070"/>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;"> 给我设计一个移动端机器学习平台的 UI，其中要包括训练任务，存储管理，和个人统计信息界面。个人信息统计界面要用图表展示用户过去一段时间的各类资源使用情况。使用 Tailwind CSS 来美化页面，把这 3 个手机界面平铺展示到一个 HTML 页面中 </div>
+    </td>
+  </tr>
+</table>
 
-|                                   GLM-4-32B-Chat-0414                                     |                                                     GLM-4-32B-Chat-0414                                                       |
-|:-----------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------:|
-| ![绘图板界面](https://github.com/user-attachments/assets/7474e6af-6874-48c8-83cb-f9b9ea152ba6) |                   ![移动端UI](https://github.com/user-attachments/assets/f466ab72-0670-4bde-b007-9ee3f1042480)                   |
-|                          设计一个支持自定义函数绘制的绘图板，可以添加和删除自定义函数，并为函数指定颜色                          | 给我设计一个移动端机器学习平台的 UI，其中要包括训练任务，存储管理，和个人统计信息界面。个人信息统计界面要用图表展示用户过去一段时间的各类资源使用情况。使用 Tailwind CSS 来美化页面，把这 3 个手机界面平铺展示到一个 HTML 页面中 |
+### SVG 生成
 
-## SVG
-
-|                                    GLM-4-32B-Chat-0414                                     |                                    GLM-4-32B-Chat-0414                                      |
-|:------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------:|
-| ![机器学习本质](https://github.com/user-attachments/assets/dfecd0d9-dc5b-41c5-9d39-e382976807be) | ![LLM训练流程](https://github.com/user-attachments/assets/986a5d56-23d3-4724-bc70-230088e0d327) |
-|                               用黑白手绘风格给我展示机器学习的本质，画在一张 svg 图中                               |                                   创建一个 svg 图来说明 LLM 的训练流程                                   |
+<table>
+  <tr>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px; width: 420px;">
+      GLM-4-32B-Chat-0414
+    </td>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px; width: 420px;">
+      GLM-4-32B-Chat-0414
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; padding: 10px; width: 420px;">
+      <img src="https://github.com/user-attachments/assets/0f884b5f-1c60-4f81-ad2c-164c4fe66e36"/>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+          用黑白手绘风格给我展示机器学习的本质，画在一张 svg 图中
+      </div>
+    </td>
+    <td style="vertical-align: top; padding: 10px; width: 420px;">
+      <img src="https://github.com/user-attachments/assets/8fe70f0f-e3e3-441b-aec6-2db2b9304326"/>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;"> create an svg to illustrate the training pipeline of an LLM </div>
+    </td>
+  </tr>
+</table>
 
 ## 模型列表
 

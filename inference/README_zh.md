@@ -66,21 +66,21 @@ pip install -r requirements.txt
 | INT4 | 1     | 10 GB  | 0.1s       | 28.7 tokens/s |  1000 |
 | INT4 | 1     | 15 GB  | 0.8s       | 24.2 tokens/s |  8000 |
 
-## 基础功能调用
+## 快速开始
 
 ### 使用 transformers 后端代码
 
 + 使用命令行与 GLM-4-9B 模型进行对话。
 
 ```shell
-python trans_cli_demo.py # GLM-4-9B-Chat
+python trans_cli_demo.py # LLM Such as GLM-4-9B-Chat-0414
 python trans_cli_vision_demo.py # GLM-4V-9B
 ```
 
 + 使用 Gradio 网页端与 GLM-4-9B 模型进行对话。
 
 ```shell
-python trans_web_demo.py  # GLM-4-9B-Chat
+python trans_web_demo.py  # LLM Such as GLM-4-9B-Chat-0414
 python trans_web_vision_demo.py # GLM-4V-9B
 ```
 
@@ -95,7 +95,7 @@ python trans_batch_demo.py
 + 使用命令行与 GLM-4-9B-Chat 模型进行对话。
 
 ```shell
-python vllm_cli_demo.py
+python vllm_cli_demo.py # LLM Such as GLM-4-9B-Chat-0414
 ```
 
 + 在 GLM-4-9B-Chat 模型上使用带有 Lora adapter 的 vLLM
@@ -105,7 +105,7 @@ python vllm_cli_demo.py
 ```
 
 
-+ 自行构建服务端，并使用 `OpenAI API` 的请求格式与 GLM-4-9B-Chat GLM-4v-9B 或者模型进行对话。本 demo 支持 Function Call 和 All Tools功能。
++ 自行构建服务端，并使用 `OpenAI API` 的请求格式与 GLM-4-9B-Chat GLM-4v-9B 或者模型进行对话。
 + 修改 `open_api_server.py` 中模型路径 `MODEL_PATH`，可选择构建 GLM-4-9B-Chat 或者 GLM-4v-9B 服务端
 
 启动服务端：

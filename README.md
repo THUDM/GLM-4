@@ -11,39 +11,144 @@
 
 ## Project Updates
 
-- 🔥🔥 **News**: `2025/04/14`: We released the `GLM-4-0414` series models, available in 9B and 32B sizes.
-- 🔥 **News**: `2024/06/18`: We released our [technical report](https://arxiv.org/pdf/2406.12793), check it out!
-- 🔥 **News**: `2024/06/05`: We open-sourced the `GLM-4-9B` series models.
+- 🔥🔥 **News**: ```2025/04/14```: We released the `GLM-4-0414` model series, available in both 9B and 32B parameter sizes.
+- 🔥 **News**: ``2024/06/18``: We published our [technical report](https://arxiv.org/pdf/2406.12793), feel free to check it out.
+- 🔥 **News**: ``2024/06/05``: We open-sourced the `GLM-4-9B` model series.
 
-## Model Introduction
+## Performance Showcase
+
+### Animation Rendering
+
+<table>
+  <tr>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-Z1-32B-0414
+    </td>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-32B-Chat-0414
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; padding: 10px;">
+      <video src="https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32" 
+             style="width: 400px; height: 300px;" autoplay loop muted playsinline></video>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+        write a Python program that shows a ball bouncing inside a spinning hexagon. The ball should be affected by gravity and friction, and it must bounce off the rotating walls realistically
+      </div>
+    </td>
+    <td style="vertical-align: top; padding: 10px;">
+      <video src="https://github.com/user-attachments/assets/ff87767e-66ac-4fcb-935a-eda783d12210" 
+             style="width: 400px; height: 300px;" autoplay loop muted playsinline></video>
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+         Create a first person filght simulator with threejs in HTML
+      </div>
+    </td>
+  </tr>
+</table>
+
+### Web Design
+
+<table>
+  <tr>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-32B-Chat-0414
+    </td>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-32B-Chat-0414
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/7474e6af-6874-48c8-83cb-f9b9ea152ba6" style="width: 400px;" />
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+          设计一个支持自定义函数绘制的绘图板，可以添加和删除自定义函数，并为函数指定颜色
+      </div>
+    </td>
+    <td style="vertical-align: top; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/f466ab72-0670-4bde-b007-9ee3f1042480" style="width: 400px;" />
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;"> 给我设计一个移动端机器学习平台的 UI，其中要包括训练任务，存储管理，和个人统计信息界面。个人信息统计界面要用图表展示用户过去一段时间的各类资源使用情况。使用 Tailwind CSS 来美化页面，把这 3 个手机界面平铺展示到一个 HTML 页面中 </div>
+    </td>
+  </tr>
+</table>
+
+
+### SVG 
+
+<table>
+  <tr>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-32B-Chat-0414
+    </td>
+    <td style="text-align: center; font-size: 16px; font-weight: bold; padding: 10px;">
+      GLM-4-32B-Chat-0414
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/dfecd0d9-dc5b-41c5-9d39-e382976807be" style="width: 400px;" />
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
+          用黑白手绘风格给我展示机器学习的本质，画在一张 svg 图中
+      </div>
+    </td>
+    <td style="vertical-align: top; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/986a5d56-23d3-4724-bc70-230088e0d327" style="width: 400px;" />
+      <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;"> create an svg to illustrate the training pipeline of an LLM </div>
+    </td>
+  </tr>
+</table>
+
 
 ## Model List
 
 ### GLM-4-0414 Series
 
-|        Model         |   Type    | Seq Length |                                                                    Download                                                                    |
-|:--------------------:|:---------:|:----------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|
-|  GLM-4-9B-Chat-0414  |   Chat    |    128K    | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414) |
-|   GLM-4-Z1-9B-0414   | Reasoning |    128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)   |
-|    GLM-4-32B-0414    |   Base    |    128K    |   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)   |
-| GLM-4-32B-Chat-0414  |   Chat    |    128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)   |
-|  GLM-4-Z1-32B-0414   | Reasoning |    128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)  |
-|  GLM-4-DR-32B-0414   | Reasoning |    128K    |  [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-DR-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-DR-32B-0414)  |
+|             Model             |   Type    | Seq Length* |                                                                              Download                                                                               |
+|:-----------------------------:|:---------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|      GLM-4-9B-Chat-0414       |   Chat    |    32K -> 128K    |           [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-9B-Chat-0414)            |
+|        GLM-Z1-9B-0414         | Reasoning |    32K -> 128K    |             [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-Z1-9B-0414)              |
+|        GLM-4-32B-0414         |   Base    |    32K -> 128K    |             [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-0414)              |
+|      GLM-4-32B-Chat-0414      |   Chat    |    32K -> 128K    |             [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-Chat-0414)             |
+|        GLM-Z1-32B-0414        | Reasoning |    32K -> 128K    |            [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-Z1-32B-0414)             |
+| GLM-4-Z1-Rumination-32B-0414  | Reasoning |    32K -> 128K    | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-Rumination-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-Rumination-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-Z1-Rumination-32B-0414)  |
+
+
+\* The model is natively trained with a 32k context length.* For requests where the total input + output length may exceed 32k, we recommend enabling **Yarn** to achieve better extrapolation performance. You can configure Yarn-based extrapolation using the following settings:
+
+```json
+"rope_scaling": {
+    "factor": 4.0,
+    "original_max_position_embeddings": 32768,
+    "type": "yarn"
+}
+```
 
 ### GLM-4-9B Series
 
-|        Model        | Type | Seq Length |                                                                                                      Download                                                                                                      |
-|:-------------------:|:----:|:----------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|      GLM-4-9B       | Base |     8K     |            [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)             |
-|    GLM-4-9B-Chat    | Chat |    128K    |     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)     |
-|  GLM-4-9B-Chat-HF   | Chat |    128K    |                                     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                     |
-|  GLM-4-9B-Chat-1M   | Chat |     1M     |[🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) |
-| GLM-4-9B-Chat-1M-HF | Chat |     1M     |                                  [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                  |
-|      GLM-4V-9B      | Chat |     8K     |           [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)           |
+|        Model        | Type | Seq Length |                                                                                                       Download                                                                                                       |
+|:-------------------:|:----:|:----------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|      GLM-4-9B       | Base |     8K     |             [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)              |
+|    GLM-4-9B-Chat    | Chat |    128K    |      [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)      |
+|  GLM-4-9B-Chat-HF   | Chat |    128K    |                                      [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                      |
+|  GLM-4-9B-Chat-1M   | Chat |     1M     | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M)  | 
+| GLM-4-9B-Chat-1M-HF | Chat |     1M     |                                   [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                   |
+|      GLM-4V-9B      | Chat |     8K     |            [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)            |
 
 ## BenchMark
 
-### Typical Tasks
+### GLM-4-0414 Series
+
+| Models           | IFEval  | SWE-Bench        | BFCL-v3 (Overall) | BFCL-v3 (MultiTurn) | TAU-Bench (Retail) | TAU-Bench (Airline) | SimpleQA | HotpotQA |
+|------------------|---------|------------------|-------------------|---------------------|--------------------|---------------------|----------|----------|
+| Qwen2.5-Max      | 85.6    | 24.4             | 50.9              | 30.5                | 58.3               | 22.0                | 79.0     | 52.8     |
+| GPT-4o-1120      | 81.9    | 38.8             | 69.6              | 41.0                | 62.8               | 46.0                | 82.8     | 63.9     |
+| DeepSeek-V3-0324 | 83.4    | 38.8（oh）         | 66.2              | 35.8                | 60.7               | 32.4                | 82.6     | 54.6     |
+| DeepSeek-R1      | 84.3    | 34（oh）/ 49.2（al） | 57.5              | 12.4                | 33.0               | 37.3                | 83.9     | 63.1     |
+| GLM-4-32B-0414   | 86.5    |                  | 69.6              | 41.5                | 68.7               | 51.2                | 88.1     | 63.8     |
+
+
+### GLM-4-9B Series
+
+#### Typical Tasks
 
 | Model               | AlignBench | MT-Bench | IFEval | MMLU | C-Eval | GSM8K | MATH | HumanEval | NaturalCodeBench |
 |:--------------------|:----------:|:--------:|:------:|:----:|:------:|:-----:|:----:|:---------:|:----------------:|
@@ -51,7 +156,7 @@
 | ChatGLM3-6B         |    5.18    |   5.50   |  28.1  | 66.4 |  69.0  | 72.3  | 25.7 |   58.5    |       11.3       |
 | GLM-4-9B-Chat       |    7.01    |   8.35   |  69.0  | 72.4 |  75.6  | 79.6  | 50.6 |   71.8    |       32.2       |
 
-### Base Model
+#### Base Model
 
 | Model               | MMLU | C-Eval | GPQA | GSM8K | MATH | HumanEval |
 |:--------------------|:----:|:------:|:----:|:-----:|:----:|:---------:|
@@ -63,7 +168,7 @@
 > Since `GLM-4-9B` adds some math, reasoning, and code-related instruction data during pre-training, Llama-3-8B-Instruct
 > is also included in the comparison range.
 
-### Long Context
+#### Long Context
 
 The [needle-in-the-haystack experiment](https://github.com/LargeWorldModel/LWM/blob/main/scripts/eval_needle.py) was
 conducted with a context length of 1M, and the results are as follows:
@@ -76,7 +181,7 @@ The long text capability was further evaluated on LongBench-Chat, and the result
 <img src="resources/longbench.png" alt="Description text" style="display: block; margin: auto; width: 65%;">
 </p>
 
-### Multi Language
+#### Multi Language
 
 The tests for GLM-4-9B-Chat and Llama-3-8B-Instruct are conducted on six multilingual datasets. The test results and the corresponding languages selected for each dataset are shown in the table below:
 
@@ -89,7 +194,7 @@ The tests for GLM-4-9B-Chat and Llama-3-8B-Instruct are conducted on six multili
 | XStoryCloze |        84.7         |     90.7      |                           zh, en, ar, es, eu, hi, id, my, ru, sw, te                           |
 | XCOPA       |        73.3         |     80.1      |                           zh, et, ht, id, it, qu, sw, ta, th, tr, vi                           |
 
-### Function Call
+#### Function Call
 
 Tested on [Berkeley Function Calling Leaderboard](https://github.com/ShishirPatil/gorilla/tree/main/berkeley-function-call-leaderboard).
 
@@ -100,7 +205,7 @@ Tested on [Berkeley Function Calling Leaderboard](https://github.com/ShishirPati
 | ChatGLM3-6B            |    57.88     |    62.18    |    69.78     |   5.42    |
 | GLM-4-9B-Chat          |    81.00     |    80.26    |    84.40     |   87.92   |
 
-### Multi-Modal
+#### Multi-Modal
 
 GLM-4V-9B is a multimodal language model with visual understanding capabilities. The evaluation results of its related classic tasks are as follows:
 
@@ -133,7 +238,7 @@ This repository provides developers with the basic usage and development code fo
 
 + [demo](demo)
     + [intel_device_demo](demo/intel_device_demo) Deployment code using OpenVINO / Intel® Extension for Transformers
-    + [composite_demo](demo/composite_demo/README.md) Full-feature demo code for GLM-4-9B-Chat and GLM-4V-9B open-source models, including All Tools capability, long-document understanding, and multimodal features.
+    + [composite_demo](demo/composite_demo/README.md) Full-feature demo code for GLM-4-9B-Chat and GLM-4V-9B open-source models, including All Tools capability, long-document understanding, and multimodal features. This does **not** apply to the `GLM-4-0414` models.
 
 ## Model Implementation Code
 

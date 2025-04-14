@@ -1,35 +1,44 @@
-# GLM-4-9B Chat dialogue model fine-tuning
+# GLM-4-9B Chat Fine-tuning
 
-In this demo, you will experience how to fine-tune the GLM-4-9B-Chat open source model (32B Model is Not support otherwise cause OOM).
-## Hardware check
+Read this in [English](README)
 
-**The data in this document are tested in the following hardware environment. The actual operating environment
-requirements and the video memory occupied by the operation are slightly different. Please refer to the actual operating
-environment. The fine-tuned resource usage is set according to the configuration file in the
-configs folder**
+## Hardware Check
 
-Test hardware information:
+All fine-tuning tests were performed in the following environment:
 
-+ OS: Ubuntu 22.04
-+ Memory: 512GB
-+ Python: 3.12.3
-+ CUDA Version: 12.4
-+ GPU Driver: 535.104.05
-+ GPU: NVIDIA H100 80GB HBM3 * 8
+> OS: Ubuntu 22.04
+> 
+> Memory: 512GB
+> 
+> Python: 3.12.3
+> 
+> CUDA Version: 12.4
+> 
+> GPU Driver: 535.104.05
+> 
+> GPU: NVIDIA H100 80GB HBM3 (hereafter referred to as GPU)
 
-| Fine-tuning Model | Fine-tuning solution               | GPU memory usage            | Weight save point size |
-|-------------------|------------------------------------|-----------------------------|------------------------|
-| GLM-4-9B-Chat     | lora (PEFT)                        | 22G                         | 17M                    |
-| GLM-4-9B-Chat     | p-tuning v2 (PEFT)                 | 21G                         | 121M                   |
-| GLM-4-9B-Chat     | SFT (Zero3 method)                 | 80G (Each GPU, Need 8 GPUs) | 20G                    |
-| GLM-4V-9B         | lora (PEFT), Include EVA2CLIPModel | 75G                         | 37M                    |
-| GLM-4V-9B         | SFT                                | Not Support in this Code    | 28G                    |
++ Fine-tuning based on Llama-Factory
 
-**GLM-4V-9B fine-tuning cannot work properly with deepspeed, the official fine-tuning script only does the most basic
-fine-tuning solution, more optimizations require developers to explore on their own**
+| Fine-tuning Model         | Fine-tuning solution | GPU memory usage             |
+|---------------------------|----------------------|------------------------------|
+| GLM-4-9B-Chat-0414        | lora                 | 22G (Each GPU, Need 1 GPU)   |
+| GLM-4-9B-Chat-0414        | SFT (Zero3 method)   | 55G (Each GPU, Need 4 GPUs)  |
+| GLM-4-9B-Chat-0414        | lora                 | 80G (Each GPU, Need 8 GPUs)  |
+| GLM-4-32B-Chat-0414       | SFT (Zero3 method)   | 80G (Each GPU, Need 16 GPUs) |
 
-Before starting fine-tuning, please install the dependencies in `basic_demo` and clone the latest model repos (Hugging
-Face) first. You also need to install the dependencies in this directory:
++ Fine-tuning based on this repository
+
+| Fine-tuning Model        | Fine-tuning solution               | GPU memory usage              |
+|--------------------------|------------------------------------|-------------------------------|
+| GLM-4V-9B                | lora (PEFT), Include EVA2CLIPModel | 75G (Each GPU, Need 1 GPU)    |
+| GLM-4-9B-Chat            | lora (PEFT)                        | 22G (Each GPU, Need 1 GPU)    |
+| GLM-4-9B-Chat            | SFT (Zero3 method)                 | 80G (Each GPU, Need 8 GPUs)   |
+
+
+## Preparation
+
+Before starting fine-tuning, please install the dependencies in \`basic_demo\`, ensure you have cloned the latest version of the model repository, and install the dependencies in this directory:
 
 ```bash
 pip install -r requirements.txt

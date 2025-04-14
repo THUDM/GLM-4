@@ -147,6 +147,11 @@ For supported frameworks, you could add the following to `config.json` to enable
 | DeepSeek-R1      | 84.3    | 34（oh）/ 49.2（al） | 57.5              | 12.4                | 33.0               | 37.3                | 83.9     | 63.1     |
 | GLM-4-32B-0414   | 86.5    |                  | 69.6              | 41.5                | 68.7               | 51.2                | 88.1     | 63.8     |
 
+<div style="text-align: center;">
+  <img src="resources/Bench-32B.png" style="width: 80%;" />
+  <img src="resources/Bench-Z1-9B.png" style="width: 80%;" />
+  <img src="resources/Bench-Z1-32B.png" style="width: 80%;" />
+</div>
 
 ### GLM-4-9B Series
 
@@ -172,16 +177,21 @@ For supported frameworks, you could add the following to `config.json` to enable
 
 #### Long Context
 
-The [needle-in-the-haystack experiment](https://github.com/LargeWorldModel/LWM/blob/main/scripts/eval_needle.py) was
-conducted with a context length of 1M, and the results are as follows:
-
-![needle](resources/eval_needle.jpeg)
+The [needle-in-the-haystack experiment](https://github.com/LargeWorldModel/LWM/blob/main/scripts/eval_needle.py) was conducted with a context length of 1M, and the results are as follows:
 
 The long text capability was further evaluated on LongBench-Chat, and the results are as follows:
 
-<p align="center">
-<img src="resources/longbench.png" alt="Description text" style="display: block; margin: auto; width: 65%;">
-</p>
+<div style="display: flex; justify-content: center; gap: 20px; align-items: flex-start;">
+  <div style="text-align: center; width: 48%;">
+    <p><strong>Needle-in-the-Haystack (1M context)</strong></p>
+    <img src="resources/eval_needle.jpeg" style="width: 100%;" />
+  </div>
+  <div style="text-align: center; width: 48%;">
+    <p><strong>LongBench-Chat Evaluation</strong></p>
+    <img src="resources/longbench.png" style="width: 100%;" />
+  </div>
+</div>
+
 
 #### Multi Language
 

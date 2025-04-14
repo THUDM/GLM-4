@@ -144,6 +144,12 @@ Read this in [English](README)
 | DeepSeek-R1      | 84.3    | 34（oh）/ 49.2（al） | 57.5              | 12.4                | 33.0               | 37.3                | 83.9     | 63.1     |
 | GLM-4-32B-0414   | 86.5    |                  | 69.6              | 41.5                | 68.7               | 51.2                | 88.1     | 63.8     |
 
+<div style="text-align: center;">
+  <img src="resources/Bench-32B.png" style="width: 80%;" />
+  <img src="resources/Bench-Z1-9B.png" style="width: 80%;" />
+  <img src="resources/Bench-Z1-32B.png" style="width: 80%;" />
+</div>
+
 ### GLM-4-9B 系列
 
 #### 对话模型典型任务
@@ -167,15 +173,20 @@ Read this in [English](README)
 
 #### 长文本
 
-在 1M 的上下文长度下进行[大海捞针实验](https://github.com/LargeWorldModel/LWM/blob/main/scripts/eval_needle.py)，结果如下：
+在 1M 的上下文长度下进行[大海捞针实验](https://github.com/LargeWorldModel/LWM/blob/main/scripts/eval_needle.py)。结果为左图。
 
-![needle](resources/eval_needle.jpeg)
+在 LongBench-Chat 上对长文本能力进行了进一步评测。结果为右图。
 
-在 LongBench-Chat 上对长文本能力进行了进一步评测，结果如下:
-
-<p align="center">
-<img src="resources/longbench.png" alt="描述文字" style="display: block; margin: auto; width: 65%;">
-</p>
+<div style="display: flex; justify-content: center; gap: 20px; align-items: flex-start;">
+  <div style="text-align: center; width: 48%;">
+    <p><strong>Needle-in-the-Haystack (1M context)</strong></p>
+    <img src="resources/eval_needle.jpeg" style="width: 100%;" />
+  </div>
+  <div style="text-align: center; width: 48%;">
+    <p><strong>LongBench-Chat Evaluation</strong></p>
+    <img src="resources/longbench.png" style="width: 100%;" />
+  </div>
+</div>
 
 #### 多语言能力
 

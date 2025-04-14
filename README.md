@@ -129,6 +129,8 @@ Finally, **GLM-Z1-9B-0414** is a surprise. We employed all the aforementioned te
 |      GLM-Z1-32B-0414       | Reasoning | 32K -> 128K |                    [🤗 Huggingface](https://huggingface.co/THUDM/GLM-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-Z1-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-Z1-32B-0414)                     |
 | GLM-Z1-Rumination-32B-0414 | Reasoning |    128K     |    [🤗 Huggingface](https://huggingface.co/THUDM/GLM-Z1-Rumination-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-Z1-Rumination-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-Z1-Rumination-32B-0414)    |
 
+Due to its smaller model capacity, GLM-4-9B-0414 has not undergone the same agent capability enhancements as GLM-4-32B-0414. Instead, it has been optimized primarily for scenarios that require large-scale batch operations, such as translation tasks.
+
 \* Models are natively trained with a 32K context. For requests where the total input + output length might exceed 32K tokens, we recommend activating YaRN for better extrapolation performance. See the [Model and Prompt Implementation](#model-and-prompt-implementation) section for details.
 
 Below are the GLM-4 series models released on June 5, 2024. Details can be found [here](README_240605.md).

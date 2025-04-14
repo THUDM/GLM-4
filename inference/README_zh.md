@@ -22,6 +22,7 @@ pip install -r requirements.txt
 + Memory: 512GB
 + Python: 3.12.3
 + CUDA Version:  12.4
++ Cmake 3.23.0
 + GPU Driver: 535.104.05
 + GPU: NVIDIA H100 80GB HBM3 * 8
 
@@ -102,20 +103,23 @@ python vllm_cli_demo.py # LLM Such as GLM-4-9B-Chat-0414
 # 添加 LORA_PATH = ''
 ```
 
++ 构建 OpenAI 类 API 服务。
+```shell
+vllm serve THUDM/GLM-4-9B-Chat-0414 --tensor_parallel_size 2
+```
 
-+ 自行构建服务端，并使用 `OpenAI API` 的请求格式与 GLM-4-9B-Chat GLM-4v-9B 或者模型进行对话。
-+ 修改 `open_api_server.py` 中模型路径 `MODEL_PATH`，可选择构建 GLM-4-9B-Chat 或者 GLM-4v-9B 服务端
+### 使用 glm-4v 构建 OpenAI 服务
 
-启动服务端：
+启动服务端
 
 ```shell
-python openai_api_server.py
+python glm4v_server.py THUDM/glm-4v-9b
 ```
 
 客户端请求：
 
 ```shell
-python openai_api_request.py
+python glm4v_api_request.py
 ```
 
 ## 压力测试
@@ -126,7 +130,7 @@ python openai_api_request.py
 python trans_stress_test.py
 ```
 
-## 使用昇腾卡运行代码
+## 使用昇腾NPU运行代码
 
 用户可以在昇腾硬件环境下运行以上代码，只需将transformers修改为openmind，将device中的cuda设备修改为npu：
 

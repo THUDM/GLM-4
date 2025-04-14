@@ -21,6 +21,7 @@ Test Hardware:
 + OS: Ubuntu 22.04
 + Memory: 512GB
 + Python: 3.12.3
++ Cmake 3.23.0
 + CUDA Version: 12.4
 + GPU Driver: 535.104.05
 + GPU: NVIDIA H100 80GB HBM3 * 8
@@ -87,35 +88,7 @@ python trans_web_vision_demo.py # GLM-4V-9B
 python trans_batch_demo.py  # LLM Such as GLM-4-9B-Chat-0414
 ```
 
-### Use vLLM backend code
 
-+ Use the command line to communicate with the GLM-4-9B-Chat model.
-
-```shell
-python vllm_cli_demo.py  # LLM Such as GLM-4-9B-Chat-0414
-```
-
-+ use LoRA adapters with vLLM on GLM-4-9B-Chat model.
-
-```python
-# vllm_cli_demo.py
-# add LORA_PATH = ''
-```
-
-+ Build the server by yourself and use the request format of `OpenAI API` to communicate with the LLM.
-+ Modify the `MODEL_PATH` in `open_api_server.py`, and you can choose to build the GLM-4-9B-Chat or GLM-4v-9B server side.
-
-Start the server:
-
-```shell
-python openai_api_server.py
-```
-
-Client request:
-
-```shell
-python openai_api_request.py
-```
 
 ## Stress test
 

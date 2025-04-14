@@ -7,15 +7,15 @@ Read this in [English](README)
 所有微调测试均在以下环境和硬件下测试:
 
 > OS: Ubuntu 22.04
-> 
+>
 > Memory: 512GB
-> 
+>
 > Python: 3.12.3
-> 
+>
 > CUDA Version: 12.4
-> 
+>
 > GPU Driver: 535.104.05
-> 
+>
 > GPU: NVIDIA H100 80GB HBM3 (以下简称 GPU)
 
 
@@ -34,7 +34,7 @@ Read this in [English](README)
 |--------------------------|------------------------------------|-------------------------------|
 | GLM-4V-9B                | lora (PEFT), Include EVA2CLIPModel | 75G (Each GPU, Need 1 GPU)    |
 | GLM-4-9B-Chat            | lora (PEFT)                        | 22G (Each GPU, Need 1 GPU)    |
-| GLM-4-9B-Chat            | SFT (Zero3 method)                 | 80G (Each GPU, Need 8 GPUs)   | 
+| GLM-4-9B-Chat            | SFT (Zero3 method)                 | 80G (Each GPU, Need 8 GPUs)   |
 
 
 ## 准备工作

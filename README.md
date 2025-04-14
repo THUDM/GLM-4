@@ -30,14 +30,14 @@
   </tr>
   <tr>
     <td style="vertical-align: top; padding: 10px;">
-      <video src="https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32" 
+      <video src="https://github.com/user-attachments/assets/849ff9fd-b54d-4c74-9ee5-3412e1a09e32"
              style="width: 400px; height: 300px;" autoplay loop muted playsinline></video>
       <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
         write a Python program that shows a ball bouncing inside a spinning hexagon. The ball should be affected by gravity and friction, and it must bounce off the rotating walls realistically
       </div>
     </td>
     <td style="vertical-align: top; padding: 10px;">
-      <video src="https://github.com/user-attachments/assets/ff87767e-66ac-4fcb-935a-eda783d12210" 
+      <video src="https://github.com/user-attachments/assets/ff87767e-66ac-4fcb-935a-eda783d12210"
              style="width: 400px; height: 300px;" autoplay loop muted playsinline></video>
       <div style="margin-top: 10px; font-size: 14px; color: #333; width: 400px;">
          Create a first person filght simulator with threejs in HTML
@@ -72,7 +72,7 @@
 </table>
 
 
-### SVG 
+### SVG
 
 <table>
   <tr>
@@ -102,14 +102,14 @@
 
 ### GLM-4-0414 Series
 
-|             Model             |   Type    | Seq Length* |                                                                              Download                                                                               |
-|:-----------------------------:|:---------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|      GLM-4-9B-Chat-0414       |   Chat    |    32K -> 128K    |           [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-9B-Chat-0414)            |
-|        GLM-Z1-9B-0414         | Reasoning |    32K -> 128K    |             [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-Z1-9B-0414)              |
-|        GLM-4-32B-0414         |   Base    |    32K -> 128K    |             [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-0414)              |
-|      GLM-4-32B-Chat-0414      |   Chat    |    32K -> 128K    |             [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-Chat-0414)             |
-|        GLM-Z1-32B-0414        | Reasoning |    32K -> 128K    |            [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-Z1-32B-0414)             |
-| GLM-4-Z1-Rumination-32B-0414  | Reasoning |    32K -> 128K    | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-Rumination-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-Rumination-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-Z1-Rumination-32B-0414)  |
+|             Model             |   Type    | Seq Length* |                                                                                                                       Download                                                                                                                        |
+|:-----------------------------:|:---------:|:----------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|      GLM-4-9B-Chat-0414       |   Chat    |    32K -> 128K    |                [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-Chat-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-9B-Chat-0414)                |
+|        GLM-Z1-9B-0414         | Reasoning |    32K -> 128K    |                   [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-9B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-Z1-9B-0414)                   |
+|        GLM-4-32B-0414         |   Base    |    32K -> 128K    |                      [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-0414)                      |
+|      GLM-4-32B-Chat-0414      |   Chat    |    32K -> 128K    |              [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Chat-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-Chat-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-Chat-0414)               |
+|        GLM-Z1-32B-0414        | Reasoning |    32K -> 128K    |                 [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-Z1-32B-0414)                  |
+| GLM-4-Z1-Rumination-32B-0414  | Reasoning |    32K -> 128K    | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-Rumination-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-Z1-Rumination-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-Z1-Rumination-32B-0414) |
 
 
 \* The model is natively trained with a 32k context length.* For requests where the total input + output length may exceed 32k, we recommend enabling **Yarn** to achieve better extrapolation performance. You can configure Yarn-based extrapolation using the following settings:
@@ -131,7 +131,7 @@ For supported frameworks, you could add the following to `config.json` to enable
 |      GLM-4-9B       | Base |     8K     |             [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/glm-4-9b)              |
 |    GLM-4-9B-Chat    | Chat |    128K    |      [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)      |
 |  GLM-4-9B-Chat-HF   | Chat |    128K    |                                      [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                      |
-|  GLM-4-9B-Chat-1M   | Chat |     1M     | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M)  | 
+|  GLM-4-9B-Chat-1M   | Chat |     1M     | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M)  |
 | GLM-4-9B-Chat-1M-HF | Chat |     1M     |                                   [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                   |
 |      GLM-4V-9B      | Chat |     8K     |            [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)            |
 
@@ -246,8 +246,8 @@ This repository provides developers with the basic usage and development code fo
 
 If you're interested in our model implementation, feel free to check out the related Pull Requests in the respective repositories — they have already been merged.
 
-+ [vLLM Model Implementation](https://github.com/vllm-project/vllm/pull/16338)  
-+ [transformers Model Implementation](https://github.com/huggingface/transformers/pull/37388)  
++ [vLLM Model Implementation](https://github.com/vllm-project/vllm/pull/16338)
++ [transformers Model Implementation](https://github.com/huggingface/transformers/pull/37388)
 + [llama.cpp Model Implementation](https://github.com/ggml-org/llama.cpp/pull/12867)
 
 ## Friendly Links

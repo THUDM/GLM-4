@@ -7,15 +7,15 @@
 All fine-tuning tests were performed in the following environment:
 
 > OS: Ubuntu 22.04
-> 
+>
 > Memory: 512GB
-> 
+>
 > Python: 3.12.3
-> 
+>
 > CUDA Version: 12.4
-> 
+>
 > GPU Driver: 535.104.05
-> 
+>
 > GPU: NVIDIA H100 80GB HBM3 (hereafter referred to as GPU)
 
 + Fine-tuning based on Llama-Factory

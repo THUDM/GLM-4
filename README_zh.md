@@ -1,7 +1,7 @@
 # GLM-4-0414 系列模型
 
 <p align="center">
-👋 加入我们的 <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a> 和 <a href="resources/WECHAT.md" target="_blank"> 微信 </a>
+👋 加入我们的 <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a>, <a href="https://x.com/ChatGLM" target="_blank">X</a> 和 <a href="resources/WECHAT.md" target="_blank"> 微信 </a>
 </p>
 <p align="center">
 📍本次开源模型可以在 <a href="https://chat.z.ai">Z.ai</a> 免费体验；使用 GLM 商业模型服务请到 <a href="https://bigmodel.cn">bigmodel.cn</a>。
@@ -209,7 +209,7 @@ GLM 家族迎来新一代开源模型 **GLM-4-32B-0414** 系列，320 亿参数�
 如果你使用`transformers`库提供的`apply_chat_template`方法构建提示词。以下是对不同 GLM-4-0414 模型中 `系统提示词`的限制。
 
 + `GLM-4-32B-Base-0414`: 基座模型，无对话模板。
-+ `GLM-4-*--0414` / `GLM-Z1-*-0414`: 如果传入`tools`，则由 `apply_chat_template` 填充工具到`chat_template`中的固定模板，单独作为一条带有`tools`绑定的 `system`字段信息并拼接于`messages[0]`。原本传入的所有 `messages` 自动往后移动一个位置。
++ `GLM-4-*-0414` / `GLM-Z1-*-0414`: 如果传入`tools`，则由 `apply_chat_template` 填充工具到`chat_template`中的固定模板，单独作为一条带有`tools`绑定的 `system`字段信息并拼接于`messages[0]`。原本传入的所有 `messages` 自动往后移动一个位置。
 + `GLM-Z1-Rumination-32B-0414`:
     + 不支持自定义系统提示词，不支持自定义工具，你的所有 `tools` 和 `system` 字段会被 `apply_chat_template` 忽略。使用该模型需要外接搜索引擎或者自定义retrieval API。
     + 一共支持四个工具，分别是

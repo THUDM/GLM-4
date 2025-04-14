@@ -1,7 +1,7 @@
 # GLM-4-0414 Model Series
 
 <p align="center">
-👋 Join our <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a> and <a href="resources/WECHAT.md" target="_blank"> WeChat (Chinese) </a>
+👋 Join our <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a>, <a href="https://x.com/ChatGLM" target="_blank">X</a> and <a href="resources/WECHAT.md" target="_blank"> WeChat (Chinese) </a>
 </p>
 <p align="center">
 📍The open-source models released this time can be experienced for free at <a href="https://chat.z.ai">Z.ai</a>; for GLM commercial model services, please visit <a href="https://bigmodel.cn">bigmodel.cn</a>.
@@ -207,7 +207,7 @@ For most user requests, if the input + output token count does not exceed the na
 If you use the `apply_chat_template` method provided by the `transformers` library to construct prompts, here are the restrictions on `System Prompts` for different GLM-4-0414 models.
 
 + `GLM-4-32B-Base-0414`: Base model, no chat template.
-+ `GLM-4-*--0414` / `GLM-Z1-*-0414`: If `tools` are provided, `apply_chat_template` will populate the tools into a fixed template within the `chat_template`, creating a separate `system` message with tool bindings prepended to the message list (`messages[0]`). All originally passed `messages` are automatically shifted one position back.
++ `GLM-4-*-0414` / `GLM-Z1-*-0414`: If `tools` are provided, `apply_chat_template` will populate the tools into a fixed template within the `chat_template`, creating a separate `system` message with tool bindings prepended to the message list (`messages[0]`). All originally passed `messages` are automatically shifted one position back.
 + `GLM-Z1-Rumination-32B-0414`:
     + Does not support custom system prompts or custom tools. Your `tools` and `system` fields will be ignored by `apply_chat_template`. Using this model requires an external search engine or a custom retrieval API.
     + Supports four tools in total:

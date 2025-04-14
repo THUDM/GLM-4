@@ -1,6 +1,6 @@
-# Basic Demo
+# Inference
 
-In this demo, you will experience how to use the GLM-4-9B open source model to perform basic tasks.
+[中文阅读](README_zh.md)
 
 Please follow the steps in the document strictly to avoid unnecessary errors.
 

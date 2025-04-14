@@ -17,7 +17,7 @@
 
 ## 安装依赖
 
-在开始推理之前，请你先安装`basic_demo`中的依赖，同时您需要安装本目录下的依赖项：
+在开始推理之前，请你先安装`inference`中的依赖，同时您需要安装本目录下的依赖项：
 ```shell
 pip install -r requirements.txt
 ```

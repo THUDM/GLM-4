@@ -18,7 +18,7 @@ Test hardware information:
 
 ## Installing Dependencies
 
-Before starting the inference, please install the dependencies in `basic_demo`, and you need to install the dependencies in this directory:
+Before starting the inference, please install the dependencies in `inference`, and you need to install the dependencies in this directory:
 ```shell
 pip install -r requirements.txt
 ```

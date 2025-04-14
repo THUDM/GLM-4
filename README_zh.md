@@ -111,6 +111,8 @@ Read this in [English](README)
 
 \* 模型原生采用 32k 上下文进行训练，对于输入 + 输出长度可能超过 32k 的请求，我们建议激活 Yarn 来获得较好的外推性能，可以使用如下配置进行 Yarn 外推设置：
 
+对于支持的框架，你应该在`config.json`中修改:
+
 ```json
 "rope_scaling": {
     "factor": 4.0,
@@ -131,7 +133,6 @@ Read this in [English](README)
 |      GLM-4V-9B      | Chat |     8K     |           [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)            |
 
 ## 评测结果
-
 
 ### GLM-4-0414 系列 
 

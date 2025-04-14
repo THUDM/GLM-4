@@ -39,7 +39,7 @@ Read this in [English](README)
 
 ## 准备工作
 
-在开始微调之前，请你先安装 `basic_demo` 中的依赖，并保证克隆了最新版本的模型仓库，同时您需要安装本目录下的依赖项：
+在开始微调之前，请你先安装 `inference` 中的依赖，并保证克隆了最新版本的模型仓库，同时您需要安装本目录下的依赖项：
 
 ```bash
 pip install -r requirements.txt

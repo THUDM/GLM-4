@@ -91,7 +91,7 @@ by `export *_MODEL_PATH=/path/to/model`. The models that can be specified includ
 The Chat model supports reasoning using [vLLM](https://github.com/vllm-project/vllm). To use it, please install vLLM and
 set the environment variable `USE_VLLM=1`.
 
-The Chat model also supports reasoning using [OpenAI API](https://platform.openai.com/docs/api-reference/introduction). To use it, please run `openai_api_server.py` in `basic_demo` and set the environment variable `USE_API=1`. This function is used to deploy inference server and demo server in different machine.
+The Chat model also supports reasoning using [OpenAI API](https://platform.openai.com/docs/api-reference/introduction). To use it, please run `openai_api_server.py` in `inference` and set the environment variable `USE_API=1`. This function is used to deploy inference server and demo server in different machine.
 
 If you need to customize the Jupyter kernel, you can specify it by `export IPYKERNEL=<kernel_name>`.
 

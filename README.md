@@ -114,6 +114,8 @@
 
 \* The model is natively trained with a 32k context length.* For requests where the total input + output length may exceed 32k, we recommend enabling **Yarn** to achieve better extrapolation performance. You can configure Yarn-based extrapolation using the following settings:
 
+For supported frameworks, you could add the following to `config.json` to enable YaRN:
+
 ```json
 "rope_scaling": {
     "factor": 4.0,

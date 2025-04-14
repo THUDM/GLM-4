@@ -1,8 +1,6 @@
-# Basic Demo
+# Inference
 
-Read this in [English](README_en.md).
-
-本 demo 中，你将体验到如何使用 GLM-4-9B 开源模型进行基本的任务。
+Read this in [English](README.md)
 
 请严格按照文档的步骤进行操作，以避免不必要的错误。
 

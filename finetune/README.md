@@ -1,6 +1,6 @@
 # GLM-4-9B Chat Fine-tuning
 
-Read this in [English](README)
+[中文阅读](README_zh.md)
 
 ## Hardware Check
 

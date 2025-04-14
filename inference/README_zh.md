@@ -97,12 +97,6 @@ python trans_batch_demo.py
 python vllm_cli_demo.py # LLM Such as GLM-4-9B-Chat-0414
 ```
 
-+ 在 GLM-4-9B-Chat 模型上使用带有 Lora adapter 的 vLLM
-```python
-# vllm_cli_demo.py
-# 添加 LORA_PATH = ''
-```
-
 + 构建 OpenAI 类 API 服务。
 ```shell
 vllm serve THUDM/GLM-4-9B-Chat-0414 --tensor_parallel_size 2

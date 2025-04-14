@@ -88,7 +88,33 @@ python trans_web_vision_demo.py # GLM-4V-9B
 python trans_batch_demo.py  # LLM Such as GLM-4-9B-Chat-0414
 ```
 
+### Use vLLM backend code
 
++ Use the command line to communicate with the GLM-4-9B-Chat model.
+
+```shell
+python vllm_cli_demo.py  # LLM Such as GLM-4-9B-Chat-0414
+```
+
++ Launch an OpenAI-compatible API service.
+
+```shell
+vllm serve THUDM/GLM-4-9B-Chat-0414 --tensor_parallel_size 2
+```
+
+### Use glm-4v to build an OpenAI-compatible service
+
+Start the server:
+
+```shell
+python glm4v_server.py THUDM/glm-4v-9b
+```
+
+Client request:
+
+```shell
+python glm4v_api_request.py
+```
 
 ## Stress test
 

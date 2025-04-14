@@ -11,7 +11,7 @@ Read this in [English](README)
 
 ## 项目更新
 
-- 🔥🔥 **News**: ```2025/04/14```: 我们发布 `GLM-4-0414` 系列模型，包含 9B 和 32B 两种模型尺寸。
+- 🔥🔥 **News**: ```2025/04/14```: 我们发布 [GLM-4-0414](https://huggingface.co/collections/THUDM/glm-4-0414-67f3cbcb34dd9d252707cb2e) 系列模型，包含 9B 和 32B 两种模型尺寸。
 - 🔥 **News**: ``2024/06/18``: 我们发布 [技术报告](https://arxiv.org/pdf/2406.12793), 欢迎查看。
 - 🔥 **News**: ``2024/06/05``: 我们发布 `GLM-4-9B` 系列开源模型。
 

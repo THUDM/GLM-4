@@ -11,7 +11,7 @@
 
 ## Project Updates
 
-- 🔥🔥 **News**: ```2025/04/14```: We released the `GLM-4-0414` model series, available in both 9B and 32B parameter sizes.
+- 🔥🔥 **News**: ```2025/04/14```: We released the [GLM-4-0414](https://huggingface.co/collections/THUDM/glm-4-0414-67f3cbcb34dd9d252707cb2e) model series, available in both 9B and 32B parameter sizes.
 - 🔥 **News**: ``2024/06/18``: We published our [technical report](https://arxiv.org/pdf/2406.12793), feel free to check it out.
 - 🔥 **News**: ``2024/06/05``: We open-sourced the `GLM-4-9B` model series.
 

@@ -1,6 +1,6 @@
 """
 
-Here is an example of using batch request glm-4-9b,
+Here is an example of using batch request GLM-4-0414 Models and glm-4-9b-chat-hf models with the transformers library.,
 here you need to build the conversation format yourself and then call the batch function to make batch requests.
 Please note that in this demo, the memory consumption is significantly higher.
 

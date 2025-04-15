@@ -16,7 +16,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument("-h", "--help", action="help", help="Show this help message and exit.")
     parser.add_argument(
-        "-m", "--model_id", default="THUDM/GLM-4-9B-Chat-0414", required=False, type=str, help="orignal model path"
+        "-m", "--model_id", default="THUDM/GLM-4-9B-0414", required=False, type=str, help="orignal model path"
     )
     parser.add_argument(
         "-p",

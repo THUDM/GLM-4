@@ -4,7 +4,7 @@ import gradio as gr
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 
 
-MODEL_PATH = "THUDM/GLM-4-9B-Chat-0414"
+MODEL_PATH = "THUDM/GLM-4-9B-0414"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, device_map="auto")
 

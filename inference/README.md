@@ -28,7 +28,7 @@ Test Hardware:
 
 The following stress test results show memory usage and latency during inference. If multiple GPUs are used, "Memory Usage" refers to the maximum usage on a single GPU.
 
-#### GLM-4-32B-Chat-0414
+#### GLM-4-32B-0414
 
 | Precision   | #GPUs | Memory Usage  | First Token Latency | Token Output Speed | Input Tokens |
 |-------------|-------|---------------|---------------------|-------------------|--------------|
@@ -37,7 +37,7 @@ The following stress test results show memory usage and latency during inference
 | BF16        | 2     | 50 GB         | 6.75s               | 8.1 tokens/s      | 32000        |
 | BF16        | 4     | 55 GB         | 37.83s              | 3.0 tokens/s      | 100000       |
 
-#### GLM-4-9B-Chat-0414
+#### GLM-4-9B-0414
 
 | Precision | #GPUs | Memory Usage | First Token Latency | Token Output Speed | Input Tokens |
 |-----------|-------|---------------|----------------------|---------------------|---------------|
@@ -71,21 +71,21 @@ The following stress test results show memory usage and latency during inference
 + Use the command line to communicate with the GLM-4-9B model.
 
 ```shell
-python trans_cli_demo.py # LLM Such as GLM-4-9B-Chat-0414
+python trans_cli_demo.py # LLM Such as GLM-4-9B-0414
 python trans_cli_vision_demo.py # GLM-4V-9B
 ```
 
 + Use the Gradio web client to communicate with the  GLM-4-9B model.
 
 ```shell
-python trans_web_demo.py  # LLM Such as GLM-4-9B-Chat-0414
+python trans_web_demo.py  # LLM Such as GLM-4-9B-0414
 python trans_web_vision_demo.py # GLM-4V-9B
 ```
 
 + Use Batch inference.
 
 ```shell
-python trans_batch_demo.py  # LLM Such as GLM-4-9B-Chat-0414
+python trans_batch_demo.py  # LLM Such as GLM-4-9B-0414
 ```
 
 ### Use vLLM backend code
@@ -93,13 +93,13 @@ python trans_batch_demo.py  # LLM Such as GLM-4-9B-Chat-0414
 + Use the command line to communicate with the GLM-4-9B-Chat model.
 
 ```shell
-python vllm_cli_demo.py  # LLM Such as GLM-4-9B-Chat-0414
+python vllm_cli_demo.py  # LLM Such as GLM-4-9B-0414
 ```
 
 + Launch an OpenAI-compatible API service.
 
 ```shell
-vllm serve THUDM/GLM-4-9B-Chat-0414 --tensor_parallel_size 2
+vllm serve THUDM/GLM-4-9B-0414 --tensor_parallel_size 2
 ```
 
 ### Use glm-4v to build an OpenAI-compatible service

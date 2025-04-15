@@ -21,12 +21,12 @@ Read this in [English](README)
 
 + 基于 Llama-Factory 进行微调
 
-| Fine-tuning Model         | Fine-tuning solution | GPU memory usage             |
-|---------------------------|----------------------|------------------------------|
-| GLM-4-9B-Chat-0414        | lora                 | 22G (Each GPU, Need 1 GPU)   |
-| GLM-4-9B-Chat-0414        | SFT (Zero3 method)   | 55G (Each GPU, Need 4 GPUs)  |
-| GLM-4-9B-Chat-0414        | lora                 | 80G (Each GPU, Need 8 GPUs)  |
-| GLM-4-32B-Chat-0414       | SFT (Zero3 method)   | 80G (Each GPU, Need 16 GPUs) |
+| Fine-tuning Model     | Fine-tuning solution | GPU memory usage             |
+|-----------------------|----------------------|------------------------------|
+| GLM-4-9B-0414     | lora                 | 22G (Each GPU, Need 1 GPU)   |
+| GLM-4-9B-0414     | SFT (Zero3 method)   | 55G (Each GPU, Need 4 GPUs)  |
+| GLM-4-9B-0414     | lora                 | 80G (Each GPU, Need 8 GPUs)  |
+| GLM-4-32B-0414    | SFT (Zero3 method)   | 80G (Each GPU, Need 16 GPUs) |
 
 + 基于本仓库代码微调
 
@@ -261,14 +261,14 @@ pip install -r requirements.txt
 通过以下代码执行 **单机多卡/多机多卡** 运行，这是使用 `deepspeed` 作为加速方案的，您需要安装 `deepspeed`。接着，按照此命令运行：
 
 ```shell
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-Chat-0414  configs/lora.yaml # For Chat Fine-tune
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml # For Chat Fine-tune
 OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b  configs/lora.yaml  # For VQA Fine-tune
 ```
 
 通过以下代码执行 **单机单卡** 运行。
 
 ```shell
-python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-Chat-0414  configs/lora.yaml # For Chat Fine-tune
+python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml # For Chat Fine-tune
 python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
@@ -282,7 +282,7 @@ python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml 
 例如，这就是一个从最后一个保存点继续微调的示例代码
 
 ```shell
-python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-Chat-0414  configs/lora.yaml yes
+python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml yes
 ```
 
 ## 使用微调后的模型

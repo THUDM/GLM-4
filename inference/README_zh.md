@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 推理的压力测试数据如下，如有多张显卡，则显存占用代表显存占用最大一张显卡的显存消耗。
 
-#### GLM-4-32B-Chat-0414
+#### GLM-4-32B-0414
 
 | 精度   | 显卡数量 | 显存占用  | 首 Token 延迟 | Token 输出速度    | 输入token数 |
 |------|------|-------|------------|---------------|----------|
@@ -37,7 +37,7 @@ pip install -r requirements.txt
 | BF16 | 2    | 50 GB | 6.75s      | 8.1 tokens/s  | 32000    |
 | BF16 | 4    | 55 GB | 37.83s     | 3.0 tokens/s  | 100000   |
 
-#### GLM-4-9B-Chat-0414
+#### GLM-4-9B-0414
 
 | 精度   | 显卡数量 | 显存占用  | 首 Token 延迟 | Token 输出速度    | 输入token数 |
 |------|------|-------|------------|---------------|---------|
@@ -72,14 +72,14 @@ pip install -r requirements.txt
 + 使用命令行与 GLM-4-9B 模型进行对话。
 
 ```shell
-python trans_cli_demo.py # LLM Such as GLM-4-9B-Chat-0414
+python trans_cli_demo.py # LLM Such as GLM-4-9B-0414
 python trans_cli_vision_demo.py # GLM-4V-9B
 ```
 
 + 使用 Gradio 网页端与 GLM-4-9B 模型进行对话。
 
 ```shell
-python trans_web_demo.py  # LLM Such as GLM-4-9B-Chat-0414
+python trans_web_demo.py  # LLM Such as GLM-4-9B-0414
 python trans_web_vision_demo.py # GLM-4V-9B
 ```
 
@@ -94,12 +94,12 @@ python trans_batch_demo.py
 + 使用命令行与 GLM-4-9B-Chat 模型进行对话。
 
 ```shell
-python vllm_cli_demo.py # LLM Such as GLM-4-9B-Chat-0414
+python vllm_cli_demo.py # LLM Such as GLM-4-9B-0414
 ```
 
 + 构建 OpenAI 类 API 服务。
 ```shell
-vllm serve THUDM/GLM-4-9B-Chat-0414 --tensor_parallel_size 2
+vllm serve THUDM/GLM-4-9B-0414 --tensor_parallel_size 2
 ```
 
 ### 使用 glm-4v 构建 OpenAI 服务

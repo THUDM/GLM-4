@@ -6,7 +6,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 
 
-MODEL_PATH = "THUDM/GLM-4-9B-Chat-0414"
+MODEL_PATH = "THUDM/GLM-4-9B-0414"
 
 
 def stress_test(input_token_len, n, output_token_len):

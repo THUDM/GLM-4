@@ -2,7 +2,7 @@
 This script creates a OpenAI Request demo for the glm-4v-9b model, just Use OpenAI API to interact with the model.
 For LLM such as GLM-4-9B-0414, using with vLLM OpenAI Server.
 
-vllm serve THUDM/GLM-4-32B-Chat-0414 --tensor_parallel_size 4
+vllm serve THUDM/GLM-4-32B-0414 --tensor_parallel_size 4
 
 """
 

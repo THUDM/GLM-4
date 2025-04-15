@@ -19,7 +19,7 @@ from vllm import AsyncEngineArgs, AsyncLLMEngine, SamplingParams
 from vllm.lora.request import LoRARequest
 
 
-MODEL_PATH = "THUDM/GLM-4-9B-Chat-0414"
+MODEL_PATH = "THUDM/GLM-4-9B-0414"
 LORA_PATH = ""
 
 
@@ -33,7 +33,6 @@ def load_model_and_tokenizer(model_dir: str, enable_lora: bool):
         tensor_parallel_size=1,
         dtype="bfloat16",
         gpu_memory_utilization=0.9,
-        enforce_eager=True,
         disable_log_requests=True,
     )
 

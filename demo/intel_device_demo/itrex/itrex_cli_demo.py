@@ -5,7 +5,7 @@ This script creates a CLI demo with transformers backend for the glm-4-9b model 
 import os
 
 
-MODEL_PATH = os.environ.get("MODEL_PATH", "THUDM/GLM-4-9B-Chat-0414")
+MODEL_PATH = os.environ.get("MODEL_PATH", "THUDM/GLM-4-9B-0414")
 
 from threading import Thread
 

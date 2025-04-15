@@ -8,6 +8,7 @@ combine: True
 freezeV: True
 max_input_length: 512
 max_output_length: 512
+# swanlab: "local"  # set to local if don`t use cloud
 
 training_args:
   # see `transformers.Seq2SeqTrainingArguments`
@@ -26,6 +27,7 @@ training_args:
   log_level: info
   logging_strategy: steps
   logging_steps: 10
+  run_name: "glm4-lora-finetune"
   # settings for evaluation
   per_device_eval_batch_size: 4
   eval_strategy: steps

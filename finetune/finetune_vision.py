@@ -121,6 +121,7 @@ class FinetuningConfig(object):
     max_output_length: int
     combine: bool
     freezeV: bool
+    swanlab: Optional[str] = "cloud"
 
     training_args: Seq2SeqTrainingArguments = dc.field(
         default_factory=lambda: Seq2SeqTrainingArguments(output_dir="./output")
@@ -136,6 +137,10 @@ class FinetuningConfig(object):
             self.training_args.per_device_eval_batch_size = (
                 self.training_args.per_device_eval_batch_size or self.training_args.per_device_train_batch_size
             )
+        if self.swanlab != "disabled":
+            os.environ["SWANLAB_PROJ_NAME"] = "GLM4-Finetune"
+        if self.swanlab == "local":
+            os.environ["SWANLAB_MODE"] = "local"
 
     @classmethod
     def from_dict(cls, **kwargs) -> "FinetuningConfig":

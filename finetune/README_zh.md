@@ -272,6 +272,20 @@ python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml #
 python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
+## 日志可视化支持
+
+微调代码支持使用SwanLab对训练指标进行可视化跟踪。可通过安装SwanLab开启跟踪：
+
+```shell
+pip install swanlab
+```
+
+可以访问[SwanLab可视化看板](https://swanlab.cn/@ShaohonChen/GLM4-Finetune)获得案例微调脚本的训练日志。
+
+如果提示登录，可以通过访问[https://swanlab.cn/space/~/settings](https://swanlab.cn/space/~/settings)获取API Key。
+
+如果仅使用本地看板，可在配置参数中设置`swanlab: local`。并使用`swanlab watch`命令开启离线看板。
+
 ## 从保存点进行微调
 
 如果按照上述方式进行训练，每次微调都会从头开始，如果你想从训练一半的模型开始微调，你可以加入第四个参数，这个参数有两种传入方式:

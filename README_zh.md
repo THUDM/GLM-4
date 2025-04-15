@@ -208,6 +208,21 @@ GLM-4-9B-0414 由于其较小的模型容量，我们未对其智能体能力进
 ```
 对于多数用户请求，如果输出 + 输出 token 数不会超过原生上下文长度，则无需任何修改。
 
+### 模型微调
+
+可以在`finetune/README.md`下找到模型的微调所需算力信息和案例的微调脚本。
+
+可以通过以下命令开启一个简单的模型微调案例
+
+```shell
+cd finetune
+pip install -r ../inference/requirements.txt
+pip install -r requirements.txt
+# Use single GPU for Chat Fine-tune
+python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml
+```
+🎉 脚本也支持使用**SwanLab**进行微调可视化跟踪，可以访问[SwanLab可视化看板](https://swanlab.cn/@ShaohonChen/GLM4-Finetune/overview)获得案例微调脚本的训练日志。
+
 ### 提示词实现
 
 如果你使用`transformers`库提供的`apply_chat_template`方法构建提示词。以下是对不同 GLM-4-0414 模型中 `系统提示词`的限制。

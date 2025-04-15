@@ -7,7 +7,7 @@
 📍The open-source models released this time can be experienced for free at <a href="https://chat.z.ai">Z.ai</a>; for GLM commercial model services, please visit <a href="https://bigmodel.cn">bigmodel.cn</a>.
 </p>
 
-Read this in [中文](README_zh.md)
+Read this in [中文](README_zh.md) | [日本語](README_ja.md)
 
 ## Project Updates
 

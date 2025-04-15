@@ -124,6 +124,15 @@ Users can use this code to test the generation speed of the model on the transfo
 python trans_stress_test.py
 ```
 
+The stress test script supports enabling **SwanLab** to track the stress testing process and record metrics:
+
+```shell
+# The API Key can be obtained by logging in to https://swanlab.cn/
+python trans_stress_test.py --swanlab_api_key "Your SwanLab API Key"
+```
+
+Using the --swanlab_api_key local parameter enables SwanLab's local mode.
+
 ## Use Ascend card to run code
 
 Users can run the above code in the Ascend hardware environment. They only need to change the transformers to openmind and the cuda device in device to npu.

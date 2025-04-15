@@ -38,7 +38,7 @@ All fine-tuning tests were performed in the following environment:
 
 ## Preparation
 
-Before starting fine-tuning, please install the dependencies in \`basic_demo\`, ensure you have cloned the latest version of the model repository, and install the dependencies in this directory:
+Before starting fine-tuning, please install the dependencies in \`inference\`, ensure you have cloned the latest version of the model repository, and install the dependencies in this directory:
 
 ```bash
 pip install -r requirements.txt

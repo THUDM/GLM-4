@@ -1,7 +1,7 @@
 # GLM-4-0414 Model Series
 
 <p align="center">
-👋 Join our <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a>, <a href="https://x.com/ChatGLM" target="_blank">X</a> and <a href="resources/WECHAT.md" target="_blank"> WeChat (Chinese) </a>
+👋 Join our <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a>, <a href="https://x.com/Zai_org" target="_blank">X</a> and <a href="resources/WECHAT.md" target="_blank"> WeChat (Chinese) </a>
 </p>
 <p align="center">
 📍The open-source models released this time can be experienced for free at <a href="https://chat.z.ai">Z.ai</a>; for GLM commercial model services, please visit <a href="https://bigmodel.cn">bigmodel.cn</a>.

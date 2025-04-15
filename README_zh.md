@@ -1,7 +1,7 @@
 # GLM-4-0414 系列模型
 
 <p align="center">
-👋 加入我们的 <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a>, <a href="https://x.com/ChatGLM" target="_blank">X</a> 和 <a href="resources/WECHAT.md" target="_blank"> 微信 </a>
+👋 加入我们的 <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a>, <a href="https://x.com/Zai_org" target="_blank">X</a> 和 <a href="resources/WECHAT.md" target="_blank"> 微信 </a>
 </p>
 <p align="center">
 📍本次开源模型可以在 <a href="https://chat.z.ai">Z.ai</a> 免费体验；使用 GLM 商业模型服务请到 <a href="https://bigmodel.cn">bigmodel.cn</a>。

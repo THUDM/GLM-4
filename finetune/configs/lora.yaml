@@ -40,7 +40,7 @@ training_args:
     max_new_tokens: 512
   # set your absolute deepspeed path here
   # deepspeed: configs/ds_zero_3.json
-  deepspeed: /data/yuxuan/GLM-4/finetune/configs/ds_zero_2.json
+  deepspeed: configs/ds_zero_2.json
 
 peft_config:
   peft_type: LORA

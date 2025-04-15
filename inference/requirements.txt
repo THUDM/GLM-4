@@ -16,5 +16,6 @@ pillow>=10.4.0
 sse-starlette>=2.1.3
 bitsandbytes>=0.44.1 # INT4 Loading, Not support for NPU
 peft>=0.15.0 # Using with finetune model
+swanlab>=0.5.5
 
 # git+https://github.com/vllm-project/vllm.git For vLLM

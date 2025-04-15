@@ -1,5 +1,6 @@
 import argparse
 import time
+import datetime
 from threading import Thread
 
 import torch
@@ -9,7 +10,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStream
 MODEL_PATH = "THUDM/GLM-4-9B-Chat-0414"
 
 
-def stress_test(input_token_len, n, output_token_len):
+def stress_test(run_name, input_token_len, n, output_token_len, swanlab_api_key):
     tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, paddsing_side="left")
     model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, torch_dtype=torch.bfloat16, device_map="auto").eval()
     device = model.device
@@ -21,6 +22,25 @@ def stress_test(input_token_len, n, output_token_len):
     #     quantization_config=BitsAndBytesConfig(load_in_4bit=True),
     #     low_cpu_mem_usage=True,
     # ).eval()
+
+    # Enable SwanLab if swanlab_api_key available
+    if swanlab_api_key:
+        import swanlab
+
+        print("Enable swanlab logging...")
+        if not args.swanlab_api_key=="local":
+            swanlab.login(api_key=args.swanlab_api_key)
+        current_time = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        run_name = run_name if run_name else f'{MODEL_PATH.split("/")[-1]}_{current_time}' 
+        config={
+            "model":model.config.to_dict(),
+            "generation_config": model.generation_config.to_dict(),
+            "input_token_len":input_token_len,
+            "n":n,
+            "output_token_len":output_token_len,
+            "device": str(model.device)
+        }
+        swanlab.init(project='glm-stress-test', name=run_name, config=config, mode="local" if args.swanlab_api_key=="local" else None)
 
     times = []
     decode_times = []
@@ -93,7 +113,14 @@ def stress_test(input_token_len, n, output_token_len):
         print(
             f"Iteration {i + 1}/{n} - Prefilling Time: {times[-1]:.4f} seconds - Average Decode Time: {avg_decode_time_per_token:.4f} tokens/second"
         )
-
+        if swanlab_api_key:
+            swanlab.log({"Iteration":i + 1,
+                         "Iteration/Prefilling Time (seconds)":times[-1], 
+                         "Iteration/Decode Time (tokens per second)" :avg_decode_time_per_token,
+                         "Iteration/Input token Len" : len(test_inputs["input_ids"][0]),
+                         "Iteration/Output token Len" : len(all_token_times),
+                         "Average First Token Time (seconds)" : sum(times) / (i + 1),
+                         "Average Decode Time (tokens per second)" : sum(decode_times) / (i + 1)})
         torch.cuda.empty_cache()
 
     avg_first_token_time = sum(times) / n
@@ -105,8 +132,10 @@ def stress_test(input_token_len, n, output_token_len):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Stress test for model inference")
+    parser.add_argument("--run_name", type=str, default=None, help="Number of tokens for each test")
     parser.add_argument("--input_token_len", type=int, default=100000, help="Number of tokens for each test")
     parser.add_argument("--output_token_len", type=int, default=128, help="Number of output tokens for each test")
     parser.add_argument("--n", type=int, default=3, help="Number of iterations for the stress test")
+    parser.add_argument("--swanlab_api_key", type=str, default=None, help="Enable swanlab logging if API key provided")
     args = parser.parse_args()
-    stress_test(args.input_token_len, args.n, args.output_token_len)
+    stress_test(args.run_name, args.input_token_len, args.n, args.output_token_len, args.swanlab_api_key)

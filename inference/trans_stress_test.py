@@ -1,6 +1,6 @@
 import argparse
-import time
 import datetime
+import time
 from threading import Thread
 
 import torch
@@ -28,19 +28,24 @@ def stress_test(run_name, input_token_len, n, output_token_len, swanlab_api_key)
         import swanlab
 
         print("Enable swanlab logging...")
-        if not args.swanlab_api_key=="local":
+        if not args.swanlab_api_key == "local":
             swanlab.login(api_key=args.swanlab_api_key)
         current_time = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        run_name = run_name if run_name else f'{MODEL_PATH.split("/")[-1]}_{current_time}' 
-        config={
-            "model":model.config.to_dict(),
+        run_name = run_name if run_name else f'{MODEL_PATH.split("/")[-1]}_{current_time}'
+        config = {
+            "model": model.config.to_dict(),
             "generation_config": model.generation_config.to_dict(),
-            "input_token_len":input_token_len,
-            "n":n,
-            "output_token_len":output_token_len,
-            "device": str(model.device)
+            "input_token_len": input_token_len,
+            "n": n,
+            "output_token_len": output_token_len,
+            "device": str(model.device),
         }
-        swanlab.init(project='glm-stress-test', name=run_name, config=config, mode="local" if args.swanlab_api_key=="local" else None)
+        swanlab.init(
+            project="glm-stress-test",
+            name=run_name,
+            config=config,
+            mode="local" if args.swanlab_api_key == "local" else None,
+        )
 
     times = []
     decode_times = []
@@ -114,13 +119,17 @@ def stress_test(run_name, input_token_len, n, output_token_len, swanlab_api_key)
             f"Iteration {i + 1}/{n} - Prefilling Time: {times[-1]:.4f} seconds - Average Decode Time: {avg_decode_time_per_token:.4f} tokens/second"
         )
         if swanlab_api_key:
-            swanlab.log({"Iteration":i + 1,
-                         "Iteration/Prefilling Time (seconds)":times[-1], 
-                         "Iteration/Decode Time (tokens per second)" :avg_decode_time_per_token,
-                         "Iteration/Input token Len" : len(test_inputs["input_ids"][0]),
-                         "Iteration/Output token Len" : len(all_token_times),
-                         "Average First Token Time (seconds)" : sum(times) / (i + 1),
-                         "Average Decode Time (tokens per second)" : sum(decode_times) / (i + 1)})
+            swanlab.log(
+                {
+                    "Iteration": i + 1,
+                    "Iteration/Prefilling Time (seconds)": times[-1],
+                    "Iteration/Decode Time (tokens per second)": avg_decode_time_per_token,
+                    "Iteration/Input token Len": len(test_inputs["input_ids"][0]),
+                    "Iteration/Output token Len": len(all_token_times),
+                    "Average First Token Time (seconds)": sum(times) / (i + 1),
+                    "Average Decode Time (tokens per second)": sum(decode_times) / (i + 1),
+                }
+            )
         torch.cuda.empty_cache()
 
     avg_first_token_time = sum(times) / n

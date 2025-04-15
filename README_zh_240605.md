@@ -1,7 +1,7 @@
 # GLM-4
 
 <p align="center">
- 📄<a href="https://arxiv.org/pdf/2406.12793" target="_blank"> Report </a> • 🤗 <a href="https://huggingface.co/collections/THUDM/glm-4-665fcf188c414b03c2f7e3b7" target="_blank">HF Repo</a> • 🤖 <a href="https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">ModelScope</a> • 🟣 <a href="https://wisemodel.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">WiseModel</a> • 🐦 <a href="https://twitter.com/thukeg" target="_blank">Twitter</a> • 👋 加入我们的 <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a> 和 <a href="resources/WECHAT.md" target="_blank">微信</a> 
+ 📄<a href="https://arxiv.org/pdf/2406.12793" target="_blank"> Report </a> • 🤗 <a href="https://huggingface.co/collections/THUDM/glm-4-665fcf188c414b03c2f7e3b7" target="_blank">HF Repo</a> • 🤖 <a href="https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">ModelScope</a> • 🟣 <a href="https://wisemodel.cn/models/ZhipuAI/glm-4-9b-chat" target="_blank">WiseModel</a> • 🐦 <a href="https://twitter.com/thukeg" target="_blank">Twitter</a> • 👋 加入我们的 <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a> 和 <a href="resources/WECHAT.md" target="_blank">微信</a>
 </p>
 <p align="center">
 📍在 <a href="https://open.bigmodel.cn/?utm_campaign=open&_channel_track_key=OWTVNma9">智谱AI开放平台</a> 体验和使用更大规模的 GLM 商业模型。
@@ -57,7 +57,7 @@ GLM-4V-9B。**GLM-4V-9B** 具备 1120 * 1120 高分辨率下的中英双语多�
 
 | Model               | MMLU | C-Eval | GPQA | GSM8K | MATH | HumanEval |
 |:--------------------|:----:|:------:|:----:|:-----:|:----:|:---------:|
-| Llama-3-8B          | 66.6 |  51.2  |  -   | 45.8  |  -   |   33.5    | 
+| Llama-3-8B          | 66.6 |  51.2  |  -   | 45.8  |  -   |   33.5    |
 | Llama-3-8B-Instruct | 68.4 |  51.3  | 34.2 | 79.6  | 30.0 |   62.2    |
 | ChatGLM3-6B-Base    | 61.4 |  69.0  | 26.8 | 72.3  | 25.7 |   58.5    |
 | GLM-4-9B            | 74.7 |  77.1  | 34.3 | 84.0  | 30.4 |   70.1    |
@@ -285,7 +285,7 @@ for o in outputs:
 + [fintune_demo](finetune_demo/README.md): 在这里包含了
     + PEFT (LORA, P-Tuning) 微调代码
     + SFT 微调代码
- 
+
  + [intel_device_demo](intel_device_demo/): 在这里包含了
    + 使用 OpenVINO 部署模型代码
    + 使用 Intel® Extension for Transformers 部署模型代码
@@ -301,7 +301,7 @@ for o in outputs:
 + [self-llm](https://github.com/datawhalechina/self-llm/tree/master/models/GLM-4): Datawhale 团队的提供的 GLM-4-9B
   系列模型使用教程。
 + [chatglm.cpp](https://github.com/li-plus/chatglm.cpp): 类似 llama.cpp 的量化加速推理方案，实现笔记本上实时对话
-+ [OpenVINO](https://github.com/openvinotoolkit): 
++ [OpenVINO](https://github.com/openvinotoolkit):
 Intel 开发的高性能 CPU,GPU及NPU 加速推理方案，可以参考此 [步骤](https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot-generate-api.ipynb) 部署 glm-4-9b-chat 模型。
 
 ## 协议
@@ -318,7 +318,7 @@ Intel 开发的高性能 CPU,GPU及NPU 加速推理方案，可以参考此 [步
 
 ```
 @misc{glm2024chatglm,
-      title={ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools}, 
+      title={ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools},
       author={Team GLM and Aohan Zeng and Bin Xu and Bowen Wang and Chenhui Zhang and Da Yin and Diego Rojas and Guanyu Feng and Hanlin Zhao and Hanyu Lai and Hao Yu and Hongning Wang and Jiadai Sun and Jiajie Zhang and Jiale Cheng and Jiayi Gui and Jie Tang and Jing Zhang and Juanzi Li and Lei Zhao and Lindong Wu and Lucen Zhong and Mingdao Liu and Minlie Huang and Peng Zhang and Qinkai Zheng and Rui Lu and Shuaiqi Duan and Shudan Zhang and Shulin Cao and Shuxun Yang and Weng Lam Tam and Wenyi Zhao and Xiao Liu and Xiao Xia and Xiaohan Zhang and Xiaotao Gu and Xin Lv and Xinghan Liu and Xinyi Liu and Xinyue Yang and Xixuan Song and Xunkai Zhang and Yifan An and Yifan Xu and Yilin Niu and Yuantao Yang and Yueyan Li and Yushi Bai and Yuxiao Dong and Zehan Qi and Zhaoyu Wang and Zhen Yang and Zhengxiao Du and Zhenyu Hou and Zihan Wang},
       year={2024},
       eprint={2406.12793},
@@ -329,7 +329,7 @@ Intel 开发的高性能 CPU,GPU及NPU 加速推理方案，可以参考此 [步
 
 ```
 @misc{wang2023cogvlm,
-      title={CogVLM: Visual Expert for Pretrained Language Models}, 
+      title={CogVLM: Visual Expert for Pretrained Language Models},
       author={Weihan Wang and Qingsong Lv and Wenmeng Yu and Wenyi Hong and Ji Qi and Yan Wang and Junhui Ji and Zhuoyi Yang and Lei Zhao and Xixuan Song and Jiazheng Xu and Bin Xu and Juanzi Li and Yuxiao Dong and Ming Ding and Jie Tang},
       year={2023},
       eprint={2311.03079},

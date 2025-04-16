@@ -206,6 +206,22 @@ If the total input + output token count might exceed the model's native context 
 ```
 For most user requests, if the input + output token count does not exceed the native context length, no modifications are needed.
 
+### Model Fine-tuning
+
+You can find information about the computational resources required for model fine-tuning, as well as example fine-tuning scripts, in `finetune/README.md`.
+
+To start a simple model fine-tuning example, run the following commands:
+
+```shell
+cd finetune
+pip install -r ../inference/requirements.txt
+pip install -r requirements.txt
+# Use single GPU for Chat Fine-tune
+python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml
+```
+
+🎉 The script also supports fine-tuning with visual tracking using **SwanLab**. You can view the training logs of the example fine-tuning script on the [SwanLab Visualization Dashboard](https://swanlab.cn/@ShaohonChen/GLM4-Finetune/overview).
+
 ### Prompt Implementation
 
 If you use the `apply_chat_template` method provided by the `transformers` library to construct prompts, here are the restrictions on `System Prompts` for different GLM-4-0414 models.

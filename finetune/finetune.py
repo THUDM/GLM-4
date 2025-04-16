@@ -119,6 +119,7 @@ class FinetuningConfig(object):
         default_factory=lambda: Seq2SeqTrainingArguments(output_dir="./output")
     )
     peft_config: Optional[PeftConfig] = None
+    swanlab: Optional[str] = "cloud"
 
     def __post_init__(self):
         if not self.training_args.do_eval or self.data_config.val_file is None:
@@ -129,6 +130,10 @@ class FinetuningConfig(object):
             self.training_args.per_device_eval_batch_size = (
                 self.training_args.per_device_eval_batch_size or self.training_args.per_device_train_batch_size
             )
+        if self.swanlab != "disabled":
+            os.environ["SWANLAB_PROJ_NAME"] = "GLM4-Finetune"
+        if self.swanlab == "local":
+            os.environ["SWANLAB_MODE"] = "local"
 
     @classmethod
     def from_dict(cls, **kwargs) -> "FinetuningConfig":

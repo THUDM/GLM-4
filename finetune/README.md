@@ -272,6 +272,20 @@ python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml #
 python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
+## Log Visualization Support
+
+The fine-tuning code supports using SwanLab to visualize and track training metrics. You can enable tracking by installing SwanLab:
+
+```shell
+pip install swanlab
+```
+
+You can visit the [SwanLab Visualization Dashboard](https://swanlab.cn/@ShaohonChen/GLM4-Finetune) to view the training logs of example fine-tuning scripts.
+
+If prompted to log in, you can obtain an API Key by visiting [https://swanlab.cn/space/~/settings](https://swanlab.cn/space/~/settings).
+
+If you only want to use the local dashboard, set `swanlab: local` in the configuration parameters and use the `swanlab watch` command to start the offline dashboard.
+
 ## Fine-tune from a saved point
 
 If you train as described above, each fine-tuning will start from the beginning. If you want to fine-tune from a

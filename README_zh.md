@@ -7,7 +7,7 @@
 📍本次开源模型可以在 <a href="https://chat.z.ai">Z.ai</a> 免费体验；使用 GLM 商业模型服务请到 <a href="https://bigmodel.cn">bigmodel.cn</a>。
 </p>
 
-Read this in [English](README)
+Read this in [English](README) | [日本語](README_ja.md)
 
 ## 项目更新
 

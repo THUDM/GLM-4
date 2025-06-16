@@ -24,7 +24,7 @@ All fine-tuning tests were performed in the following environment:
 |-----------------------|----------------------|------------------------------|
 | GLM-4-9B-0414     | lora                 | 22G (Each GPU, Need 1 GPU)   |
 | GLM-4-9B-0414     | SFT (Zero3 method)   | 55G (Each GPU, Need 4 GPUs)  |
-| GLM-4-9B-0414     | lora                 | 80G (Each GPU, Need 8 GPUs)  |
+| GLM-4-9B-0414     | SFT                  | 80G (Each GPU, Need 8 GPUs)  |
 | GLM-4-32B-0414    | SFT (Zero3 method)   | 80G (Each GPU, Need 16 GPUs) |
 
 + Fine-tuning based on this repository

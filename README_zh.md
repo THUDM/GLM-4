@@ -11,7 +11,8 @@ Read this in [English](README)
 
 ## 项目更新
 
-- 🔥 **News**: ```2025/04/14```: 我们发布 [GLM-4-32B-0414](https://huggingface.co/collections/THUDM/glm-4-0414-67f3cbcb34dd9d252707cb2e) 系列模型，规模提升至 32B，包含对话、推理、沉思多种能力的模型。
+- 🔥 **News**：`2025/07/02`：我们正式发布 [GLM-4.1V-9B-Thinking](https://huggingface.co/collections/THUDM/glm-41v-thinking-6862bbfc44593a8601c2578d) 系列视觉理解模型，更多信息请查看 [GitHub 仓库](https://github.com/THUDM/GLM-4.1V-Thinking)。
+- **News**: ```2025/04/14```: 我们发布 [GLM-4-32B-0414](https://huggingface.co/collections/THUDM/glm-4-0414-67f3cbcb34dd9d252707cb2e) 系列模型，规模提升至 32B，包含对话、推理、沉思多种能力的模型。
 - **News**: ``2024/06/18``: 我们发布 [技术报告](https://arxiv.org/pdf/2406.12793), 欢迎查看。
 - **News**: ``2024/06/05``: 我们发布 `GLM-4-9B` 系列开源模型，其内容可以在[这里](README_240605.md)查看。
 

@@ -11,7 +11,8 @@ Read this in [中文](README_zh.md)
 
 ## Project Updates
 
-- 🔥 **News**: ```2025/04/14```: We are releasing the [GLM-4-32B-0414](https://huggingface.co/collections/THUDM/glm-4-0414-67f3cbcb34dd9d252707cb2e) series models, scaled up to 32B parameters, including models with capabilities for dialogue, reasoning, and rumination.
+- 🔥 **News**: ```2025/07/02```: We are releasing the [GLM-4.1V-9B-Thinking](https://huggingface.co/collections/THUDM/glm-41v-thinking-6862bbfc44593a8601c2578d) series VLM, check [this github repo](https://github.com/THUDM/GLM-4.1V-Thinking) to get more information.
+- **News**: ```2025/04/14```: We are releasing the [GLM-4-32B-0414](https://huggingface.co/collections/THUDM/glm-4-0414-67f3cbcb34dd9d252707cb2e) series models, scaled up to 32B parameters, including models with capabilities for dialogue, reasoning, and rumination.
 - **News**: ``2024/06/18``: We have released our [Technical Report](https://arxiv.org/pdf/2406.12793), feel free to check it out.
 - **News**: ``2024/06/05``: We released the `GLM-4-9B` series of open-source models. Details can be found [here](README_20240605.md).
 

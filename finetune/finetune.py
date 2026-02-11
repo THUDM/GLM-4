@@ -245,9 +245,15 @@ def process_batch(
             new_input_ids = tokenizer.apply_chat_template(conv, tokenize=True, return_dict=False)
             input_ids = new_input_ids
             loss_masks = [False] * len(input_ids)
-            last_assistant_index = len(input_ids) - input_ids[::-1].index(151337) - 1
-            for j in range(last_assistant_index + 1, len(input_ids)):
-                loss_masks[j] = True
+            for j in range(len(input_ids)):
+                if input_ids[j] == 151337:  # assistant role token
+                    loss_masks[j] = True
+                    k = j + 1
+                    while k < len(input_ids):
+                        loss_masks[k] = True
+                        if input_ids[k] == 151336:  # end token
+                            break
+                        k += 1
         else:
             for message in conv:
                 message = process_message(message)

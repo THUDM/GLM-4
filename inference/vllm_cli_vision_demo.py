@@ -67,7 +67,7 @@ async def chat():
     image_path = input("Image Path:")
     try:
         image = Image.open(image_path).convert("RGB")
-    except:
+    except Exception:
         print("Invalid image path. Continuing with text conversation.")
     while True:
         user_input = input("\nYou: ")

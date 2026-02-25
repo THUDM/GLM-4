@@ -90,7 +90,7 @@ def dispatch_tool(tool_name: str, code: str, session_id: str) -> list[ToolObserv
     try:
         ret: str = tool_hook(**tool_params)
         return [ToolObservation(tool_name, str(ret))]
-    except:
+    except Exception:
         err = traceback.format_exc()
         return [ToolObservation("system_error", err)]
 
@@ -149,7 +149,7 @@ def get_weather(
         resp.raise_for_status()
         resp = resp.json()
         ret = {k: {_v: resp[k][0][_v] for _v in v} for k, v in key_selection.items()}
-    except:
+    except Exception:
         import traceback
 
         ret = "Error encountered while fetching weather data!\n" + traceback.format_exc()

@@ -103,10 +103,10 @@ class CodeKernel:
         if msg["content"]["status"] == "error":
             try:
                 error_msg = msg["content"]["traceback"]
-            except:
+            except Exception:
                 try:
                     error_msg = msg["content"]["traceback"][-1].strip()
-                except:
+                except Exception:
                     error_msg = "Traceback Error"
             if verbose:
                 print("Error: ", error_msg)

@@ -70,21 +70,20 @@ Chat 模型支持使用 [vLLM](https://github.com/vllm-project/vllm) 推理。�
 
 Chat 模型支持使用 [OpenAI API](https://platform.openai.com/docs/api-reference/introduction) 推理。若要使用，请启动basic_demo目录下的openai_api_server并设置环境变量 `USE_API=1`。该功能可以解耦推理服务器和demo服务器。
 
-出于安全原因，宿主机 Shell 和无沙箱 Jupyter Python 工具已从可调用工具注册表中移除。若需要代码执行能力，
-应接入独立容器/虚拟机沙箱，并限制网络、文件挂载、CPU、内存和执行时间，不能直接恢复宿主机执行。
+如果需要自定义 Jupyter 内核，可以通过 `export IPYKERNEL=<kernel_name>` 来指定。
 
 ## 使用
 
 GLM-4 Demo 拥有三种模式：
 
-- All Tools: 工具调用对话模式，支持受限网页浏览、图片生成及不执行宿主机命令的自定义工具。
+- All Tools: 具有完整工具调用能力的对话模式，原生支持网页浏览、代码执行、图片生成，并支持自定义工具。
 - 文档解读: 支持上传文档进行文档解读与对话。
 - 多模态: 支持上传图像进行图像理解与对话。
 
 ### All Tools
 
 本模式兼容 ChatGLM3-6B 的工具注册流程。
-+ 网页浏览和图片生成能力已经集成；宿主机代码执行默认不可用。
++ 代码能力，绘图能力，联网能力已经自动集成，用户只需按照要求配置对应的Key。
 + 本模式下不支持系统提示词，模型会自动构建提示词。
 
 对话模式下，用户可以直接在侧边栏修改 top_p, temperature 等参数来调整模型的行为。

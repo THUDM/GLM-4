@@ -78,9 +78,7 @@ set the environment variable `USE_VLLM=1`.
 
 The Chat model also supports reasoning using [OpenAI API](https://platform.openai.com/docs/api-reference/introduction). To use it, please run `openai_api_server.py` in `inference` and set the environment variable `USE_API=1`. This function is used to deploy inference server and demo server in different machine.
 
-For security, host shell execution and the unsandboxed Jupyter Python tool are no longer registered as callable tools.
-If code execution is required, integrate a separate container or VM sandbox with network, filesystem, CPU, memory, and
-execution-time limits. Do not re-enable host execution.
+If you need to customize the Jupyter kernel, you can specify it by `export IPYKERNEL=<kernel_name>`.
 
 ## Usage
 
@@ -115,7 +113,8 @@ def get_weather(
 
 This mode is compatible with the tool registration process of ChatGLM3-6B.
 
-+ Restricted web browsing and image generation are integrated. Host code execution is not available.
++ Code capability, drawing capability, and networking capability have been automatically integrated. Users only need to
+  configure the corresponding Key as required.
 + System prompt words are not supported in this mode. The model will automatically build prompt words.
 
 ## Text interpretation mode

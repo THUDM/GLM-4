@@ -7,6 +7,7 @@ through defined interfaces.
 import copy
 import inspect
 import json
+import subprocess
 import traceback
 from collections.abc import Callable
 from types import GenericAlias
@@ -15,9 +16,14 @@ from typing import Annotated, get_origin
 from .browser import tool_call as browser
 from .cogview import tool_call as cogview
 from .interface import ToolObservation
+from .python import tool_call as python
 
 
-ALL_TOOLS = {"simple_browser": browser, "cogview": cogview}
+ALL_TOOLS = {
+    "simple_browser": browser,
+    "python": python,
+    "cogview": cogview,
+}
 
 _TOOL_HOOKS = {}
 _TOOL_DESCRIPTIONS = []
@@ -149,6 +155,30 @@ def get_weather(
         ret = "Error encountered while fetching weather data!\n" + traceback.format_exc()
 
     return str(ret)
+
+
+@register_tool
+def get_shell(
+    query: Annotated[str, "The command should run in Linux shell", True],
+) -> str:
+    """
+    Use shell to run command
+    """
+    if not isinstance(query, str):
+        raise TypeError("Command must be a string")
+    try:
+        result = subprocess.run(
+            query,
+            shell=True,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        return result.stdout
+    except subprocess.CalledProcessError as e:
+        return e.stderr
+
 
 if __name__ == "__main__":
     print(get_tools())

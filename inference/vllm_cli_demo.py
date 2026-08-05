@@ -19,7 +19,7 @@ from vllm import AsyncEngineArgs, AsyncLLMEngine, SamplingParams
 from vllm.lora.request import LoRARequest
 
 
-MODEL_PATH = "THUDM/GLM-4-9B-0414"
+MODEL_PATH = "zai-org/GLM-4-9B-0414"
 LORA_PATH = ""
 
 

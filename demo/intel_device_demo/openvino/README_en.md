@@ -17,7 +17,7 @@ pip install -r requirements.txt
 Since the Huggingface model needs to be converted to an OpenVINO IR model, you need to download the model and convert it.
 
 ```
-python3 convert.py --model_id THUDM/glm-4-9b-chat --output {your_path}/glm-4-9b-chat-ov
+python3 convert.py --model_id zai-org/glm-4-9b-chat --output {your_path}/glm-4-9b-chat-ov
 ```
 The conversion process is as follows:
 ```

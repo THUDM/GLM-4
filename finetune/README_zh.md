@@ -261,15 +261,15 @@ pip install -r requirements.txt
 通过以下代码执行 **单机多卡/多机多卡** 运行，这是使用 `deepspeed` 作为加速方案的，您需要安装 `deepspeed`。接着，按照此命令运行：
 
 ```shell
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml # For Chat Fine-tune
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b  configs/lora.yaml  # For VQA Fine-tune
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune.py  data/AdvertiseGen/  zai-org/GLM-4-9B-0414  configs/lora.yaml # For Chat Fine-tune
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_vision.py  data/CogVLM-311K/  zai-org/glm-4v-9b  configs/lora.yaml  # For VQA Fine-tune
 ```
 
 通过以下代码执行 **单机单卡** 运行。
 
 ```shell
-python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml # For Chat Fine-tune
-python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
+python finetune.py  data/AdvertiseGen/  zai-org/GLM-4-9B-0414  configs/lora.yaml # For Chat Fine-tune
+python finetune_vision.py  data/CogVLM-311K/  zai-org/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
 ## 日志可视化支持
@@ -296,7 +296,7 @@ pip install swanlab
 例如，这就是一个从最后一个保存点继续微调的示例代码
 
 ```shell
-python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml yes
+python finetune.py  data/AdvertiseGen/  zai-org/GLM-4-9B-0414  configs/lora.yaml yes
 ```
 
 ## 使用微调后的模型

@@ -5,6 +5,7 @@ Please follow the Readme.md to run the demo.
 
 """
 
+import hmac
 import os
 import traceback
 from enum import Enum
@@ -19,6 +20,7 @@ from conversation import (
     Role,
     postprocess_text,
     response_to_str,
+    sanitize_untrusted_content,
 )
 from PIL import Image
 from streamlit.delta_generator import DeltaGenerator
@@ -26,8 +28,8 @@ from tools.tool_registry import dispatch_tool, get_tools
 from utils import extract_docx, extract_pdf, extract_pptx, extract_text
 
 
-CHAT_MODEL_PATH = os.environ.get("CHAT_MODEL_PATH", "THUDM/glm-4-9b-chat")
-VLM_MODEL_PATH = os.environ.get("VLM_MODEL_PATH", "THUDM/glm-4v-9b")
+CHAT_MODEL_PATH = os.environ.get("CHAT_MODEL_PATH", "zai-org/glm-4-9b-chat")
+VLM_MODEL_PATH = os.environ.get("VLM_MODEL_PATH", "zai-org/glm-4v-9b")
 
 USE_VLLM = os.environ.get("USE_VLLM", "0") == "1"
 USE_API = os.environ.get("USE_API", "0") == "1"
@@ -57,6 +59,27 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="expanded",
 )
+
+
+def require_authentication() -> None:
+    password = os.environ.get("COMPOSITE_DEMO_PASSWORD")
+    server_address = str(st.get_option("server.address") or "")
+    if server_address not in {"127.0.0.1", "::1", "localhost"} and not password:
+        st.error("COMPOSITE_DEMO_PASSWORD is required when the app is bound to a non-loopback address.")
+        st.stop()
+    if not password or st.session_state.get("authenticated"):
+        return
+
+    candidate = st.text_input("Password", type="password")
+    if st.button("Sign in"):
+        if hmac.compare_digest(candidate, password):
+            st.session_state.authenticated = True
+            st.rerun()
+        st.error("Invalid password")
+    st.stop()
+
+
+require_authentication()
 
 st.title("GLM-4 Demo")
 st.markdown(
@@ -259,7 +282,8 @@ def main(prompt_text: str):
             new: bool = False,
         ):
             processed_text = postprocess_text(text, role.value == Role.ASSISTANT.value)
-            conversation = Conversation(role, text, processed_text, metadata, image)
+            model_text = sanitize_untrusted_content(text) if role.value == Role.OBSERVATION.value else text
+            conversation = Conversation(role, model_text, processed_text, metadata, image)
 
             # Use different placeholder for new block
             placeholder = message_placeholder if new else markdown_placeholder

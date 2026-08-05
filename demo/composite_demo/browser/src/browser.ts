@@ -2,8 +2,9 @@ import { JSDOM } from 'jsdom';
 import TurndownService from 'turndown';
 
 import config from './config';
+import { fetchTextWithLimits } from './security';
 import { Message, ToolObservation } from './types';
-import { logger, withTimeout } from './utils';
+import { logger } from './utils';
 
 // represent a quote from a display
 interface Quote {
@@ -122,6 +123,12 @@ abstract class BaseBrowser {
     return this.turndownService.turndown(dom.window.document);
   }
 
+  private transformQuote(dom: JSDOM): string {
+    const service = new TurndownService({ headingStyle: 'atx' });
+    service.remove(['script', 'style']);
+    return service.turndown(dom.window.document);
+  }
+
   private formatPage(state: PageState): string {
     let formatted_lines = state.lines.join('\n');
     let formatted_title = state.title ? `TITLE: ${state.title}\n\n` : '';
@@ -147,6 +154,9 @@ abstract class BaseBrowser {
   }
 
   private pushPageState(): PageState {
+    while (this.state.pageStack.length >= config.MAX_PAGE_STACK) {
+      this.state.pageStack.shift();
+    }
     let state = this.newPageState();
     this.state.pageStack.push(state);
     return state;
@@ -169,25 +179,24 @@ abstract class BaseBrowser {
 
   protected functions = {
     search: async (query: string, recency_days: number = -1) => {
-      logger.debug(`Searching for: ${query}`);
+      if (!config.BING_SEARCH_API_KEY) throw new Error('BING_SEARCH_API_KEY is not configured');
+      if (!query || query.length > 512) throw new Error('Search query must contain at most 512 characters');
+      if (recency_days !== -1 && (!Number.isInteger(recency_days) || recency_days < 1 || recency_days > 3650)) {
+        throw new Error('recency_days must be between 1 and 3650');
+      }
+      logger.debug(`Searching; query_chars=${query.length}`);
       const search = new URLSearchParams({ q: query });
       recency_days > 0 && search.append('recency_days', recency_days.toString());
       if (config.CUSTOM_CONFIG_ID) {
-    search.append('customconfig', config.CUSTOM_CONFIG_ID.toString());
-}
+        search.append('customconfig', config.CUSTOM_CONFIG_ID.toString());
+      }
       const url = `${config.BING_SEARCH_API_URL}/search?${search.toString()}`;
-      console.log('Full URL:', url); // 输出完整的 URL查看是否正确
-
-      return withTimeout(
-        config.BROWSER_TIMEOUT,
-        fetch(url, {
-          headers: {
-            'Ocp-Apim-Subscription-Key': config.BING_SEARCH_API_KEY,
-          }
-        })
-            .then(
-          res =>
-            res.json() as Promise<{
+      return fetchTextWithLimits(url, {
+        headers: {
+          'Ocp-Apim-Subscription-Key': config.BING_SEARCH_API_KEY,
+        },
+      })
+        .then(({ text }) => JSON.parse(text) as {
               queryContext: {
                 originalQuery: string;
               };
@@ -220,10 +229,8 @@ abstract class BaseBrowser {
                   }[];
                 };
               };
-            }>,
-        ),
-      )
-        .then(async ({ value: res }) => {
+            })
+        .then(async res => {
           try {
             let state = this.pushPageState();
             let metadataList: TetherQuoteMetadata[] = [];
@@ -262,25 +269,19 @@ abstract class BaseBrowser {
           }
         })
         .catch(err => {
-          logger.error(`搜索请求失败：${query}，错误信息：${err.message}`);
-          if (err.code === 'ECONNABORTED') {
-            throw new Error(`Timeout while executing search for: ${query}`);
-          }
-          throw new Error(`网络或服务器发生错误，请检查URL: ${url}`);
+          logger.error(`Search request failed: ${err.message}`);
+          throw new Error('Search request failed');
         });
     },
     open_url: (url: string) => {
-      logger.debug(`Opening ${url}`);
+      logger.debug('Opening URL');
 
-      return withTimeout(
-        config.BROWSER_TIMEOUT,
-        fetch(url).then(res => res.text()),
-      )
-        .then(async ({ value: res, time }) => {
+      return fetchTextWithLimits(url)
+        .then(async ({ text: res, finalUrl }) => {
           try {
             const state = this.pushPageState();
-            state.url = new URL(url);
-            state.url_string = url;
+            state.url = new URL(finalUrl);
+            state.url_string = finalUrl;
             state.hostname = state.url.hostname;
 
             const html = res;
@@ -306,7 +307,7 @@ abstract class BaseBrowser {
             let page = lines.join('\n');
 
             // The first line feed is not a typo
-            let text_result = `\nURL: ${url}\n${page}`;
+            let text_result = `\nURL: ${finalUrl}\n${page}`;
             state.lines = text_result.split('\n');
 
             // all lines has only one source
@@ -314,7 +315,7 @@ abstract class BaseBrowser {
             state.line_source[`0-${state.lines.length - 1}`] = {
               type: 'webpage',
               title: title,
-              url: url,
+              url: finalUrl,
               lines: state.lines,
             };
 
@@ -333,18 +334,18 @@ abstract class BaseBrowser {
         })
         .catch(err => {
           logger.error(err.message);
-          if (err.code === 'ECONNABORTED') {
-            throw new Error(`Timeout while loading page w/ URL: ${url}`);
-          }
           throw new Error(`Failed to load page w/ URL: ${url}`);
         });
     },
     mclick: (ids: number[]) => {
       logger.info('Entering mclick', ids);
+      if (ids.length === 0 || ids.length > config.MAX_MCLICK_IDS) {
+        throw new Error(`mclick accepts between 1 and ${config.MAX_MCLICK_IDS} ids`);
+      }
       let promises: Promise<ActionResult>[] = [];
       let state = this.lastPageState();
       for (let id of ids) {
-        if (isNaN(id) || id >= state.links.length) {
+        if (!Number.isInteger(id) || id < 0 || id >= state.links.length) {
           promises.push(
             Promise.reject(
               new Error(
@@ -372,13 +373,11 @@ abstract class BaseBrowser {
 
         const quoteIndex = this.state.quoteCounter++; // ascending in final results
         promises.push(
-          withTimeout(
-            config.BROWSER_TIMEOUT,
-            fetch(url).then(res => res.text()),
-          )
-            .then(({ value: res, time }) => {
+          fetchTextWithLimits(url)
+            .then(({ text: res, finalUrl }) => {
               let state = this.newPageState();
-              state.url = new URL(url);
+              state.url = new URL(finalUrl);
+              state.url_string = finalUrl;
               state.hostname = state.url.hostname;
 
               try {
@@ -387,7 +386,7 @@ abstract class BaseBrowser {
                 const title = dom.window.document.title;
                 state.title = title;
                 removeDenseLinks(dom.window.document);
-                let quoteText = this.transform(dom);
+                let quoteText = this.transformQuote(dom);
                 // remove consecutive newline
                 quoteText = quoteText.replace(/[\r\n]+/g, '\n');
                 const quoteLines = quoteText.split('\n');
@@ -395,13 +394,13 @@ abstract class BaseBrowser {
                 const metadata = {
                   type: 'webpage',
                   title: title,
-                  url: url,
+                  url: finalUrl,
                   lines: quoteLines,
                 };
                 const quoteMetadata = {
                   type: 'webpage',
                   title: title,
-                  url: url,
+                  url: finalUrl,
                   text: quoteText,
                 };
                 state.line_source = {};
@@ -410,6 +409,10 @@ abstract class BaseBrowser {
                   text: quoteText,
                   metadata: [metadata],
                 };
+                const quoteIds = Object.keys(this.state.quotes).sort((a, b) => Number(a) - Number(b));
+                while (quoteIds.length > config.MAX_QUOTES) {
+                  delete this.state.quotes[quoteIds.shift()!];
+                }
 
                 const returnContentType = 'quote_result';
                 return {
@@ -418,7 +421,7 @@ abstract class BaseBrowser {
                   message: quoteText,
                   metadataList: [quoteMetadata],
                   metadata: {
-                    url,
+                    url: finalUrl,
                   },
                 };
               } catch (err) {
@@ -427,9 +430,6 @@ abstract class BaseBrowser {
             })
             .catch(err => {
               logger.error(err.message);
-              if (err.code === 'ECONNABORTED') {
-                throw new Error(`Timeout while loading page w/ URL: ${this.formatErrorUrl(url)}`);
-              }
               throw new Error(`Failed to load page w/ URL: ${this.formatErrorUrl(url)}`);
             })
             .catch(err => {
@@ -573,9 +573,16 @@ abstract class BaseBrowser {
 
   async action(content: string): Promise<ToolObservation[]> {
     const lines = content.split('\n');
+    if (Buffer.byteLength(content, 'utf8') > config.MAX_ACTION_BYTES) {
+      throw new Error('Action payload is too large');
+    }
+    if (lines.length > config.MAX_ACTION_LINES) {
+      throw new Error(`Too many action lines; maximum is ${config.MAX_ACTION_LINES}`);
+    }
     let results: ActionResult[] = [];
     for (const line of lines) {
-      logger.info(`Action line: ${line}`)
+      const actionName = /^\s*(\w+)\s*\(/.exec(line)?.[1] ?? 'invalid';
+      logger.info(`Action: ${actionName}; action_bytes=${Buffer.byteLength(line, 'utf8')}`);
       try {
         const lineActionResult = await this.actionLine(line);
         logger.debug(`Action line result: ${JSON.stringify(lineActionResult, null, 2)}`);
@@ -686,8 +693,9 @@ export class SimpleBrowser extends BaseBrowser {
   }
 
   async actionLine(content: string): Promise<ActionResult | ActionResult[]> {
-    const regex = /(\w+)\(([^)]*)\)/;
-    const matches = content.match(regex);
+    const trimmed = content.trim();
+    const regex = /^(\w+)\(([^)]*)\)$/;
+    const matches = trimmed.match(regex);
 
     if (matches) {
       const functionName = matches[1];

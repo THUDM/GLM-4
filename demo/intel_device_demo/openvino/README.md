@@ -19,7 +19,7 @@ pip install -r requirements.txt
 由于需要将Huggingface模型转换为OpenVINO IR模型，因此您需要下载模型并转换。
 
 ```
-python3 convert.py --model_id THUDM/glm-4-9b-chat --output {your_path}/glm-4-9b-chat-ov
+python3 convert.py --model_id zai-org/glm-4-9b-chat --output {your_path}/glm-4-9b-chat-ov
 ```
 
 ### 可以选择的参数

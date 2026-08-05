@@ -38,32 +38,17 @@ pnpm install
 
 ## Run
 
-1. Modify `BING_SEARCH_API_KEY` in `browser/src/config.ts` to configure the Bing Search API Key that the browser service
-   needs to use:
+1. Configure secrets through environment variables. Do not edit source files or commit secrets:
 
-```diff
-export default {
-
-   BROWSER_TIMEOUT: 10000,
-   BING_SEARCH_API_URL: 'https://api.bing.microsoft.com/v7.0',
-   BING_SEARCH_API_KEY: '<PUT_YOUR_BING_SEARCH_KEY_HERE>',
-
-   HOST: 'localhost',
-   PORT: 3000,
-};
+```bash
+export BING_SEARCH_API_KEY='<Bing Search API Key>'
+export BING_CUSTOM_CONFIG_ID='<optional Custom Configuration ID>'
+export ZHIPU_AI_KEY='<optional Zhipu AI API Key>'
 ```
 
-2. The Wenshengtu function needs to call the CogView API. Modify `src/tools/config.py`
-   , provide the [Zhipu AI Open Platform](https://open.bigmodel.cn) API Key required for the Wenshengtu function:
-
-```diff
-BROWSER_SERVER_URL = 'http://localhost:3000'
-
-IPYKERNEL = 'glm4-demo'
-
-ZHIPU_AI_KEY = '<PUT_YOUR_ZHIPU_AI_KEY_HERE>'
-COGVIEW_MODEL = 'cogview-3'
-```
+2. The browser backend and Streamlit bind to loopback by default. Set `COMPOSITE_DEMO_PASSWORD` before exposing
+   Streamlit on a non-loopback address. The browser backend should remain private; cross-host deployments must set the
+   same `BROWSER_API_KEY` on the backend and Streamlit process.
 
 3. Start the browser backend in a separate shell:
 
@@ -84,16 +69,18 @@ and loading the model, which may take some time.
 If you have downloaded the model locally, you can specify to load the model from the local
 by `export *_MODEL_PATH=/path/to/model`. The models that can be specified include:
 
-- `CHAT_MODEL_PATH`: used for All Tools mode and document interpretation mode, the default is `THUDM/glm-4-9b-chat`.
+- `CHAT_MODEL_PATH`: used for All Tools mode and document interpretation mode, the default is `zai-org/glm-4-9b-chat`.
 
-- `VLM_MODEL_PATH`: used for VLM mode, the default is `THUDM/glm-4v-9b`.
+- `VLM_MODEL_PATH`: used for VLM mode, the default is `zai-org/glm-4v-9b`.
 
 The Chat model supports reasoning using [vLLM](https://github.com/vllm-project/vllm). To use it, please install vLLM and
 set the environment variable `USE_VLLM=1`.
 
 The Chat model also supports reasoning using [OpenAI API](https://platform.openai.com/docs/api-reference/introduction). To use it, please run `openai_api_server.py` in `inference` and set the environment variable `USE_API=1`. This function is used to deploy inference server and demo server in different machine.
 
-If you need to customize the Jupyter kernel, you can specify it by `export IPYKERNEL=<kernel_name>`.
+For security, host shell execution and the unsandboxed Jupyter Python tool are no longer registered as callable tools.
+If code execution is required, integrate a separate container or VM sandbox with network, filesystem, CPU, memory, and
+execution-time limits. Do not re-enable host execution.
 
 ## Usage
 
@@ -128,8 +115,7 @@ def get_weather(
 
 This mode is compatible with the tool registration process of ChatGLM3-6B.
 
-+ Code capability, drawing capability, and networking capability have been automatically integrated. Users only need to
-  configure the corresponding Key as required.
++ Restricted web browsing and image generation are integrated. Host code execution is not available.
 + System prompt words are not supported in this mode. The model will automatically build prompt words.
 
 ## Text interpretation mode

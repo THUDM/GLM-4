@@ -1,18 +1,16 @@
 """
 This script creates a OpenAI Request demo for the glm-4v-9b model, just Use OpenAI API to interact with the model.
 For LLM such as GLM-4-9B-0414, using with vLLM OpenAI Server.
-
-vllm serve THUDM/GLM-4-32B-0414 --tensor_parallel_size 4
-
 """
 
 import base64
+import os
 
 from openai import OpenAI
 
 
 base_url = "http://127.0.0.1:8000/v1/"
-client = OpenAI(api_key="EMPTY", base_url=base_url)
+client = OpenAI(api_key=os.getenv("GLM4V_API_KEY", "EMPTY"), base_url=base_url)
 
 
 def create_chat_completion(messages, use_stream=False):

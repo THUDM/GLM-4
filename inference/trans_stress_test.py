@@ -7,7 +7,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 
 
-MODEL_PATH = "THUDM/GLM-4-9B-0414"
+MODEL_PATH = "zai-org/GLM-4-9B-0414"
 
 
 def stress_test(run_name, input_token_len, n, output_token_len, swanlab_api_key):

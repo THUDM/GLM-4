@@ -261,15 +261,15 @@ Execute **single machine multi-card/multi-machine multi-card** run through the f
 the acceleration solution, and you need to install `deepspeed`.
 
 ```shell
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9b-0414  configs/lora.yaml # For Chat Fine-tune
-OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b  configs/lora.yaml  # For VQA Fine-tune
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune.py  data/AdvertiseGen/  zai-org/GLM-4-9b-0414  configs/lora.yaml # For Chat Fine-tune
+OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=8  finetune_vision.py  data/CogVLM-311K/  zai-org/glm-4v-9b  configs/lora.yaml  # For VQA Fine-tune
 ```
 
 Execute **single machine single card** run through the following code.
 
 ```shell
-python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml # For Chat Fine-tune
-python finetune_vision.py  data/CogVLM-311K/  THUDM/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
+python finetune.py  data/AdvertiseGen/  zai-org/GLM-4-9B-0414  configs/lora.yaml # For Chat Fine-tune
+python finetune_vision.py  data/CogVLM-311K/  zai-org/glm-4v-9b configs/lora.yaml # For VQA Fine-tune
 ```
 
 ## Log Visualization Support
@@ -298,7 +298,7 @@ half-trained model, you can add a fourth parameter, which can be passed in two w
 For example, this is an example code to continue fine-tuning from the last saved point
 
 ```shell
-python finetune.py data/AdvertiseGen/ THUDM/GLM-4-9B-0414 configs/lora.yaml yes
+python finetune.py data/AdvertiseGen/ zai-org/GLM-4-9B-0414 configs/lora.yaml yes
 ```
 
 ## Use the fine-tuned model

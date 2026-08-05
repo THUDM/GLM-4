@@ -35,44 +35,17 @@ pnpm install
 
 ## 运行
 
-1. 修改 `browser/src/config.ts` 中的 `BING_SEARCH_API_KEY` 配置浏览器服务需要使用的 Bing 搜索 API Key：
+1. 使用环境变量配置密钥，不要修改源码或把密钥提交到仓库：
 
-    ```diff
-    export default {
-
-        BROWSER_TIMEOUT: 10000,
-        BING_SEARCH_API_URL: 'https://api.bing.microsoft.com/v7.0',
-        BING_SEARCH_API_KEY: '<PUT_YOUR_BING_SEARCH_KEY_HERE>',
-
-        HOST: 'localhost',
-        PORT: 3000,
-    };
-    ```
-   如果您注册的是Bing Customer Search的API，您可以修改您的配置文件为如下，并且填写您的Custom Configuration ID:
-
-    ```diff
-    export default {
-        LOG_LEVEL: 'debug',
-        BROWSER_TIMEOUT: 10000,
-        BING_SEARCH_API_URL: 'https://api.bing.microsoft.com/v7.0/custom/',
-        BING_SEARCH_API_KEY: 'YOUR_BING_SEARCH_API_KEY',
-        CUSTOM_CONFIG_ID :  'YOUR_CUSTOM_CONFIG_ID', //将您的Custom Configuration ID放在此处
-        HOST: 'localhost',
-        PORT: 3000,
-   };
+    ```bash
+    export BING_SEARCH_API_KEY='<Bing Search API Key>'
+    export BING_CUSTOM_CONFIG_ID='<可选的 Custom Configuration ID>'
+    export ZHIPU_AI_KEY='<可选的智谱开放平台 API Key>'
     ```
 
-2. 文生图功能需要调用 CogView API。修改 `src/tools/config.py`
-   ，提供文生图功能需要使用的 [智谱 AI 开放平台](https://open.bigmodel.cn) API Key：
-
-    ```diff
-    BROWSER_SERVER_URL = 'http://localhost:3000'
-
-    IPYKERNEL = 'glm-4-demo'
-
-    ZHIPU_AI_KEY = '<PUT_YOUR_ZHIPU_AI_KEY_HERE>'
-    COGVIEW_MODEL = 'cogview-3'
-    ```
+2. 浏览器后端和 Streamlit 默认只监听环回地址。若确需对外提供 Streamlit，请设置
+   `COMPOSITE_DEMO_PASSWORD`；应用在非环回监听且未设置密码时会拒绝启动。浏览器后端不应直接对外暴露；
+   若必须跨主机调用，需同时设置 `BROWSER_API_KEY`，并在两端使用相同的值。
 
 3. 启动浏览器后端，在单独的 shell 中：
 
@@ -90,27 +63,28 @@ pnpm install
 之后即可从命令行中看到 demo 的地址，点击即可访问。初次访问需要下载并加载模型，可能需要花费一定时间。
 
 如果已经在本地下载了模型，可以通过 `export *_MODEL_PATH=/path/to/model` 来指定从本地加载模型。可以指定的模型包括：
-- `CHAT_MODEL_PATH`: 用于 All Tools 模式与文档解读模式，默认为 `THUDM/glm-4-9b-chatglm-4-9b-chat`。
-- `VLM_MODEL_PATH`: 用于 VLM 模式，默认为 `THUDM/glm-4v-9b`。
+- `CHAT_MODEL_PATH`: 用于 All Tools 模式与文档解读模式，默认为 `zai-org/glm-4-9b-chatglm-4-9b-chat`。
+- `VLM_MODEL_PATH`: 用于 VLM 模式，默认为 `zai-org/glm-4v-9b`。
 
 Chat 模型支持使用 [vLLM](https://github.com/vllm-project/vllm) 推理。若要使用，请安装 vLLM 并设置环境变量 `USE_VLLM=1`。
 
 Chat 模型支持使用 [OpenAI API](https://platform.openai.com/docs/api-reference/introduction) 推理。若要使用，请启动basic_demo目录下的openai_api_server并设置环境变量 `USE_API=1`。该功能可以解耦推理服务器和demo服务器。
 
-如果需要自定义 Jupyter 内核，可以通过 `export IPYKERNEL=<kernel_name>` 来指定。
+出于安全原因，宿主机 Shell 和无沙箱 Jupyter Python 工具已从可调用工具注册表中移除。若需要代码执行能力，
+应接入独立容器/虚拟机沙箱，并限制网络、文件挂载、CPU、内存和执行时间，不能直接恢复宿主机执行。
 
 ## 使用
 
 GLM-4 Demo 拥有三种模式：
 
-- All Tools: 具有完整工具调用能力的对话模式，原生支持网页浏览、代码执行、图片生成，并支持自定义工具。
+- All Tools: 工具调用对话模式，支持受限网页浏览、图片生成及不执行宿主机命令的自定义工具。
 - 文档解读: 支持上传文档进行文档解读与对话。
 - 多模态: 支持上传图像进行图像理解与对话。
 
 ### All Tools
 
 本模式兼容 ChatGLM3-6B 的工具注册流程。
-+ 代码能力，绘图能力，联网能力已经自动集成，用户只需按照要求配置对应的Key。
++ 网页浏览和图片生成能力已经集成；宿主机代码执行默认不可用。
 + 本模式下不支持系统提示词，模型会自动构建提示词。
 
 对话模式下，用户可以直接在侧边栏修改 top_p, temperature 等参数来调整模型的行为。

@@ -120,8 +120,7 @@ python glm4v_server.py zai-org/glm-4v-9b
 
 客户端需发送 `Authorization: Bearer <GLM4V_API_KEY>`。远程图片 URL 默认关闭；确有需要时，通过
 `GLM4V_ALLOWED_IMAGE_HOSTS=images.example.com,cdn.example.com` 配置精确主机白名单。服务会拒绝私网、
-环回及特殊用途地址，并限制重定向、下载时间、响应体、图片像素、请求体和输出 token 数。完整配置见
-仓库根目录的 `SECURITY.md`。
+环回及特殊用途地址，并限制重定向、下载时间、响应体、图片像素、请求体和输出 token 数。
 
 客户端请求：
 

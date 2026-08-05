@@ -121,8 +121,7 @@ python glm4v_server.py zai-org/glm-4v-9b
 Clients must send `Authorization: Bearer <GLM4V_API_KEY>`. Remote image URLs are disabled by default. If they are
 required, configure an exact host allowlist such as
 `GLM4V_ALLOWED_IMAGE_HOSTS=images.example.com,cdn.example.com`. Private, loopback, and special-use addresses are
-rejected, and redirects, download time, response size, image pixels, request size, and output tokens are bounded. See
-`SECURITY.md` in the repository root for the full configuration.
+rejected, and redirects, download time, response size, image pixels, request size, and output tokens are bounded.
 
 Client request:
 

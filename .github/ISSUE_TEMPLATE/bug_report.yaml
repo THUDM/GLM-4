@@ -6,14 +6,14 @@ body:
       value: |
         ## Before you open an issue
 
-        This repository is for **open-source GLM-5 model** bugs only (weights, inference code, and the examples in this repo).
+        This repository is for **open-source GLM model** bugs only (weights, inference code, and the examples in this repo).
 
         If your question is about the **API, coding plans, or official products (ZCode, Z.ai)**, this is **not** the right place. Please use the official channels below so we can help you faster:
 
         - **API / Coding Plan**: submit a ticket at https://bigmodel.cn/ticket-submit or email service@zhipuai.cn
         - **ZCode**: [Feishu group](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=4e4i92a4-c529-4304-a8ad-991a5536bb2a) · [Discord](https://discord.gg/EpH5XkTyhu) · [feedback repo](https://github.com/zai-org/feedback) · email user_feedback@aminer.cn
         - **Z.ai**: https://z.ai/contact
-        
+
         Issues that are unrelated to the open-source model may be closed and redirected to the channels above.
 
   - type: textarea

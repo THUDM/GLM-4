@@ -99,7 +99,7 @@ python vllm_cli_demo.py # LLM Such as GLM-4-9B-0414
 
 + 构建 OpenAI 类 API 服务。
 ```shell
-vllm serve THUDM/GLM-4-9B-0414 --tensor_parallel_size 2
+vllm serve zai-org/GLM-4-9B-0414 --tensor_parallel_size 2
 ```
 
 ### 使用 glm-4v 构建 OpenAI 服务
@@ -107,8 +107,20 @@ vllm serve THUDM/GLM-4-9B-0414 --tensor_parallel_size 2
 启动服务端
 
 ```shell
-python glm4v_server.py THUDM/glm-4v-9b
+python glm4v_server.py zai-org/glm-4v-9b
 ```
+
+服务默认仅监听 `127.0.0.1:8000`。如需对外监听，必须同时设置 API Key：
+
+```shell
+export GLM4V_HOST=0.0.0.0
+export GLM4V_API_KEY='<使用密码管理器生成的高强度随机值>'
+python glm4v_server.py zai-org/glm-4v-9b
+```
+
+客户端需发送 `Authorization: Bearer <GLM4V_API_KEY>`。远程图片 URL 默认关闭；确有需要时，通过
+`GLM4V_ALLOWED_IMAGE_HOSTS=images.example.com,cdn.example.com` 配置精确主机白名单。服务会拒绝私网、
+环回及特殊用途地址，并限制重定向、下载时间、响应体、图片像素、请求体和输出 token 数。
 
 客户端请求：
 

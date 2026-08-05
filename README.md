@@ -1,7 +1,7 @@
 # GLM-4-0414 Model Series
 
 <p align="center">
-👋 Join our <a href="https://discord.gg/8cnQKdAprg" target="_blank">Discord</a>, <a href="https://x.com/Zai_org" target="_blank">X</a> and <a href="resources/WECHAT.md" target="_blank"> WeChat (Chinese) </a>
+👋 Join our <a href="https://discord.gg/Hc5z9bx5Xw" target="_blank">Discord</a>, <a href="https://x.com/Zai_org" target="_blank">X</a> and <a href="resources/WECHAT.md" target="_blank"> WeChat (Chinese) </a>
 </p>
 <p align="center">
 📍The open-source models released this time can be experienced for free at <a href="https://chat.z.ai">Z.ai</a>; for GLM commercial model services, please visit <a href="https://bigmodel.cn">bigmodel.cn</a>.
@@ -11,8 +11,8 @@ Read this in [中文](README_zh.md)
 
 ## Project Updates
 
-- 🔥 **News**: ```2025/07/02```: We are releasing the [GLM-4.1V-9B-Thinking](https://huggingface.co/collections/THUDM/glm-41v-thinking-6862bbfc44593a8601c2578d) series VLM, check [this github repo](https://github.com/THUDM/GLM-4.1V-Thinking) to get more information.
-- **News**: ```2025/04/14```: We are releasing the [GLM-4-32B-0414](https://huggingface.co/collections/THUDM/glm-4-0414-67f3cbcb34dd9d252707cb2e) series models, scaled up to 32B parameters, including models with capabilities for dialogue, reasoning, and rumination.
+- 🔥 **News**: ```2025/07/02```: We are releasing the [GLM-4.1V-9B-Thinking](https://huggingface.co/collections/zai-org/glm-41v-thinking-6862bbfc44593a8601c2578d) series VLM, check [this github repo](https://github.com/zai-org/GLM-4.1V-Thinking) to get more information.
+- **News**: ```2025/04/14```: We are releasing the [GLM-4-32B-0414](https://huggingface.co/collections/zai-org/glm-4-0414-67f3cbcb34dd9d252707cb2e) series models, scaled up to 32B parameters, including models with capabilities for dialogue, reasoning, and rumination.
 - **News**: ``2024/06/18``: We have released our [Technical Report](https://arxiv.org/pdf/2406.12793), feel free to check it out.
 - **News**: ``2024/06/05``: We released the `GLM-4-9B` series of open-source models. Details can be found [here](README_20240605.md).
 
@@ -125,12 +125,12 @@ GLM-Z1-9B-0414 Open-Source Model [Try it Online](https://modelscope.cn/studios/Z
 
 |           Model            |   Type    | Seq Length* |                                                                                                                                                              Download                                                                                                                                                              |
 |:--------------------------:|:---------:|:-----------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|       GLM-4-9B-0414        |   Chat    | 32K -> 128K |                           [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-9B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-0414)                           |
-|       GLM-Z1-9B-0414       | Reasoning | 32K -> 128K |                        [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-Z1-9B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-Z1-9B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-Z1-9B-0414)                        |
-|    GLM-4-32B-Base-0414     |   Base    | 32K -> 128K |               [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-Base-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-Base-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-Base-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-32B-Base-0414)               |
-|       GLM-4-32B-0414       |   Chat    | 32K -> 128K |                      [🤗 Huggingface](https://huggingface.co/THUDM/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-32B-Base-0414)                       |
-|      GLM-Z1-32B-0414       | Reasoning | 32K -> 128K |                       [🤗 Huggingface](https://huggingface.co/THUDM/GLM-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-Z1-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-Z1-32B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-Z1-32B-0414)                       |
-| GLM-Z1-Rumination-32B-0414 | Reasoning |    128K     | [🤗 Huggingface](https://huggingface.co/THUDM/GLM-Z1-Rumination-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-Z1-Rumination-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-Z1-Rumination-32B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-Z1-Rumination-32B-0414) |
+|       GLM-4-9B-0414        |   Chat    | 32K -> 128K |                           [🤗 Huggingface](https://huggingface.co/zai-org/GLM-4-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-9B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-9B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-0414)                           |
+|       GLM-Z1-9B-0414       | Reasoning | 32K -> 128K |                        [🤗 Huggingface](https://huggingface.co/zai-org/GLM-4-Z1-9B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-Z1-9B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-Z1-9B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-Z1-9B-0414)                        |
+|    GLM-4-32B-Base-0414     |   Base    | 32K -> 128K |               [🤗 Huggingface](https://huggingface.co/zai-org/GLM-4-32B-Base-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-Base-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-Base-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-32B-Base-0414)               |
+|       GLM-4-32B-0414       |   Chat    | 32K -> 128K |                      [🤗 Huggingface](https://huggingface.co/zai-org/GLM-4-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-4-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-4-32B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-32B-Base-0414)                       |
+|      GLM-Z1-32B-0414       | Reasoning | 32K -> 128K |                       [🤗 Huggingface](https://huggingface.co/zai-org/GLM-Z1-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-Z1-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-Z1-32B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-Z1-32B-0414)                       |
+| GLM-Z1-Rumination-32B-0414 | Reasoning |    128K     | [🤗 Huggingface](https://huggingface.co/zai-org/GLM-Z1-Rumination-32B-0414)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-Z1-Rumination-32B-0414)<br> [🧩 Modelers](https://modelers.cn/models/zhipuai/GLM-Z1-Rumination-32B-0414)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-Z1-Rumination-32B-0414) |
 
 Due to its smaller model capacity, GLM-4-9B-0414 has not undergone the same agent capability enhancements as GLM-4-32B-0414. Instead, it has been optimized primarily for scenarios that require large-scale batch operations, such as translation tasks.
 
@@ -140,12 +140,12 @@ Below are the GLM-4 series models released on June 5, 2024. Details can be found
 
 |             Model             |   Type    | Seq Length* |                                                                                                      Download                                                                                                       |
 |:-----------------------------:|:---------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|      GLM-4-9B       | Base |     8K     |                                           [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br>                                            |
-|    GLM-4-9B-Chat    | Chat |    128K    |     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)      |
-|  GLM-4-9B-Chat-HF   | Chat |    128K    |                                     [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                      |
-|  GLM-4-9B-Chat-1M   | Chat |     1M     | [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) |
-| GLM-4-9B-Chat-1M-HF | Chat |     1M     |                                  [🤗 Huggingface](https://huggingface.co/THUDM/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                   |
-|      GLM-4V-9B      | Chat |     8K     |        [🤗 Huggingface](https://huggingface.co/THUDM/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)               |
+|      GLM-4-9B       | Base |     8K     |                                           [🤗 Huggingface](https://huggingface.co/zai-org/glm-4-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b)<br>                                            |
+|    GLM-4-9B-Chat    | Chat |    128K    |     [🤗 Huggingface](https://huggingface.co/zai-org/glm-4-9b-chat)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat)      |
+|  GLM-4-9B-Chat-HF   | Chat |    128K    |                                     [🤗 Huggingface](https://huggingface.co/zai-org/glm-4-9b-chat-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-hf)                                      |
+|  GLM-4-9B-Chat-1M   | Chat |     1M     | [🤗 Huggingface](https://huggingface.co/zai-org/glm-4-9b-chat-1m)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4-9B-Chat-1M) |
+| GLM-4-9B-Chat-1M-HF | Chat |     1M     |                                  [🤗 Huggingface](https://huggingface.co/zai-org/glm-4-9b-chat-1m-hf)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4-9b-chat-1m-hf)                                   |
+|      GLM-4V-9B      | Chat |     8K     |        [🤗 Huggingface](https://huggingface.co/zai-org/glm-4v-9b)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/glm-4v-9b)<br> [🟣 WiseModel](https://wisemodel.cn/models/ZhipuAI/GLM-4V-9B)               |
 
 ## Evaluation Results
 
@@ -218,7 +218,7 @@ cd finetune
 pip install -r ../inference/requirements.txt
 pip install -r requirements.txt
 # Use single GPU for Chat Fine-tune
-python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml
+python finetune.py  data/AdvertiseGen/  zai-org/GLM-4-9B-0414  configs/lora.yaml
 ```
 
 🎉 The script also supports fine-tuning with visual tracking using **SwanLab**. You can view the training logs of the example fine-tuning script on the [SwanLab Visualization Dashboard](https://swanlab.cn/@ShaohonChen/GLM4-Finetune/overview).

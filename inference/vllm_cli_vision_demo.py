@@ -18,7 +18,7 @@ from PIL import Image
 from vllm import AsyncEngineArgs, AsyncLLMEngine, SamplingParams
 
 
-MODEL_PATH = "THUDM/glm-4v-9b"
+MODEL_PATH = "zai-org/glm-4v-9b"
 
 
 def load_model_and_tokenizer(model_dir: str):

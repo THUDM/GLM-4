@@ -1,5 +1,10 @@
 import base64
+import binascii
 import gc
+import ipaddress
+import os
+import secrets
+import socket
 import sys
 import threading
 import time
@@ -7,22 +12,91 @@ from contextlib import asynccontextmanager
 from io import BytesIO
 from pathlib import Path
 from typing import List, Literal, Optional, Tuple, Union
+from urllib.parse import urljoin, urlparse
 
 import requests
 import torch
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from peft import PeftModelForCausalLM
-from PIL import Image
-from pydantic import BaseModel, Field
+from PIL import Image, UnidentifiedImageError
+from pydantic import BaseModel, Field, field_validator, model_validator
 from sse_starlette.sse import EventSourceResponse
+from starlette.responses import JSONResponse
 from transformers import AutoModel, AutoTokenizer, TextIteratorStreamer
 
 
 TORCH_TYPE = (
     torch.bfloat16 if torch.cuda.is_available() and torch.cuda.get_device_capability()[0] >= 8 else torch.float16
 )
+
+MAX_REQUEST_BYTES = int(os.environ.get("GLM4V_MAX_REQUEST_BYTES", 30 * 1024 * 1024))
+MAX_IMAGE_BYTES = int(os.environ.get("GLM4V_MAX_IMAGE_BYTES", 20 * 1024 * 1024))
+MAX_IMAGE_PIXELS = int(os.environ.get("GLM4V_MAX_IMAGE_PIXELS", 20_000_000))
+MAX_MESSAGES = int(os.environ.get("GLM4V_MAX_MESSAGES", 64))
+MAX_TEXT_CHARS = int(os.environ.get("GLM4V_MAX_TEXT_CHARS", 200_000))
+MAX_OUTPUT_TOKENS = int(os.environ.get("GLM4V_MAX_OUTPUT_TOKENS", 4096))
+MAX_REDIRECTS = int(os.environ.get("GLM4V_MAX_IMAGE_REDIRECTS", 3))
+IMAGE_CONNECT_TIMEOUT = float(os.environ.get("GLM4V_IMAGE_CONNECT_TIMEOUT", 3))
+IMAGE_READ_TIMEOUT = float(os.environ.get("GLM4V_IMAGE_READ_TIMEOUT", 10))
+API_KEY = os.environ.get("GLM4V_API_KEY")
+ALLOWED_IMAGE_HOSTS = {
+    host.strip().rstrip(".").lower()
+    for host in os.environ.get("GLM4V_ALLOWED_IMAGE_HOSTS", "").split(",")
+    if host.strip()
+}
+INFERENCE_SLOTS = threading.BoundedSemaphore(int(os.environ.get("GLM4V_MAX_CONCURRENT_REQUESTS", 1)))
+
+
+class RequestTooLarge(Exception):
+    pass
+
+
+class RequestBodyLimitMiddleware:
+    """Reject oversized request bodies, including chunked bodies, before parsing."""
+
+    def __init__(self, app, max_bytes: int):
+        self.app = app
+        self.max_bytes = max_bytes
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        headers = dict(scope.get("headers", []))
+        content_length = headers.get(b"content-length")
+        if content_length:
+            try:
+                parsed_length = int(content_length)
+                if parsed_length < 0:
+                    raise ValueError
+                if parsed_length > self.max_bytes:
+                    response = JSONResponse({"detail": "Request body too large"}, status_code=413)
+                    await response(scope, receive, send)
+                    return
+            except ValueError:
+                response = JSONResponse({"detail": "Invalid Content-Length"}, status_code=400)
+                await response(scope, receive, send)
+                return
+
+        received = 0
+
+        async def limited_receive():
+            nonlocal received
+            message = await receive()
+            if message["type"] == "http.request":
+                received += len(message.get("body", b""))
+                if received > self.max_bytes:
+                    raise RequestTooLarge
+            return message
+
+        try:
+            await self.app(scope, limited_receive, send)
+        except RequestTooLarge:
+            response = JSONResponse({"detail": "Request body too large"}, status_code=413)
+            await response(scope, receive, send)
 
 
 @asynccontextmanager
@@ -39,13 +113,35 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.add_middleware(RequestBodyLimitMiddleware, max_bytes=MAX_REQUEST_BYTES)
+
+cors_origins = [origin.strip() for origin in os.environ.get("GLM4V_CORS_ORIGINS", "").split(",") if origin.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=cors_origins,
+    allow_credentials="*" not in cors_origins,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Authorization", "Content-Type"],
 )
+
+
+@app.middleware("http")
+async def require_api_key(request: Request, call_next):
+    if API_KEY:
+        supplied = request.headers.get("Authorization", "")
+        expected = f"Bearer {API_KEY}"
+        if not secrets.compare_digest(supplied, expected):
+            return JSONResponse({"detail": "Unauthorized"}, status_code=401, headers={"WWW-Authenticate": "Bearer"})
+    else:
+        client_host = request.client.host if request.client else ""
+        try:
+            is_loopback = ipaddress.ip_address(client_host).is_loopback
+        except ValueError:
+            is_loopback = client_host == "localhost"
+        if not is_loopback:
+            return JSONResponse({"detail": "API key is required for non-loopback clients"}, status_code=403)
+    return await call_next(request)
 
 
 class ModelCard(BaseModel):
@@ -65,16 +161,23 @@ class ModelCard(BaseModel):
 
 class ModelList(BaseModel):
     object: str = "list"
-    data: List[ModelCard] = []
+    data: List[ModelCard] = Field(default_factory=list)
 
 
 class ImageUrl(BaseModel):
-    url: str
+    url: str = Field(min_length=1, max_length=((MAX_IMAGE_BYTES + 2) // 3) * 4 + 256)
+
+    @field_validator("url")
+    @classmethod
+    def limit_remote_url_length(cls, value: str) -> str:
+        if not value.startswith("data:image/") and len(value) > 4096:
+            raise ValueError("Remote image URL exceeds 4096 characters")
+        return value
 
 
 class TextContent(BaseModel):
     type: Literal["text"]
-    text: str
+    text: str = Field(max_length=MAX_TEXT_CHARS)
 
 
 class ImageUrlContent(BaseModel):
@@ -88,7 +191,7 @@ ContentItem = Union[TextContent, ImageUrlContent]
 class ChatMessageInput(BaseModel):
     role: Literal["user", "assistant", "system"]
     content: Union[str, List[ContentItem]]
-    name: Optional[str] = None
+    name: Optional[str] = Field(default=None, max_length=128)
 
 
 class ChatMessageResponse(BaseModel):
@@ -103,14 +206,33 @@ class DeltaMessage(BaseModel):
 
 
 class ChatCompletionRequest(BaseModel):
-    model: str
-    messages: List[ChatMessageInput]
-    temperature: Optional[float] = 0.8
-    top_p: Optional[float] = 0.8
-    max_tokens: Optional[int] = None
+    model: str = Field(min_length=1, max_length=128)
+    messages: List[ChatMessageInput] = Field(min_length=1, max_length=MAX_MESSAGES)
+    temperature: Optional[float] = Field(default=0.8, ge=0, le=2)
+    top_p: Optional[float] = Field(default=0.8, ge=0, le=1)
+    max_tokens: Optional[int] = Field(default=None, ge=1, le=MAX_OUTPUT_TOKENS)
     stream: Optional[bool] = False
     # Additional parameters
-    repetition_penalty: Optional[float] = 1.0
+    repetition_penalty: Optional[float] = Field(default=1.0, ge=0.1, le=2)
+
+    @model_validator(mode="after")
+    def enforce_content_limits(self):
+        text_chars = 0
+        image_count = 0
+        for message in self.messages:
+            if isinstance(message.content, str):
+                text_chars += len(message.content)
+                continue
+            for item in message.content:
+                if isinstance(item, TextContent):
+                    text_chars += len(item.text)
+                elif isinstance(item, ImageUrlContent):
+                    image_count += 1
+        if text_chars > MAX_TEXT_CHARS:
+            raise ValueError(f"Total text content exceeds {MAX_TEXT_CHARS} characters")
+        if image_count > 1:
+            raise ValueError("GLM-4V accepts at most one image per request")
+        return self
 
 
 class ChatCompletionResponseChoice(BaseModel):
@@ -148,7 +270,7 @@ async def list_models():
 
 
 @app.post("/v1/chat/completions", response_model=ChatCompletionResponse)
-async def create_chat_completion(request: ChatCompletionRequest):
+def create_chat_completion(request: ChatCompletionRequest):
     global model, tokenizer
 
     if len(request.messages) < 1 or request.messages[-1].role == "assistant":
@@ -164,10 +286,20 @@ async def create_chat_completion(request: ChatCompletionRequest):
         repetition_penalty=request.repetition_penalty,
     )
 
+    if not INFERENCE_SLOTS.acquire(blocking=False):
+        raise HTTPException(status_code=429, detail="The model is busy; retry later")
+
     if request.stream:
-        generate = predict(request.model, gen_params)
-        return EventSourceResponse(generate, media_type="text/event-stream")
-    response = generate_glm4v(model, tokenizer, gen_params)
+        return EventSourceResponse(predict_with_slot(request.model, gen_params), media_type="text/event-stream")
+
+    try:
+        response = generate_glm4v(model, tokenizer, gen_params)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except requests.RequestException as exc:
+        raise HTTPException(status_code=502, detail="Unable to download remote image") from exc
+    finally:
+        INFERENCE_SLOTS.release()
 
     usage = UsageInfo()
 
@@ -183,6 +315,13 @@ async def create_chat_completion(request: ChatCompletionRequest):
     for usage_key, usage_value in task_usage.model_dump().items():
         setattr(usage, usage_key, getattr(usage, usage_key) + usage_value)
     return ChatCompletionResponse(model=request.model, choices=[choice_data], object="chat.completion", usage=usage)
+
+
+def predict_with_slot(model_id: str, params: dict):
+    try:
+        yield from predict(model_id, params)
+    finally:
+        INFERENCE_SLOTS.release()
 
 
 def predict(model_id: str, params: dict):
@@ -220,6 +359,120 @@ def generate_glm4v(model: AutoModel, tokenizer: AutoTokenizer, params: dict):
     return response
 
 
+def _validate_remote_image_url(url: str) -> None:
+    if not ALLOWED_IMAGE_HOSTS:
+        raise ValueError(
+            "Remote image URLs are disabled. Set GLM4V_ALLOWED_IMAGE_HOSTS to an explicit comma-separated allowlist."
+        )
+
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"} or not parsed.hostname:
+        raise ValueError("Image URL must use http or https")
+    if parsed.username or parsed.password:
+        raise ValueError("Credentials in image URLs are not allowed")
+
+    hostname = parsed.hostname.rstrip(".").lower()
+    if hostname not in ALLOWED_IMAGE_HOSTS:
+        raise ValueError(f"Image host is not allowlisted: {hostname}")
+
+    try:
+        addresses = socket.getaddrinfo(hostname, parsed.port or (443 if parsed.scheme == "https" else 80), type=socket.SOCK_STREAM)
+    except socket.gaierror as exc:
+        raise ValueError(f"Unable to resolve image host: {hostname}") from exc
+    if not addresses:
+        raise ValueError(f"Unable to resolve image host: {hostname}")
+
+    for _, _, _, _, sockaddr in addresses:
+        address = ipaddress.ip_address(sockaddr[0].split("%", 1)[0])
+        if not address.is_global:
+            raise ValueError(f"Image host resolves to a non-public address: {address}")
+
+
+def _load_image_bytes(image_data: bytes) -> Image.Image:
+    if len(image_data) > MAX_IMAGE_BYTES:
+        raise ValueError(f"Image exceeds the {MAX_IMAGE_BYTES}-byte limit")
+    try:
+        with Image.open(BytesIO(image_data)) as source:
+            source.verify()
+        with Image.open(BytesIO(image_data)) as source:
+            width, height = source.size
+            if width <= 0 or height <= 0 or width * height > MAX_IMAGE_PIXELS:
+                raise ValueError(f"Image exceeds the {MAX_IMAGE_PIXELS}-pixel limit")
+            return source.convert("RGB")
+    except Image.DecompressionBombError as exc:
+        raise ValueError("Image dimensions are unsafe") from exc
+    except (UnidentifiedImageError, OSError) as exc:
+        raise ValueError("Invalid image data") from exc
+
+
+def _decode_data_image(image_url: str) -> Image.Image:
+    header, separator, encoded = image_url.partition(",")
+    if not separator or not header.startswith("data:image/") or not header.endswith(";base64"):
+        raise ValueError("Only base64-encoded image data URLs are supported")
+    if len(encoded) > ((MAX_IMAGE_BYTES + 2) // 3) * 4:
+        raise ValueError(f"Encoded image exceeds the {MAX_IMAGE_BYTES}-byte limit")
+    try:
+        image_data = base64.b64decode(encoded, validate=True)
+    except (binascii.Error, ValueError) as exc:
+        raise ValueError("Invalid base64 image") from exc
+    return _load_image_bytes(image_data)
+
+
+def _download_remote_image(image_url: str) -> Image.Image:
+    session = requests.Session()
+    session.trust_env = False
+    current_url = image_url
+    try:
+        for redirect_count in range(MAX_REDIRECTS + 1):
+            _validate_remote_image_url(current_url)
+            response = session.get(
+                current_url,
+                allow_redirects=False,
+                headers={"Accept": "image/*", "User-Agent": "GLM-4V-image-fetcher/1.0"},
+                stream=True,
+                timeout=(IMAGE_CONNECT_TIMEOUT, IMAGE_READ_TIMEOUT),
+                verify=True,
+            )
+            try:
+                if response.is_redirect or response.is_permanent_redirect:
+                    if redirect_count >= MAX_REDIRECTS:
+                        raise ValueError("Too many image redirects")
+                    location = response.headers.get("Location")
+                    if not location:
+                        raise ValueError("Image redirect has no Location header")
+                    current_url = urljoin(current_url, location)
+                    continue
+
+                response.raise_for_status()
+                content_type = response.headers.get("Content-Type", "").split(";", 1)[0].lower()
+                if not content_type.startswith("image/"):
+                    raise ValueError(f"Remote resource is not an image: {content_type or 'unknown content type'}")
+                content_length = response.headers.get("Content-Length")
+                if content_length:
+                    try:
+                        declared_size = int(content_length)
+                    except ValueError as exc:
+                        raise ValueError("Remote server returned an invalid Content-Length") from exc
+                    if declared_size > MAX_IMAGE_BYTES:
+                        raise ValueError(f"Remote image exceeds the {MAX_IMAGE_BYTES}-byte limit")
+
+                chunks = []
+                total = 0
+                for chunk in response.iter_content(chunk_size=64 * 1024):
+                    if not chunk:
+                        continue
+                    total += len(chunk)
+                    if total > MAX_IMAGE_BYTES:
+                        raise ValueError(f"Remote image exceeds the {MAX_IMAGE_BYTES}-byte limit")
+                    chunks.append(chunk)
+                return _load_image_bytes(b"".join(chunks))
+            finally:
+                response.close()
+    finally:
+        session.close()
+    raise ValueError("Unable to download image")
+
+
 def process_history_and_images(
     messages: List[ChatMessageInput],
 ) -> Tuple[Optional[str], Optional[List[Tuple[str, str]]], Optional[List[Image.Image]]]:
@@ -252,13 +505,10 @@ def process_history_and_images(
             for item in content:
                 if isinstance(item, ImageUrlContent):
                     image_url = item.image_url.url
-                    if image_url.startswith("data:image/jpeg;base64,"):
-                        base64_encoded_image = image_url.split("data:image/jpeg;base64,")[1]
-                        image_data = base64.b64decode(base64_encoded_image)
-                        image = Image.open(BytesIO(image_data)).convert("RGB")
+                    if image_url.startswith("data:image/"):
+                        image = _decode_data_image(image_url)
                     else:
-                        response = requests.get(image_url, verify=False)
-                        image = Image.open(BytesIO(response.content)).convert("RGB")
+                        image = _download_remote_image(image_url)
                     image_list.append(image)
 
         if role == "user":
@@ -385,4 +635,8 @@ if __name__ == "__main__":
             device_map="auto",
         ).eval()
 
-    uvicorn.run(app, host="0.0.0.0", port=8000, workers=1)
+    server_host = os.environ.get("GLM4V_HOST", "127.0.0.1")
+    server_port = int(os.environ.get("GLM4V_PORT", 8000))
+    if server_host not in {"127.0.0.1", "::1", "localhost"} and not API_KEY:
+        raise RuntimeError("GLM4V_API_KEY is required when binding the API to a non-loopback address")
+    uvicorn.run(app, host=server_host, port=server_port, workers=1)

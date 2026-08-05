@@ -145,7 +145,7 @@ def get_weather(
     import requests
 
     try:
-        resp = requests.get(f"https://wttr.in/{city_name}?format=j1")
+        resp = requests.get(f"https://wttr.in/{city_name}?format=j1", timeout=(3, 10))
         resp.raise_for_status()
         resp = resp.json()
         ret = {k: {_v: resp[k][0][_v] for _v in v} for k, v in key_selection.items()}
@@ -181,5 +181,4 @@ def get_shell(
 
 
 if __name__ == "__main__":
-    # print(dispatch_tool("get_shell", {"query": "pwd"}))
     print(get_tools())

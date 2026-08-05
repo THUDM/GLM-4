@@ -21,7 +21,7 @@ from PIL import Image
 from transformers import AutoModel, AutoTokenizer, StoppingCriteria, StoppingCriteriaList, TextIteratorStreamer
 
 
-MODEL_PATH = os.environ.get("MODEL_PATH", "THUDM/glm-4v-9b")
+MODEL_PATH = os.environ.get("MODEL_PATH", "zai-org/glm-4v-9b")
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True, encode_special_tokens=True)
 model = AutoModel.from_pretrained(

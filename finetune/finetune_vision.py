@@ -222,7 +222,7 @@ class DataManager(object):
             remove_columns=remove_columns,
             num_proc=self._num_proc,
             # This is default params of  orig_dataset.map, and you can change it smaller
-            # https://github.com/THUDM/GLM-4/issues/277
+            # https://github.com/zai-org/GLM-4/issues/277
             writer_batch_size=1000,
             batch_size=1000,
         )

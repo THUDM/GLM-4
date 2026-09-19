@@ -7,7 +7,7 @@
 📍在 <a href="https://open.bigmodel.cn/?utm_campaign=open&_channel_track_key=OWTVNma9">智谱AI开放平台</a> 体验和使用更大规模的 GLM 商业模型。
 </p>
 
-Read this in [English](README_en.md)
+Read this in [English](README_20240605.md)
 
 ## 项目更新
 
@@ -121,7 +121,7 @@ GLM-4V-9B 是一个多模态语言模型，具备视觉理解能力，其相关�
 
 ## 快速调用
 
-**硬件配置和系统要求，请查看[这里](basic_demo/README.md)。**
+**硬件配置和系统要求，请查看[这里](inference/README_zh.md)。**
 
 ### 使用以下方法快速调用 GLM-4-9B-Chat 语言模型
 
@@ -274,19 +274,16 @@ for o in outputs:
 
 如果你想更进一步了解 GLM-4-9B 系列开源模型，本开源仓库通过以下内容为开发者提供基础的 GLM-4-9B 的使用和开发代码
 
-+ [basic_demo](basic_demo/README.md): 在这里包含了
-    + 使用 transformers 和 vLLM 后端的交互代码
-    + OpenAI API 后端交互代码
-    + Batch 推理代码
++ [inference](inference/README_zh.md)：在这里包含了命令行、网页、Batch、vLLM 和 OpenAI 兼容 API 推理示例。
 
-+ [composite_demo](composite_demo/README.md): 在这里包含了
++ [composite_demo](demo/composite_demo/README.md): 在这里包含了
     + GLM-4-9B-Chat 以及 GLM-4V-9B 开源模型的完整功能演示代码，包含了 All Tools 能力、长文档解读和多模态能力的展示。
 
-+ [fintune_demo](finetune_demo/README.md): 在这里包含了
++ [finetune](finetune/README.md): 在这里包含了
     + PEFT (LORA, P-Tuning) 微调代码
     + SFT 微调代码
 
- + [intel_device_demo](intel_device_demo/): 在这里包含了
+ + [intel_device_demo](demo/intel_device_demo/): 在这里包含了
    + 使用 OpenVINO 部署模型代码
    + 使用 Intel® Extension for Transformers 部署模型代码
 

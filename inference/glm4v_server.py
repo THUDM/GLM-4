@@ -583,16 +583,16 @@ def generate_stream_glm4v(model: AutoModel, tokenizer: AutoTokenizer, params: di
     generation_thread = threading.Thread(target=generate_text)
     generation_thread.start()
 
-    total_len = input_echo_len
+    completion_tokens = 0
     for next_text in streamer:
         generated_text += next_text
-        total_len = len(tokenizer.encode(generated_text))
+        completion_tokens = len(tokenizer.encode(generated_text))
         yield {
             "text": generated_text,
             "usage": {
                 "prompt_tokens": input_echo_len,
-                "completion_tokens": total_len - input_echo_len,
-                "total_tokens": total_len,
+                "completion_tokens": completion_tokens,
+                "total_tokens": input_echo_len + completion_tokens,
             },
         }
     generation_thread.join()
@@ -601,8 +601,8 @@ def generate_stream_glm4v(model: AutoModel, tokenizer: AutoTokenizer, params: di
         "text": generated_text,
         "usage": {
             "prompt_tokens": input_echo_len,
-            "completion_tokens": total_len - input_echo_len,
-            "total_tokens": total_len,
+            "completion_tokens": completion_tokens,
+            "total_tokens": input_echo_len + completion_tokens,
         },
     }
 
